@@ -124,33 +124,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var RouterComponent =
+var TicketsComponent =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(RouterComponent, _Component);
+  _inherits(TicketsComponent, _Component);
 
-  function RouterComponent() {
+  function TicketsComponent() {
     var _getPrototypeOf2;
 
     var _this;
 
-    _classCallCheck(this, RouterComponent);
+    _classCallCheck(this, TicketsComponent);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(RouterComponent)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(TicketsComponent)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
       data: [],
-      openTask: null
+      openTicketDescId: null
     });
 
     return _this;
   }
 
-  _createClass(RouterComponent, [{
+  _createClass(TicketsComponent, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
@@ -166,53 +166,101 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.state.data.map(function (ticket) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: ticket._id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0417\u0430\u044F\u0432\u043A\u0430 ", ticket.ticketNumber, " \u043E\u0442 ", ticket.ticketDate, " \u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 ", ticket.ticketPriority), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.firstname + ' ' + ticket.lasname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0417\u0430\u044F\u0432\u043A\u0430 ", ticket.ticketNumber, " \u043E\u0442 ", ticket.ticketDate, " \u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", ticket.ticketPriority, " \u0421\u0442\u0430\u0442\u0443\u0441: ", ticket.status), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.firstname + ' ' + ticket.lasname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "".concat(ticket._id)
-        }, "\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435 \u043E\u0431 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0438 ", ticket.vendor, " ", ticket.model), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)));
+        }, "\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435 \u043E\u0431 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0438 ", ticket.vendor, " ", ticket.model), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, ticket._id === _this3.state.openTicketDescId && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(OpenDescComponent, {
+          problem: ticket.problem,
+          contacts: {
+            telnum: ticket.telnum,
+            email: ticket.email,
+            extum: ticket.extnum
+          }
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            _this3.setState({
+              openTicketDescId: ticket._id
+            });
+          }
+        }, "OPEN"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            _this3.setState({
+              openTicketDescId: null
+            });
+          }
+        }, "CLOSE")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)));
       })));
     }
   }]);
 
-  return RouterComponent;
+  return TicketsComponent;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); // end of RouterComponent
 
 
-var NewDeafultComponent =
+var OpenDescComponent =
 /*#__PURE__*/
 function (_Component2) {
-  _inherits(NewDeafultComponent, _Component2);
+  _inherits(OpenDescComponent, _Component2);
 
-  function NewDeafultComponent() {
+  function OpenDescComponent() {
+    _classCallCheck(this, OpenDescComponent);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(OpenDescComponent).apply(this, arguments));
+  }
+
+  _createClass(OpenDescComponent, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "OpenDescComponent"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041F\u0440\u0438\u0447\u0438\u043D\u0430: ", this.props.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Email: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "mailto:" + this.props.contacts.email
+      }, this.props.contacts.email + ' '), "\u0422\u0435\u043B.: ", this.props.contacts.telnum + ' ', "\u0412\u043D\u0443\u0442\u0440: ", this.props.contacts.extum + ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        defaultValue: this.props.problem
+      }));
+    }
+  }]);
+
+  return OpenDescComponent;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+var DescComponent =
+/*#__PURE__*/
+function (_Component3) {
+  _inherits(DescComponent, _Component3);
+
+  function DescComponent() {
     var _getPrototypeOf3;
 
-    var _this3;
+    var _this4;
 
-    _classCallCheck(this, NewDeafultComponent);
+    _classCallCheck(this, DescComponent);
 
     for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
       args[_key2] = arguments[_key2];
     }
 
-    _this3 = _possibleConstructorReturn(this, (_getPrototypeOf3 = _getPrototypeOf(NewDeafultComponent)).call.apply(_getPrototypeOf3, [this].concat(args)));
+    _this4 = _possibleConstructorReturn(this, (_getPrototypeOf3 = _getPrototypeOf(DescComponent)).call.apply(_getPrototypeOf3, [this].concat(args)));
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this3)), "state", {
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "state", {
       data: {}
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this3)), "arg", _this3.props.match.params.number);
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "arg", _this4.props.match.params.ticketid);
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this3)), "foo", console.log('NewDeafultComponent, this.arg: ', _this3.arg));
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "foo", console.log('DescComponent, this.arg: ', _this4.arg));
 
-    return _this3;
+    return _this4;
   }
 
-  _createClass(NewDeafultComponent, [{
+  _createClass(DescComponent, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this4 = this;
+      var _this5 = this;
 
       fetch('/mongoosefind', {
         method: 'post',
@@ -226,11 +274,9 @@ function (_Component2) {
       }).then(function (res) {
         return res.json();
       }).then(function (json) {
-        return _this4.setState({
+        return _this5.setState({
           data: json
         });
-      }).then(function () {
-        console.log(_this4.state.data);
       });
     }
   }, {
@@ -238,11 +284,11 @@ function (_Component2) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Title: ", this.state.data.ticketNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Desc: ", this.state.data.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: '/'
-      }, "home"));
+      }, "\u041E\u0431\u0440\u0430\u0442\u043D\u043E \u043A \u0437\u0430\u044F\u0432\u043A\u0430\u043C"));
     }
   }]);
 
-  return NewDeafultComponent;
+  return DescComponent;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); //NewDeafultComponent
 
 
@@ -250,15 +296,15 @@ var Routing = function Routing() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/",
-    component: RouterComponent
+    component: TicketsComponent
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: "/:number",
-    component: NewDeafultComponent
+    path: "/:ticketid",
+    component: DescComponent
   }));
 };
 
 var Api = function Api() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(RouterComponent, null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Routing, null);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(TicketsComponent, null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Routing, null);
 };
 
 Object(react_dom__WEBPACK_IMPORTED_MODULE_2__["render"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Api, null)), document.getElementById('root'));
