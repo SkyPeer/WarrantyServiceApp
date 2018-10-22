@@ -47,7 +47,8 @@ let TicketsSchema = new mongoose.Schema({
 
     finishDate: String,
     comment: String,
-
+    serviceCentre: String,
+    typeOfService: String,
 
 });
 
