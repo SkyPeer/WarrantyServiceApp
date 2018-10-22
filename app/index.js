@@ -159,15 +159,12 @@ class OpenDescComponent extends  Component {
        this.fullSetStateFunc();
     };
 
-    onChangeInputFunc(event){
-        console.log(event.target.value);
-        this.setState({comment: event.target.value});
-    };
-    /*
+
+
     onChangeInputFunc = (event) => {
         console.log(event.target.value);
         this.setState({comment: event.target.value});
-    }; */
+    };
 
     /*changeStatus = (event) => {
     console.log(event.value)}; */
@@ -197,9 +194,8 @@ class OpenDescComponent extends  Component {
         return(
             <form id="OpenDescComponent" onSubmit={(event)=>{event.preventDefault()}}>
             <div>Причина: {this.props.problem}</div><br />
-            Код проекта: {this.props.projectCode} <br />
+            <div>Код проекта: {this.props.projectCode}</div><div>Местонахождение оборудования: {this.props.place}</div><br />
             <div>Контакты:</div>
-
             <div>Email: <a href={"mailto:" + this.props.contacts.email}>{this.props.contacts.email +' '}</a>
                  Тел.: {this.props.contacts.telnum +' '}
                  Внутр: {this.props.contacts.extum +' '}
@@ -209,7 +205,7 @@ class OpenDescComponent extends  Component {
 
                 Сервисный центр: <input defaultValue={this.props.serviceCentre} /><br />
 
-                Ремонт платный/не платный <input defaultValue={this.props.typeOfservice}/><br />
+                Ремонт: <input defaultValue={this.props.typeOfservice}/><br />
 
                 Дата завершения ремонта <input defaultValue={this.props.finishDate}/><br />
 
@@ -251,21 +247,15 @@ class DescComponent extends Component{
 
     render(){
         return(
-            <div>
+            <Layout>
                 <h5>Title: {this.state.data.ticketNumber}</h5>
                 <h5>Desc: {this.state.data.problem}</h5>
-                <Link to={'/'}>Обратно к заявкам</Link>
-            </div>);
+                <Link to={'../list'}>Обратно к заявкам</Link>
+            </Layout>);
     }
 
 } //NewDeafultComponent
 
-
-const Routingq = () => (
-    <Switch>
-
-    </Switch>
-);
 const Routing = () => (
     <Switch>
         <Route exact path='/' component={Main}/>

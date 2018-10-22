@@ -450,6 +450,14 @@ function (_Component2) {
       _this4.fullSetStateFunc();
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "onChangeInputFunc", function (event) {
+      console.log(event.target.value);
+
+      _this4.setState({
+        comment: event.target.value
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "clickFormFunc", function () {
       _this4.props.saveButtonClick({
         comment: _this4.state.comment,
@@ -472,21 +480,7 @@ function (_Component2) {
       this.fullSetStateFunc();
     }
   }, {
-    key: "onChangeInputFunc",
-    value: function onChangeInputFunc(event) {
-      console.log(event.target.value);
-      this.setState({
-        comment: event.target.value
-      });
-    }
-  }, {
     key: "changeStatus",
-
-    /*
-    onChangeInputFunc = (event) => {
-        console.log(event.target.value);
-        this.setState({comment: event.target.value});
-    }; */
 
     /*changeStatus = (event) => {
     console.log(event.value)}; */
@@ -511,7 +505,7 @@ function (_Component2) {
         onSubmit: function onSubmit(event) {
           event.preventDefault();
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041F\u0440\u0438\u0447\u0438\u043D\u0430: ", this.props.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "\u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430: ", this.props.projectCode, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Email: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041F\u0440\u0438\u0447\u0438\u043D\u0430: ", this.props.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430: ", this.props.projectCode), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041C\u0435\u0441\u0442\u043E\u043D\u0430\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F: ", this.props.place), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Email: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "mailto:" + this.props.contacts.email
       }, this.props.contacts.email + ' '), "\u0422\u0435\u043B.: ", this.props.contacts.telnum + ' ', "\u0412\u043D\u0443\u0442\u0440: ", this.props.contacts.extum + ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
@@ -520,7 +514,7 @@ function (_Component2) {
         onChange: this.onChangeInputFunc
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         defaultValue: this.props.serviceCentre
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "\u0420\u0435\u043C\u043E\u043D\u0442 \u043F\u043B\u0430\u0442\u043D\u044B\u0439/\u043D\u0435 \u043F\u043B\u0430\u0442\u043D\u044B\u0439 ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "\u0420\u0435\u043C\u043E\u043D\u0442: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         defaultValue: this.props.typeOfservice
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "\u0414\u0430\u0442\u0430 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F \u0440\u0435\u043C\u043E\u043D\u0442\u0430 ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         defaultValue: this.props.finishDate
@@ -597,8 +591,8 @@ function (_Component3) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Title: ", this.state.data.ticketNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Desc: ", this.state.data.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: '/'
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_8__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Title: ", this.state.data.ticketNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Desc: ", this.state.data.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: '../list'
       }, "\u041E\u0431\u0440\u0430\u0442\u043D\u043E \u043A \u0437\u0430\u044F\u0432\u043A\u0430\u043C"));
     }
   }]);
@@ -606,10 +600,6 @@ function (_Component3) {
   return DescComponent;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); //NewDeafultComponent
 
-
-var Routingq = function Routingq() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null);
-};
 
 var Routing = function Routing() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
