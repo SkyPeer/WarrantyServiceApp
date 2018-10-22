@@ -49,6 +49,7 @@ let TicketsSchema = new mongoose.Schema({
     comment: String,
     serviceCentre: String,
     typeOfService: String,
+    serviceCentreTicket: String,
 
 });
 
@@ -67,24 +68,49 @@ app.get('/mongooseGetData', function(req, res, next){
 });
 
 app.post('/mongooseFind', bodyParser.json(), function(req, res){
-    console.log('req.body', req.body);
+    //console.log('req.body', req.body);
     TicketModel.findById(req.body, function (err, taskDocs) {
         if (err) return next (err);
-        console.log(taskDocs);
+        //console.log(taskDocs);
         res.json(taskDocs)
     })
 });
+
+app.post('/mongooseUpdate', bodyParser.json(), function (req, res) {
+    console.log('------- mongooseUpdate req.body:', req.body);
+    TicketModel.findOneAndUpdate(
+        {
+            id: req.body.id  // search query
+        },
+        {
+            status: req.body.status,
+            comment: req.body.comment // field:values to update
+        },
+        {
+            new: true,                       // return updated doc
+            runValidators: true              // validate before update
+        })
+        .then(() => {
+            //console.log(doc)
+            console.log('ok');
+            res.sendStatus(200)
+        })
+        .catch(err => {
+            console.error(err)
+        })
+});
+
+
 
 
 
 let date = new Date();
 console.log(date.getDate(), date.getMonth()+1, date.getFullYear());
 
-function getRandomArbitary()
-{
+function getRandomArbitary() {
     return Math.random() * (9999 - 1) + 2000;
-}
-console.log('random number', parseInt(getRandomArbitary()))
+}console.log('random number', parseInt(getRandomArbitary()))
+
 
 
 app.post('/delete', bodyParser.json(), function (req, res){

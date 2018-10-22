@@ -150,11 +150,48 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
       data: [],
-      openTicketDescId: null
+      openTicketDescId: null,
+      updateFormStatus: {}
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "clickFunc", function (arg) {
-      console.log('clickFunc', arg);
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateDataFunc", function (updatearg, id) {
+      console.log('clickFunc', updatearg, id);
+      fetch('/mongooseUpdate', {
+        method: 'post',
+
+        /*body: JSON.stringify({
+            _id: id,
+            status: updatearg.status
+        }), */
+        body: JSON.stringify({
+          _id: id,
+          comment: updatearg.comment,
+          status: updatearg.status,
+          place: updatearg.place,
+          finishDate: updatearg.finishDate,
+          serviceCentre: updatearg.serviceCentre,
+          serviceCenterTicket: updatearg.serviceCentreTicket,
+          typeOfservice: updatearg.typeOfservice
+        }),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).then(checkStatus).then(function () {
+        return console.log('updated');
+      }).then(function () {
+        return _this.getAllData();
+      }).then(alert('Обновлена'));
+
+      function checkStatus(response) {
+        if (response.status >= 200 && response.status < 300) {
+          return response;
+        } else {
+          var error = new Error(response.statusText);
+          error.response = response;
+          throw error;
+        }
+      }
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "statusOptions", [{
@@ -203,7 +240,7 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.state.data.map(function (ticket) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: ticket._id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0417\u0430\u044F\u0432\u043A\u0430 ", ticket.ticketNumber, " \u043E\u0442 ", ticket.ticketDate, " \u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", ticket.ticketPriority, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _this3.statusOptions[ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.firstname + ' ' + ticket.lasname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.updateFormStatus, "\u0417\u0430\u044F\u0432\u043A\u0430 ", ticket.ticketNumber, " \u043E\u0442 ", ticket.ticketDate, " \u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", ticket.ticketPriority, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _this3.statusOptions[ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.firstname + ' ' + ticket.lasname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "".concat(ticket._id)
         }, "\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435 \u043E\u0431 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0438 ", ticket.vendor, " ", ticket.model), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, ticket._id === _this3.state.openTicketDescId && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(OpenDescComponent, {
           problem: ticket.problem,
@@ -221,7 +258,7 @@ function (_Component) {
           typeOfservice: ticket.typeOfService,
           comment: ticket.comment,
           saveButtonClick: function saveButtonClick(arg) {
-            _this3.clickFunc(arg);
+            _this3.updateDataFunc(arg, ticket._id);
           }
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick() {
@@ -263,23 +300,19 @@ function (_Component2) {
     _this4 = _possibleConstructorReturn(this, (_getPrototypeOf3 = _getPrototypeOf(OpenDescComponent)).call.apply(_getPrototypeOf3, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "state", {
-      commentValue: '',
+      comment: '',
       status: ''
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "statusOptions", _this4.props.statusOptions);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "fullSetStateFunc", function () {
+      console.log(' --- fullSetStateFunc');
+
       _this4.setState({
-        commentValue: _this4.props.comment,
+        comment: _this4.props.comment,
         status: _this4.props.status
       });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "testFunc2", function () {
-      var a = 2;
-      var b = 2;
-      return a + b;
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "resetForm", function () {
@@ -290,7 +323,7 @@ function (_Component2) {
       console.log(event.target.value);
 
       _this4.setState({
-        commentValue: event.target.value
+        comment: event.target.value
       });
     });
 
@@ -303,7 +336,10 @@ function (_Component2) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "clickFormFunc", function () {
-      _this4.props.saveButtonClick(_this4.state.commentValue);
+      _this4.props.saveButtonClick({
+        comment: _this4.state.comment,
+        status: _this4.state.status
+      });
 
       return 'ok';
     });
@@ -314,21 +350,11 @@ function (_Component2) {
   _createClass(OpenDescComponent, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.setState({
-        commentValue: this.props.comment,
-        status: this.props.status
-      });
-      /*this.setState({
-          commentValue: this.props.comment,
-          status: this.props.status
-      })*/
-    }
-  }, {
-    key: "testFunc1",
-    value: function testFunc1() {
-      var a = 2;
-      var b = 2;
-      return a + b;
+      /*  this.setState({
+            comment: this.props.comment,
+            status: this.props.status
+        }) */
+      this.fullSetStateFunc();
     }
   }, {
     key: "render",
@@ -345,7 +371,7 @@ function (_Component2) {
       }, this.props.contacts.email + ' '), "\u0422\u0435\u043B.: ", this.props.contacts.telnum + ' ', "\u0412\u043D\u0443\u0442\u0440: ", this.props.contacts.extum + ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         id: "comment",
-        value: this.state.commentValue,
+        value: this.state.comment,
         onChange: this.onChangeInputFunc
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         defaultValue: this.props.serviceCentre
@@ -364,11 +390,6 @@ function (_Component2) {
       }, " SAVE "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           _this5.resetForm();
-        }
-      }, "Reset"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          console.log('f1 = ', _this5.testFunc1);
-          console.log('f2 = ', _this5.testFunc2);
         }
       }, "Reset"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)));
     }

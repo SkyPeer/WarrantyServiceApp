@@ -6,8 +6,15 @@ import 'react-dropdown/style.css'
 
 class TicketsComponent extends Component{
     state = {
+
         data: [],
-        openTicketDescId: null
+
+        openTicketDescId: null,
+
+        updateFormStatus:
+            {
+                        
+            }
     };
 
 
@@ -17,14 +24,55 @@ class TicketsComponent extends Component{
             .then(json => this.setState({data: json}))
     }
 
-    clickFunc = (arg) => {
-        console.log('clickFunc', arg)
+    updateDataFunc = (updatearg, id) => {
+        console.log('clickFunc', updatearg, id);
+
+            fetch('/mongooseUpdate', {
+                method: 'post',
+                /*body: JSON.stringify({
+                    _id: id,
+                    status: updatearg.status
+                }), */
+                body: JSON.stringify({
+                    _id: id,
+                    comment: updatearg.comment,
+                    status: updatearg.status,
+                    place: updatearg.place,
+                    finishDate: updatearg.finishDate,
+                    serviceCentre: updatearg.serviceCentre,
+                    serviceCenterTicket: updatearg.serviceCentreTicket,
+                    typeOfservice: updatearg.typeOfservice
+
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(checkStatus)
+                .then(()=>console.log('updated'))
+                .then(()=>this.getAllData())
+                .then(alert('Обновлена'));
+
+            function checkStatus(response) {
+                if (response.status >= 200 && response.status < 300) {
+                    return response
+                } else {
+                    let error = new Error(response.statusText);
+                    error.response = response;
+                    throw error
+                }
+            }
     };
+
+
+
 
     componentDidMount() {
         this.getAllData();
-
     }
+
+
 
     statusOptions = [
         { value: 0, label: 'Новая' },
@@ -43,7 +91,7 @@ class TicketsComponent extends Component{
                         this.state.data.map((ticket) => (
                             <li key={ticket._id}>
                             <div>
-                                <div>Заявка {ticket.ticketNumber} от {ticket.ticketDate} приоритет: {ticket.ticketPriority} Статус: {this.statusOptions[ticket.status].label}</div>
+                                <div>{this.updateFormStatus}Заявка {ticket.ticketNumber} от {ticket.ticketDate} приоритет: {ticket.ticketPriority} Статус: {this.statusOptions[ticket.status].label}</div>
                                 <div>Инициатор {ticket.firstname +' '+ ticket.lasname + ' '+ ticket.familyname}</div>
                                 <Link to={`${ticket._id}`}>Подробнее об оборудовании {ticket.vendor} {ticket.model}</Link>
 
@@ -71,7 +119,7 @@ class TicketsComponent extends Component{
                                                     serviceCentre={ticket.serviceCentre}
                                                     typeOfservice={ticket.typeOfService}
                                                     comment={ticket.comment}
-                                                    saveButtonClick={(arg)=>{this.clickFunc(arg)}}
+                                                    saveButtonClick={(arg)=>{this.updateDataFunc(arg, ticket._id)}}
 
                                                 />
                                             </section>)
@@ -88,57 +136,30 @@ class TicketsComponent extends Component{
 }// end of RouterComponent
 
 class OpenDescComponent extends  Component {
-    /*constructor(props) {
-        super(props);
-        this.state = {value: ''};
-
-        this.handleChange = this.handleChange.bind(this);
-        //this.handleSubmit = this.handleSubmit.bind(this);
-    }*/
-
-/*    onChangeInputValue = (event) =>{
-        console.log('onChangeInputValue', event);
-        //this.setState({comment : this.event.target.value});
-    }; */
 
     state = {
-        commentValue: '',
+        comment: '',
         status: '',
     };
 
     statusOptions = this.props.statusOptions;
 
     fullSetStateFunc = () => {
+        console.log(' --- fullSetStateFunc');
         this.setState({
-            commentValue: this.props.comment,
+            comment: this.props.comment,
             status: this.props.status
         })
     };
 
     componentDidMount(){
-        this.setState({
-            commentValue: this.props.comment,
+      /*  this.setState({
+            comment: this.props.comment,
             status: this.props.status
-        })
+        }) */
+      this.fullSetStateFunc()
 
-        /*this.setState({
-            commentValue: this.props.comment,
-            status: this.props.status
-        })*/
     }
-
-    testFunc1(){
-        let a = 2;
-        let b = 2;
-        return a + b;
-    };
-
-    testFunc2 = () => {
-        let a = 2;
-        let b = 2;
-      return a + b;
-    };
-
 
 
     resetForm = () => {
@@ -149,21 +170,24 @@ class OpenDescComponent extends  Component {
 
     onChangeInputFunc = (event) => {
         console.log(event.target.value);
-        this.setState({commentValue: event.target.value});
+        this.setState({comment: event.target.value});
     };
 
     /*changeStatus = (event) => {
     console.log(event.value)}; */
 
     changeStatus = (event) => {
-        console.log(event.value)
+        console.log(event.value);
         this.setState({status: event.value})
     };
 
 
     clickFormFunc = () =>
     {
-        this.props.saveButtonClick(this.state.commentValue);
+        this.props.saveButtonClick({
+            comment: this.state.comment,
+            status: this.state.status
+        });
         return 'ok';
     };
 
@@ -179,7 +203,7 @@ class OpenDescComponent extends  Component {
                  Внутр: {this.props.contacts.extum +' '}
             </div>
             <hr />
-            <div>Коментарий:<input type="text" id="comment" value={this.state.commentValue} onChange={this.onChangeInputFunc} /><br />
+            <div>Коментарий:<input type="text" id="comment" value={this.state.comment} onChange={this.onChangeInputFunc} /><br />
 
                 Сервисный центр: <input defaultValue={this.props.serviceCentre} /><br />
 
@@ -191,10 +215,7 @@ class OpenDescComponent extends  Component {
 
                 <button onClick={this.clickFormFunc}> SAVE </button>
                 <button onClick={()=>{this.resetForm()}}>Reset</button>
-                <button onClick={()=>{
-                    console.log('f1 = ', this.testFunc1);
-                    console.log('f2 = ', this.testFunc2)
-                }}>Reset</button>
+
 
                 <hr />
         </div>
