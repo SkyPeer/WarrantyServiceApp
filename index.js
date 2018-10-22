@@ -28,7 +28,7 @@ let TicketsSchema = new mongoose.Schema({
     ticketNumber: Number,
     ticketDate: String,
     ticketPriority: String,
-    status: String,
+    status: Number,
 
     type: String,
     vendor: String,
