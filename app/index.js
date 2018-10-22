@@ -1,20 +1,18 @@
-import React, {Component} from 'react'
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
+import React, {Component} from 'react';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import { render } from 'react-dom'
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
+import {Main} from "./pages/main";
+import {Search} from "./pages/search";
+import {Form} from "./pages/form";
+import {Layout} from "./controls/layout";
 
 class TicketsComponent extends Component{
     state = {
-
         data: [],
-
         openTicketDescId: null,
-
-        updateFormStatus:
-            {
-                        
-            }
+        idOfupdatedTicket: null
     };
 
 
@@ -35,13 +33,14 @@ class TicketsComponent extends Component{
                 }), */
                 body: JSON.stringify({
                     _id: id,
-                    comment: updatearg.comment,
+                   /* comment: updatearg.comment,
                     status: updatearg.status,
                     place: updatearg.place,
                     finishDate: updatearg.finishDate,
                     serviceCentre: updatearg.serviceCentre,
                     serviceCenterTicket: updatearg.serviceCentreTicket,
-                    typeOfservice: updatearg.typeOfservice
+                    typeOfservice: updatearg.typeOfservice*/
+                    ...updatearg
 
                 }),
                 headers: {
@@ -52,7 +51,7 @@ class TicketsComponent extends Component{
                 .then(checkStatus)
                 .then(()=>console.log('updated'))
                 .then(()=>this.getAllData())
-                .then(alert('Обновлена'));
+                .then(this.setState({idOfupdatedTicket: id}));
 
             function checkStatus(response) {
                 if (response.status >= 200 && response.status < 300) {
@@ -66,13 +65,9 @@ class TicketsComponent extends Component{
     };
 
 
-
-
     componentDidMount() {
         this.getAllData();
     }
-
-
 
     statusOptions = [
         { value: 0, label: 'Новая' },
@@ -85,15 +80,14 @@ class TicketsComponent extends Component{
 
     render(){
         return(
-            <div>
-                <ul>
-                    {
-                        this.state.data.map((ticket) => (
-                            <li key={ticket._id}>
+            <Layout>
+                    {this.state.data.map((ticket) => (
+                            <div key={ticket._id}>
                             <div>
-                                <div>{this.updateFormStatus}Заявка {ticket.ticketNumber} от {ticket.ticketDate} приоритет: {ticket.ticketPriority} Статус: {this.statusOptions[ticket.status].label}</div>
+                                <div>{this.state.idOfupdatedTicket === ticket._id ? <div>ОБНОВЛЕНА!!!</div> : ''}
+                                Заявка {ticket.ticketNumber} от {ticket.ticketDate} приоритет: {ticket.ticketPriority} Статус: {this.statusOptions[ticket.status].label}</div>
                                 <div>Инициатор {ticket.firstname +' '+ ticket.lasname + ' '+ ticket.familyname}</div>
-                                <Link to={`${ticket._id}`}>Подробнее об оборудовании {ticket.vendor} {ticket.model}</Link>
+                                <Link to={'/list/'+ticket._id}>Подробнее об оборудовании {ticket.vendor} {ticket.model}</Link>
 
                                     <div>
 
@@ -129,9 +123,8 @@ class TicketsComponent extends Component{
                                     </div>
                                     <hr />
                                 </div>
-                            </li>))}
-                </ul>
-            </div>
+                            </div>))}
+            </Layout>
         )}
 }// end of RouterComponent
 
@@ -166,20 +159,29 @@ class OpenDescComponent extends  Component {
        this.fullSetStateFunc();
     };
 
-
-
-    onChangeInputFunc = (event) => {
+    onChangeInputFunc(event){
         console.log(event.target.value);
         this.setState({comment: event.target.value});
     };
+    /*
+    onChangeInputFunc = (event) => {
+        console.log(event.target.value);
+        this.setState({comment: event.target.value});
+    }; */
 
     /*changeStatus = (event) => {
     console.log(event.value)}; */
 
-    changeStatus = (event) => {
+
+    changeStatus(event){
+        console.log(event.value);
+     this.setState({status: event.value})
+    }
+
+    /*changeStatus = (event) => {
         console.log(event.value);
         this.setState({status: event.value})
-    };
+    };*/
 
 
     clickFormFunc = () =>
@@ -211,7 +213,7 @@ class OpenDescComponent extends  Component {
 
                 Дата завершения ремонта <input defaultValue={this.props.finishDate}/><br />
 
-                <label>Статус заявки:</label><Dropdown id="status" options={this.statusOptions} onChange={this.changeStatus} value={this.statusOptions[this.state.status]} placeholder="Select an option" />
+                <label>Статус заявки:</label><Dropdown id="status" options={this.statusOptions} onChange={this.changeStatus.bind(this)} value={this.statusOptions[this.state.status]} placeholder="Select an option" />
 
                 <button onClick={this.clickFormFunc}> SAVE </button>
                 <button onClick={()=>{this.resetForm()}}>Reset</button>
@@ -259,21 +261,26 @@ class DescComponent extends Component{
 } //NewDeafultComponent
 
 
+const Routingq = () => (
+    <Switch>
+
+    </Switch>
+);
 const Routing = () => (
     <Switch>
-        <Route exact path='/' component={TicketsComponent}/>
-        <Route path='/:ticketid' component={DescComponent}/>
+        <Route exact path='/' component={Main}/>
+        <Route path='/list/:ticketid' component={DescComponent}/>
+        <Route path='/list' component={TicketsComponent}/>
+        <Route path='/search' component={Search}/>
+        <Route path='/form' component={Form}/>
     </Switch>
 );
 
 
-const Api = () => (
-    <TicketsComponent />,
-        <Routing />
-);
+//const Api = () => (<TicketsComponent />,);
 
 render(
     <BrowserRouter>
-        <Api/>
+        <Routing />
     </BrowserRouter>,
     document.getElementById('root'));
