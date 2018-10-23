@@ -18,6 +18,7 @@ const express = require('express'),
 
 mongoose.connect('mongodb://localhost:27017/warranty', {
     useNewUrlParser: true,
+    useFindAndModify: true,
 })
     .then(() => {console.log('mongodb has started')})
     .catch((err) => {console.log(err)});
@@ -27,7 +28,7 @@ mongoose.Promise = global.Promise;
 let TicketsSchema = new mongoose.Schema({
     ticketNumber: Number,
     ticketDate: String,
-    ticketPriority: String,
+    ticketPriority: Number,
     status: Number,
 
     type: String,
@@ -83,6 +84,7 @@ app.post('/mongooseUpdate', bodyParser.json(), function (req, res) {
             _id: req.body._id  // search query
         },
         {
+            ticketPriority: req.body.ticketPriority,
             typeOfService: req.body.typeOfService,
             status: req.body.status,
             comment: req.body.comment // field:values to update

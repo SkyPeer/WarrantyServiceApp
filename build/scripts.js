@@ -353,6 +353,17 @@ function (_Component) {
       label: 'Не гарантийный'
     }]);
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "ticketPriorityOptinons", [{
+      value: 0,
+      label: "Низкий"
+    }, {
+      value: 1,
+      label: "Средний"
+    }, {
+      value: 2,
+      label: "Высокий"
+    }]);
+
     return _this;
   }
 
@@ -382,7 +393,7 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_8__["Layout"], null, this.state.data.map(function (ticket) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: ticket._id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.state.idOfupdatedTicket === ticket._id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0410!!!") : '', "\u0417\u0430\u044F\u0432\u043A\u0430 ", ticket.ticketNumber, " \u043E\u0442 ", ticket.ticketDate, " \u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", ticket.ticketPriority, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _this3.statusOptions[ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.firstname + ' ' + ticket.lasname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.state.idOfupdatedTicket === ticket._id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0410!!!") : '', "\u0417\u0430\u044F\u0432\u043A\u0430 ", ticket.ticketNumber, " \u043E\u0442 ", ticket.ticketDate, " ", ticket.finishDate ? 'Дата завершения: ' + ticket.finishDate + ' ' : '', "\u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", _this3.ticketPriorityOptinons[ticket.ticketPriority].label, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _this3.statusOptions[ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.firstname + ' ' + ticket.lasname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: '/list/' + ticket._id
         }, "\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435 \u043E\u0431 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0438 ", ticket.vendor, " ", ticket.model), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, ticket._id === _this3.state.openTicketDescId && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(OpenDescComponent, {
           contacts: {
@@ -403,7 +414,9 @@ function (_Component) {
           comment: ticket.comment,
           saveButtonClick: function saveButtonClick(updatearg) {
             _this3.updateDataFunc(updatearg, ticket._id);
-          }
+          },
+          ticketPriority: ticket.ticketPriority,
+          ticketPriorityOptions: _this3.ticketPriorityOptinons
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick() {
             _this3.setState({
@@ -446,12 +459,15 @@ function (_Component2) {
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "state", {
       comment: '',
       status: '',
-      typeOfService: ''
+      typeOfService: '',
+      ticketPriority: ''
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "statusOptions", _this4.props.statusOptions);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "typeOfServiceOptions", _this4.props.typeOfServiceOptions);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "ticketPriorityOptions", _this4.props.ticketPriorityOptions);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "fullSetStateFunc", function () {
       console.log(' --- fullSetStateFunc');
@@ -459,7 +475,8 @@ function (_Component2) {
       _this4.setState({
         comment: _this4.props.comment,
         status: _this4.props.status,
-        typeOfService: _this4.props.typeOfService
+        typeOfService: _this4.props.typeOfService,
+        ticketPriority: _this4.props.ticketPriority
       });
     });
 
@@ -472,6 +489,14 @@ function (_Component2) {
 
       _this4.setState({
         comment: event.target.value
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "changePriority", function (event) {
+      console.log('changePriority', event.value);
+
+      _this4.setState({
+        ticketPriority: event.value
       });
     });
 
@@ -492,10 +517,13 @@ function (_Component2) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "clickFormFunc", function () {
+      console.log('this.state', _this4.state);
+
       _this4.props.saveButtonClick({
         comment: _this4.state.comment,
         status: _this4.state.status,
-        typeOfService: _this4.state.typeOfService
+        typeOfService: _this4.state.typeOfService,
+        ticketPriority: _this4.state.ticketPriority
       }); //this.componentDidMount();
 
     });
@@ -536,7 +564,13 @@ function (_Component2) {
         placeholder: "\u0413\u0430\u0440\u0430\u043D\u0442\u0438\u043D\u044B\u0439 / \u041D\u0435 \u0433\u0430\u0440\u0430\u043D\u0442\u0438\u0439\u043D\u044B\u0439"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "\u0414\u0430\u0442\u0430 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F \u0440\u0435\u043C\u043E\u043D\u0442\u0430 ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         defaultValue: this.props.finishDate
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0442\u0430\u0442\u0443\u0441 \u0437\u0430\u044F\u0432\u043A\u0438:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_dropdown__WEBPACK_IMPORTED_MODULE_3___default.a, {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 \u0437\u0430\u044F\u0432\u043A\u0438:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_dropdown__WEBPACK_IMPORTED_MODULE_3___default.a, {
+        id: "priority",
+        options: this.ticketPriorityOptions,
+        onChange: this.changePriority,
+        value: this.ticketPriorityOptions[this.state.ticketPriority],
+        placeholder: "\u0412\u044B\u0431\u0435\u0440\u0435\u0442\u0435 \u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 \u0437\u0430\u044F\u0432\u043A\u0438"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0442\u0430\u0442\u0443\u0441 \u0437\u0430\u044F\u0432\u043A\u0438:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_dropdown__WEBPACK_IMPORTED_MODULE_3___default.a, {
         id: "status",
         options: this.statusOptions,
         onChange: this.changeStatus,
