@@ -48,7 +48,7 @@ let TicketsSchema = new mongoose.Schema({
 
     finishDate: String,
     comment: String,
-    serviceCentre: String,
+    serviceCenter: String,
     typeOfService: String,
     serviceCentreTicket: String,
 

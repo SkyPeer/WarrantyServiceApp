@@ -24,7 +24,7 @@ class TicketsComponent extends Component{
         fetch(`/mongooseGetDataSC`)
             .then(res => res.json())
             .then(json => this.setState({sc: json}))
-            .then(()=>{console.log(' --- sc: ', this.state.sc)})
+            //.then(()=>{console.log(' --- sc: ', this.state.sc)})
     }
 
     updateDataFunc = (updatearg, id) => {
@@ -92,6 +92,8 @@ class TicketsComponent extends Component{
         {value: 2, label: "Высокий"}
     ];
 
+    a(){console.log('a()', this.state.sc)};
+
 
     render(){
         return(
@@ -124,15 +126,16 @@ class TicketsComponent extends Component{
                                                     saveButtonClick={(updatearg)=>{this.updateDataFunc(updatearg, ticket._id)}}
                                                     ticketPriority={ticket.ticketPriority} ticketPriorityOptions={this.ticketPriorityOptinons}
 
-                                                    serviceCentre={ticket.serviceCentre}
+                                                    serviceCenter={ticket.serviceCenter} serviceCenterOptions={this.state.sc}
                                                     typeOfService={ticket.typeOfService} typeOfServiceOptions={this.typeOfServiceOptions}
-                                                    sc={this.state.sc}
+
 
                                                 />
                                             </section>)
                                         }
                                         <button onClick={()=>{this.setState({openTicketDescId:ticket._id})}}>OPEN</button>
                                         <button onClick={()=>{this.setState({openTicketDescId:null})}}>CLOSE</button>
+                                        <button onClick={ ()=>{this.a()} }> --- TEST</button>
                                     </div>
                                     <hr />
                                 </div>
@@ -148,12 +151,13 @@ class OpenDescComponent extends  Component {
         status: '',
         typeOfService: '',
         ticketPriority: '',
+        serviceCenter: '',
     };
 
     statusOptions = this.props.statusOptions;
     typeOfServiceOptions = this.props.typeOfServiceOptions;
     ticketPriorityOptions = this.props.ticketPriorityOptions;
-    sc = this.props.sc;
+    serviceCenterOptions = this.props.serviceCenterOptions;
 
 
 
@@ -163,15 +167,17 @@ class OpenDescComponent extends  Component {
             comment: this.props.comment,
             status: this.props.status,
             typeOfService: this.props.typeOfService,
-            ticketPriority: this.props.ticketPriority
+            ticketPriority: this.props.ticketPriority,
+            serviceCenter: this.props.serviceCenter
 
-        })
+        });
+
+
     };
 
     componentDidMount(){
         console.log('--componentDidMount');
       this.fullSetStateFunc()
-
     }
 
     resetForm = () => {
@@ -208,6 +214,12 @@ class OpenDescComponent extends  Component {
         });
     };
 
+    changeServiceCenter = (event) => {
+        console.log(event.target.value);
+        this.setState({serviceCenter: event.target.value})
+    };
+
+
     render(){
         return(
             <form id="OpenDescComponent" onSubmit={(event)=>{event.preventDefault()}}>
@@ -221,15 +233,42 @@ class OpenDescComponent extends  Component {
                 </div>
                 <hr />
                 <div>Коментарий:<input type="text" id="comment" value={this.state.comment} onChange={this.onChangeInputFunc} /><br />
-                Сервисный центр: <input defaultValue={this.props.serviceCentre} /><br />
-                Ремонт: <Dropdown id="typeOfService" options={this.typeOfServiceOptions} onChange={this.changeTypeOfService} value={this.typeOfServiceOptions[this.state.typeOfService]} placeholder="Гарантиный / Не гарантийный" /><br />
+
+
+                    <select id="serviceCenterSelect" onChange={this.changeServiceCenter} value={this.state.serviceCenter}>
+                        <option value="" defaultValue>select please</option>
+                        {this.props.serviceCenterOptions.map(sc =>
+
+                            <option
+                                key={sc._id}
+                                value={sc._id}>
+                                {sc.scTitle}
+                            </option>
+                        )}
+                    </select> <br /> <br />
+
+                    {!this.state.serviceCenter === '' ? console.log('ServiceCeterChecked') : console.log('ServiceCenter not Checked!')}
+
+                    <label>Ремонт: </label><Dropdown id="typeOfService" options={this.typeOfServiceOptions} onChange={this.changeTypeOfService} value={this.typeOfServiceOptions[this.state.typeOfService]} placeholder="Гарантиный / Не гарантийный" /><br />
                 Дата завершения ремонта <input defaultValue={this.props.finishDate}/><br />
+
                 <label>Приоритет заявки:</label><Dropdown id="priority" options={this.ticketPriorityOptions} onChange={this.changePriority} value={this.ticketPriorityOptions[this.state.ticketPriority]} placeholder="Выберете приоритет заявки" />
-                <label>Статус заявки:</label><Dropdown id="status" options={this.statusOptions} onChange={this.changeStatus} value={this.statusOptions[this.state.status]} placeholder="Выберете статус заявки" />
+
+                    <label>Статус заявки:</label>
+                    <Dropdown id="status"
+                              options={this.statusOptions}
+                              onChange={this.changeStatus}
+                              value={this.statusOptions[this.state.status]}
+                              placeholder="Выберете статус заявки" />
 
                 <button onClick={this.clickFormFunc}> SAVE </button>
                 <button onClick={()=>{this.resetForm()}}>Reset</button>
 
+                    <button onClick={ ()=> {
+
+                        console.log('this.state.serviceCenter', this.state.serviceCenter);
+                        console.log('this.props.serviceCenterOptions', this.props.serviceCenterOptions)
+                    }}> --- TEST --- </button>
 
                 <hr />
         </div>
