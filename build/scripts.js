@@ -201,7 +201,7 @@ function (_Component) {
         to: "/list"
       }, "List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/form"
-      }, "Form"));
+      }, "Form"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
     }
   }]);
 
@@ -287,7 +287,8 @@ function (_Component) {
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
       data: [],
       openTicketDescId: null,
-      idOfupdatedTicket: null
+      idOfupdatedTicket: null,
+      sc: []
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateDataFunc", function (updatearg, id) {
@@ -372,12 +373,21 @@ function (_Component) {
     value: function getAllData() {
       var _this2 = this;
 
-      fetch("/mongooseGetData").then(function (res) {
+      fetch("/mongooseGetDataTickets").then(function (res) {
         return res.json();
       }).then(function (json) {
         return _this2.setState({
           data: json
         });
+      });
+      fetch("/mongooseGetDataSC").then(function (res) {
+        return res.json();
+      }).then(function (json) {
+        return _this2.setState({
+          sc: json
+        });
+      }).then(function () {
+        console.log(' --- sc: ', _this2.state.sc);
       });
     }
   }, {
@@ -402,21 +412,23 @@ function (_Component) {
             extum: ticket.extnum
           },
           idshnik: ticket._id,
+          ticketNumber: ticket.ticketNumber,
           problem: ticket.problem,
           projectCode: ticket.projectCode,
           place: ticket.place,
           status: ticket.status,
           statusOptions: _this3.statusOptions,
           finishDate: ticket.finishDate,
-          serviceCentre: ticket.serviceCentre,
-          typeOfService: ticket.typeOfService,
-          typeOfServiceOptions: _this3.typeOfServiceOptions,
           comment: ticket.comment,
           saveButtonClick: function saveButtonClick(updatearg) {
             _this3.updateDataFunc(updatearg, ticket._id);
           },
           ticketPriority: ticket.ticketPriority,
-          ticketPriorityOptions: _this3.ticketPriorityOptinons
+          ticketPriorityOptions: _this3.ticketPriorityOptinons,
+          serviceCentre: ticket.serviceCentre,
+          typeOfService: ticket.typeOfService,
+          typeOfServiceOptions: _this3.typeOfServiceOptions,
+          sc: _this3.state.sc
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick() {
             _this3.setState({
@@ -468,6 +480,8 @@ function (_Component2) {
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "typeOfServiceOptions", _this4.props.typeOfServiceOptions);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "ticketPriorityOptions", _this4.props.ticketPriorityOptions);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "sc", _this4.props.sc);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "fullSetStateFunc", function () {
       console.log(' --- fullSetStateFunc');
@@ -524,8 +538,7 @@ function (_Component2) {
         status: _this4.state.status,
         typeOfService: _this4.state.typeOfService,
         ticketPriority: _this4.state.ticketPriority
-      }); //this.componentDidMount();
-
+      });
     });
 
     return _this4;
@@ -547,8 +560,8 @@ function (_Component2) {
         onSubmit: function onSubmit(event) {
           event.preventDefault();
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Key: ", this.props.idshnik, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041F\u0440\u0438\u0447\u0438\u043D\u0430: ", this.props.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430: ", this.props.projectCode), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041C\u0435\u0441\u0442\u043E\u043D\u0430\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F: ", this.props.place), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Email: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "mailto:" + this.props.contacts.email
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Key: ", this.props.idshnik, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041F\u0440\u0438\u0447\u0438\u043D\u0430: ", this.props.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430: ", this.props.projectCode), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041C\u0435\u0441\u0442\u043E\u043D\u0430\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F: ", this.props.place), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Email:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "mailto:" + this.props.contacts.email + "?subject=Заявка на гарантийное обслуживание № " + this.props.ticketNumber
       }, this.props.contacts.email + ' '), "\u0422\u0435\u043B.: ", this.props.contacts.telnum + ' ', "\u0412\u043D\u0443\u0442\u0440: ", this.props.contacts.extum + ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         id: "comment",

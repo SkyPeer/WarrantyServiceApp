@@ -54,17 +54,30 @@ let TicketsSchema = new mongoose.Schema({
 
 });
 
-let TicketModel = mongoose.model('tickets', TicketsSchema);
+let ServiceCentersSchema = new mongoose.Schema({
+    scTitle: String,
+    scVendors: String,
+    scAdress: String
 
-    //upload = multer(),
-   // jsonParser = bodyParser.json();
+});
 
+let ServiceCenterModel = mongoose.model('servicecenters', ServiceCentersSchema);
+app.get('/mongooseGetDataSC', function(req, res, next){
 
-app.get('/mongooseGetData', function(req, res, next){
-
-    TicketModel.find(function (err, tasksDocs){
+    ServiceCenterModel.find(function (err, scDocs){
         if (err) return next (err);
-        res.json(tasksDocs)
+        res.json(scDocs)
+    })
+});
+
+
+
+let TicketModel = mongoose.model('tickets', TicketsSchema);
+app.get('/mongooseGetDataTickets', function(req, res, next){
+
+    TicketModel.find(function (err, ticketsDocs){
+        if (err) return next (err);
+        res.json(ticketsDocs)
     })
 });
 

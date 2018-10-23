@@ -8,6 +8,7 @@ class Navbar extends Component{
                 <Link to="/search">Search</Link>
                 <Link to="/list">List</Link>
                 <Link to="/form">Form</Link>
+                <hr /><hr />
             </div>
         )
     }

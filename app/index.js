@@ -12,14 +12,19 @@ class TicketsComponent extends Component{
     state = {
         data: [],
         openTicketDescId: null,
-        idOfupdatedTicket: null
+        idOfupdatedTicket: null,
+        sc: []
     };
 
 
     getAllData () {
-        fetch(`/mongooseGetData`)
+        fetch(`/mongooseGetDataTickets`)
             .then(res => res.json())
-            .then(json => this.setState({data: json}))
+            .then(json => this.setState({data: json}));
+        fetch(`/mongooseGetDataSC`)
+            .then(res => res.json())
+            .then(json => this.setState({sc: json}))
+            .then(()=>{console.log(' --- sc: ', this.state.sc)})
     }
 
     updateDataFunc = (updatearg, id) => {
@@ -106,25 +111,23 @@ class TicketsComponent extends Component{
                                             <section>
 
                                                 <OpenDescComponent
-
-                                                    contacts={
-                                                        {
-                                                            telnum: ticket.telnum,
-                                                            email: ticket.email,
-                                                            extum: ticket.extnum
-                                                        }
-                                                    }
+                                                    contacts={{telnum: ticket.telnum, email: ticket.email, extum: ticket.extnum}}
                                                     idshnik={ticket._id}
+                                                    ticketNumber={ticket.ticketNumber}
                                                     problem={ticket.problem}
                                                     projectCode={ticket.projectCode}
                                                     place={ticket.place}
                                                     status={ticket.status} statusOptions={this.statusOptions}
                                                     finishDate={ticket.finishDate}
-                                                    serviceCentre={ticket.serviceCentre}
-                                                    typeOfService={ticket.typeOfService} typeOfServiceOptions={this.typeOfServiceOptions}
+
                                                     comment={ticket.comment}
                                                     saveButtonClick={(updatearg)=>{this.updateDataFunc(updatearg, ticket._id)}}
                                                     ticketPriority={ticket.ticketPriority} ticketPriorityOptions={this.ticketPriorityOptinons}
+
+                                                    serviceCentre={ticket.serviceCentre}
+                                                    typeOfService={ticket.typeOfService} typeOfServiceOptions={this.typeOfServiceOptions}
+                                                    sc={this.state.sc}
+
                                                 />
                                             </section>)
                                         }
@@ -150,6 +153,9 @@ class OpenDescComponent extends  Component {
     statusOptions = this.props.statusOptions;
     typeOfServiceOptions = this.props.typeOfServiceOptions;
     ticketPriorityOptions = this.props.ticketPriorityOptions;
+    sc = this.props.sc;
+
+
 
     fullSetStateFunc = () => {
         console.log(' --- fullSetStateFunc');
@@ -168,17 +174,14 @@ class OpenDescComponent extends  Component {
 
     }
 
-
     resetForm = () => {
        this.fullSetStateFunc();
     };
-
 
     onChangeInputFunc = (event) => {
         console.log(event.target.value);
         this.setState({comment: event.target.value});
     };
-
 
     changePriority = (event) =>{
         console.log('changePriority', event.value);
@@ -195,20 +198,14 @@ class OpenDescComponent extends  Component {
         this.setState({typeOfService: event.value})
     };
 
-
-
-    clickFormFunc = () =>
-    {
-
+    clickFormFunc = () => {
         console.log('this.state', this.state);
-
         this.props.saveButtonClick({
             comment: this.state.comment,
             status: this.state.status,
             typeOfService: this.state.typeOfService,
             ticketPriority: this.state.ticketPriority
         });
-        //this.componentDidMount();
     };
 
     render(){
@@ -218,7 +215,7 @@ class OpenDescComponent extends  Component {
                 <div>Причина: {this.props.problem}</div><br />
                 <div>Код проекта: {this.props.projectCode}</div><div>Местонахождение оборудования: {this.props.place}</div><br />
                 <div>Контакты:</div>
-                <div>Email: <a href={"mailto:" + this.props.contacts.email}>{this.props.contacts.email +' '}</a>
+                <div>Email:<a href={"mailto:" + this.props.contacts.email +"?subject=Заявка на гарантийное обслуживание № "+this.props.ticketNumber}>{this.props.contacts.email +' '}</a>
                  Тел.: {this.props.contacts.telnum +' '}
                  Внутр: {this.props.contacts.extum +' '}
                 </div>
