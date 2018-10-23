@@ -33,14 +33,14 @@ class TicketsComponent extends Component{
                 }), */
                 body: JSON.stringify({
                     _id: id,
-                    comment: updatearg.comment,
-                    /*status: updatearg.status,
+                    /*comment: updatearg.comment,
+                    status: updatearg.status,
                     place: updatearg.place,
                     finishDate: updatearg.finishDate,
                     serviceCentre: updatearg.serviceCentre,
                     serviceCenterTicket: updatearg.serviceCentreTicket,
                     typeOfservice: updatearg.typeOfservice */
-                    //...updatearg
+                    ...updatearg
 
                 }),
                 headers: {
@@ -50,8 +50,8 @@ class TicketsComponent extends Component{
             })
                 .then(checkStatus)
                 .then(()=>console.log('updated'))
-                .then(()=>this.getAllData());
-                /*.then(()=>this.setState({idOfupdatedTicket: id})); */
+                .then(()=>this.getAllData())
+                .then(()=>this.setState({idOfupdatedTicket: id, openTicketDescId: null}));
 
             function checkStatus(response) {
                 if (response.status >= 200 && response.status < 300) {
@@ -76,6 +76,10 @@ class TicketsComponent extends Component{
         { value: 3, label: 'Завершена' },
         { value: 4, label: 'Отклонена' },
     ];
+    typeOfServiceOptions = [
+        {value: 0, label: 'Гарантийный'},
+        {value: 1, label: 'Не гарантийный'}
+    ];
 
 
     render(){
@@ -95,26 +99,26 @@ class TicketsComponent extends Component{
                                             <section>
 
                                                 <OpenDescComponent
-                                                    idshnik={ticket._id}
-                                                    problem={ticket.problem}
 
                                                     contacts={
-
                                                         {
                                                             telnum: ticket.telnum,
                                                             email: ticket.email,
                                                             extum: ticket.extnum
                                                         }
                                                     }
+                                                    idshnik={ticket._id}
+                                                    problem={ticket.problem}
                                                     projectCode={ticket.projectCode}
                                                     place={ticket.place}
                                                     status={ticket.status}
                                                     statusOptions={this.statusOptions}
                                                     finishDate={ticket.finishDate}
                                                     serviceCentre={ticket.serviceCentre}
-                                                    typeOfservice={ticket.typeOfService}
+                                                    typeOfService={ticket.typeOfService}
+                                                    typeOfServiceOptions={this.typeOfServiceOptions}
                                                     comment={ticket.comment}
-                                                    saveButtonClick={(arg)=>{this.updateDataFunc(arg, ticket._id)}}
+                                                    saveButtonClick={(updatearg)=>{this.updateDataFunc(updatearg, ticket._id)}}
 
                                                 />
                                             </section>)
@@ -134,32 +138,24 @@ class OpenDescComponent extends  Component {
     state = {
         comment: '',
         status: '',
+        typeOfService: '',
     };
 
     statusOptions = this.props.statusOptions;
-
-
+    typeOfServiceOptions = this.props.typeOfServiceOptions;
 
     fullSetStateFunc = () => {
         console.log(' --- fullSetStateFunc');
         this.setState({
             comment: this.props.comment,
-            status: this.props.status
+            status: this.props.status,
+            typeOfService: this.props.typeOfService
+
         })
     };
 
     componentDidMount(){
-      /*  this.setState({
-            comment: this.props.comment,
-            status: this.props.status
-        }) */
-
-        this.setState({
-            comment: this.props.comment,
-            //status: this.props.status
-        });
-
-      console.log('--componentDidMount');
+        console.log('--componentDidMount');
       this.fullSetStateFunc()
 
     }
@@ -175,26 +171,25 @@ class OpenDescComponent extends  Component {
         this.setState({comment: event.target.value});
     };
 
-    /*changeStatus = (event) => {
-    console.log(event.value)}; */
 
-
-    changeStatus(event){
-        console.log(event.value);
-     this.setState({status: event.value})
-    }
-
-    /*changeStatus = (event) => {
-        console.log(event.value);
+    changeStatus = (event) => {
+        console.log('changeStatus', event.value);
         this.setState({status: event.value})
-    };*/
+    };
+
+    changeTypeOfService = (event) => {
+        console.log('changeTypeOfService',event.value);
+        this.setState({typeOfService: event.value})
+    };
+
 
 
     clickFormFunc = () =>
     {
         this.props.saveButtonClick({
             comment: this.state.comment,
-            //status: this.state.status
+            status: this.state.status,
+            typeOfService: this.state.typeOfService
         });
         //this.componentDidMount();
     };
@@ -204,22 +199,18 @@ class OpenDescComponent extends  Component {
             <form id="OpenDescComponent" onSubmit={(event)=>{event.preventDefault()}}>
                 <div>Key: {this.props.idshnik} </div>
                 <div>Причина: {this.props.problem}</div><br />
-            <div>Код проекта: {this.props.projectCode}</div><div>Местонахождение оборудования: {this.props.place}</div><br />
-            <div>Контакты:</div>
-            <div>Email: <a href={"mailto:" + this.props.contacts.email}>{this.props.contacts.email +' '}</a>
+                <div>Код проекта: {this.props.projectCode}</div><div>Местонахождение оборудования: {this.props.place}</div><br />
+                <div>Контакты:</div>
+                <div>Email: <a href={"mailto:" + this.props.contacts.email}>{this.props.contacts.email +' '}</a>
                  Тел.: {this.props.contacts.telnum +' '}
                  Внутр: {this.props.contacts.extum +' '}
-            </div>
-            <hr />
-            <div>Коментарий:<input type="text" id="comment" value={this.state.comment} onChange={this.onChangeInputFunc} /><br />
-
+                </div>
+                <hr />
+                <div>Коментарий:<input type="text" id="comment" value={this.state.comment} onChange={this.onChangeInputFunc} /><br />
                 Сервисный центр: <input defaultValue={this.props.serviceCentre} /><br />
-
-                Ремонт: <input defaultValue={this.props.typeOfservice}/><br />
-
+                Ремонт: <Dropdown id="typeOfService" options={this.typeOfServiceOptions} onChange={this.changeTypeOfService} value={this.typeOfServiceOptions[this.state.typeOfService]} placeholder="Гарантиный / Не гарантийный" /><br />
                 Дата завершения ремонта <input defaultValue={this.props.finishDate}/><br />
-
-                <label>Статус заявки:</label><Dropdown id="status" options={this.statusOptions} onChange={this.changeStatus.bind(this)} value={this.statusOptions[this.state.status]} placeholder="Select an option" />
+                <label>Статус заявки:</label><Dropdown id="status" options={this.statusOptions} onChange={this.changeStatus} value={this.statusOptions[this.state.status]} placeholder="Выберете статус заявки" />
 
                 <button onClick={this.clickFormFunc}> SAVE </button>
                 <button onClick={()=>{this.resetForm()}}>Reset</button>
