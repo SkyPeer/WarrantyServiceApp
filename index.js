@@ -77,13 +77,13 @@ app.post('/mongooseFind', bodyParser.json(), function(req, res){
 });
 
 app.post('/mongooseUpdate', bodyParser.json(), function (req, res) {
-    console.log('------- mongooseUpdate req.body:', req.body);
+    console.log('------- mongooseUpdate req.body:   id', req.body._id, 'body.comment:', req.body.comment);
     TicketModel.findOneAndUpdate(
         {
-            id: req.body.id  // search query
+            _id: req.body._id  // search query
         },
         {
-            status: req.body.status,
+            //status: req.body.status,
             comment: req.body.comment // field:values to update
         },
         {

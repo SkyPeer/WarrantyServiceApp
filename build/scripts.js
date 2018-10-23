@@ -236,8 +236,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controls_layout__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./controls/layout */ "./app/controls/layout.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -299,9 +297,18 @@ function (_Component) {
             _id: id,
             status: updatearg.status
         }), */
-        body: JSON.stringify(_objectSpread({
-          _id: id
-        }, updatearg)),
+        body: JSON.stringify({
+          _id: id,
+          comment: updatearg.comment
+          /*status: updatearg.status,
+          place: updatearg.place,
+          finishDate: updatearg.finishDate,
+          serviceCentre: updatearg.serviceCentre,
+          serviceCenterTicket: updatearg.serviceCentreTicket,
+          typeOfservice: updatearg.typeOfservice */
+          //...updatearg
+
+        }),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -310,9 +317,8 @@ function (_Component) {
         return console.log('updated');
       }).then(function () {
         return _this.getAllData();
-      }).then(_this.setState({
-        idOfupdatedTicket: id
-      }));
+      });
+      /*.then(()=>this.setState({idOfupdatedTicket: id})); */
 
       function checkStatus(response) {
         if (response.status >= 200 && response.status < 300) {
@@ -374,6 +380,7 @@ function (_Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.state.idOfupdatedTicket === ticket._id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0410!!!") : '', "\u0417\u0430\u044F\u0432\u043A\u0430 ", ticket.ticketNumber, " \u043E\u0442 ", ticket.ticketDate, " \u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", ticket.ticketPriority, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _this3.statusOptions[ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.firstname + ' ' + ticket.lasname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: '/list/' + ticket._id
         }, "\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435 \u043E\u0431 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0438 ", ticket.vendor, " ", ticket.model), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, ticket._id === _this3.state.openTicketDescId && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(OpenDescComponent, {
+          idshnik: ticket._id,
           problem: ticket.problem,
           contacts: {
             telnum: ticket.telnum,
@@ -460,11 +467,10 @@ function (_Component2) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "clickFormFunc", function () {
       _this4.props.saveButtonClick({
-        comment: _this4.state.comment,
-        status: _this4.state.status
-      });
+        comment: _this4.state.comment //status: this.state.status
 
-      return 'ok';
+      }); //this.componentDidMount();
+
     });
 
     return _this4;
@@ -477,6 +483,11 @@ function (_Component2) {
             comment: this.props.comment,
             status: this.props.status
         }) */
+      this.setState({
+        comment: this.props.comment //status: this.props.status
+
+      });
+      console.log('--componentDidMount');
       this.fullSetStateFunc();
     }
   }, {
@@ -505,7 +516,7 @@ function (_Component2) {
         onSubmit: function onSubmit(event) {
           event.preventDefault();
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041F\u0440\u0438\u0447\u0438\u043D\u0430: ", this.props.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430: ", this.props.projectCode), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041C\u0435\u0441\u0442\u043E\u043D\u0430\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F: ", this.props.place), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Email: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Key: ", this.props.idshnik, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041F\u0440\u0438\u0447\u0438\u043D\u0430: ", this.props.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430: ", this.props.projectCode), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041C\u0435\u0441\u0442\u043E\u043D\u0430\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F: ", this.props.place), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Email: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "mailto:" + this.props.contacts.email
       }, this.props.contacts.email + ' '), "\u0422\u0435\u043B.: ", this.props.contacts.telnum + ' ', "\u0412\u043D\u0443\u0442\u0440: ", this.props.contacts.extum + ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",

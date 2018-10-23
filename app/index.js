@@ -33,14 +33,14 @@ class TicketsComponent extends Component{
                 }), */
                 body: JSON.stringify({
                     _id: id,
-                   /* comment: updatearg.comment,
-                    status: updatearg.status,
+                    comment: updatearg.comment,
+                    /*status: updatearg.status,
                     place: updatearg.place,
                     finishDate: updatearg.finishDate,
                     serviceCentre: updatearg.serviceCentre,
                     serviceCenterTicket: updatearg.serviceCentreTicket,
-                    typeOfservice: updatearg.typeOfservice*/
-                    ...updatearg
+                    typeOfservice: updatearg.typeOfservice */
+                    //...updatearg
 
                 }),
                 headers: {
@@ -50,8 +50,8 @@ class TicketsComponent extends Component{
             })
                 .then(checkStatus)
                 .then(()=>console.log('updated'))
-                .then(()=>this.getAllData())
-                .then(this.setState({idOfupdatedTicket: id}));
+                .then(()=>this.getAllData());
+                /*.then(()=>this.setState({idOfupdatedTicket: id})); */
 
             function checkStatus(response) {
                 if (response.status >= 200 && response.status < 300) {
@@ -95,6 +95,7 @@ class TicketsComponent extends Component{
                                             <section>
 
                                                 <OpenDescComponent
+                                                    idshnik={ticket._id}
                                                     problem={ticket.problem}
 
                                                     contacts={
@@ -137,6 +138,8 @@ class OpenDescComponent extends  Component {
 
     statusOptions = this.props.statusOptions;
 
+
+
     fullSetStateFunc = () => {
         console.log(' --- fullSetStateFunc');
         this.setState({
@@ -150,6 +153,13 @@ class OpenDescComponent extends  Component {
             comment: this.props.comment,
             status: this.props.status
         }) */
+
+        this.setState({
+            comment: this.props.comment,
+            //status: this.props.status
+        });
+
+      console.log('--componentDidMount');
       this.fullSetStateFunc()
 
     }
@@ -158,7 +168,6 @@ class OpenDescComponent extends  Component {
     resetForm = () => {
        this.fullSetStateFunc();
     };
-
 
 
     onChangeInputFunc = (event) => {
@@ -185,15 +194,16 @@ class OpenDescComponent extends  Component {
     {
         this.props.saveButtonClick({
             comment: this.state.comment,
-            status: this.state.status
+            //status: this.state.status
         });
-        return 'ok';
+        //this.componentDidMount();
     };
 
     render(){
         return(
             <form id="OpenDescComponent" onSubmit={(event)=>{event.preventDefault()}}>
-            <div>Причина: {this.props.problem}</div><br />
+                <div>Key: {this.props.idshnik} </div>
+                <div>Причина: {this.props.problem}</div><br />
             <div>Код проекта: {this.props.projectCode}</div><div>Местонахождение оборудования: {this.props.place}</div><br />
             <div>Контакты:</div>
             <div>Email: <a href={"mailto:" + this.props.contacts.email}>{this.props.contacts.email +' '}</a>
