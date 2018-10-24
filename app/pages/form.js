@@ -31,10 +31,19 @@ class Form extends Component{
 
     }
 
-    ticketPriorityOptinons = [
+    ticketPriorityOptions = [
         {value: 0, label: "Низкий"},
         {value: 1, label: "Средний"},
         {value: 2, label: "Высокий"}
+    ];
+
+    placeOptions = [
+        {value: 0, label: "Головной офис"},
+        {value: 1, label: "Доп. офис №1"},
+        {value: 2, label: "Доп. офис №2"},
+        {value: 3, label: "Склад"},
+        {value: 4, label: "Заказчик"},
+        {value: 5, label: "Другое"}
     ];
 
 
@@ -73,19 +82,10 @@ class Form extends Component{
         this.setState({ticketPriority: event.target.value})
     };
 
-
-    /*
-
-     ticketPriority: Number,
-     vendor: String,
-     model: String,
-     partNumber: String,
-     problem: String,
-     place: String,
-     projectCode: String,
-
-
-     */
+    changePlace = (event) =>{
+        console.log('changeplace', event.target.value);
+        this.setState({place: event.target.value})
+    };
 
 
     render(){
@@ -105,12 +105,26 @@ class Form extends Component{
                     <hr />
 
 
+                    <label>Производитель / вендор: </label><input onChange={this.vendorChange}/><br />
+                    <label>Модель: </label><input onChange={this.modelChange}/><br />
+                    <label>P/N: </label><input onChange={this.partNumberChange}/><br />
+                    <label>Описание проблемы:</label><br /><textarea onChange={this.problemChange}></textarea><br />
+                    <label>Код проекта</label><input onChange={this.projectCodechange}></input><br />
 
-                    <select className="selectPriority" onChange={this.changePriority} value={this.state.ticketPriority}>
-                        {this.props.ticketPriorityOptions.map(priority =>
+                    <label>Местонахождение оборудования: </label><select className="selectPlace" onChange={this.changePlace} value={this.state.place}>
+                        {this.placeOptions.map(place =>
+                            <option key={place.value} value={place.value}>{place.label}</option>
+                        )}
+                    </select>
+                    <br />
+
+                    <label>Приоритет заявки: </label><select className="selectPriority" onChange={this.changePriority} value={this.state.ticketPriority}>
+                        {this.ticketPriorityOptions.map(priority =>
                             <option key={priority.value} value={priority.value}>{priority.label}</option>
                         )}
                     </select>
+
+
 
 
                 </form>
