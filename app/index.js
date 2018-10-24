@@ -152,6 +152,7 @@ class OpenDescComponent extends  Component {
         typeOfService: '',
         ticketPriority: '',
         serviceCenter: '',
+        serviceCenterDetails: '',
     };
 
     statusOptions = this.props.statusOptions;
@@ -171,8 +172,14 @@ class OpenDescComponent extends  Component {
             serviceCenter: this.props.serviceCenter
 
         });
+        this.props.serviceCenter !== '' ? this.getServiceCenterDetails(this.props.serviceCenter) : console.log('fullSetStateFunc: serviceCenter Not checked')
 
 
+    };
+
+    getServiceCenterDetails = (id) => {
+        let scDetais = this.props.serviceCenterOptions.find(item => item._id === id)
+        this.setState({serviceCenterDetails: scDetais})
     };
 
     componentDidMount(){
@@ -180,48 +187,51 @@ class OpenDescComponent extends  Component {
       this.fullSetStateFunc()
     }
 
-    resetForm = () => {
-       this.fullSetStateFunc();
-    };
-
     onChangeInputFunc = (event) => {
         console.log(event.target.value);
         this.setState({comment: event.target.value});
     };
 
     changePriority = (event) =>{
-        console.log('changePriority', event.value);
-        this.setState({ticketPriority: event.value})
+        console.log('changePriority', event.target.value);
+        this.setState({ticketPriority: event.target.value})
     };
 
     changeStatus = (event) => {
-        console.log('changeStatus', event.value);
-        this.setState({status: event.value})
+        console.log('changeStatus', event.target.value);
+        this.setState({status: event.target.value})
+    };
+
+    changeServiceCenter = (event) => {
+        console.log(event.target.value);
+        this.getServiceCenterDetails(event.target.value);
+        this.setState({serviceCenter: event.target.value})
+
     };
 
     changeTypeOfService = (event) => {
-        console.log('changeTypeOfService',event.value);
-        this.setState({typeOfService: event.value})
+        console.log('changeTypeOfService',event.target.value);
+        this.setState({typeOfService: event.target.value})
     };
 
-    clickFormFunc = () => {
+    saveFormFunc = () => {
         console.log('this.state', this.state);
         this.props.saveButtonClick({
             comment: this.state.comment,
             status: this.state.status,
             typeOfService: this.state.typeOfService,
-            ticketPriority: this.state.ticketPriority
+            ticketPriority: this.state.ticketPriority,
+            serviceCenter: this.state.serviceCenter
         });
     };
-
-    changeServiceCenter = (event) => {
-        console.log(event.target.value);
-        this.setState({serviceCenter: event.target.value})
+    resetForm = () => {
+        this.fullSetStateFunc();
     };
 
 
     render(){
         return(
+
             <form id="OpenDescComponent" onSubmit={(event)=>{event.preventDefault()}}>
                 <div>Key: {this.props.idshnik} </div>
                 <div>Причина: {this.props.problem}</div><br />
@@ -234,40 +244,51 @@ class OpenDescComponent extends  Component {
                 <hr />
                 <div>Коментарий:<input type="text" id="comment" value={this.state.comment} onChange={this.onChangeInputFunc} /><br />
 
-
-                    <select id="serviceCenterSelect" onChange={this.changeServiceCenter} value={this.state.serviceCenter}>
-                        <option value="" defaultValue>select please</option>
+                    <select className="selectServiceCenter" onChange={this.changeServiceCenter} value={this.state.serviceCenter}>
+                        <option value="" defaultValue>Выбрать сервисный центр</option>
                         {this.props.serviceCenterOptions.map(sc =>
-
-                            <option
-                                key={sc._id}
-                                value={sc._id}>
-                                {sc.scTitle}
-                            </option>
+                            <option key={sc._id} value={sc._id}>{sc.scTitle}</option>
                         )}
-                    </select> <br /> <br />
+                    </select>
+                    {this.state.serviceCenterDetails !== undefined ? <div><b>Адрес СЦ: </b>{this.state.serviceCenterDetails.scAdress} <br /> <b>Авторизация вендоров:</b> {this.state.serviceCenterDetails.scVendors}</div> : ''}
+                    <br /> <br />
 
-                    {!this.state.serviceCenter === '' ? console.log('ServiceCeterChecked') : console.log('ServiceCenter not Checked!')}
+                    <label>Ремонт: </label>
 
-                    <label>Ремонт: </label><Dropdown id="typeOfService" options={this.typeOfServiceOptions} onChange={this.changeTypeOfService} value={this.typeOfServiceOptions[this.state.typeOfService]} placeholder="Гарантиный / Не гарантийный" /><br />
-                Дата завершения ремонта <input defaultValue={this.props.finishDate}/><br />
+                    <Dropdown id="typeOfService" options={this.typeOfServiceOptions} onChange={this.changeTypeOfService} value={this.typeOfServiceOptions[this.state.typeOfService]} placeholder="Гарантиный / Не гарантийный" /><br />
 
-                <label>Приоритет заявки:</label><Dropdown id="priority" options={this.ticketPriorityOptions} onChange={this.changePriority} value={this.ticketPriorityOptions[this.state.ticketPriority]} placeholder="Выберете приоритет заявки" />
+                    <select className="typeOfService" onChange={this.changeTypeOfService} value={this.state.typeOfService}>
+                        {this.typeOfServiceOptions.map(typeOfService =>
+                            <option key={typeOfService.value} value={typeOfService.value}>{typeOfService.label}</option>
+                        )}
+                    </select>
+
+                    Дата завершения обслуживания <input defaultValue={this.props.finishDate}/><br />
+
+                    <label>Приоритет заявки:</label>
+
+                    <select className="selectPriority" onChange={this.changePriority} value={this.state.ticketPriority}>
+                        {this.props.ticketPriorityOptions.map(priority =>
+                            <option key={priority.value} value={priority.value}>{priority.label}</option>
+                        )}
+                    </select>
 
                     <label>Статус заявки:</label>
-                    <Dropdown id="status"
-                              options={this.statusOptions}
-                              onChange={this.changeStatus}
-                              value={this.statusOptions[this.state.status]}
-                              placeholder="Выберете статус заявки" />
 
-                <button onClick={this.clickFormFunc}> SAVE </button>
-                <button onClick={()=>{this.resetForm()}}>Reset</button>
+                    <select className="selectStatus" onChange={this.changeStatus} value={this.state.status}>
+                        {this.props.statusOptions.map(status =>
+                            <option key={status.value} value={status.value}>{status.label}</option>
+                        )}
+                    </select>
+
+                    <button onClick={this.saveFormFunc}> SAVE </button>
+                    <button onClick={()=>{this.resetForm()}}>Reset</button>
 
                     <button onClick={ ()=> {
 
                         console.log('this.state.serviceCenter', this.state.serviceCenter);
-                        console.log('this.props.serviceCenterOptions', this.props.serviceCenterOptions)
+                        console.log('this.props.serviceCenterOptions: ', this.props.serviceCenterOptions)
+                        console.log('this.state.serviceCenterDetails: ',this.state.serviceCenterDetails)
                     }}> --- TEST --- </button>
 
                 <hr />

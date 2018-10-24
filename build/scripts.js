@@ -480,7 +480,8 @@ function (_Component2) {
       status: '',
       typeOfService: '',
       ticketPriority: '',
-      serviceCenter: ''
+      serviceCenter: '',
+      serviceCenterDetails: ''
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "statusOptions", _this4.props.statusOptions);
@@ -501,10 +502,18 @@ function (_Component2) {
         ticketPriority: _this4.props.ticketPriority,
         serviceCenter: _this4.props.serviceCenter
       });
+
+      _this4.props.serviceCenter !== '' ? _this4.getServiceCenterDetails(_this4.props.serviceCenter) : console.log('fullSetStateFunc: serviceCenter Not checked');
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "resetForm", function () {
-      _this4.fullSetStateFunc();
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "getServiceCenterDetails", function (id) {
+      var scDetais = _this4.props.serviceCenterOptions.find(function (item) {
+        return item._id === id;
+      });
+
+      _this4.setState({
+        serviceCenterDetails: scDetais
+      });
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "onChangeInputFunc", function (event) {
@@ -516,46 +525,53 @@ function (_Component2) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "changePriority", function (event) {
-      console.log('changePriority', event.value);
+      console.log('changePriority', event.target.value);
 
       _this4.setState({
-        ticketPriority: event.value
+        ticketPriority: event.target.value
       });
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "changeStatus", function (event) {
-      console.log('changeStatus', event.value);
+      console.log('changeStatus', event.target.value);
 
       _this4.setState({
-        status: event.value
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "changeTypeOfService", function (event) {
-      console.log('changeTypeOfService', event.value);
-
-      _this4.setState({
-        typeOfService: event.value
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "clickFormFunc", function () {
-      console.log('this.state', _this4.state);
-
-      _this4.props.saveButtonClick({
-        comment: _this4.state.comment,
-        status: _this4.state.status,
-        typeOfService: _this4.state.typeOfService,
-        ticketPriority: _this4.state.ticketPriority
+        status: event.target.value
       });
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "changeServiceCenter", function (event) {
       console.log(event.target.value);
 
+      _this4.getServiceCenterDetails(event.target.value);
+
       _this4.setState({
         serviceCenter: event.target.value
       });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "changeTypeOfService", function (event) {
+      console.log('changeTypeOfService', event.target.value);
+
+      _this4.setState({
+        typeOfService: event.target.value
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "saveFormFunc", function () {
+      console.log('this.state', _this4.state);
+
+      _this4.props.saveButtonClick({
+        comment: _this4.state.comment,
+        status: _this4.state.status,
+        typeOfService: _this4.state.typeOfService,
+        ticketPriority: _this4.state.ticketPriority,
+        serviceCenter: _this4.state.serviceCenter
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "resetForm", function () {
+      _this4.fullSetStateFunc();
     });
 
     return _this4;
@@ -585,39 +601,54 @@ function (_Component2) {
         value: this.state.comment,
         onChange: this.onChangeInputFunc
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        id: "serviceCenterSelect",
+        className: "selectServiceCenter",
         onChange: this.changeServiceCenter,
         value: this.state.serviceCenter
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "",
         defaultValue: true
-      }, "select please"), this.props.serviceCenterOptions.map(function (sc) {
+      }, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u0441\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440"), this.props.serviceCenterOptions.map(function (sc) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: sc._id,
           value: sc._id
         }, sc.scTitle);
-      })), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), !this.state.serviceCenter === '' ? console.log('ServiceCeterChecked') : console.log('ServiceCenter not Checked!'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0420\u0435\u043C\u043E\u043D\u0442: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_dropdown__WEBPACK_IMPORTED_MODULE_3___default.a, {
+      })), this.state.serviceCenterDetails !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0421\u0426: "), this.state.serviceCenterDetails.scAdress, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432:"), " ", this.state.serviceCenterDetails.scVendors) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0420\u0435\u043C\u043E\u043D\u0442: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_dropdown__WEBPACK_IMPORTED_MODULE_3___default.a, {
         id: "typeOfService",
         options: this.typeOfServiceOptions,
         onChange: this.changeTypeOfService,
         value: this.typeOfServiceOptions[this.state.typeOfService],
         placeholder: "\u0413\u0430\u0440\u0430\u043D\u0442\u0438\u043D\u044B\u0439 / \u041D\u0435 \u0433\u0430\u0440\u0430\u043D\u0442\u0438\u0439\u043D\u044B\u0439"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "\u0414\u0430\u0442\u0430 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F \u0440\u0435\u043C\u043E\u043D\u0442\u0430 ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "typeOfService",
+        onChange: this.changeTypeOfService,
+        value: this.state.typeOfService
+      }, this.typeOfServiceOptions.map(function (typeOfService) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: typeOfService.value,
+          value: typeOfService.value
+        }, typeOfService.label);
+      })), "\u0414\u0430\u0442\u0430 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u044F ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         defaultValue: this.props.finishDate
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 \u0437\u0430\u044F\u0432\u043A\u0438:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_dropdown__WEBPACK_IMPORTED_MODULE_3___default.a, {
-        id: "priority",
-        options: this.ticketPriorityOptions,
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 \u0437\u0430\u044F\u0432\u043A\u0438:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "selectPriority",
         onChange: this.changePriority,
-        value: this.ticketPriorityOptions[this.state.ticketPriority],
-        placeholder: "\u0412\u044B\u0431\u0435\u0440\u0435\u0442\u0435 \u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 \u0437\u0430\u044F\u0432\u043A\u0438"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0442\u0430\u0442\u0443\u0441 \u0437\u0430\u044F\u0432\u043A\u0438:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_dropdown__WEBPACK_IMPORTED_MODULE_3___default.a, {
-        id: "status",
-        options: this.statusOptions,
+        value: this.state.ticketPriority
+      }, this.props.ticketPriorityOptions.map(function (priority) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: priority.value,
+          value: priority.value
+        }, priority.label);
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0442\u0430\u0442\u0443\u0441 \u0437\u0430\u044F\u0432\u043A\u0438:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "selectStatus",
         onChange: this.changeStatus,
-        value: this.statusOptions[this.state.status],
-        placeholder: "\u0412\u044B\u0431\u0435\u0440\u0435\u0442\u0435 \u0441\u0442\u0430\u0442\u0443\u0441 \u0437\u0430\u044F\u0432\u043A\u0438"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.clickFormFunc
+        value: this.state.status
+      }, this.props.statusOptions.map(function (status) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: status.value,
+          value: status.value
+        }, status.label);
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.saveFormFunc
       }, " SAVE "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           _this5.resetForm();
@@ -625,7 +656,8 @@ function (_Component2) {
       }, "Reset"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           console.log('this.state.serviceCenter', _this5.state.serviceCenter);
-          console.log('this.props.serviceCenterOptions', _this5.props.serviceCenterOptions);
+          console.log('this.props.serviceCenterOptions: ', _this5.props.serviceCenterOptions);
+          console.log('this.state.serviceCenterDetails: ', _this5.state.serviceCenterDetails);
         }
       }, " --- TEST --- "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)));
     }

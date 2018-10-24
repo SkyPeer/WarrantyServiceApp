@@ -100,7 +100,9 @@ app.post('/mongooseUpdate', bodyParser.json(), function (req, res) {
             ticketPriority: req.body.ticketPriority,
             typeOfService: req.body.typeOfService,
             status: req.body.status,
-            comment: req.body.comment // field:values to update
+            comment: req.body.comment,
+            serviceCenter: req.body.serviceCenter
+            // field:values to update
         },
         {
             new: true,                       // return updated doc
