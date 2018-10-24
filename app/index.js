@@ -254,9 +254,6 @@ class OpenDescComponent extends  Component {
                     <br /> <br />
 
                     <label>Ремонт: </label>
-
-                    <Dropdown id="typeOfService" options={this.typeOfServiceOptions} onChange={this.changeTypeOfService} value={this.typeOfServiceOptions[this.state.typeOfService]} placeholder="Гарантиный / Не гарантийный" /><br />
-
                     <select className="typeOfService" onChange={this.changeTypeOfService} value={this.state.typeOfService}>
                         {this.typeOfServiceOptions.map(typeOfService =>
                             <option key={typeOfService.value} value={typeOfService.value}>{typeOfService.label}</option>
@@ -282,7 +279,7 @@ class OpenDescComponent extends  Component {
                     </select>
 
                     <button onClick={this.saveFormFunc}> SAVE </button>
-                    <button onClick={()=>{this.resetForm()}}>Reset</button>
+                    <button onClick={this.resetForm}>Reset</button>
 
                     <button onClick={ ()=> {
 
