@@ -46,7 +46,7 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2536">
+            <state relative-caret-position="-2808">
               <caret line="129" column="99" lean-forward="false" selection-start-line="129" selection-start-column="99" selection-end-line="129" selection-end-column="99" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
@@ -62,10 +62,11 @@
       <file leaf-file-name="form.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/pages/form.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="27" column="35" lean-forward="false" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
+            <state relative-caret-position="338">
+              <caret line="67" column="37" lean-forward="false" selection-start-line="67" selection-start-column="37" selection-end-line="67" selection-end-column="37" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
+                <element signature="e#473#594#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -372,12 +373,12 @@
       <updated>1540084296563</updated>
       <workItem from="1540084297908" duration="7984000" />
       <workItem from="1540129630145" duration="87283000" />
-      <workItem from="1540308727977" duration="33520000" />
+      <workItem from="1540308727977" duration="34424000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="128787000" />
+    <option name="totallyTimeSpent" value="129691000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -573,7 +574,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2536">
+        <state relative-caret-position="-2808">
           <caret line="129" column="99" lean-forward="false" selection-start-line="129" selection-start-column="99" selection-end-line="129" selection-end-column="99" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
@@ -587,10 +588,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/pages/form.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="27" column="35" lean-forward="false" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
+        <state relative-caret-position="338">
+          <caret line="67" column="37" lean-forward="false" selection-start-line="67" selection-start-column="37" selection-end-line="67" selection-end-column="37" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#473#594#0" expanded="false" />
           </folding>
         </state>
       </provider>
