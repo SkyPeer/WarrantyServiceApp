@@ -842,7 +842,8 @@ function (_Component) {
       problem: '',
       place: '',
       projectCode: '',
-      ticketPriority: ''
+      ticketPriority: '',
+      ticketNumber: ''
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "firstNameChange", function (event) {
@@ -897,11 +898,26 @@ function (_Component) {
   }
 
   _createClass(Form, [{
-    key: "render",
-    value: function render() {
+    key: "componentDidMount",
+    value: function componentDidMount() {
       var _this2 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Form"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "\u041D\u043E\u043C\u0435\u0440 \u0437\u0430\u044F\u0432\u043A\u0438 \u0438 \u0434\u0430\u0442\u0430"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0418\u043C\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      fetch("/getTicketRandomNumber").then(function (res) {
+        return res.json();
+      }).then(function (json) {
+        console.log(json);
+
+        _this2.setState({
+          ticketNumber: json.ticketNumber
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Form"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "\u041D\u043E\u043C\u0435\u0440 \u0437\u0430\u044F\u0432\u043A\u0438 ", this.state.ticketNumber, " \u0438 \u0434\u0430\u0442\u0430"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0418\u043C\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.firstNameChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0424\u0430\u043C\u0438\u043B\u0438\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.lastNameChange
@@ -915,7 +931,7 @@ function (_Component) {
         onChange: this.extnumChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
-          console.log(_this2.state);
+          console.log(_this3.state.ticketNumber);
         }
       }, "\u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C"));
     }

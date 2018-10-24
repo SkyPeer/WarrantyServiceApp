@@ -18,8 +18,20 @@ class Form extends Component{
         place: '',
         projectCode: '',
 
-        ticketPriority: ''
+        ticketPriority: '',
+
+        ticketNumber: ''
     };
+
+    componentDidMount(){
+        fetch(`/getTicketRandomNumber`)
+            .then(res => res.json())
+            .then((json) => {
+            console.log(json)
+            this.setState({ticketNumber: json.ticketNumber})
+        })
+
+    }
 
     firstNameChange = (event) => {
         console.log('firstNameChange', event.target.value);
@@ -56,7 +68,7 @@ class Form extends Component{
         return (
             <Layout>
                 <h1>Form</h1>
-                <h5>Номер заявки и дата</h5>
+                <h5>Номер заявки {this.state.ticketNumber} и дата</h5>
                 <form>
                     <hr />
                     <div><b>Инициатор:</b></div>
@@ -69,7 +81,7 @@ class Form extends Component{
                     <hr />
 
                 </form>
-                <button onClick={()=>{console.log(this.state)}}>отправить</button>
+                <button onClick={()=>{console.log(this.state.ticketNumber)}}>отправить</button>
             </Layout>
         )
     }

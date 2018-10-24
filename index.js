@@ -51,8 +51,8 @@ let TicketsSchema = new mongoose.Schema({
     serviceCenter: String,
     typeOfService: String,
     serviceCenterTicket: String,
-
 });
+let TicketModel = mongoose.model('tickets', TicketsSchema);
 
 let ServiceCentersSchema = new mongoose.Schema({
     scTitle: String,
@@ -62,6 +62,21 @@ let ServiceCentersSchema = new mongoose.Schema({
 });
 
 let ServiceCenterModel = mongoose.model('servicecenters', ServiceCentersSchema);
+
+
+
+app.get('/getTicketRandomNumber', (req, res) => {
+
+    function getRandomArbitary() {
+        let random = Math.random() * (9999 - 1) + 2000;
+        console.log('newRequest', parseInt(random));
+        return random
+    }
+    res.json({ticketNumber: parseInt(getRandomArbitary())})
+
+});
+
+
 app.get('/mongooseGetDataSC', function(req, res, next){
 
     ServiceCenterModel.find(function (err, scDocs){
@@ -70,9 +85,6 @@ app.get('/mongooseGetDataSC', function(req, res, next){
     })
 });
 
-
-
-let TicketModel = mongoose.model('tickets', TicketsSchema);
 app.get('/mongooseGetDataTickets', function(req, res, next){
 
     TicketModel.find(function (err, ticketsDocs){
@@ -121,16 +133,8 @@ app.post('/mongooseUpdate', bodyParser.json(), function (req, res) {
 });
 
 
-
-
-
 let date = new Date();
 console.log(date.getDate(), date.getMonth()+1, date.getFullYear());
-
-function getRandomArbitary() {
-    return Math.random() * (9999 - 1) + 2000;
-}console.log('random number', parseInt(getRandomArbitary()))
-
 
 
 app.post('/delete', bodyParser.json(), function (req, res){
