@@ -50,7 +50,7 @@ let TicketsSchema = new mongoose.Schema({
     comment: String,
     serviceCenter: String,
     typeOfService: String,
-    serviceCentreTicket: String,
+    serviceCenterTicket: String,
 
 });
 
@@ -91,7 +91,7 @@ app.post('/mongooseFind', bodyParser.json(), function(req, res){
 });
 
 app.post('/mongooseUpdate', bodyParser.json(), function (req, res) {
-    console.log('------- mongooseUpdate req.body:   id', req.body._id, 'body.comment:', req.body.comment, 'body.status:', req.body.status);
+    console.log('------- mongooseUpdate req.body:   id', req.body._id, 'body.comment:', req.body.comment, 'body.status:', req.body.status, req.body.serviceCenterTicket);
     TicketModel.findOneAndUpdate(
         {
             _id: req.body._id  // search query
@@ -101,7 +101,9 @@ app.post('/mongooseUpdate', bodyParser.json(), function (req, res) {
             typeOfService: req.body.typeOfService,
             status: req.body.status,
             comment: req.body.comment,
-            serviceCenter: req.body.serviceCenter
+            serviceCenter: req.body.serviceCenter,
+            finishDate: req.body.finishDate,
+            serviceCenterTicket: req.body.serviceCenterTicket
             // field:values to update
         },
         {

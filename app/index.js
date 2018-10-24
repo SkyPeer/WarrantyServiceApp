@@ -127,7 +127,9 @@ class TicketsComponent extends Component{
                                                     ticketPriority={ticket.ticketPriority} ticketPriorityOptions={this.ticketPriorityOptinons}
 
                                                     serviceCenter={ticket.serviceCenter} serviceCenterOptions={this.state.sc}
+                                                    serviceCenterTicket={ticket.serviceCenterTicket}
                                                     typeOfService={ticket.typeOfService} typeOfServiceOptions={this.typeOfServiceOptions}
+
 
 
                                                 />
@@ -153,6 +155,9 @@ class OpenDescComponent extends  Component {
         ticketPriority: '',
         serviceCenter: '',
         serviceCenterDetails: '',
+        serviceCenterTicket: '',
+        finishDate: ''
+
     };
 
     statusOptions = this.props.statusOptions;
@@ -169,7 +174,9 @@ class OpenDescComponent extends  Component {
             status: this.props.status,
             typeOfService: this.props.typeOfService,
             ticketPriority: this.props.ticketPriority,
-            serviceCenter: this.props.serviceCenter
+            serviceCenter: this.props.serviceCenter,
+            finishDate: this.props.finishDate,
+            serviceCenterTicket: this.props.serviceCenterTicket
 
         });
         this.props.serviceCenter !== '' ? this.getServiceCenterDetails(this.props.serviceCenter) : console.log('fullSetStateFunc: serviceCenter Not checked')
@@ -187,9 +194,19 @@ class OpenDescComponent extends  Component {
       this.fullSetStateFunc()
     }
 
-    onChangeInputFunc = (event) => {
+    changeComment = (event) => {
         console.log(event.target.value);
         this.setState({comment: event.target.value});
+    };
+
+    changeFinishDate = (event) => {
+        console.log(event.target.value);
+        this.setState({finishDate: event.target.value});
+    };
+
+    changeServiceCenterTicket = (event) => {
+        console.log(event.target.value);
+        this.setState({serviceCenterTicket: event.target.value})
     };
 
     changePriority = (event) =>{
@@ -221,7 +238,10 @@ class OpenDescComponent extends  Component {
             status: this.state.status,
             typeOfService: this.state.typeOfService,
             ticketPriority: this.state.ticketPriority,
-            serviceCenter: this.state.serviceCenter
+            serviceCenter: this.state.serviceCenter,
+            serviceCenterTicket: this.state.serviceCenterTicket,
+            finishDate: this.state.finishDate,
+
         });
     };
     resetForm = () => {
@@ -242,16 +262,15 @@ class OpenDescComponent extends  Component {
                  Внутр: {this.props.contacts.extum +' '}
                 </div>
                 <hr />
-                <div>Коментарий:<input type="text" id="comment" value={this.state.comment} onChange={this.onChangeInputFunc} /><br />
+                <div>Коментарий:<input type="text" id="comment" value={this.state.comment} onChange={this.changeComment} /><br /><br />
 
-                    <select className="selectServiceCenter" onChange={this.changeServiceCenter} value={this.state.serviceCenter}>
+                <label>Сервисный центр: </label><select className="selectServiceCenter" onChange={this.changeServiceCenter} value={this.state.serviceCenter}>
                         <option value="" defaultValue>Выбрать сервисный центр</option>
                         {this.props.serviceCenterOptions.map(sc =>
                             <option key={sc._id} value={sc._id}>{sc.scTitle}</option>
                         )}
                     </select>
                     {this.state.serviceCenterDetails !== undefined ? <div><b>Адрес СЦ: </b>{this.state.serviceCenterDetails.scAdress} <br /> <b>Авторизация вендоров:</b> {this.state.serviceCenterDetails.scVendors}</div> : ''}
-                    <br /> <br />
 
                     <label>Ремонт: </label>
                     <select className="typeOfService" onChange={this.changeTypeOfService} value={this.state.typeOfService}>
@@ -260,8 +279,9 @@ class OpenDescComponent extends  Component {
                         )}
                     </select>
 
-                    Дата завершения обслуживания <input defaultValue={this.props.finishDate}/><br />
-
+                    <label>Дата завершения обслуживания:</label><input onChange={this.changeFinishDate} value={this.state.finishDate}/>
+                    <label>Сервисный контракт / № обращения</label><input onChange={this.changeServiceCenterTicket} value={this.state.serviceCenterTicket}/>
+                    <br /><br />
                     <label>Приоритет заявки:</label>
 
                     <select className="selectPriority" onChange={this.changePriority} value={this.state.ticketPriority}>

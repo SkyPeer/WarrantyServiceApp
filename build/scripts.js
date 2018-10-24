@@ -430,6 +430,7 @@ function (_Component) {
           ticketPriorityOptions: _this3.ticketPriorityOptinons,
           serviceCenter: ticket.serviceCenter,
           serviceCenterOptions: _this3.state.sc,
+          serviceCenterTicket: ticket.serviceCenterTicket,
           typeOfService: ticket.typeOfService,
           typeOfServiceOptions: _this3.typeOfServiceOptions
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -481,7 +482,9 @@ function (_Component2) {
       typeOfService: '',
       ticketPriority: '',
       serviceCenter: '',
-      serviceCenterDetails: ''
+      serviceCenterDetails: '',
+      serviceCenterTicket: '',
+      finishDate: ''
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "statusOptions", _this4.props.statusOptions);
@@ -500,7 +503,9 @@ function (_Component2) {
         status: _this4.props.status,
         typeOfService: _this4.props.typeOfService,
         ticketPriority: _this4.props.ticketPriority,
-        serviceCenter: _this4.props.serviceCenter
+        serviceCenter: _this4.props.serviceCenter,
+        finishDate: _this4.props.finishDate,
+        serviceCenterTicket: _this4.props.serviceCenterTicket
       });
 
       _this4.props.serviceCenter !== '' ? _this4.getServiceCenterDetails(_this4.props.serviceCenter) : console.log('fullSetStateFunc: serviceCenter Not checked');
@@ -516,11 +521,27 @@ function (_Component2) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "onChangeInputFunc", function (event) {
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "changeComment", function (event) {
       console.log(event.target.value);
 
       _this4.setState({
         comment: event.target.value
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "changeFinishDate", function (event) {
+      console.log(event.target.value);
+
+      _this4.setState({
+        finishDate: event.target.value
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "changeServiceCenterTicket", function (event) {
+      console.log(event.target.value);
+
+      _this4.setState({
+        serviceCenterTicket: event.target.value
       });
     });
 
@@ -566,7 +587,9 @@ function (_Component2) {
         status: _this4.state.status,
         typeOfService: _this4.state.typeOfService,
         ticketPriority: _this4.state.ticketPriority,
-        serviceCenter: _this4.state.serviceCenter
+        serviceCenter: _this4.state.serviceCenter,
+        serviceCenterTicket: _this4.state.serviceCenterTicket,
+        finishDate: _this4.state.finishDate
       });
     });
 
@@ -599,8 +622,8 @@ function (_Component2) {
         type: "text",
         id: "comment",
         value: this.state.comment,
-        onChange: this.onChangeInputFunc
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        onChange: this.changeComment
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         className: "selectServiceCenter",
         onChange: this.changeServiceCenter,
         value: this.state.serviceCenter
@@ -612,7 +635,7 @@ function (_Component2) {
           key: sc._id,
           value: sc._id
         }, sc.scTitle);
-      })), this.state.serviceCenterDetails !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0421\u0426: "), this.state.serviceCenterDetails.scAdress, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432:"), " ", this.state.serviceCenterDetails.scVendors) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0420\u0435\u043C\u043E\u043D\u0442: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      })), this.state.serviceCenterDetails !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0421\u0426: "), this.state.serviceCenterDetails.scAdress, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432:"), " ", this.state.serviceCenterDetails.scVendors) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0420\u0435\u043C\u043E\u043D\u0442: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         className: "typeOfService",
         onChange: this.changeTypeOfService,
         value: this.state.typeOfService
@@ -621,9 +644,13 @@ function (_Component2) {
           key: typeOfService.value,
           value: typeOfService.value
         }, typeOfService.label);
-      })), "\u0414\u0430\u0442\u0430 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u044F ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        defaultValue: this.props.finishDate
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 \u0437\u0430\u044F\u0432\u043A\u0438:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0414\u0430\u0442\u0430 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u044F:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.changeFinishDate,
+        value: this.state.finishDate
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u043A\u043E\u043D\u0442\u0440\u0430\u043A\u0442 / \u2116 \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.changeServiceCenterTicket,
+        value: this.state.serviceCenterTicket
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 \u0437\u0430\u044F\u0432\u043A\u0438:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         className: "selectPriority",
         onChange: this.changePriority,
         value: this.state.ticketPriority
@@ -770,13 +797,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
@@ -787,15 +816,52 @@ function (_Component) {
   _inherits(Form, _Component);
 
   function Form() {
+    var _getPrototypeOf2;
+
+    var _this;
+
     _classCallCheck(this, Form);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Form).apply(this, arguments));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Form)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+      firstname: '',
+      lasname: '',
+      familyname: '',
+      email: '',
+      telnum: '',
+      extnum: '',
+      type: '',
+      vendor: '',
+      model: '',
+      partNumber: '',
+      problem: '',
+      place: '',
+      projectCode: '',
+      ticketPriority: ''
+    });
+
+    return _this;
   }
 
   _createClass(Form, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Form"));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Form"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0418\u043C\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.firstNameChange
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0424\u0430\u043C\u0438\u043B\u0438\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.firstNameChange
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.firstNameChange
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0418\u043C\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.firstNameChange
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0418\u043C\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.firstNameChange
+      })));
     }
   }]);
 
