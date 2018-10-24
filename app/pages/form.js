@@ -10,7 +10,6 @@ class Form extends Component{
         telnum: '',
         extnum: '',
 
-        type: '',
         vendor: '',
         model: '',
         partNumber: '',
@@ -19,7 +18,6 @@ class Form extends Component{
         projectCode: '',
 
         ticketPriority: '',
-
         ticketNumber: ''
     };
 
@@ -27,11 +25,18 @@ class Form extends Component{
         fetch(`/getTicketRandomNumber`)
             .then(res => res.json())
             .then((json) => {
-            console.log(json)
+            console.log(json);
             this.setState({ticketNumber: json.ticketNumber})
         })
 
     }
+
+    ticketPriorityOptinons = [
+        {value: 0, label: "Низкий"},
+        {value: 1, label: "Средний"},
+        {value: 2, label: "Высокий"}
+    ];
+
 
     firstNameChange = (event) => {
         console.log('firstNameChange', event.target.value);
@@ -63,6 +68,25 @@ class Form extends Component{
         this.setState({extum:event.target.value})
     };
 
+    changePriority = (event) =>{
+        console.log('changePriority', event.target.value);
+        this.setState({ticketPriority: event.target.value})
+    };
+
+
+    /*
+
+     ticketPriority: Number,
+     vendor: String,
+     model: String,
+     partNumber: String,
+     problem: String,
+     place: String,
+     projectCode: String,
+
+
+     */
+
 
     render(){
         return (
@@ -79,6 +103,15 @@ class Form extends Component{
                     <label>моб. телефон: </label><input onChange={this.telnumChange}/><br />
                     <label>внутр. №: </label><input onChange={this.extnumChange}/><br />
                     <hr />
+
+
+
+                    <select className="selectPriority" onChange={this.changePriority} value={this.state.ticketPriority}>
+                        {this.props.ticketPriorityOptions.map(priority =>
+                            <option key={priority.value} value={priority.value}>{priority.label}</option>
+                        )}
+                    </select>
+
 
                 </form>
                 <button onClick={()=>{console.log(this.state.ticketNumber)}}>отправить</button>

@@ -394,11 +394,6 @@ function (_Component) {
       this.getAllData();
     }
   }, {
-    key: "a",
-    value: function a() {
-      console.log('a()', this.state.sc);
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -445,11 +440,7 @@ function (_Component) {
               openTicketDescId: null
             });
           }
-        }, "CLOSE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          onClick: function onClick() {
-            _this3.a();
-          }
-        }, " --- TEST")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)));
+        }, "CLOSE")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)));
       }));
     }
   }]);
@@ -835,7 +826,6 @@ function (_Component) {
       email: '',
       telnum: '',
       extnum: '',
-      type: '',
       vendor: '',
       model: '',
       partNumber: '',
@@ -845,6 +835,17 @@ function (_Component) {
       ticketPriority: '',
       ticketNumber: ''
     });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "ticketPriorityOptinons", [{
+      value: 0,
+      label: "Низкий"
+    }, {
+      value: 1,
+      label: "Средний"
+    }, {
+      value: 2,
+      label: "Высокий"
+    }]);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "firstNameChange", function (event) {
       console.log('firstNameChange', event.target.value);
@@ -894,6 +895,14 @@ function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "changePriority", function (event) {
+      console.log('changePriority', event.target.value);
+
+      _this.setState({
+        ticketPriority: event.target.value
+      });
+    });
+
     return _this;
   }
 
@@ -914,6 +923,16 @@ function (_Component) {
     }
   }, {
     key: "render",
+
+    /*
+       ticketPriority: Number,
+     vendor: String,
+     model: String,
+     partNumber: String,
+     problem: String,
+     place: String,
+     projectCode: String,
+         */
     value: function render() {
       var _this3 = this;
 
@@ -929,7 +948,16 @@ function (_Component) {
         onChange: this.telnumChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0432\u043D\u0443\u0442\u0440. \u2116: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.extnumChange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "selectPriority",
+        onChange: this.changePriority,
+        value: this.state.ticketPriority
+      }, this.props.ticketPriorityOptions.map(function (priority) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: priority.value,
+          value: priority.value
+        }, priority.label);
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           console.log(_this3.state.ticketNumber);
         }

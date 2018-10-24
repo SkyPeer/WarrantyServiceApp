@@ -31,7 +31,6 @@ let TicketsSchema = new mongoose.Schema({
     ticketPriority: Number,
     status: Number,
 
-    type: String,
     vendor: String,
     model: String,
     partNumber: String,
@@ -68,11 +67,11 @@ let ServiceCenterModel = mongoose.model('servicecenters', ServiceCentersSchema);
 app.get('/getTicketRandomNumber', (req, res) => {
 
     function getRandomArbitary() {
-        let random = Math.random() * (9999 - 1) + 2000;
-        console.log('newRequest', parseInt(random));
-        return random
+        let random = parseInt(Math.random() * (9999 - 1) + 2000);
+        console.log('newRequest', random);
+        return (random)
     }
-    res.json({ticketNumber: parseInt(getRandomArbitary())})
+    res.json({ticketNumber: getRandomArbitary()})
 
 });
 
@@ -103,7 +102,14 @@ app.post('/mongooseFind', bodyParser.json(), function(req, res){
 });
 
 app.post('/mongooseUpdate', bodyParser.json(), function (req, res) {
-    console.log('------- mongooseUpdate req.body:   id', req.body._id, 'body.comment:', req.body.comment, 'body.status:', req.body.status, req.body.serviceCenterTicket);
+    console.log('------- mongooseUpdate ' +
+        'req.body:   id', req.body._id,
+        'body.comment:', req.body.comment,
+        'body.status:', req.body.status,
+        'body.serviceCenterTicket:',req.body.serviceCenterTicket,
+        'body.finishDate:',req.body.finishDate
+    );
+
     TicketModel.findOneAndUpdate(
         {
             _id: req.body._id  // search query

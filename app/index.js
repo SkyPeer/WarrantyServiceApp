@@ -92,7 +92,6 @@ class TicketsComponent extends Component{
         {value: 2, label: "Высокий"}
     ];
 
-    a(){console.log('a()', this.state.sc)};
 
 
     render(){
@@ -137,7 +136,7 @@ class TicketsComponent extends Component{
                                         }
                                         <button onClick={()=>{this.setState({openTicketDescId:ticket._id})}}>OPEN</button>
                                         <button onClick={()=>{this.setState({openTicketDescId:null})}}>CLOSE</button>
-                                        <button onClick={ ()=>{this.a()} }> --- TEST</button>
+
                                     </div>
                                     <hr />
                                 </div>
