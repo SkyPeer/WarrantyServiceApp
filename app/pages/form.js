@@ -15,6 +15,7 @@ class Form extends Component{
         partNumber: '',
         problem: '',
         place: '',
+        placeAnother: '',
         projectCode: '',
 
         ticketPriority: '',
@@ -30,6 +31,51 @@ class Form extends Component{
         })
 
     }
+
+    saveData = () => {
+        this.updateDataFunc(this.state)
+    };
+
+    updateDataFunc = (saveData) => {
+        console.log('clickFunc', saveData);
+
+        fetch('/mongooseInsert', {
+            method: 'post',
+            /*body: JSON.stringify({
+             _id: id,
+             status: updatearg.status
+             }), */
+            body: JSON.stringify({
+                /*comment: updatearg.comment,
+                 status: updatearg.status,
+                 place: updatearg.place,
+                 finishDate: updatearg.finishDate,
+                 serviceCentre: updatearg.serviceCentre,
+                 serviceCenterTicket: updatearg.serviceCentreTicket,
+                 typeOfservice: updatearg.typeOfservice */
+                ...saveData
+
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(checkStatus)
+            .then(()=>console.log('inserted'));
+
+
+        function checkStatus(response) {
+            if (response.status >= 200 && response.status < 300) {
+                return response
+            } else {
+                let error = new Error(response.statusText);
+                error.response = response;
+                throw error
+            }
+        }
+    };
+
 
     ticketPriorityOptions = [
         {value: 0, label: "Низкий"},
@@ -74,7 +120,7 @@ class Form extends Component{
 
     extnumChange = (event) => {
         console.log('extnumChange', event.target.value);
-        this.setState({extum:event.target.value})
+        this.setState({extnum:event.target.value})
     };
 
     changePriority = (event) =>{
@@ -114,9 +160,8 @@ class Form extends Component{
 
     projectCodechange = (event) =>{
         console.log('changeProjectCodec:', event.target.value);
-        this.setState({projectCodec: event.target.value})
+        this.setState({projectCode: event.target.value})
     };
-
 
     render(){
         return (
@@ -126,8 +171,8 @@ class Form extends Component{
                 <form id="CreateTicket" onSubmit={(event)=>{event.preventDefault()}}>
                     <hr />
                     <div><b>Инициатор:</b></div>
-                    <label>Имя: </label>
-                    <input onChange={this.firstNameChange}/><br />
+                    <label>Имя</label>
+                    <input id="name" placeholder="Имя" onChange={this.firstNameChange}/><br />
 
                     <label>Фамилия: </label>
                     <input onChange={this.lastNameChange}/><br />
@@ -136,7 +181,7 @@ class Form extends Component{
                     <input onChange={this.familyNameChange}/><br />
 
                     <label>E-mail:</label>
-                    <input onChange={this.emailChange}/><br />
+                    <input onFocus={()=>{console.log('on Focus')}} onBlur={()=>{console.log('on blur')}}  onChange={this.emailChange}/><br />
 
                     <label>моб. телефон: </label>
                     <input onChange={this.telnumChange}/><br />
@@ -179,7 +224,8 @@ class Form extends Component{
 
 
                 </form>
-                <button onClick={()=>{console.log(this.state.ticketNumber)}}>Отправить</button>
+                <button onClick={this.saveData}>Отправить</button>
+                <button onClick={()=>{console.log(this.state)}}>---- TEST ----</button>
             </Layout>
         )
     }

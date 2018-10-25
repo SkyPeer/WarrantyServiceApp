@@ -780,6 +780,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controls_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controls/layout */ "./app/controls/layout.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -831,9 +833,43 @@ function (_Component) {
       partNumber: '',
       problem: '',
       place: '',
+      placeAnother: '',
       projectCode: '',
       ticketPriority: '',
       ticketNumber: ''
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "saveData", function () {
+      _this.updateDataFunc(_this.state);
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateDataFunc", function (saveData) {
+      console.log('clickFunc', saveData);
+      fetch('/mongooseInsert', {
+        method: 'post',
+
+        /*body: JSON.stringify({
+         _id: id,
+         status: updatearg.status
+         }), */
+        body: JSON.stringify(_objectSpread({}, saveData)),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).then(checkStatus).then(function () {
+        return console.log('inserted');
+      });
+
+      function checkStatus(response) {
+        if (response.status >= 200 && response.status < 300) {
+          return response;
+        } else {
+          var error = new Error(response.statusText);
+          error.response = response;
+          throw error;
+        }
+      }
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "ticketPriorityOptions", [{
@@ -911,7 +947,7 @@ function (_Component) {
       console.log('extnumChange', event.target.value);
 
       _this.setState({
-        extum: event.target.value
+        extnum: event.target.value
       });
     });
 
@@ -975,7 +1011,7 @@ function (_Component) {
       console.log('changeProjectCodec:', event.target.value);
 
       _this.setState({
-        projectCodec: event.target.value
+        projectCode: event.target.value
       });
     });
 
@@ -1007,13 +1043,21 @@ function (_Component) {
         onSubmit: function onSubmit(event) {
           event.preventDefault();
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0418\u043C\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0418\u043C\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "name",
+        placeholder: "\u0418\u043C\u044F",
         onChange: this.firstNameChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0424\u0430\u043C\u0438\u043B\u0438\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.lastNameChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.familyNameChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "E-mail:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onFocus: function onFocus() {
+          console.log('on Focus');
+        },
+        onBlur: function onBlur() {
+          console.log('on blur');
+        },
         onChange: this.emailChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u043C\u043E\u0431. \u0442\u0435\u043B\u0435\u0444\u043E\u043D: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.telnumChange
@@ -1050,10 +1094,12 @@ function (_Component) {
           value: priority.value
         }, priority.label);
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.saveData
+      }, "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
-          console.log(_this3.state.ticketNumber);
+          console.log(_this3.state);
         }
-      }, "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C"));
+      }, "---- TEST ----"));
     }
   }]);
 

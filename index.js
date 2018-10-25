@@ -61,19 +61,23 @@ let ServiceCentersSchema = new mongoose.Schema({
 
 });
 
-let ServiceCenterModel = mongoose.model('servicecenters', ServiceCentersSchema);
-
-
-
-app.get('/getTicketRandomNumber', (req, res) => {
+    let ServiceCenterModel = mongoose.model('servicecenters', ServiceCentersSchema);
 
     function getRandomArbitary() {
         let random = parseInt(Math.random() * (9999 - 1) + 2000);
         console.log('newRequest', random);
         return (random)
     }
-    res.json({ticketNumber: getRandomArbitary()})
 
+    function getCurrnetDateTime() {
+        let date = new Date();
+        return(date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear() + ' ' + (date.getHours() + ':' + date.getMinutes()));
+    }
+
+    console.log(getCurrnetDateTime());
+
+app.get('/getTicketRandomNumber', (req, res) => {
+    res.json({ticketNumber: getRandomArbitary()})
 });
 
 
@@ -140,8 +144,52 @@ app.post('/mongooseUpdate', bodyParser.json(), function (req, res) {
 });
 
 
-let date = new Date();
-console.log(date.getDate(), date.getMonth(), date.getFullYear(), (date.getHours() + ':' +date.getMinutes()));
+
+app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
+    console.log('------- mongooseinsert ' +
+            'name: ', req.body.firstname
+    );
+
+    TicketModel.create(
+        {
+            firstname: req.body.firstname,
+            lasname: req.body.lastname,
+            familyname: req.body.familyname,
+            email: req.body.email,
+            telnum: req.body.telnum,
+            extnum: req.body.extnum,
+
+            ticketNumber: getRandomArbitary(),
+            ticketDate: getCurrnetDateTime(),
+            ticketPriority: req.body.ticketPriority,
+            status: 0,
+
+            vendor: req.body.vendor,
+            model: req.body.model,
+            partNumber: req.body.partNumber,
+            problem: req.body.problem,
+            place: req.body.place,
+            placeAnother: req.body.placeAnother,
+            projectCode: req.body.projectCode,
+
+            finishDate: '',
+            comment: '',
+            serviceCenter: '',
+            typeOfService: 0,
+            serviceCenterTicket: '',
+        })
+        .then(() => {
+            //console.log(doc)
+            console.log('ok');
+            res.sendStatus(200)
+        })
+        .catch(err => {
+            console.error(err)
+        })
+});
+
+
+
 
 
 app.post('/delete', bodyParser.json(), function (req, res){
