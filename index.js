@@ -35,7 +35,8 @@ let TicketsSchema = new mongoose.Schema({
     model: String,
     partNumber: String,
     problem: String,
-    place: String,
+    place: Number,
+    placeAnother: String,
     projectCode: String,
 
     firstname: String,
@@ -48,7 +49,7 @@ let TicketsSchema = new mongoose.Schema({
     finishDate: String,
     comment: String,
     serviceCenter: String,
-    typeOfService: String,
+    typeOfService: Number,
     serviceCenterTicket: String,
 });
 let TicketModel = mongoose.model('tickets', TicketsSchema);
@@ -140,7 +141,7 @@ app.post('/mongooseUpdate', bodyParser.json(), function (req, res) {
 
 
 let date = new Date();
-console.log(date.getDate(), date.getMonth()+1, date.getFullYear());
+console.log(date.getDate(), date.getMonth(), date.getFullYear(), (date.getHours() + ':' +date.getMinutes()));
 
 
 app.post('/delete', bodyParser.json(), function (req, res){

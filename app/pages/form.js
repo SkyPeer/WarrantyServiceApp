@@ -68,7 +68,7 @@ class Form extends Component{
     };
 
     telnumChange = (event) => {
-        console.log('telnumnChange', event.target.value);
+        console.log('telnumnChange:', event.target.value);
         this.setState({telnum:event.target.value})
     };
 
@@ -78,13 +78,43 @@ class Form extends Component{
     };
 
     changePriority = (event) =>{
-        console.log('changePriority', event.target.value);
+        console.log('changePriority:', event.target.value);
         this.setState({ticketPriority: event.target.value})
     };
 
-    changePlace = (event) =>{
-        console.log('changeplace', event.target.value);
+    placeChange = (event) =>{
+        console.log('changePlace:', event.target.value);
         this.setState({place: event.target.value})
+    };
+
+    placeAnotherChange = (event) =>{
+        console.log('changeAnotherPlace:', event.target.value);
+        this.setState({placeAnother: event.target.value})
+    };
+
+    vendorChange = (event) =>{
+        console.log('changeVendor:', event.target.value);
+        this.setState({vendor: event.target.value})
+    };
+
+    modelChange = (event) =>{
+        console.log('changeModel:', event.target.value);
+        this.setState({model: event.target.value})
+    };
+
+    partNumberChange = (event) =>{
+        console.log('changepartNumber:', event.target.value);
+        this.setState({partNumber: event.target.value})
+    };
+
+    problemChange = (event) =>{
+        console.log('changepartProblem:', event.target.value);
+        this.setState({problem: event.target.value})
+    };
+
+    projectCodechange = (event) =>{
+        console.log('changeProjectCodec:', event.target.value);
+        this.setState({projectCodec: event.target.value})
     };
 
 
@@ -93,32 +123,53 @@ class Form extends Component{
             <Layout>
                 <h1>Form</h1>
                 <h5>Номер заявки {this.state.ticketNumber} и дата</h5>
-                <form>
+                <form id="CreateTicket" onSubmit={(event)=>{event.preventDefault()}}>
                     <hr />
                     <div><b>Инициатор:</b></div>
-                    <label>Имя: </label><input onChange={this.firstNameChange}/><br />
-                    <label>Фамилия: </label><input onChange={this.lastNameChange}/><br />
-                    <label>Отчество: </label><input onChange={this.familyNameChange}/><br />
-                    <label>E-mail:</label><input onChange={this.emailChange}/><br />
-                    <label>моб. телефон: </label><input onChange={this.telnumChange}/><br />
-                    <label>внутр. №: </label><input onChange={this.extnumChange}/><br />
+                    <label>Имя: </label>
+                    <input onChange={this.firstNameChange}/><br />
+
+                    <label>Фамилия: </label>
+                    <input onChange={this.lastNameChange}/><br />
+
+                    <label>Отчество: </label>
+                    <input onChange={this.familyNameChange}/><br />
+
+                    <label>E-mail:</label>
+                    <input onChange={this.emailChange}/><br />
+
+                    <label>моб. телефон: </label>
+                    <input onChange={this.telnumChange}/><br />
+
+                    <label>внутр. №: </label>
+                    <input onChange={this.extnumChange}/><br />
                     <hr />
 
+                    <label>Производитель / вендор: </label>
+                    <input onChange={this.vendorChange}/><br />
 
-                    <label>Производитель / вендор: </label><input onChange={this.vendorChange}/><br />
-                    <label>Модель: </label><input onChange={this.modelChange}/><br />
-                    <label>P/N: </label><input onChange={this.partNumberChange}/><br />
-                    <label>Описание проблемы:</label><br /><textarea onChange={this.problemChange}></textarea><br />
-                    <label>Код проекта</label><input onChange={this.projectCodechange}></input><br />
+                    <label>Модель: </label>
+                    <input onChange={this.modelChange}/><br />
 
-                    <label>Местонахождение оборудования: </label><select className="selectPlace" onChange={this.changePlace} value={this.state.place}>
+                    <label>P/N: </label>
+                    <input onChange={this.partNumberChange}/><br />
+
+                    <label>Описание проблемы:</label>
+                    <br /><textarea onChange={this.problemChange}></textarea><br />
+
+                    <label>Код проекта: </label>
+                    <input onChange={this.projectCodechange}></input><br />
+
+                    <label>Местонахождение оборудования: </label><br />
+                    <select className="selectPlace" onChange={this.placeChange} value={this.state.place}>
                         {this.placeOptions.map(place =>
                             <option key={place.value} value={place.value}>{place.label}</option>
                         )}
-                    </select>
-                    <br />
+                    </select>{this.state.place === '5' ? <input onChange={this.placeAnotherChange}></input> : console.log('another place') }
+                    <br /><br />
 
-                    <label>Приоритет заявки: </label><select className="selectPriority" onChange={this.changePriority} value={this.state.ticketPriority}>
+                    <label>Приоритет заявки: </label>
+                    <select className="selectPriority" onChange={this.changePriority} value={this.state.ticketPriority}>
                         {this.ticketPriorityOptions.map(priority =>
                             <option key={priority.value} value={priority.value}>{priority.label}</option>
                         )}
@@ -128,7 +179,7 @@ class Form extends Component{
 
 
                 </form>
-                <button onClick={()=>{console.log(this.state.ticketNumber)}}>отправить</button>
+                <button onClick={()=>{console.log(this.state.ticketNumber)}}>Отправить</button>
             </Layout>
         )
     }

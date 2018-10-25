@@ -900,7 +900,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "telnumChange", function (event) {
-      console.log('telnumnChange', event.target.value);
+      console.log('telnumnChange:', event.target.value);
 
       _this.setState({
         telnum: event.target.value
@@ -916,18 +916,66 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "changePriority", function (event) {
-      console.log('changePriority', event.target.value);
+      console.log('changePriority:', event.target.value);
 
       _this.setState({
         ticketPriority: event.target.value
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "changePlace", function (event) {
-      console.log('changeplace', event.target.value);
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "placeChange", function (event) {
+      console.log('changePlace:', event.target.value);
 
       _this.setState({
         place: event.target.value
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "placeAnotherChange", function (event) {
+      console.log('changeAnotherPlace:', event.target.value);
+
+      _this.setState({
+        placeAnother: event.target.value
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "vendorChange", function (event) {
+      console.log('changeVendor:', event.target.value);
+
+      _this.setState({
+        vendor: event.target.value
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "modelChange", function (event) {
+      console.log('changeModel:', event.target.value);
+
+      _this.setState({
+        model: event.target.value
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "partNumberChange", function (event) {
+      console.log('changepartNumber:', event.target.value);
+
+      _this.setState({
+        partNumber: event.target.value
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "problemChange", function (event) {
+      console.log('changepartProblem:', event.target.value);
+
+      _this.setState({
+        problem: event.target.value
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "projectCodechange", function (event) {
+      console.log('changeProjectCodec:', event.target.value);
+
+      _this.setState({
+        projectCodec: event.target.value
       });
     });
 
@@ -954,7 +1002,12 @@ function (_Component) {
     value: function render() {
       var _this3 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Form"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "\u041D\u043E\u043C\u0435\u0440 \u0437\u0430\u044F\u0432\u043A\u0438 ", this.state.ticketNumber, " \u0438 \u0434\u0430\u0442\u0430"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0418\u043C\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Form"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "\u041D\u043E\u043C\u0435\u0440 \u0437\u0430\u044F\u0432\u043A\u0438 ", this.state.ticketNumber, " \u0438 \u0434\u0430\u0442\u0430"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        id: "CreateTicket",
+        onSubmit: function onSubmit(event) {
+          event.preventDefault();
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0418\u043C\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.firstNameChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0424\u0430\u043C\u0438\u043B\u0438\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.lastNameChange
@@ -974,18 +1027,20 @@ function (_Component) {
         onChange: this.partNumberChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         onChange: this.problemChange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.projectCodechange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041C\u0435\u0441\u0442\u043E\u043D\u0430\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041C\u0435\u0441\u0442\u043E\u043D\u0430\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         className: "selectPlace",
-        onChange: this.changePlace,
+        onChange: this.placeChange,
         value: this.state.place
       }, this.placeOptions.map(function (place) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: place.value,
           value: place.value
         }, place.label);
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 \u0437\u0430\u044F\u0432\u043A\u0438: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      })), this.state.place === '5' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.placeAnotherChange
+      }) : console.log('another place'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 \u0437\u0430\u044F\u0432\u043A\u0438: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         className: "selectPriority",
         onChange: this.changePriority,
         value: this.state.ticketPriority
@@ -998,7 +1053,7 @@ function (_Component) {
         onClick: function onClick() {
           console.log(_this3.state.ticketNumber);
         }
-      }, "\u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C"));
+      }, "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C"));
     }
   }]);
 
