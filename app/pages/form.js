@@ -13,7 +13,7 @@ class Form extends Component{
         model: '',
         partNumber: '',
         problem: '',
-        place: '',
+        place: 0,
         placeAnother: '',
         projectCode: '',
         ticketPriority: 0,
@@ -146,6 +146,21 @@ class Form extends Component{
         this.setState({projectCode: event.target.value})
     };
 
+    onFocus = (event) => {
+        console.log('onFocus');
+        event.target.className='helloworld';
+
+    };
+
+    onBlur = (event) =>{
+        console.log('onBlur');
+        console.log('value:', event.target.value);
+
+        let element = event.target;
+        console.log('element.required:', element.required);
+        element.value == '' && element.required ? element.className = 'helloworld input_error': element.className = 'helloworld'
+    };
+
     render(){
         return (
             <Layout>
@@ -154,8 +169,15 @@ class Form extends Component{
                     <hr />
                     <div><b>Инициатор:</b></div>
                     <label>Имя</label>
-                    <input id="name" placeholder="Имя" onChange={this.firstNameChange}/><br />
+                    <input id="name"
+                           placeholder="Имя"
+                           onChange={this.firstNameChange}
+                           onFocus={this.onFocus}
+                           onBlur={this.onBlur}
+                           className="helloworld"
+                           required />
 
+                    <br />
                     <label>Фамилия: </label>
                     <input onChange={this.lastNameChange}/><br />
 
@@ -163,7 +185,7 @@ class Form extends Component{
                     <input onChange={this.familyNameChange}/><br />
 
                     <label>E-mail:</label>
-                    <input onFocus={()=>{console.log('on Focus')}} onBlur={()=>{console.log('on blur')}}  onChange={this.emailChange}/><br />
+                    <input onChange={this.emailChange}/><br />
 
                     <label>моб. телефон: </label>
                     <input onChange={this.telnumChange}/><br />
@@ -203,8 +225,7 @@ class Form extends Component{
                     </select>
 
                 </form>
-                <button onClick={this.saveData}>Отправить</button>
-                <button onClick={()=>{this.setState({defaultstate})}}> Reset </button>
+                <button onClick={this.saveData} disabled={true}>Отправить</button>
             </Layout>
         )
     }

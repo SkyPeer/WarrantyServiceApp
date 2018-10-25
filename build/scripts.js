@@ -832,7 +832,7 @@ function (_Component) {
       model: '',
       partNumber: '',
       problem: '',
-      place: '',
+      place: 0,
       placeAnother: '',
       projectCode: '',
       ticketPriority: 0,
@@ -1019,14 +1019,25 @@ function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onFocus", function (event) {
+      console.log('onFocus');
+      event.target.className = 'helloworld';
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onBlur", function (event) {
+      console.log('onBlur');
+      console.log('value:', event.target.value);
+      var element = event.target;
+      console.log('element.required:', element.required);
+      element.value == '' && element.required ? element.className = 'helloworld input_error' : element.className = 'helloworld';
+    });
+
     return _this;
   }
 
   _createClass(Form, [{
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Form"), this.state.newTicketNumber !== '' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0421\u043E\u0437\u0434\u0430\u043D\u043E \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u0435 \u2116 ", this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate, " \u041C\u0421\u041A") : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         id: "CreateTicket",
         onSubmit: function onSubmit(event) {
@@ -1035,18 +1046,16 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0418\u043C\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "name",
         placeholder: "\u0418\u043C\u044F",
-        onChange: this.firstNameChange
+        onChange: this.firstNameChange,
+        onFocus: this.onFocus,
+        onBlur: this.onBlur,
+        className: "helloworld",
+        required: true
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0424\u0430\u043C\u0438\u043B\u0438\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.lastNameChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.familyNameChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "E-mail:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        onFocus: function onFocus() {
-          console.log('on Focus');
-        },
-        onBlur: function onBlur() {
-          console.log('on blur');
-        },
         onChange: this.emailChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u043C\u043E\u0431. \u0442\u0435\u043B\u0435\u0444\u043E\u043D: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.telnumChange
@@ -1083,14 +1092,9 @@ function (_Component) {
           value: priority.value
         }, priority.label);
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.saveData
-      }, "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          _this2.setState({
-            defaultstate: defaultstate
-          });
-        }
-      }, " Reset "));
+        onClick: this.saveData,
+        disabled: true
+      }, "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C"));
     }
   }]);
 
