@@ -63,7 +63,7 @@ let ServiceCentersSchema = new mongoose.Schema({
 
     let ServiceCenterModel = mongoose.model('servicecenters', ServiceCentersSchema);
 
-    function getRandomArbitary() {
+    function getRandomTicketNumber() {
         let random = parseInt(Math.random() * (9999 - 1) + 2000);
         console.log('newRequest', random);
         return (random)
@@ -77,7 +77,7 @@ let ServiceCentersSchema = new mongoose.Schema({
     console.log(getCurrnetDateTime());
 
 app.get('/getTicketRandomNumber', (req, res) => {
-    res.json({ticketNumber: getRandomArbitary()})
+    res.json({ticketNumber: getRandomTicketNumber()})
 });
 
 
@@ -150,6 +150,13 @@ app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
             'name: ', req.body.firstname
     );
 
+    let randomTicketNumber = getRandomTicketNumber();
+    let currnetDateTime = getCurrnetDateTime();
+    let resJson = {
+        ticketNumber: randomTicketNumber,
+        currnetDateTime: currnetDateTime,
+        status: 200
+    };
     TicketModel.create(
         {
             firstname: req.body.firstname,
@@ -159,8 +166,8 @@ app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
             telnum: req.body.telnum,
             extnum: req.body.extnum,
 
-            ticketNumber: getRandomArbitary(),
-            ticketDate: getCurrnetDateTime(),
+            ticketNumber: randomTicketNumber,
+            ticketDate: currnetDateTime,
             ticketPriority: req.body.ticketPriority,
             status: 0,
 
@@ -178,10 +185,13 @@ app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
             typeOfService: 0,
             serviceCenterTicket: '',
         })
-        .then(() => {
+        /*.then(() => {
             //console.log(doc)
             console.log('ok');
-            res.sendStatus(200)
+            res.sendStatus(200)})*/
+        .then(() => {
+            //res.setHeader('Content-Type', 'application/json');
+            res.json({resJson})
         })
         .catch(err => {
             console.error(err)

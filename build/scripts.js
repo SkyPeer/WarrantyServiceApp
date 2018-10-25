@@ -835,8 +835,9 @@ function (_Component) {
       place: '',
       placeAnother: '',
       projectCode: '',
-      ticketPriority: '',
-      ticketNumber: ''
+      ticketPriority: 0,
+      newTicketNumber: '',
+      datetimeOfCreate: ''
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "saveData", function () {
@@ -847,23 +848,26 @@ function (_Component) {
       console.log('clickFunc', saveData);
       fetch('/mongooseInsert', {
         method: 'post',
-
-        /*body: JSON.stringify({
-         _id: id,
-         status: updatearg.status
-         }), */
         body: JSON.stringify(_objectSpread({}, saveData)),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         }
-      }).then(checkStatus).then(function () {
+      }).then(checkStatus).then(function (checkStatus) {
+        return checkStatus.json();
+      }).then(function (json) {
+        return _this.setState({
+          newTicketNumber: json.resJson.ticketNumber,
+          datetimeOfCreate: json.resJson.currnetDateTime
+        });
+      }).then(function () {
         return console.log('inserted');
       });
 
-      function checkStatus(response) {
-        if (response.status >= 200 && response.status < 300) {
-          return response;
+      function checkStatus(responsee) {
+        if (responsee.status >= 200 && responsee.status < 300) {
+          //console.log(response);
+          return responsee;
         } else {
           var error = new Error(response.statusText);
           error.response = response;
@@ -1019,26 +1023,11 @@ function (_Component) {
   }
 
   _createClass(Form, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      fetch("/getTicketRandomNumber").then(function (res) {
-        return res.json();
-      }).then(function (json) {
-        console.log(json);
-
-        _this2.setState({
-          ticketNumber: json.ticketNumber
-        });
-      });
-    }
-  }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Form"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "\u041D\u043E\u043C\u0435\u0440 \u0437\u0430\u044F\u0432\u043A\u0438 ", this.state.ticketNumber, " \u0438 \u0434\u0430\u0442\u0430"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Form"), this.state.newTicketNumber !== '' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0421\u043E\u0437\u0434\u0430\u043D\u043E \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u0435 \u2116 ", this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate, " \u041C\u0421\u041A") : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         id: "CreateTicket",
         onSubmit: function onSubmit(event) {
           event.preventDefault();
@@ -1097,9 +1086,11 @@ function (_Component) {
         onClick: this.saveData
       }, "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
-          console.log(_this3.state);
+          _this2.setState({
+            defaultstate: defaultstate
+          });
         }
-      }, "---- TEST ----"));
+      }, " Reset "));
     }
   }]);
 

@@ -9,7 +9,6 @@ class Form extends Component{
         email: '',
         telnum: '',
         extnum: '',
-
         vendor: '',
         model: '',
         partNumber: '',
@@ -17,20 +16,13 @@ class Form extends Component{
         place: '',
         placeAnother: '',
         projectCode: '',
+        ticketPriority: 0,
 
-        ticketPriority: '',
-        ticketNumber: ''
+        newTicketNumber: '',
+        datetimeOfCreate: '',
+
     };
 
-    componentDidMount(){
-        fetch(`/getTicketRandomNumber`)
-            .then(res => res.json())
-            .then((json) => {
-            console.log(json);
-            this.setState({ticketNumber: json.ticketNumber})
-        })
-
-    }
 
     saveData = () => {
         this.updateDataFunc(this.state)
@@ -41,20 +33,8 @@ class Form extends Component{
 
         fetch('/mongooseInsert', {
             method: 'post',
-            /*body: JSON.stringify({
-             _id: id,
-             status: updatearg.status
-             }), */
             body: JSON.stringify({
-                /*comment: updatearg.comment,
-                 status: updatearg.status,
-                 place: updatearg.place,
-                 finishDate: updatearg.finishDate,
-                 serviceCentre: updatearg.serviceCentre,
-                 serviceCenterTicket: updatearg.serviceCentreTicket,
-                 typeOfservice: updatearg.typeOfservice */
                 ...saveData
-
             }),
             headers: {
                 'Accept': 'application/json',
@@ -62,12 +42,17 @@ class Form extends Component{
             }
         })
             .then(checkStatus)
+            .then(checkStatus => checkStatus.json())
+            .then((json)=> this.setState({
+                newTicketNumber: json.resJson.ticketNumber,
+                datetimeOfCreate: json.resJson.currnetDateTime}))
             .then(()=>console.log('inserted'));
 
 
-        function checkStatus(response) {
-            if (response.status >= 200 && response.status < 300) {
-                return response
+        function checkStatus(responsee) {
+            if (responsee.status >= 200 && responsee.status < 300) {
+                //console.log(response);
+                return responsee
             } else {
                 let error = new Error(response.statusText);
                 error.response = response;
@@ -75,7 +60,6 @@ class Form extends Component{
             }
         }
     };
-
 
     ticketPriorityOptions = [
         {value: 0, label: "Низкий"},
@@ -91,7 +75,6 @@ class Form extends Component{
         {value: 4, label: "Заказчик"},
         {value: 5, label: "Другое"}
     ];
-
 
     firstNameChange = (event) => {
         console.log('firstNameChange', event.target.value);
@@ -166,8 +149,7 @@ class Form extends Component{
     render(){
         return (
             <Layout>
-                <h1>Form</h1>
-                <h5>Номер заявки {this.state.ticketNumber} и дата</h5>
+                <h1>Form</h1>{this.state.newTicketNumber !== '' ? <div>Создано обращение № {this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate} МСК</div> : ''}
                 <form id="CreateTicket" onSubmit={(event)=>{event.preventDefault()}}>
                     <hr />
                     <div><b>Инициатор:</b></div>
@@ -220,12 +202,9 @@ class Form extends Component{
                         )}
                     </select>
 
-
-
-
                 </form>
                 <button onClick={this.saveData}>Отправить</button>
-                <button onClick={()=>{console.log(this.state)}}>---- TEST ----</button>
+                <button onClick={()=>{this.setState({defaultstate})}}> Reset </button>
             </Layout>
         )
     }
