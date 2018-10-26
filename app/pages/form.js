@@ -154,11 +154,29 @@ class Form extends Component{
 
     onBlur = (event) =>{
         console.log('onBlur');
-        console.log('value:', event.target.value);
+        //console.log('value:', event.target.value);
+        console.log(event.target);
+
+        let validator = event.target.id;
+
+        switch (validator) {
+            case 'name': console.log('weNeedCheckName!!!');
+                /*checkLetters(target)*/
+                break;
+            case 'number':
+                //checkNumber(target);
+                break;
+            case 'regexp':
+                //checkRegExp(target);
+                break;
+        }
 
         let element = event.target;
         console.log('element.required:', element.required);
-        element.value == '' && element.required ? element.className = 'helloworld input_error': element.className = 'helloworld'
+        element.value == '' && element.required ? element.className = 'input_error': element.className = 'input_correct'
+
+
+
     };
 
     render(){
@@ -168,7 +186,7 @@ class Form extends Component{
                 <form id="CreateTicket" onSubmit={(event)=>{event.preventDefault()}}>
                     <hr />
                     <div><b>Инициатор:</b></div>
-                    <label>Имя</label>
+                    <label>* Имя</label>
                     <input id="name"
                            placeholder="Имя"
                            onChange={this.firstNameChange}
@@ -178,43 +196,46 @@ class Form extends Component{
                            required />
 
                     <br />
-                    <label>Фамилия: </label>
+                    <label>* Фамилия: </label>
                     <input onChange={this.lastNameChange}/><br />
 
-                    <label>Отчество: </label>
+                    <label>  Отчество: </label>
                     <input onChange={this.familyNameChange}/><br />
 
-                    <label>E-mail:</label>
-                    <input onChange={this.emailChange}/><br />
+                    <div className="form__field">
+                        <label>* E-mail:</label>
+                        <input onChange={this.emailChange} type="email"/>
+                        <span className="form__error">Это поле должно содержать E-Mail в формате example@site.com</span>
+                    </div>
 
-                    <label>моб. телефон: </label>
+                    <label>* моб. телефон: </label>
                     <input onChange={this.telnumChange}/><br />
 
-                    <label>внутр. №: </label>
+                    <label>  внутр. №: </label>
                     <input onChange={this.extnumChange}/><br />
                     <hr />
 
-                    <label>Производитель / вендор: </label>
+                    <label>* Производитель / вендор: </label>
                     <input onChange={this.vendorChange}/><br />
 
-                    <label>Модель: </label>
+                    <label>* Модель: </label>
                     <input onChange={this.modelChange}/><br />
 
-                    <label>P/N: </label>
+                    <label>* P/N: </label>
                     <input onChange={this.partNumberChange}/><br />
 
-                    <label>Описание проблемы:</label>
+                    <label>* Описание проблемы:</label>
                     <br /><textarea onChange={this.problemChange}></textarea><br />
 
-                    <label>Код проекта: </label>
+                    <label>  Код проекта: </label>
                     <input onChange={this.projectCodechange}></input><br />
 
-                    <label>Местонахождение оборудования: </label><br />
+                    <label>* Местонахождение оборудования: </label><br />
                     <select className="selectPlace" onChange={this.placeChange} value={this.state.place}>
                         {this.placeOptions.map(place =>
                             <option key={place.value} value={place.value}>{place.label}</option>
                         )}
-                    </select>{this.state.place === '5' ? <input onChange={this.placeAnotherChange}></input> : console.log('another place') }
+                    </select>{this.state.place === '5' ? <input onChange={this.placeAnotherChange}></input> : /*console.log('another place')*/ '' }
                     <br /><br />
 
                     <label>Приоритет заявки: </label>
@@ -222,10 +243,10 @@ class Form extends Component{
                         {this.ticketPriorityOptions.map(priority =>
                             <option key={priority.value} value={priority.value}>{priority.label}</option>
                         )}
-                    </select>
-
+                    </select><br />
+                    <button onClick={this.saveData} className="btn btn-primary" disabled={true}>Отправить</button>
                 </form>
-                <button onClick={this.saveData} disabled={true}>Отправить</button>
+
             </Layout>
         )
     }
