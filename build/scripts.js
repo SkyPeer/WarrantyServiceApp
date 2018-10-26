@@ -837,7 +837,9 @@ function (_Component) {
       projectCode: '',
       ticketPriority: 0,
       newTicketNumber: '',
-      datetimeOfCreate: ''
+      datetimeOfCreate: '',
+      formErrors: {},
+      formValid: false
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "saveData", function () {
@@ -908,8 +910,7 @@ function (_Component) {
     }]);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "firstNameChange", function (event) {
-      console.log('firstNameChange', event.target.value);
-
+      // console.log('firstNameChange', event.target.value);
       _this.setState({
         firstname: event.target.value
       });
@@ -1019,36 +1020,66 @@ function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onFocus", function (event) {
-      console.log('onFocus');
-      event.target.className = 'helloworld';
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onFocus", function (event) {//   console.log('onFocus');
+      //event.target.className='hello';
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "checkLetters", function (target) {
+      var value = target;
+      var pattern = /^[A-Za-zА-Яа-я]+$/;
+      return pattern.test(value);
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "checkEmail", function (target) {
+      var value = target;
+      var pattern = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
+      console.log('checkEmail', pattern.test(value));
+      return pattern.test(value);
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onBlur", function (event) {
-      console.log('onBlur'); //console.log('value:', event.target.value);
+      //   console.log('blur');
+      var targetId = event.target.id; //console.log('this.state[targetId]', this.state[targetId]);
 
-      console.log(event.target);
-      var validator = event.target.id;
+      var checkValue = _this.state[targetId];
+      console.log('this.state[targetId]', checkValue);
+      var validator = targetId;
+      var errorsObj = _this.state.formErrors;
 
       switch (validator) {
-        case 'name':
-          console.log('weNeedCheckName!!!');
-          /*checkLetters(target)*/
-
+        case 'firstname':
+          {
+            checkValue.length < 3 || !_this.checkLetters(checkValue) ? errorsObj[targetId] = 'error' : delete errorsObj[targetId];
+          }
           break;
 
-        case 'number':
-          //checkNumber(target);
+        case 'lastname':
+          {
+            checkValue.length < 3 || !_this.checkLetters(checkValue) ? errorsObj[targetId] = 'error' : delete errorsObj[targetId];
+          }
           break;
 
-        case 'regexp':
-          //checkRegExp(target);
+        case 'email':
+          {
+            !_this.checkEmail(checkValue) ? errorsObj[targetId] = 'error' : delete errorsObj[targetId];
+          }
           break;
+
+        /*case 'regexp':
+            //checkRegExp(target);
+            break; */
+
+        /*default:
+            break; */
       }
 
-      var element = event.target;
-      console.log('element.required:', element.required);
-      element.value == '' && element.required ? element.className = 'input_error' : element.className = 'input_correct';
+      _this.setState({
+        formErrors: errorsObj
+      }); //  console.log('this.state.formErrors', this.state.formErrors);
+
+
+      console.log('id', event.target.id, 'required', event.target.required);
+      event.target.required ? _this.state.formErrors.hasOwnProperty(validator) ? event.target.className = 'input_error' : event.target.className = 'input_correct' : '';
     });
 
     return _this;
@@ -1056,40 +1087,77 @@ function (_Component) {
 
   _createClass(Form, [{
     key: "render",
+    // end of component
     value: function render() {
+      var _this2 = this;
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Form"), this.state.newTicketNumber !== '' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0421\u043E\u0437\u0434\u0430\u043D\u043E \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u0435 \u2116 ", this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate, " \u041C\u0421\u041A") : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         id: "CreateTicket",
         onSubmit: function onSubmit(event) {
           event.preventDefault();
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u0418\u043C\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        id: "name",
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u0418\u043C\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "firstname",
         placeholder: "\u0418\u043C\u044F",
         onChange: this.firstNameChange,
         onFocus: this.onFocus,
         onBlur: this.onBlur,
-        className: "helloworld",
+        value: this.state.firstname,
+        className: "",
         required: true
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u0424\u0430\u043C\u0438\u043B\u0438\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        onChange: this.lastNameChange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "  \u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        onChange: this.familyNameChange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form__field"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* E-mail:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        onChange: this.emailChange,
-        type: "email"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }), this.state.formErrors.hasOwnProperty('firstname') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "form_input form__error"
+      }, "\u041F\u043E\u043B\u0435 \"\u0418\u043C\u044F\" \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0411\u043E\u043B\u044C\u0449\u0435 2\u0445 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u0424\u0430\u043C\u0438\u043B\u0438\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "lastname",
+        placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0424\u0430\u043C\u0438\u043B\u0438\u044E",
+        onChange: this.lastNameChange,
+        onFocus: this.onFocus,
+        onBlur: this.onBlur,
+        value: this.state.lastname,
+        className: "",
+        required: true
+      }), this.state.formErrors.hasOwnProperty('lastname') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "form__error"
-      }, "\u042D\u0442\u043E \u043F\u043E\u043B\u0435 \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C E-Mail \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 example@site.com")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u043C\u043E\u0431. \u0442\u0435\u043B\u0435\u0444\u043E\u043D: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        onChange: this.telnumChange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "  \u0432\u043D\u0443\u0442\u0440. \u2116: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        onChange: this.extnumChange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C / \u0432\u0435\u043D\u0434\u043E\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "\u0424\u0430\u043C\u0438\u043B\u0438\u044F - \u041E\u0448\u0438\u0431\u043A\u0430") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "  \u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "familyname",
+        onChange: this.familyNameChange,
+        placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E",
+        onFocus: this.onFocus,
+        onBlur: this.onBlur,
+        value: this.state.familyname,
+        className: ""
+      }), this.state.formErrors.hasOwnProperty('familyname') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "form__error"
+      }, "\u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E - \u041E\u0448\u0438\u0431\u043A\u0430") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* E-mail:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "email",
+        placeholder: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 E-mail",
+        onChange: this.emailChange,
+        onFocus: this.onFocus,
+        onBlur: this.onBlur,
+        value: this.state.email,
+        type: "email",
+        className: "",
+        required: true
+      }), this.state.formErrors.hasOwnProperty('email') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "form__error"
+      }, "\u042D\u0442\u043E \u043F\u043E\u043B\u0435 \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C E-Mail \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 example@site.com") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u043C\u043E\u0431. \u0442\u0435\u043B\u0435\u0444\u043E\u043D: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "telnum",
+        onChange: this.telnumChange,
+        onFocus: this.onFocus,
+        onBlur: this.onBlur,
+        value: this.state.telnum,
+        required: true
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "  \u0432\u043D\u0443\u0442\u0440. \u2116: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "extnum",
+        onChange: this.extnumChange,
+        onFocus: this.onFocus,
+        onBlur: this.onBlur,
+        value: this.state.extnum
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C / \u0432\u0435\u043D\u0434\u043E\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.vendorChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041C\u043E\u0434\u0435\u043B\u044C: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.modelChange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* P/N: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* P/N \u0438\u043B\u0438 \u0417\u0430\u0432\u043E\u0434\u0441\u043A\u043E\u0439 \u043D\u043E\u043C\u0435\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.partNumberChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         onChange: this.problemChange
@@ -1120,8 +1188,13 @@ function (_Component) {
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.saveData,
         className: "btn btn-primary",
-        disabled: true
-      }, "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C")));
+        disabled: !this.state.formValid
+      }, "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          console.log(_this2.state.formErrors);
+        },
+        className: "btn btn-primary"
+      }, "--- TEST")));
     }
   }]);
 

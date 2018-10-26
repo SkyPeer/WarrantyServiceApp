@@ -10,24 +10,11 @@
 
         }
 
-        #OpenDescComponent{
+        #OpenDescComponent {
             background-color: blanchedalmond;
             margin: 15px;
             padding: 15px;
             margin-left: 0px;
-
-
-        }
-        form {
-            display: inline-block;
-            padding: 25px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 500px;
-        }
-
-        .form__field {
-            margin-bottom: 10px;
         }
 
         .form__error {
@@ -36,10 +23,10 @@
             font-size: 12px;
             display: block;
             margin-top: 3px;
-            display: none;
+            display: block;
         }
 
-        form input {
+        input {
             outline: none;
             display: block;
             width: 100%;
@@ -49,23 +36,52 @@
             box-sizing: border-box;
         }
 
-        button {
+        /*button {
             width: 100%;
             padding: 10px;
             border-radius: 2px;
             border: 0;
             background-color: #ccc;
             color: #fff;
+        }*/
+
+
+        .input_error {
+            border-color: red;
         }
 
-
-        input:invalid:not(:placeholder-shown) {
-            border-color: palevioletred;
-
-        }
-        input:invalid:not(:placeholder-shown) + .form__error {
+        .input_error + .form__error {
             display: block;
         }
+
+        .input_correct{
+            border-color: green;
+        }
+
+        form {
+            display: inline-block;
+            padding: 25px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 500px;
+        }
+
+        /*.form__field {
+            margin-bottom: 10px;
+        }*/
+
+
+
+
+
+
+        /*input:invalid:not(:placeholder-shown) {
+            border-color: palevioletred;
+
+        }*/
+        /*input:invalid:not(:placeholder-shown) + .form__error {
+            display: block;
+        }*/
 
     </style>
     <title>Сервис гарантийного обслуживания</title>

@@ -21,6 +21,8 @@ class Form extends Component{
         newTicketNumber: '',
         datetimeOfCreate: '',
 
+        formErrors: {},
+        formValid: false
     };
 
 
@@ -76,8 +78,16 @@ class Form extends Component{
         {value: 5, label: "Другое"}
     ];
 
+
+    /*Заменить все функции
+    * handleUserInput (e) {
+     const name = e.target.name;
+     const value = e.target.value;
+     this.setState({[name]: value});
+     }*/
+
     firstNameChange = (event) => {
-        console.log('firstNameChange', event.target.value);
+       // console.log('firstNameChange', event.target.value);
         this.setState({firstname:event.target.value})
     };
 
@@ -147,37 +157,75 @@ class Form extends Component{
     };
 
     onFocus = (event) => {
-        console.log('onFocus');
-        event.target.className='helloworld';
+     //   console.log('onFocus');
+        //event.target.className='hello';
 
     };
 
-    onBlur = (event) =>{
-        console.log('onBlur');
-        //console.log('value:', event.target.value);
-        console.log(event.target);
+    checkLetters = (target) => {
+        let value = target;
+        let pattern = /^[A-Za-zА-Яа-я]+$/;
+        return pattern.test(value)
+    };
 
-        let validator = event.target.id;
+    checkEmail = (target) => {
+        let value = target;
+        let pattern = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
+        console.log('checkEmail', pattern.test(value));
+        return pattern.test(value)
+    };
+
+
+    onBlur = (event) => {
+        //   console.log('blur');
+
+        let targetId = event.target.id;
+
+        //console.log('this.state[targetId]', this.state[targetId]);
+
+        let checkValue = this.state[targetId];
+
+        console.log('this.state[targetId]', checkValue);
+
+        let validator = targetId;
+
+        let errorsObj = this.state.formErrors;
 
         switch (validator) {
-            case 'name': console.log('weNeedCheckName!!!');
-                /*checkLetters(target)*/
-                break;
-            case 'number':
-                //checkNumber(target);
-                break;
-            case 'regexp':
+
+            case 'firstname' : {
+                checkValue.length < 3 || !this.checkLetters(checkValue) ?
+                    errorsObj[targetId] = 'error' :
+                    delete errorsObj[targetId];
+            }break;
+
+
+            case 'lastname' : {
+                checkValue.length < 3 || !this.checkLetters(checkValue) ?
+                    errorsObj[targetId] = 'error' :
+                    delete errorsObj[targetId];
+            }break;
+
+
+            case 'email' : {
+                !this.checkEmail(checkValue) ?
+                    errorsObj[targetId] = 'error' :
+                    delete errorsObj[targetId];
+            }break;
+
+            /*case 'regexp':
                 //checkRegExp(target);
-                break;
+                break; */
+            /*default:
+                break; */
+
         }
-
-        let element = event.target;
-        console.log('element.required:', element.required);
-        element.value == '' && element.required ? element.className = 'input_error': element.className = 'input_correct'
-
-
-
+        this.setState({formErrors: errorsObj});
+        //  console.log('this.state.formErrors', this.state.formErrors);
+        console.log('id',event.target.id, 'required', event.target.required);
+        event.target.required ? (this.state.formErrors.hasOwnProperty(validator) ? event.target.className = 'input_error' : event.target.className = 'input_correct') : '';
     };
+ // end of component
 
     render(){
         return (
@@ -186,34 +234,80 @@ class Form extends Component{
                 <form id="CreateTicket" onSubmit={(event)=>{event.preventDefault()}}>
                     <hr />
                     <div><b>Инициатор:</b></div>
+
+                    <div>
                     <label>* Имя</label>
-                    <input id="name"
+                    <input id="firstname"
                            placeholder="Имя"
                            onChange={this.firstNameChange}
                            onFocus={this.onFocus}
                            onBlur={this.onBlur}
-                           className="helloworld"
+                           value={this.state.firstname}
+                           className=""
                            required />
-
-                    <br />
-                    <label>* Фамилия: </label>
-                    <input onChange={this.lastNameChange}/><br />
-
-                    <label>  Отчество: </label>
-                    <input onChange={this.familyNameChange}/><br />
-
-                    <div className="form__field">
-                        <label>* E-mail:</label>
-                        <input onChange={this.emailChange} type="email"/>
-                        <span className="form__error">Это поле должно содержать E-Mail в формате example@site.com</span>
+                { this.state.formErrors.hasOwnProperty('firstname') ? <span className="form_input form__error">Поле "Имя" должно содержать Больще 2х символов</span> : ''}
                     </div>
 
-                    <label>* моб. телефон: </label>
-                    <input onChange={this.telnumChange}/><br />
+                    <div>
+                        <label>* Фамилия: </label>
+                        <input id="lastname"
+                            placeholder="Введите Фамилию"
+                            onChange={this.lastNameChange}
+                            onFocus={this.onFocus}
+                            onBlur={this.onBlur}
+                            value={this.state.lastname}
+                            className=""
+                            required />
+                        { this.state.formErrors.hasOwnProperty('lastname') ? <span className="form__error">Фамилия - Ошибка</span> : ''}
+                    </div>
 
+                    <div>
+                        <label>  Отчество: </label>
+                        <input id="familyname"
+                           onChange={this.familyNameChange}
+                           placeholder="Введите Отчество"
+                           onFocus={this.onFocus}
+                           onBlur={this.onBlur}
+                           value={this.state.familyname}
+                           className=""/>
+                        { this.state.formErrors.hasOwnProperty('familyname') ? <span className="form__error">Отчество - Ошибка</span> : ''}
+                    </div>
+
+                    <div>
+                        <label>* E-mail:</label>
+                        <input id="email"
+                            placeholder="Укажите E-mail"
+                            onChange={this.emailChange}
+                            onFocus={this.onFocus}
+                            onBlur={this.onBlur}
+                            value={this.state.email}
+                            type="email"
+                            className=""
+                            required/>
+                        { this.state.formErrors.hasOwnProperty('email') ?  <span className="form__error">Это поле должно содержать E-Mail в формате example@site.com</span> : '' }
+                    </div>
+
+                    <div>
+                    <label>* моб. телефон: </label>
+                        <input id="telnum"
+                            onChange={this.telnumChange}
+                            onFocus={this.onFocus}
+                            onBlur={this.onBlur}
+                            value={this.state.telnum}
+                            required/>
+                    </div>
+
+                    <div>
                     <label>  внутр. №: </label>
-                    <input onChange={this.extnumChange}/><br />
-                    <hr />
+                    <input id="extnum"
+                        onChange={this.extnumChange}
+                        onFocus={this.onFocus}
+                        onBlur={this.onBlur}
+                        value={this.state.extnum}
+                    />
+                    </div>
+
+                        <hr />
 
                     <label>* Производитель / вендор: </label>
                     <input onChange={this.vendorChange}/><br />
@@ -221,7 +315,7 @@ class Form extends Component{
                     <label>* Модель: </label>
                     <input onChange={this.modelChange}/><br />
 
-                    <label>* P/N: </label>
+                    <label>* P/N или Заводской номер: </label>
                     <input onChange={this.partNumberChange}/><br />
 
                     <label>* Описание проблемы:</label>
@@ -244,7 +338,8 @@ class Form extends Component{
                             <option key={priority.value} value={priority.value}>{priority.label}</option>
                         )}
                     </select><br />
-                    <button onClick={this.saveData} className="btn btn-primary" disabled={true}>Отправить</button>
+                    <button onClick={this.saveData} className="btn btn-primary" disabled={!this.state.formValid}>Отправить</button>
+                    <button onClick={()=>{console.log(this.state.formErrors)}} className="btn btn-primary" >--- TEST</button>
                 </form>
 
             </Layout>
