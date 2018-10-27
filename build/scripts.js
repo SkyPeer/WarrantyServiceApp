@@ -1051,20 +1051,20 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onBlur", function (event) {
       //   console.log('blur');
+      var target = event.target;
       var targetId = event.target.id;
-      var required = event.target.required; //console.log('this.state[targetId]', this.state[targetId]);
+      var required = event.target.required;
+      var checkValue = _this.state[targetId]; //!required ? targetId = "notrequired" : '';
 
-      var checkValue = _this.state[targetId]; //console.log('this.state[targetId]', checkValue);
-
-      var validator = targetId;
       var errorsObj = _this.state.formErrors;
+      !required && checkValue.length == 0 ? targetId = 'notrequired' : '';
 
-      switch (validator) {
+      switch (targetId) {
         case 'firstname':
           {
             checkValue.length < 3 || !_this.checkLetters(checkValue) ? errorsObj[targetId] = 'error' : delete errorsObj[targetId];
 
-            _this.changeClassName(event.target);
+            _this.changeClassName(target);
           }
           break;
 
@@ -1072,31 +1072,44 @@ function (_Component) {
           {
             checkValue.length < 3 || !_this.checkLetters(checkValue) ? errorsObj[targetId] = 'error' : delete errorsObj[targetId];
 
-            _this.changeClassName(event.target);
+            _this.changeClassName(target);
           }
           break;
 
         case 'familyname':
           {
-            checkValue.length >= 1 ? checkValue.length < 3 || !_this.checkLetters(checkValue) ? errorsObj[targetId] = 'error' : delete errorsObj[targetId] : delete errorsObj[targetId];
+            checkValue.length < 3 || !_this.checkLetters(checkValue) ? errorsObj[targetId] = 'error' : delete errorsObj[targetId];
+
+            _this.changeClassName(target);
           }
           break;
 
         case 'email':
           {
             !_this.checkEmail(checkValue) ? errorsObj[targetId] = 'error' : delete errorsObj[targetId];
+
+            _this.changeClassName(target);
           }
           break;
 
         case 'telnum':
           {
             !_this.checkTelNum(checkValue) ? errorsObj[targetId] = 'error' : delete errorsObj[targetId];
+
+            _this.changeClassName(target);
+          }
+          break;
+
+        case 'notrequired':
+          {
+            console.log('notrequired');
+            target.className = '';
           }
           break;
 
         default:
           {
-            event.target.required ? _this.state.formErrors.hasOwnProperty(validator) ? event.target.className = 'input_error' : event.target.className = 'input_correct' : '';
+            event.target.required ? _this.state.formErrors.hasOwnProperty(targetId) ? event.target.className = 'input_error' : event.target.className = 'input_correct' : '';
           }
           break;
       }
@@ -1130,9 +1143,9 @@ function (_Component) {
         value: this.state.firstname,
         className: "",
         required: true
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }), this.state.formErrors.hasOwnProperty('firstname') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "form__error"
-      }, "\u041F\u043E\u043B\u0435 \"\u0418\u043C\u044F\" \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0411\u043E\u043B\u044C\u0449\u0435 2\u0445 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u0424\u0430\u043C\u0438\u043B\u0438\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "\u041F\u043E\u043B\u0435 \"\u0418\u043C\u044F\" \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0411\u043E\u043B\u044C\u0449\u0435 2\u0445 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u0424\u0430\u043C\u0438\u043B\u0438\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "lastname",
         placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0424\u0430\u043C\u0438\u043B\u0438\u044E",
         onChange: this.lastNameChange,
@@ -1141,9 +1154,9 @@ function (_Component) {
         value: this.state.lastname,
         className: "",
         required: true
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }), this.state.formErrors.hasOwnProperty('lastname') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "form__error"
-      }, "\u041F\u043E\u043B\u0435 \"\u0424\u0430\u043C\u0438\u043B\u0438\u044F\" \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0411\u043E\u043B\u044C\u0449\u0435 2\u0445 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "  \u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "\u041F\u043E\u043B\u0435 \"\u0424\u0430\u043C\u0438\u043B\u0438\u044F\" \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0411\u043E\u043B\u044C\u0449\u0435 2\u0445 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "  \u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "familyname",
         onChange: this.familyNameChange,
         placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E",
@@ -1151,9 +1164,9 @@ function (_Component) {
         onBlur: this.onBlur,
         value: this.state.familyname,
         className: ""
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }), this.state.formErrors.hasOwnProperty('familyname') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "form__error"
-      }, "\u041F\u043E\u043B\u0435 \"\u0424\u0430\u043C\u0438\u043B\u0438\u044F\" \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0411\u043E\u043B\u044C\u0449\u0435 2\u0445 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* E-mail:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "\u041F\u043E\u043B\u0435 \"\u0424\u0430\u043C\u0438\u043B\u0438\u044F\" \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0411\u043E\u043B\u044C\u0449\u0435 2\u0445 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* E-mail:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "email",
         placeholder: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 E-mail \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 example@site.com",
         onChange: this.emailChange,
@@ -1180,17 +1193,34 @@ function (_Component) {
         onFocus: this.onFocus,
         onBlur: this.onBlur,
         value: this.state.extnum
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C / \u0432\u0435\u043D\u0434\u043E\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        onChange: this.vendorChange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041C\u043E\u0434\u0435\u043B\u044C: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C / \u0432\u0435\u043D\u0434\u043E\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "vendor",
+        onChange: this.vendorChange,
+        onFocus: this.onFocus,
+        onBlur: this.onBlur,
+        value: this.state.vendor,
+        required: true
+      }), this.state.formErrors.hasOwnProperty('vendor') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "form__error"
+      }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044F") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041C\u043E\u0434\u0435\u043B\u044C: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "model",
         className: "",
-        onChange: this.modelChange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        onChange: this.modelChange,
+        onFocus: this.onFocus,
+        onBlur: this.onBlur,
+        value: this.state.model,
+        required: true
+      }), this.state.formErrors.hasOwnProperty('model') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "form__error"
-      }, "\u041F\u043E\u043B\u0435 \"\u0418\u043C\u044F\" \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0411\u043E\u043B\u044C\u0449\u0435 2\u0445 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* P/N \u0438\u043B\u0438 \u0417\u0430\u0432\u043E\u0434\u0441\u043A\u043E\u0439 \u043D\u043E\u043C\u0435\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        onChange: this.partNumberChange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+      }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C \u043C\u043E\u0434\u0435\u043B\u044C / \u0430\u0440\u0442\u0438\u043A\u0443\u043B") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* P/N \u0438\u043B\u0438 \u0417\u0430\u0432\u043E\u0434\u0441\u043A\u043E\u0439 \u043D\u043E\u043C\u0435\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.partNumberChange,
+        onFocus: this.onFocus,
+        onBlur: this.onBlur,
+        value: this.state.partNumber,
+        required: true
+      }), this.state.formErrors.hasOwnProperty('partNumber') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "form__error"
+      }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C partnumber / \u0445\u0430\u0432\u043E\u0434\u0441\u043A\u043E\u0439 \u043D\u043E\u043C\u0435\u0440") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         onChange: this.problemChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "  \u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.projectCodechange

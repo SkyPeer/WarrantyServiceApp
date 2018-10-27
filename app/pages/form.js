@@ -187,67 +187,66 @@ class Form extends Component{
         this.state.formErrors.hasOwnProperty(target.id) ? target.className = "input_error" : target.className = "input_correct"
     };
 
-
     onBlur = (event) => {
         //   console.log('blur');
+        let target = event.target;
         let targetId = event.target.id;
         let required = event.target.required;
-        //console.log('this.state[targetId]', this.state[targetId]);
         let checkValue = this.state[targetId];
-        //console.log('this.state[targetId]', checkValue);
-        let validator = targetId;
+
+        //!required ? targetId = "notrequired" : '';
         let errorsObj = this.state.formErrors;
 
+        !required && checkValue.length == 0 ? targetId = 'notrequired': '';
 
-        switch (validator) {
+        switch (targetId) {
 
             case 'firstname' : {
                 checkValue.length < 3 || !this.checkLetters(checkValue) ?
                     errorsObj[targetId] = 'error' :
                     delete errorsObj[targetId];
-                this.changeClassName(event.target)
+                this.changeClassName(target)
             }break;
 
             case 'lastname' : {
                 checkValue.length < 3 || !this.checkLetters(checkValue) ?
                     errorsObj[targetId] = 'error' :
                     delete errorsObj[targetId];
-                this.changeClassName(event.target)
+                this.changeClassName(target)
             }break;
 
             case 'familyname' : {
-                checkValue.length >= 1 ?
-                    (checkValue.length < 3 || !this.checkLetters(checkValue) ?
-                    errorsObj[targetId] = 'error' : delete errorsObj[targetId])
-                : delete errorsObj[targetId];
-
+                checkValue.length < 3 || !this.checkLetters(checkValue) ?
+                    errorsObj[targetId] = 'error' : delete errorsObj[targetId];
+               this.changeClassName(target);
             }break;
 
             case 'email' : {
                 !this.checkEmail(checkValue) ?
                     errorsObj[targetId] = 'error' :
                     delete errorsObj[targetId];
+                this.changeClassName(target)
             }break;
 
             case 'telnum' : {
                 !this.checkTelNum(checkValue) ?
                     errorsObj[targetId] = 'error' :
                     delete errorsObj[targetId];
+                this.changeClassName(target)
+            }break;
+
+            case 'notrequired' : {
+                console.log('notrequired');
+                target.className = '';
             }break;
 
             default: {
                 event.target.required ?
-                    (this.state.formErrors.hasOwnProperty(validator) ? event.target.className = 'input_error' : event.target.className = 'input_correct')
+                    (this.state.formErrors.hasOwnProperty(targetId) ? event.target.className = 'input_error' : event.target.className = 'input_correct')
                     : '';
             }break;
-
         }
-
         this.setState({formErrors: errorsObj});
-       
-
-
-
 
         //  console.log('this.state.formErrors', this.state.formErrors);
       //  console.log('id:',event.target.id, 'required:', event.target.required, 'hasOwnProperty(validator)', this.state.formErrors.hasOwnProperty(validator), 'value.length:',event.target.value.length == 0);
@@ -273,7 +272,7 @@ class Form extends Component{
                            value={this.state.firstname}
                            className=""
                            required />
-                    <span className="form__error">Поле "Имя" должно содержать Больще 2х символов</span>
+                    { this.state.formErrors.hasOwnProperty('firstname') ? <span className="form__error">Поле "Имя" должно содержать Больще 2х символов</span> : ''}
                     </div>
 
                     <div>
@@ -286,7 +285,7 @@ class Form extends Component{
                             value={this.state.lastname}
                             className=""
                             required />
-                    <span className="form__error">Поле "Фамилия" должно содержать Больще 2х символов</span>
+                    { this.state.formErrors.hasOwnProperty('lastname') ? <span className="form__error">Поле "Фамилия" должно содержать Больще 2х символов</span> : ''}
                     </div>
 
                     <div>
@@ -298,7 +297,7 @@ class Form extends Component{
                            onBlur={this.onBlur}
                            value={this.state.familyname}
                            className=""/>
-                        <span className="form__error">Поле "Фамилия" должно содержать Больще 2х символов</span>
+                    { this.state.formErrors.hasOwnProperty('familyname') ? <span className="form__error">Поле "Фамилия" должно содержать Больще 2х символов</span> : ''}
                     </div>
 
                     <div>
@@ -312,7 +311,7 @@ class Form extends Component{
                             type="email"
                             className=""
                             required/>
-                        { this.state.formErrors.hasOwnProperty('email') ?  <span className="form__error">Это поле должно содержать E-Mail в формате example@site.com</span> : '' }
+                    { this.state.formErrors.hasOwnProperty('email') ?  <span className="form__error">Это поле должно содержать E-Mail в формате example@site.com</span> : '' }
                     </div>
 
                     <div>
@@ -337,26 +336,45 @@ class Form extends Component{
                     </div>
 
                         <hr />
-
+                    <div>
                     <label>* Производитель / вендор: </label>
-                    <input onChange={this.vendorChange}/><br />
+                    <input id="vendor"
+                        onChange={this.vendorChange}
+                        onFocus={this.onFocus}
+                        onBlur={this.onBlur}
+                        value={this.state.vendor}
+                        required
+                    />
+                        { this.state.formErrors.hasOwnProperty('vendor') ?  <span className="form__error">Просьба указать производителя</span> : '' }
+                    </div>
 
                     <div>
                     <label>* Модель: </label>
-                    <input
-                        id="model"
+                    <input id="model"
                         className=""
-                        onChange={this.modelChange}/>
-                    <span className="form__error">Поле "Имя" должно содержать Больще 2х символов</span>
+                        onChange={this.modelChange}
+                        onFocus={this.onFocus}
+                        onBlur={this.onBlur}
+                        value={this.state.model}
+                           required />
+                    { this.state.formErrors.hasOwnProperty('model') ?  <span className="form__error">Просьба указать модель / артикул</span> : '' }
+
+                    </div>
+
+                    <div>
+                    <label>* P/N или Заводской номер: </label>
+                    <input
+                        onChange={this.partNumberChange}
+                        onFocus={this.onFocus}
+                        onBlur={this.onBlur}
+                        value={this.state.partNumber}
+                        required />
+                    { this.state.formErrors.hasOwnProperty('partNumber') ?  <span className="form__error">Просьба указать partnumber / хаводской номер</span> : '' }
                     </div>
 
 
-
-                    <label>* P/N или Заводской номер: </label>
-                    <input onChange={this.partNumberChange}/><br />
-
                     <label>* Описание проблемы:</label>
-                    <br /><textarea onChange={this.problemChange}></textarea><br />
+                    <textarea onChange={this.problemChange}></textarea><br />
 
                     <label>  Код проекта: </label>
                     <input onChange={this.projectCodechange}></input><br />
