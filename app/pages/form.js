@@ -22,6 +22,7 @@ class Form extends Component{
         datetimeOfCreate: '',
 
         formErrors: {},
+
         formValid: false
     };
 
@@ -159,37 +160,44 @@ class Form extends Component{
     onFocus = (event) => {
      //   console.log('onFocus');
         //event.target.className='hello';
-
     };
 
     checkLetters = (target) => {
         let value = target;
         let pattern = /^[A-Za-zА-Яа-я]+$/;
+        console.log('checkLetters value: ', value,' resutl: ', pattern.test(value));
         return pattern.test(value)
     };
 
     checkEmail = (target) => {
         let value = target;
         let pattern = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
-        console.log('checkEmail', pattern.test(value));
+       //console.log('checkEmail', pattern.test(value));
         return pattern.test(value)
+    };
+
+    checkTelNum = (target) => {
+        let value = target;
+        let pattern = /^\+7\d{10}$/;
+        //console.log('checkTelNum', pattern.test(value));
+        return pattern.test(value)
+    };
+
+    changeClassName = (target) => {
+        this.state.formErrors.hasOwnProperty(target.id) ? target.className = "input_error" : target.className = "input_correct"
     };
 
 
     onBlur = (event) => {
         //   console.log('blur');
-
         let targetId = event.target.id;
-
+        let required = event.target.required;
         //console.log('this.state[targetId]', this.state[targetId]);
-
         let checkValue = this.state[targetId];
-
-        console.log('this.state[targetId]', checkValue);
-
+        //console.log('this.state[targetId]', checkValue);
         let validator = targetId;
-
         let errorsObj = this.state.formErrors;
+
 
         switch (validator) {
 
@@ -197,15 +205,23 @@ class Form extends Component{
                 checkValue.length < 3 || !this.checkLetters(checkValue) ?
                     errorsObj[targetId] = 'error' :
                     delete errorsObj[targetId];
+                this.changeClassName(event.target)
             }break;
-
 
             case 'lastname' : {
                 checkValue.length < 3 || !this.checkLetters(checkValue) ?
                     errorsObj[targetId] = 'error' :
                     delete errorsObj[targetId];
+                this.changeClassName(event.target)
             }break;
 
+            case 'familyname' : {
+                checkValue.length >= 1 ?
+                    (checkValue.length < 3 || !this.checkLetters(checkValue) ?
+                    errorsObj[targetId] = 'error' : delete errorsObj[targetId])
+                : delete errorsObj[targetId];
+
+            }break;
 
             case 'email' : {
                 !this.checkEmail(checkValue) ?
@@ -213,19 +229,31 @@ class Form extends Component{
                     delete errorsObj[targetId];
             }break;
 
-            /*case 'regexp':
-                //checkRegExp(target);
-                break; */
-            /*default:
-                break; */
+            case 'telnum' : {
+                !this.checkTelNum(checkValue) ?
+                    errorsObj[targetId] = 'error' :
+                    delete errorsObj[targetId];
+            }break;
+
+            default: {
+                event.target.required ?
+                    (this.state.formErrors.hasOwnProperty(validator) ? event.target.className = 'input_error' : event.target.className = 'input_correct')
+                    : '';
+            }break;
 
         }
+
         this.setState({formErrors: errorsObj});
+       
+
+
+
+
         //  console.log('this.state.formErrors', this.state.formErrors);
-        console.log('id',event.target.id, 'required', event.target.required);
-        event.target.required ? (this.state.formErrors.hasOwnProperty(validator) ? event.target.className = 'input_error' : event.target.className = 'input_correct') : '';
+      //  console.log('id:',event.target.id, 'required:', event.target.required, 'hasOwnProperty(validator)', this.state.formErrors.hasOwnProperty(validator), 'value.length:',event.target.value.length == 0);
+
     };
- // end of component
+
 
     render(){
         return (
@@ -238,14 +266,14 @@ class Form extends Component{
                     <div>
                     <label>* Имя</label>
                     <input id="firstname"
-                           placeholder="Имя"
+                           placeholder="Введите Имя"
                            onChange={this.firstNameChange}
                            onFocus={this.onFocus}
                            onBlur={this.onBlur}
                            value={this.state.firstname}
                            className=""
                            required />
-                { this.state.formErrors.hasOwnProperty('firstname') ? <span className="form_input form__error">Поле "Имя" должно содержать Больще 2х символов</span> : ''}
+                    <span className="form__error">Поле "Имя" должно содержать Больще 2х символов</span>
                     </div>
 
                     <div>
@@ -258,7 +286,7 @@ class Form extends Component{
                             value={this.state.lastname}
                             className=""
                             required />
-                        { this.state.formErrors.hasOwnProperty('lastname') ? <span className="form__error">Фамилия - Ошибка</span> : ''}
+                    <span className="form__error">Поле "Фамилия" должно содержать Больще 2х символов</span>
                     </div>
 
                     <div>
@@ -270,13 +298,13 @@ class Form extends Component{
                            onBlur={this.onBlur}
                            value={this.state.familyname}
                            className=""/>
-                        { this.state.formErrors.hasOwnProperty('familyname') ? <span className="form__error">Отчество - Ошибка</span> : ''}
+                        <span className="form__error">Поле "Фамилия" должно содержать Больще 2х символов</span>
                     </div>
 
                     <div>
                         <label>* E-mail:</label>
                         <input id="email"
-                            placeholder="Укажите E-mail"
+                            placeholder="Укажите E-mail в формате example@site.com"
                             onChange={this.emailChange}
                             onFocus={this.onFocus}
                             onBlur={this.onBlur}
@@ -295,6 +323,7 @@ class Form extends Component{
                             onBlur={this.onBlur}
                             value={this.state.telnum}
                             required/>
+                        { this.state.formErrors.hasOwnProperty('telnum') ?  <span className="form__error">Номер телефона должен быть в формате +79876543210 </span> : '' }
                     </div>
 
                     <div>
@@ -312,8 +341,16 @@ class Form extends Component{
                     <label>* Производитель / вендор: </label>
                     <input onChange={this.vendorChange}/><br />
 
+                    <div>
                     <label>* Модель: </label>
-                    <input onChange={this.modelChange}/><br />
+                    <input
+                        id="model"
+                        className=""
+                        onChange={this.modelChange}/>
+                    <span className="form__error">Поле "Имя" должно содержать Больще 2х символов</span>
+                    </div>
+
+
 
                     <label>* P/N или Заводской номер: </label>
                     <input onChange={this.partNumberChange}/><br />
@@ -340,10 +377,15 @@ class Form extends Component{
                     </select><br />
                     <button onClick={this.saveData} className="btn btn-primary" disabled={!this.state.formValid}>Отправить</button>
                     <button onClick={()=>{console.log(this.state.formErrors)}} className="btn btn-primary" >--- TEST</button>
+                    <button onClick={()=>{
+                        let test = document.getElementById('model');
+                        test.className="input_error2"
+                    }}>  --- TEST CSS --- </button>
                 </form>
 
             </Layout>
         )
     }
-}
+} // end of component
+
 export {Form}
