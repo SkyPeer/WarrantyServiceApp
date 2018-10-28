@@ -192,7 +192,10 @@ class Form extends Component{
         let target = event.target;
         let targetId = event.target.id;
         let required = event.target.required;
+        let validator = event.target.dataset;
         let checkValue = this.state[targetId];
+
+        console.log(validator.validatorPerson);
 
         //!required ? targetId = "notrequired" : '';
         let errorsObj = this.state.formErrors;
@@ -270,6 +273,7 @@ class Form extends Component{
                            onFocus={this.onFocus}
                            onBlur={this.onBlur}
                            value={this.state.firstname}
+                           data-validator="person"
                            className=""
                            required />
                     { this.state.formErrors.hasOwnProperty('firstname') ? <span className="form__error">Поле "Имя" должно содержать Больще 2х символов</span> : ''}
@@ -283,6 +287,7 @@ class Form extends Component{
                             onFocus={this.onFocus}
                             onBlur={this.onBlur}
                             value={this.state.lastname}
+                            data-validator="person"
                             className=""
                             required />
                     { this.state.formErrors.hasOwnProperty('lastname') ? <span className="form__error">Поле "Фамилия" должно содержать Больще 2х символов</span> : ''}
@@ -296,6 +301,7 @@ class Form extends Component{
                            onFocus={this.onFocus}
                            onBlur={this.onBlur}
                            value={this.state.familyname}
+                           data-validator="person"
                            className=""/>
                     { this.state.formErrors.hasOwnProperty('familyname') ? <span className="form__error">Поле "Фамилия" должно содержать Больще 2х символов</span> : ''}
                     </div>
@@ -322,7 +328,7 @@ class Form extends Component{
                             onBlur={this.onBlur}
                             value={this.state.telnum}
                             required/>
-                        { this.state.formErrors.hasOwnProperty('telnum') ?  <span className="form__error">Номер телефона должен быть в формате +79876543210 </span> : '' }
+                    { this.state.formErrors.hasOwnProperty('telnum') ?  <span className="form__error">Номер телефона должен быть в формате +79876543210 </span> : '' }
                     </div>
 
                     <div>
@@ -331,11 +337,11 @@ class Form extends Component{
                         onChange={this.extnumChange}
                         onFocus={this.onFocus}
                         onBlur={this.onBlur}
-                        value={this.state.extnum}
-                    />
+                        value={this.state.extnum}/>
                     </div>
 
-                        <hr />
+                    <hr />
+
                     <div>
                     <label>* Производитель / вендор: </label>
                     <input id="vendor"
@@ -356,7 +362,7 @@ class Form extends Component{
                         onFocus={this.onFocus}
                         onBlur={this.onBlur}
                         value={this.state.model}
-                           required />
+                       required />
                     { this.state.formErrors.hasOwnProperty('model') ?  <span className="form__error">Просьба указать модель / артикул</span> : '' }
 
                     </div>
@@ -374,25 +380,47 @@ class Form extends Component{
 
 
                     <label>* Описание проблемы:</label>
-                    <textarea onChange={this.problemChange}></textarea><br />
+                    <textarea id="problem"
+                        onChange={this.problemChange}
+                        onFocus={this.onFocus}
+                        onBlur={this.onBlur}
+                        value={this.state.problem}
+                        required
+                    />
 
                     <label>  Код проекта: </label>
-                    <input onChange={this.projectCodechange}></input><br />
-
+                    <input id="projectCode"
+                        onChange={this.projectCodechange}
+                        onFocus={this.onFocus}
+                        onBlur={this.onBlur}
+                        value={this.state.projectCode}
+                    />
+                    <div>
                     <label>* Местонахождение оборудования: </label><br />
-                    <select className="selectPlace" onChange={this.placeChange} value={this.state.place}>
+                    <select id="place"
+                            onChange={this.placeChange}
+                            value={this.state.place}>
                         {this.placeOptions.map(place =>
                             <option key={place.value} value={place.value}>{place.label}</option>
                         )}
-                    </select>{this.state.place === '5' ? <input onChange={this.placeAnotherChange}></input> : /*console.log('another place')*/ '' }
-                    <br /><br />
-
+                    </select>{this.state.place === '5' ?
+                    <input id="placeAnother"
+                        placeholder="Укажите местоположение оборудование"
+                        onChange={this.placeAnotherChange}
+                        onFocus={this.onFocus}
+                        onBlur={this.onBlur}
+                        value={this.state.placeAnother} /> : '' }
+                    </div>
+                    <div>
                     <label>Приоритет заявки: </label>
                     <select className="selectPriority" onChange={this.changePriority} value={this.state.ticketPriority}>
                         {this.ticketPriorityOptions.map(priority =>
                             <option key={priority.value} value={priority.value}>{priority.label}</option>
                         )}
-                    </select><br />
+                    </select>
+                    </div>
+
+
                     <button onClick={this.saveData} className="btn btn-primary" disabled={!this.state.formValid}>Отправить</button>
                     <button onClick={()=>{console.log(this.state.formErrors)}} className="btn btn-primary" >--- TEST</button>
                     <button onClick={()=>{
