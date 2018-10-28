@@ -93,42 +93,48 @@ class Form extends Component{
     };
 
     lastNameChange = (event) => {
-        console.log('lastNameChange', event.target.value);
+        //console.log('lastNameChange', event.target.value);
         this.setState({lastname:event.target.value})
     };
 
     familyNameChange = (event) => {
-        console.log('familyNameChange', event.target.value);
+       // console.log('familyNameChange', event.target.value);
         this.setState({familyname:event.target.value})
     };
 
     emailChange = (event) => {
-        console.log('emailChange', event.target.value);
+        //console.log('emailChange', event.target.value);
         this.setState({email:event.target.value})
     };
 
     telnumChange = (event) => {
-        console.log('telnumnChange:', event.target.value);
+      //  console.log('telnumnChange:', event.target.value);
         this.setState({telnum:event.target.value})
     };
 
     extnumChange = (event) => {
-        console.log('extnumChange', event.target.value);
+       // console.log('extnumChange', event.target.value);
         this.setState({extnum:event.target.value})
     };
 
     changePriority = (event) =>{
-        console.log('changePriority:', event.target.value);
+        //console.log('changePriority:', event.target.value);
         this.setState({ticketPriority: event.target.value})
     };
 
-    placeChange = (event) =>{
-        console.log('changePlace:', event.target.value);
-        this.setState({place: event.target.value})
+    placeChange = (event) => {
+        //console.log('changePlace:', event.target.value);
+        this.setState({place: event.target.value});
+        //console.log('this.state.place', this.state.place); // ПОЧЕМУ ТУТ ОСТАЕТСЯ СТАРОЕ ЗНАЧЕНИЕ ???
+
+        let errorsObj = this.state.formErrors;
+        event.target.value == '5' ? errorsObj['placeAnother'] = 'error' : delete errorsObj['placeAnother'];
+        this.setState({formErrors: errorsObj})
+
     };
 
     placeAnotherChange = (event) =>{
-        console.log('changeAnotherPlace:', event.target.value);
+        //console.log('changeAnotherPlace:', event.target.value);
         this.setState({placeAnother: event.target.value})
     };
 
@@ -148,24 +154,24 @@ class Form extends Component{
     };
 
     problemChange = (event) =>{
-        console.log('changepartProblem:', event.target.value);
+        //console.log('changepartProblem:', event.target.value);
         this.setState({problem: event.target.value})
     };
 
     projectCodechange = (event) =>{
-        console.log('changeProjectCodec:', event.target.value);
+        //console.log('changeProjectCodec:', event.target.value);
         this.setState({projectCode: event.target.value})
     };
 
     onFocus = (event) => {
-     //   console.log('onFocus');
-        //event.target.className='hello';
+        event.target.className='';
+
     };
 
     checkLetters = (target) => {
         let value = target;
         let pattern = /^[A-Za-zА-Яа-я]+$/;
-        console.log('checkLetters value: ', value,' resutl: ', pattern.test(value));
+       // console.log('checkLetters value: ', value,' resutl: ', pattern.test(value));
         return pattern.test(value)
     };
 
@@ -187,41 +193,56 @@ class Form extends Component{
         this.state.formErrors.hasOwnProperty(target.id) ? target.className = "input_error" : target.className = "input_correct"
     };
 
+    checkform = () => {
+        let arrayOfErrors = Object.keys(this.state.formErrors);
+        let requireArrayCheck = true;
+        let requireArray = [
+            this.state.firstname,
+            this.state.lastname,
+            this.state.email,
+            this.state.telnum,
+            this.state.vendor,
+            this.state.model,
+            this.state.partNumber,
+            this.state.problem
+        ];
+    //console.log('checkform --- test:', requireArray[0].length)
+
+        for (let i=0; i<requireArray.length; i++){
+            if (requireArray[i].length == 0){
+                requireArrayCheck = false
+            }
+        }
+        console.log('---- CHECKFORM:   arrayOfErrors',arrayOfErrors.length ==0,' requireArrayCheck ',requireArrayCheck, 'result:', (arrayOfErrors.length == 0 && requireArrayCheck));
+
+        this.setState({formValid: (arrayOfErrors.length == 0 && requireArrayCheck)})
+
+    };
+
+
+
     onBlur = (event) => {
         //   console.log('blur');
         let target = event.target;
         let targetId = event.target.id;
         let required = event.target.required;
-        let validator = event.target.dataset;
+        let validator = event.target.dataset.validator;
         let checkValue = this.state[targetId];
 
-        console.log(validator.validatorPerson);
+        //console.log('onlur validator: ',validator);
 
         //!required ? targetId = "notrequired" : '';
         let errorsObj = this.state.formErrors;
 
-        !required && checkValue.length == 0 ? targetId = 'notrequired': '';
+        !required && checkValue.length == 0 ? validator = 'notrequired': '';
 
-        switch (targetId) {
+        switch (validator) {
 
-            case 'firstname' : {
+            case 'person' : {
                 checkValue.length < 3 || !this.checkLetters(checkValue) ?
                     errorsObj[targetId] = 'error' :
                     delete errorsObj[targetId];
                 this.changeClassName(target)
-            }break;
-
-            case 'lastname' : {
-                checkValue.length < 3 || !this.checkLetters(checkValue) ?
-                    errorsObj[targetId] = 'error' :
-                    delete errorsObj[targetId];
-                this.changeClassName(target)
-            }break;
-
-            case 'familyname' : {
-                checkValue.length < 3 || !this.checkLetters(checkValue) ?
-                    errorsObj[targetId] = 'error' : delete errorsObj[targetId];
-               this.changeClassName(target);
             }break;
 
             case 'email' : {
@@ -238,10 +259,28 @@ class Form extends Component{
                 this.changeClassName(target)
             }break;
 
+            case 'standart' :{
+              checkValue.length < 2 ? errorsObj[targetId] = 'error' : delete errorsObj[targetId];
+                this.changeClassName(target)
+            }break;
+
+            case 'problem' :{
+                checkValue.length < 7 ? errorsObj[targetId] = 'error' : delete errorsObj[targetId];
+                this.changeClassName(target)
+            }break;
+
+            case 'placeAnother' :{
+                checkValue.length < 7 ? errorsObj[targetId] = 'error' : delete errorsObj[targetId];
+                this.changeClassName(target)
+            }break;
+
             case 'notrequired' : {
                 console.log('notrequired');
                 target.className = '';
+                delete this.state.formErrors[targetId]
             }break;
+
+
 
             default: {
                 event.target.required ?
@@ -250,7 +289,8 @@ class Form extends Component{
             }break;
         }
         this.setState({formErrors: errorsObj});
-
+        //console.log('this.state.formErrors', this.state.formErrors)
+        this.checkform();
         //  console.log('this.state.formErrors', this.state.formErrors);
       //  console.log('id:',event.target.id, 'required:', event.target.required, 'hasOwnProperty(validator)', this.state.formErrors.hasOwnProperty(validator), 'value.length:',event.target.value.length == 0);
 
@@ -303,7 +343,7 @@ class Form extends Component{
                            value={this.state.familyname}
                            data-validator="person"
                            className=""/>
-                    { this.state.formErrors.hasOwnProperty('familyname') ? <span className="form__error">Поле "Фамилия" должно содержать Больще 2х символов</span> : ''}
+                    { this.state.formErrors.hasOwnProperty('familyname') ? <span className="form__error">Поле "Отчество" должно содержать Больще 2х символов</span> : ''}
                     </div>
 
                     <div>
@@ -315,7 +355,8 @@ class Form extends Component{
                             onBlur={this.onBlur}
                             value={this.state.email}
                             type="email"
-                            className=""
+                               data-validator="email"
+                               className=""
                             required/>
                     { this.state.formErrors.hasOwnProperty('email') ?  <span className="form__error">Это поле должно содержать E-Mail в формате example@site.com</span> : '' }
                     </div>
@@ -323,11 +364,13 @@ class Form extends Component{
                     <div>
                     <label>* моб. телефон: </label>
                         <input id="telnum"
-                            onChange={this.telnumChange}
+                           placeholder="Укажите ном. телефона в формате +79876543210"
+                           onChange={this.telnumChange}
                             onFocus={this.onFocus}
                             onBlur={this.onBlur}
                             value={this.state.telnum}
-                            required/>
+                               data-validator="telnum"
+                               required/>
                     { this.state.formErrors.hasOwnProperty('telnum') ?  <span className="form__error">Номер телефона должен быть в формате +79876543210 </span> : '' }
                     </div>
 
@@ -337,7 +380,9 @@ class Form extends Component{
                         onChange={this.extnumChange}
                         onFocus={this.onFocus}
                         onBlur={this.onBlur}
-                        value={this.state.extnum}/>
+                        value={this.state.extnum}
+                        data-validator="standart"
+                    />
                     </div>
 
                     <hr />
@@ -349,9 +394,12 @@ class Form extends Component{
                         onFocus={this.onFocus}
                         onBlur={this.onBlur}
                         value={this.state.vendor}
-                        required
-                    />
+                        data-validator="standart"
+                        placeholder="Укажите производителя: HP, Eaton, CISCO...."
+                        required/>
+
                         { this.state.formErrors.hasOwnProperty('vendor') ?  <span className="form__error">Просьба указать производителя</span> : '' }
+
                     </div>
 
                     <div>
@@ -362,39 +410,48 @@ class Form extends Component{
                         onFocus={this.onFocus}
                         onBlur={this.onBlur}
                         value={this.state.model}
-                       required />
+                        data-validator="standart"
+                        required />
                     { this.state.formErrors.hasOwnProperty('model') ?  <span className="form__error">Просьба указать модель / артикул</span> : '' }
 
                     </div>
 
                     <div>
                     <label>* P/N или Заводской номер: </label>
-                    <input
+                    <input id="partNumber"
                         onChange={this.partNumberChange}
                         onFocus={this.onFocus}
                         onBlur={this.onBlur}
                         value={this.state.partNumber}
+                        data-validator="standart"
                         required />
                     { this.state.formErrors.hasOwnProperty('partNumber') ?  <span className="form__error">Просьба указать partnumber / хаводской номер</span> : '' }
                     </div>
 
-
+                    <div>
                     <label>* Описание проблемы:</label>
                     <textarea id="problem"
                         onChange={this.problemChange}
                         onFocus={this.onFocus}
                         onBlur={this.onBlur}
                         value={this.state.problem}
-                        required
-                    />
+                        data-validator="problem"
+                        required/>
+                    { this.state.formErrors.hasOwnProperty('problem') ?  <span className="form__error">Просьба указать причину от 7-ми сиволов</span> : '' }
+                    </div>
 
+                    <div>
                     <label>  Код проекта: </label>
                     <input id="projectCode"
                         onChange={this.projectCodechange}
                         onFocus={this.onFocus}
                         onBlur={this.onBlur}
                         value={this.state.projectCode}
-                    />
+                        data-validator="standart"/>
+                    { this.state.formErrors.hasOwnProperty('projectCode') ?  <span className="form__error">Просьба указать внутренний код проекта</span> : '' }
+                    </div>
+
+
                     <div>
                     <label>* Местонахождение оборудования: </label><br />
                     <select id="place"
@@ -409,8 +466,13 @@ class Form extends Component{
                         onChange={this.placeAnotherChange}
                         onFocus={this.onFocus}
                         onBlur={this.onBlur}
-                        value={this.state.placeAnother} /> : '' }
-                    </div>
+                        value={this.state.placeAnother}
+                        required
+                        className="input_error"
+                        data-validator="placeAnother"
+                        /> : '' }
+                    { this.state.formErrors.hasOwnProperty('placeAnother') ?  <span className="form__error">Просьба указать внутренний код проекта</span> : '' }
+                        </div>
                     <div>
                     <label>Приоритет заявки: </label>
                     <select className="selectPriority" onChange={this.changePriority} value={this.state.ticketPriority}>
@@ -422,7 +484,9 @@ class Form extends Component{
 
 
                     <button onClick={this.saveData} className="btn btn-primary" disabled={!this.state.formValid}>Отправить</button>
-                    <button onClick={()=>{console.log(this.state.formErrors)}} className="btn btn-primary" >--- TEST</button>
+                    <button onClick={()=>{
+                        console.log(this.state.formErrors); console.log(this.state); console.log('formValid:', this.state.formValid)
+                    }} className="btn btn-primary" >--- TEST</button>
                     <button onClick={()=>{
                         let test = document.getElementById('model');
                         test.className="input_error2"

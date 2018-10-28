@@ -917,64 +917,64 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "lastNameChange", function (event) {
-      console.log('lastNameChange', event.target.value);
-
+      //console.log('lastNameChange', event.target.value);
       _this.setState({
         lastname: event.target.value
       });
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "familyNameChange", function (event) {
-      console.log('familyNameChange', event.target.value);
-
+      // console.log('familyNameChange', event.target.value);
       _this.setState({
         familyname: event.target.value
       });
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "emailChange", function (event) {
-      console.log('emailChange', event.target.value);
-
+      //console.log('emailChange', event.target.value);
       _this.setState({
         email: event.target.value
       });
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "telnumChange", function (event) {
-      console.log('telnumnChange:', event.target.value);
-
+      //  console.log('telnumnChange:', event.target.value);
       _this.setState({
         telnum: event.target.value
       });
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "extnumChange", function (event) {
-      console.log('extnumChange', event.target.value);
-
+      // console.log('extnumChange', event.target.value);
       _this.setState({
         extnum: event.target.value
       });
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "changePriority", function (event) {
-      console.log('changePriority:', event.target.value);
-
+      //console.log('changePriority:', event.target.value);
       _this.setState({
         ticketPriority: event.target.value
       });
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "placeChange", function (event) {
-      console.log('changePlace:', event.target.value);
-
+      //console.log('changePlace:', event.target.value);
       _this.setState({
         place: event.target.value
+      }); //console.log('this.state.place', this.state.place); // ПОЧЕМУ ТУТ ОСТАЕТСЯ СТАРОЕ ЗНАЧЕНИЕ ???
+
+
+      var errorsObj = _this.state.formErrors;
+      event.target.value == '5' ? errorsObj['placeAnother'] = 'error' : delete errorsObj['placeAnother'];
+
+      _this.setState({
+        formErrors: errorsObj
       });
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "placeAnotherChange", function (event) {
-      console.log('changeAnotherPlace:', event.target.value);
-
+      //console.log('changeAnotherPlace:', event.target.value);
       _this.setState({
         placeAnother: event.target.value
       });
@@ -1005,29 +1005,27 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "problemChange", function (event) {
-      console.log('changepartProblem:', event.target.value);
-
+      //console.log('changepartProblem:', event.target.value);
       _this.setState({
         problem: event.target.value
       });
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "projectCodechange", function (event) {
-      console.log('changeProjectCodec:', event.target.value);
-
+      //console.log('changeProjectCodec:', event.target.value);
       _this.setState({
         projectCode: event.target.value
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onFocus", function (event) {//   console.log('onFocus');
-      //event.target.className='hello';
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onFocus", function (event) {
+      event.target.className = '';
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "checkLetters", function (target) {
       var value = target;
-      var pattern = /^[A-Za-zА-Яа-я]+$/;
-      console.log('checkLetters value: ', value, ' resutl: ', pattern.test(value));
+      var pattern = /^[A-Za-zА-Яа-я]+$/; // console.log('checkLetters value: ', value,' resutl: ', pattern.test(value));
+
       return pattern.test(value);
     });
 
@@ -1049,36 +1047,38 @@ function (_Component) {
       _this.state.formErrors.hasOwnProperty(target.id) ? target.className = "input_error" : target.className = "input_correct";
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "checkform", function () {
+      var arrayOfErrors = Object.keys(_this.state.formErrors);
+      var requireArrayCheck = true;
+      var requireArray = [_this.state.firstname, _this.state.lastname, _this.state.email, _this.state.telnum, _this.state.vendor, _this.state.model, _this.state.partNumber, _this.state.problem]; //console.log('checkform --- test:', requireArray[0].length)
+
+      for (var i = 0; i < requireArray.length; i++) {
+        if (requireArray[i].length == 0) {
+          requireArrayCheck = false;
+        }
+      }
+
+      console.log('---- CHECKFORM:   arrayOfErrors', arrayOfErrors.length == 0, ' requireArrayCheck ', requireArrayCheck, 'result:', arrayOfErrors.length == 0 && requireArrayCheck);
+
+      _this.setState({
+        formValid: arrayOfErrors.length == 0 && requireArrayCheck
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onBlur", function (event) {
       //   console.log('blur');
       var target = event.target;
       var targetId = event.target.id;
       var required = event.target.required;
-      var validator = event.target.dataset;
-      var checkValue = _this.state[targetId];
-      console.log(validator.validatorPerson); //!required ? targetId = "notrequired" : '';
+      var validator = event.target.dataset.validator;
+      var checkValue = _this.state[targetId]; //console.log('onlur validator: ',validator);
+      //!required ? targetId = "notrequired" : '';
 
       var errorsObj = _this.state.formErrors;
-      !required && checkValue.length == 0 ? targetId = 'notrequired' : '';
+      !required && checkValue.length == 0 ? validator = 'notrequired' : '';
 
-      switch (targetId) {
-        case 'firstname':
-          {
-            checkValue.length < 3 || !_this.checkLetters(checkValue) ? errorsObj[targetId] = 'error' : delete errorsObj[targetId];
-
-            _this.changeClassName(target);
-          }
-          break;
-
-        case 'lastname':
-          {
-            checkValue.length < 3 || !_this.checkLetters(checkValue) ? errorsObj[targetId] = 'error' : delete errorsObj[targetId];
-
-            _this.changeClassName(target);
-          }
-          break;
-
-        case 'familyname':
+      switch (validator) {
+        case 'person':
           {
             checkValue.length < 3 || !_this.checkLetters(checkValue) ? errorsObj[targetId] = 'error' : delete errorsObj[targetId];
 
@@ -1102,10 +1102,35 @@ function (_Component) {
           }
           break;
 
+        case 'standart':
+          {
+            checkValue.length < 2 ? errorsObj[targetId] = 'error' : delete errorsObj[targetId];
+
+            _this.changeClassName(target);
+          }
+          break;
+
+        case 'problem':
+          {
+            checkValue.length < 7 ? errorsObj[targetId] = 'error' : delete errorsObj[targetId];
+
+            _this.changeClassName(target);
+          }
+          break;
+
+        case 'placeAnother':
+          {
+            checkValue.length < 7 ? errorsObj[targetId] = 'error' : delete errorsObj[targetId];
+
+            _this.changeClassName(target);
+          }
+          break;
+
         case 'notrequired':
           {
             console.log('notrequired');
             target.className = '';
+            delete _this.state.formErrors[targetId];
           }
           break;
 
@@ -1118,7 +1143,10 @@ function (_Component) {
 
       _this.setState({
         formErrors: errorsObj
-      }); //  console.log('this.state.formErrors', this.state.formErrors);
+      }); //console.log('this.state.formErrors', this.state.formErrors)
+
+
+      _this.checkform(); //  console.log('this.state.formErrors', this.state.formErrors);
       //  console.log('id:',event.target.id, 'required:', event.target.required, 'hasOwnProperty(validator)', this.state.formErrors.hasOwnProperty(validator), 'value.length:',event.target.value.length == 0);
 
     });
@@ -1171,7 +1199,7 @@ function (_Component) {
         className: ""
       }), this.state.formErrors.hasOwnProperty('familyname') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "form__error"
-      }, "\u041F\u043E\u043B\u0435 \"\u0424\u0430\u043C\u0438\u043B\u0438\u044F\" \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0411\u043E\u043B\u044C\u0449\u0435 2\u0445 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* E-mail:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "\u041F\u043E\u043B\u0435 \"\u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E\" \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0411\u043E\u043B\u044C\u0449\u0435 2\u0445 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* E-mail:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "email",
         placeholder: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 E-mail \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 example@site.com",
         onChange: this.emailChange,
@@ -1179,16 +1207,19 @@ function (_Component) {
         onBlur: this.onBlur,
         value: this.state.email,
         type: "email",
+        "data-validator": "email",
         className: "",
         required: true
       }), this.state.formErrors.hasOwnProperty('email') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "form__error"
       }, "\u042D\u0442\u043E \u043F\u043E\u043B\u0435 \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C E-Mail \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 example@site.com") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u043C\u043E\u0431. \u0442\u0435\u043B\u0435\u0444\u043E\u043D: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "telnum",
+        placeholder: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u043D\u043E\u043C. \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430 \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 +79876543210",
         onChange: this.telnumChange,
         onFocus: this.onFocus,
         onBlur: this.onBlur,
         value: this.state.telnum,
+        "data-validator": "telnum",
         required: true
       }), this.state.formErrors.hasOwnProperty('telnum') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "form__error"
@@ -1197,13 +1228,16 @@ function (_Component) {
         onChange: this.extnumChange,
         onFocus: this.onFocus,
         onBlur: this.onBlur,
-        value: this.state.extnum
+        value: this.state.extnum,
+        "data-validator": "standart"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C / \u0432\u0435\u043D\u0434\u043E\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "vendor",
         onChange: this.vendorChange,
         onFocus: this.onFocus,
         onBlur: this.onBlur,
         value: this.state.vendor,
+        "data-validator": "standart",
+        placeholder: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044F: HP, Eaton, CISCO....",
         required: true
       }), this.state.formErrors.hasOwnProperty('vendor') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "form__error"
@@ -1214,31 +1248,40 @@ function (_Component) {
         onFocus: this.onFocus,
         onBlur: this.onBlur,
         value: this.state.model,
+        "data-validator": "standart",
         required: true
       }), this.state.formErrors.hasOwnProperty('model') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "form__error"
       }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C \u043C\u043E\u0434\u0435\u043B\u044C / \u0430\u0440\u0442\u0438\u043A\u0443\u043B") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* P/N \u0438\u043B\u0438 \u0417\u0430\u0432\u043E\u0434\u0441\u043A\u043E\u0439 \u043D\u043E\u043C\u0435\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "partNumber",
         onChange: this.partNumberChange,
         onFocus: this.onFocus,
         onBlur: this.onBlur,
         value: this.state.partNumber,
+        "data-validator": "standart",
         required: true
       }), this.state.formErrors.hasOwnProperty('partNumber') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "form__error"
-      }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C partnumber / \u0445\u0430\u0432\u043E\u0434\u0441\u043A\u043E\u0439 \u043D\u043E\u043C\u0435\u0440") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+      }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C partnumber / \u0445\u0430\u0432\u043E\u0434\u0441\u043A\u043E\u0439 \u043D\u043E\u043C\u0435\u0440") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         id: "problem",
         onChange: this.problemChange,
         onFocus: this.onFocus,
         onBlur: this.onBlur,
         value: this.state.problem,
+        "data-validator": "problem",
         required: true
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "  \u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), this.state.formErrors.hasOwnProperty('problem') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "form__error"
+      }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C \u043F\u0440\u0438\u0447\u0438\u043D\u0443 \u043E\u0442 7-\u043C\u0438 \u0441\u0438\u0432\u043E\u043B\u043E\u0432") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "  \u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "projectCode",
         onChange: this.projectCodechange,
         onFocus: this.onFocus,
         onBlur: this.onBlur,
-        value: this.state.projectCode
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041C\u0435\u0441\u0442\u043E\u043D\u0430\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        value: this.state.projectCode,
+        "data-validator": "standart"
+      }), this.state.formErrors.hasOwnProperty('projectCode') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "form__error"
+      }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C \u0432\u043D\u0443\u0442\u0440\u0435\u043D\u043D\u0438\u0439 \u043A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041C\u0435\u0441\u0442\u043E\u043D\u0430\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         id: "place",
         onChange: this.placeChange,
         value: this.state.place
@@ -1253,8 +1296,13 @@ function (_Component) {
         onChange: this.placeAnotherChange,
         onFocus: this.onFocus,
         onBlur: this.onBlur,
-        value: this.state.placeAnother
-      }) : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 \u0437\u0430\u044F\u0432\u043A\u0438: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        value: this.state.placeAnother,
+        required: true,
+        className: "input_error",
+        "data-validator": "placeAnother"
+      }) : '', this.state.formErrors.hasOwnProperty('placeAnother') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "form__error"
+      }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C \u0432\u043D\u0443\u0442\u0440\u0435\u043D\u043D\u0438\u0439 \u043A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 \u0437\u0430\u044F\u0432\u043A\u0438: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         className: "selectPriority",
         onChange: this.changePriority,
         value: this.state.ticketPriority
@@ -1270,6 +1318,8 @@ function (_Component) {
       }, "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           console.log(_this2.state.formErrors);
+          console.log(_this2.state);
+          console.log('formValid:', _this2.state.formValid);
         },
         className: "btn btn-primary"
       }, "--- TEST"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
