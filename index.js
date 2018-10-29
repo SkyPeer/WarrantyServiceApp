@@ -93,7 +93,7 @@ app.get('/mongooseGetDataTickets', function(req, res, next){
 
     TicketModel.find(function (err, ticketsDocs){
         if (err) return next (err);
-        res.json(ticketsDocs)
+        res.json(ticketsDocs.reverse())
     })
 });
 

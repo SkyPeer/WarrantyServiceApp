@@ -27,8 +27,10 @@ class TicketsComponent extends Component{
             //.then(()=>{console.log(' --- sc: ', this.state.sc)})
     }
 
+
+
     updateDataFunc = (updatearg, id) => {
-        console.log('clickFunc', updatearg, id);
+        //console.log('clickFunc', updatearg, id);
 
             fetch('/mongooseUpdate', {
                 method: 'post',
@@ -54,7 +56,7 @@ class TicketsComponent extends Component{
                 }
             })
                 .then(checkStatus)
-                .then(()=>console.log('updated'))
+                //.then(()=>console.log('updated'))
                 .then(()=>this.getAllData())
                 .then(()=>this.setState({idOfupdatedTicket: id, openTicketDescId: null}));
 
@@ -71,8 +73,21 @@ class TicketsComponent extends Component{
 
 
     componentDidMount() {
+        console.log('componentDidMount');
         this.getAllData();
+        this.timerGetAllData;
+
     }
+
+    componentWillUnmount(){
+        console.log('componentWillUnmount');
+        clearInterval(this.timerGetAllData)
+    }
+
+    timerGetAllData = setInterval(() => {
+    console.log( "time" );
+    this.getAllData()
+    }, 5000);
 
     statusOptions = [
         { value: 0, label: 'Новая' },
@@ -93,11 +108,11 @@ class TicketsComponent extends Component{
     ];
 
 
-
     render(){
+        //console.log(this.state.data);
         return(
             <Layout>
-                    {this.state.data.map((ticket) => (
+                {this.state.data.map((ticket) => (
                             <div key={ticket._id}>
                             <div>
                                 <div>{this.state.idOfupdatedTicket === ticket._id ? <div>ОБНОВЛЕНА!!!</div> : ''}
@@ -167,7 +182,7 @@ class OpenDescComponent extends  Component {
 
 
     fullSetStateFunc = () => {
-        console.log(' --- fullSetStateFunc');
+        //console.log(' --- fullSetStateFunc');
         this.setState({
             comment: this.props.comment,
             status: this.props.status,
@@ -178,7 +193,7 @@ class OpenDescComponent extends  Component {
             serviceCenterTicket: this.props.serviceCenterTicket
 
         });
-        this.props.serviceCenter !== '' ? this.getServiceCenterDetails(this.props.serviceCenter) : console.log('fullSetStateFunc: serviceCenter Not checked')
+        this.props.serviceCenter !== '' ? this.getServiceCenterDetails(this.props.serviceCenter) : '' /*console.log('fullSetStateFunc: serviceCenter Not checked') */
 
 
     };
@@ -189,49 +204,49 @@ class OpenDescComponent extends  Component {
     };
 
     componentDidMount(){
-        console.log('--componentDidMount');
+        //console.log('--componentDidMount');
       this.fullSetStateFunc()
     }
 
     changeComment = (event) => {
-        console.log(event.target.value);
+        //console.log(event.target.value);
         this.setState({comment: event.target.value});
     };
 
     changeFinishDate = (event) => {
-        console.log(event.target.value);
+        //console.log(event.target.value);
         this.setState({finishDate: event.target.value});
     };
 
     changeServiceCenterTicket = (event) => {
-        console.log(event.target.value);
+        //console.log(event.target.value);
         this.setState({serviceCenterTicket: event.target.value})
     };
 
     changePriority = (event) =>{
-        console.log('changePriority', event.target.value);
+        //console.log('changePriority', event.target.value);
         this.setState({ticketPriority: event.target.value})
     };
 
     changeStatus = (event) => {
-        console.log('changeStatus', event.target.value);
+        //console.log('changeStatus', event.target.value);
         this.setState({status: event.target.value})
     };
 
     changeServiceCenter = (event) => {
-        console.log(event.target.value);
+        //console.log(event.target.value);
         this.getServiceCenterDetails(event.target.value);
         this.setState({serviceCenter: event.target.value})
 
     };
 
     changeTypeOfService = (event) => {
-        console.log('changeTypeOfService',event.target.value);
+        //console.log('changeTypeOfService',event.target.value);
         this.setState({typeOfService: event.target.value})
     };
 
     saveFormFunc = () => {
-        console.log('this.state', this.state);
+        //console.log('this.state', this.state);
         this.props.saveButtonClick({
             comment: this.state.comment,
             status: this.state.status,
@@ -302,9 +317,9 @@ class OpenDescComponent extends  Component {
 
                     <button onClick={ ()=> {
 
-                        console.log('this.state.serviceCenter', this.state.serviceCenter);
-                        console.log('this.props.serviceCenterOptions: ', this.props.serviceCenterOptions)
-                        console.log('this.state.serviceCenterDetails: ',this.state.serviceCenterDetails)
+                        //console.log('this.state.serviceCenter', this.state.serviceCenter);
+                        //console.log('this.props.serviceCenterOptions: ', this.props.serviceCenterOptions)
+                        //console.log('this.state.serviceCenterDetails: ',this.state.serviceCenterDetails)
                     }}> --- TEST --- </button>
 
                 <hr />
@@ -320,7 +335,7 @@ class DescComponent extends Component{
             data:{}
         };
     arg = this.props.match.params.ticketid;
-    foo = console.log('DescComponent, this.arg: ',this.arg);
+    //foo = console.log('DescComponent, this.arg: ',this.arg);
 
     componentDidMount() {
 

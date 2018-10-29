@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Layout} from "../controls/layout";
+import ReactPhoneInput from 'react-phone-input-2'
 
 class Form extends Component{
     state =  {
@@ -21,8 +22,8 @@ class Form extends Component{
         newTicketNumber: '',
         datetimeOfCreate: '',
 
+        telnumCheck: {},
         formErrors: {},
-
         formValid: false
     };
 
@@ -49,7 +50,12 @@ class Form extends Component{
             .then((json)=> this.setState({
                 newTicketNumber: json.resJson.ticketNumber,
                 datetimeOfCreate: json.resJson.currnetDateTime}))
-            .then(()=>console.log('inserted'));
+            .then(()=>console.log('inserted'))
+            .then(
+                ()=>{
+                    alert ('Создано обращение №' + this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate)
+                }
+            );
 
 
         function checkStatus(responsee) {
@@ -107,11 +113,6 @@ class Form extends Component{
         this.setState({email:event.target.value})
     };
 
-    telnumChange = (event) => {
-      //  console.log('telnumnChange:', event.target.value);
-        this.setState({telnum:event.target.value})
-    };
-
     extnumChange = (event) => {
        // console.log('extnumChange', event.target.value);
         this.setState({extnum:event.target.value})
@@ -123,9 +124,8 @@ class Form extends Component{
     };
 
     placeChange = (event) => {
-        //console.log('changePlace:', event.target.value);
         this.setState({place: event.target.value});
-        //console.log('this.state.place', this.state.place); // ПОЧЕМУ ТУТ ОСТАЕТСЯ СТАРОЕ ЗНАЧЕНИЕ ???
+        //console.log('this.state.place', this.state.place); // ПОЧЕМУ ТУТ ОСТАЕТСЯ СТАРОЕ ЗНАЧЕНИЕ, потому что обновление проихсодит внутри метода render() ???
 
         let errorsObj = this.state.formErrors;
         event.target.value == '5' ? errorsObj['placeAnother'] = 'error' : delete errorsObj['placeAnother'];
@@ -139,7 +139,7 @@ class Form extends Component{
     };
 
     vendorChange = (event) =>{
-        console.log('changeVendor:', event.target.value);
+       // console.log('changeVendor:', event.target.value);
         this.setState({vendor: event.target.value})
     };
 
@@ -182,13 +182,6 @@ class Form extends Component{
         return pattern.test(value)
     };
 
-    checkTelNum = (target) => {
-        let value = target;
-        let pattern = /^\+7\d{10}$/;
-        //console.log('checkTelNum', pattern.test(value));
-        return pattern.test(value)
-    };
-
     changeClassName = (target) => {
         this.state.formErrors.hasOwnProperty(target.id) ? target.className = "input_error" : target.className = "input_correct"
     };
@@ -219,7 +212,10 @@ class Form extends Component{
 
     };
 
-
+    telnumChange = (event) => {
+        console.log('telnumnChange:', event);
+        this.setState({telnum:event})
+    };
 
     onBlur = (event) => {
         //   console.log('blur');
@@ -229,7 +225,7 @@ class Form extends Component{
         let validator = event.target.dataset.validator;
         let checkValue = this.state[targetId];
 
-        //console.log('onlur validator: ',validator);
+        console.log('validator: ',validator);
 
         //!required ? targetId = "notrequired" : '';
         let errorsObj = this.state.formErrors;
@@ -252,12 +248,9 @@ class Form extends Component{
                 this.changeClassName(target)
             }break;
 
-            case 'telnum' : {
-                !this.checkTelNum(checkValue) ?
-                    errorsObj[targetId] = 'error' :
-                    delete errorsObj[targetId];
-                this.changeClassName(target)
-            }break;
+            /*case 'telnum' : {
+
+            }break;*/
 
             case 'standart' :{
               checkValue.length < 2 ? errorsObj[targetId] = 'error' : delete errorsObj[targetId];
@@ -296,11 +289,34 @@ class Form extends Component{
 
     };
 
+    onTelNumBlur = () => {
+
+        let errorsObj = this.state.formErrors;
+
+        this.state.telnum.length === 18 ? delete errorsObj['telnum'] : errorsObj['telnum']='error';
+        //this.state.telnum.length !== 18 ? this.setState({telnumCheck:{borderColor: 'red'}}) : this.setState({telnumCheck:{}});
+        console.log(this.state.formErrors.hasOwnProperty('telnum'));
+        console.log('telNumBlur', this.state.telnum.length );
+        this.setState({formErrors: errorsObj});
+        this.state.formErrors.hasOwnProperty('telnum') ?
+            this.setState({telnumCheck:{borderColor: 'red'}}) :
+            this.setState({telnumCheck:{borderColor: 'green'}});
+        this.checkform();
+
+
+    };
+
 
     render(){
+
+
+
+        /*this.state.newTicketNumber !== '' ? alert('Создано обращение №', {this.state.newTicketNumber} + '  ' + this.state.datetimeOfCreate}, МСК) : ''; */
+
+
         return (
             <Layout>
-                <h1>Form</h1>{this.state.newTicketNumber !== '' ? <div>Создано обращение № {this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate} МСК</div> : ''}
+                <h1>Form, {this.state.newTicketNumber !== '' ? <div>Создано обращение № {this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate} МСК</div> : ''}</h1>
                 <form id="CreateTicket" onSubmit={(event)=>{event.preventDefault()}}>
                     <hr />
                     <div><b>Инициатор:</b></div>
@@ -363,16 +379,17 @@ class Form extends Component{
 
                     <div>
                     <label>* моб. телефон: </label>
-                        <input id="telnum"
-                           placeholder="Укажите ном. телефона в формате +79876543210"
-                           onChange={this.telnumChange}
-                            onFocus={this.onFocus}
-                            onBlur={this.onBlur}
-                            value={this.state.telnum}
-                               data-validator="telnum"
-                               required/>
-                    { this.state.formErrors.hasOwnProperty('telnum') ?  <span className="form__error">Номер телефона должен быть в формате +79876543210 </span> : '' }
+                        <ReactPhoneInput id="telnum"
+                                         onFocus={this.onFocus}
+                                         onBlur={this.onTelNumBlur}
+                                         defaultCountry={'ru'}
+                                         onChange={this.telnumChange}
+                                         value={this.state.telnum}
+                                         inputStyle={this.state.telnumCheck}
+                                         buttonStyle={this.state.telnumCheck}/>
+                    { this.state.formErrors.hasOwnProperty('telnum') ? <span className="form__error">Номер телефона должен быть в формате +79876543210 </span> : '' }
                     </div>
+
 
                     <div>
                     <label>  внутр. №: </label>
@@ -467,11 +484,9 @@ class Form extends Component{
                         onFocus={this.onFocus}
                         onBlur={this.onBlur}
                         value={this.state.placeAnother}
-                        required
                         className="input_error"
                         data-validator="placeAnother"
                         /> : '' }
-                    { this.state.formErrors.hasOwnProperty('placeAnother') ?  <span className="form__error">Просьба указать внутренний код проекта</span> : '' }
                         </div>
                     <div>
                     <label>Приоритет заявки: </label>
@@ -491,6 +506,8 @@ class Form extends Component{
                         let test = document.getElementById('model');
                         test.className="input_error2"
                     }}>  --- TEST CSS --- </button>
+
+                    <button onClick={()=>{this.telTestFunc()}}>  --- TEST TEL2 --- </button>
                 </form>
 
             </Layout>
