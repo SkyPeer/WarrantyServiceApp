@@ -57,7 +57,6 @@ class Form extends Component{
                 }
             );
 
-
         function checkStatus(responsee) {
             if (responsee.status >= 200 && responsee.status < 300) {
                 //console.log(response);
@@ -85,13 +84,16 @@ class Form extends Component{
         {value: 5, label: "Другое"}
     ];
 
-
     /*Заменить все функции
     * handleUserInput (e) {
      const name = e.target.name;
      const value = e.target.value;
      this.setState({[name]: value});
      }*/
+
+    onChangeHandler = (event) => {
+
+    };
 
     firstNameChange = (event) => {
        // console.log('firstNameChange', event.target.value);
@@ -163,10 +165,6 @@ class Form extends Component{
         this.setState({projectCode: event.target.value})
     };
 
-    onFocus = (event) => {
-        event.target.className='';
-
-    };
 
     checkLetters = (target) => {
         let value = target;
@@ -184,37 +182,6 @@ class Form extends Component{
 
     changeClassName = (target) => {
         this.state.formErrors.hasOwnProperty(target.id) ? target.className = "input_error" : target.className = "input_correct"
-    };
-
-    checkform = () => {
-        let arrayOfErrors = Object.keys(this.state.formErrors);
-        let requireArrayCheck = true;
-        let requireArray = [
-            this.state.firstname,
-            this.state.lastname,
-            this.state.email,
-            this.state.telnum,
-            this.state.vendor,
-            this.state.model,
-            this.state.partNumber,
-            this.state.problem
-        ];
-    //console.log('checkform --- test:', requireArray[0].length)
-
-        for (let i=0; i<requireArray.length; i++){
-            if (requireArray[i].length == 0){
-                requireArrayCheck = false
-            }
-        }
-        console.log('---- CHECKFORM:   arrayOfErrors',arrayOfErrors.length ==0,' requireArrayCheck ',requireArrayCheck, 'result:', (arrayOfErrors.length == 0 && requireArrayCheck));
-
-        this.setState({formValid: (arrayOfErrors.length == 0 && requireArrayCheck)})
-
-    };
-
-    telnumChange = (event) => {
-        console.log('telnumnChange:', event);
-        this.setState({telnum:event})
     };
 
     onBlur = (event) => {
@@ -289,6 +256,11 @@ class Form extends Component{
 
     };
 
+    onFocus = (event) => {
+        event.target.className='';
+
+    };
+
     onTelNumBlur = () => {
 
         let errorsObj = this.state.formErrors;
@@ -296,16 +268,48 @@ class Form extends Component{
         this.state.telnum.length === 18 ? delete errorsObj['telnum'] : errorsObj['telnum']='error';
         //this.state.telnum.length !== 18 ? this.setState({telnumCheck:{borderColor: 'red'}}) : this.setState({telnumCheck:{}});
         console.log(this.state.formErrors.hasOwnProperty('telnum'));
+
         console.log('telNumBlur', this.state.telnum.length );
+
         this.setState({formErrors: errorsObj});
+
         this.state.formErrors.hasOwnProperty('telnum') ?
             this.setState({telnumCheck:{borderColor: 'red'}}) :
             this.setState({telnumCheck:{borderColor: 'green'}});
         this.checkform();
 
-
     };
 
+    telnumChange = (event) => {
+        console.log('telnumnChange:', event);
+        this.setState({telnum:event})
+    };
+
+    checkform = () => {
+        let arrayOfErrors = Object.keys(this.state.formErrors);
+        let requireArrayCheck = true;
+        let requireArray = [
+            this.state.firstname,
+            this.state.lastname,
+            this.state.email,
+            this.state.telnum,
+            this.state.vendor,
+            this.state.model,
+            this.state.partNumber,
+            this.state.problem
+        ];
+        //console.log('checkform --- test:', requireArray[0].length)
+
+        for (let i=0; i<requireArray.length; i++){
+            if (requireArray[i].length == 0){
+                requireArrayCheck = false
+            }
+        }
+        console.log('---- CHECKFORM:   arrayOfErrors',arrayOfErrors.length ==0,' requireArrayCheck ',requireArrayCheck, 'result:', (arrayOfErrors.length == 0 && requireArrayCheck));
+
+        this.setState({formValid: (arrayOfErrors.length == 0 && requireArrayCheck)})
+
+    };
 
     render(){
 

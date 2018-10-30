@@ -923,6 +923,8 @@ function (_Component) {
       label: "Другое"
     }]);
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onChangeHandler", function (event) {});
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "firstNameChange", function (event) {
       // console.log('firstNameChange', event.target.value);
       _this.setState({
@@ -1023,10 +1025,6 @@ function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onFocus", function (event) {
-      event.target.className = '';
-    });
-
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "checkLetters", function (target) {
       var value = target;
       var pattern = /^[A-Za-zА-Яа-я]+$/; // console.log('checkLetters value: ', value,' resutl: ', pattern.test(value));
@@ -1043,32 +1041,6 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "changeClassName", function (target) {
       _this.state.formErrors.hasOwnProperty(target.id) ? target.className = "input_error" : target.className = "input_correct";
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "checkform", function () {
-      var arrayOfErrors = Object.keys(_this.state.formErrors);
-      var requireArrayCheck = true;
-      var requireArray = [_this.state.firstname, _this.state.lastname, _this.state.email, _this.state.telnum, _this.state.vendor, _this.state.model, _this.state.partNumber, _this.state.problem]; //console.log('checkform --- test:', requireArray[0].length)
-
-      for (var i = 0; i < requireArray.length; i++) {
-        if (requireArray[i].length == 0) {
-          requireArrayCheck = false;
-        }
-      }
-
-      console.log('---- CHECKFORM:   arrayOfErrors', arrayOfErrors.length == 0, ' requireArrayCheck ', requireArrayCheck, 'result:', arrayOfErrors.length == 0 && requireArrayCheck);
-
-      _this.setState({
-        formValid: arrayOfErrors.length == 0 && requireArrayCheck
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "telnumChange", function (event) {
-      console.log('telnumnChange:', event);
-
-      _this.setState({
-        telnum: event
-      });
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onBlur", function (event) {
@@ -1152,6 +1124,10 @@ function (_Component) {
 
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onFocus", function (event) {
+      event.target.className = '';
+    });
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onTelNumBlur", function () {
       var errorsObj = _this.state.formErrors;
       _this.state.telnum.length === 18 ? delete errorsObj['telnum'] : errorsObj['telnum'] = 'error'; //this.state.telnum.length !== 18 ? this.setState({telnumCheck:{borderColor: 'red'}}) : this.setState({telnumCheck:{}});
@@ -1174,6 +1150,32 @@ function (_Component) {
       });
 
       _this.checkform();
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "telnumChange", function (event) {
+      console.log('telnumnChange:', event);
+
+      _this.setState({
+        telnum: event
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "checkform", function () {
+      var arrayOfErrors = Object.keys(_this.state.formErrors);
+      var requireArrayCheck = true;
+      var requireArray = [_this.state.firstname, _this.state.lastname, _this.state.email, _this.state.telnum, _this.state.vendor, _this.state.model, _this.state.partNumber, _this.state.problem]; //console.log('checkform --- test:', requireArray[0].length)
+
+      for (var i = 0; i < requireArray.length; i++) {
+        if (requireArray[i].length == 0) {
+          requireArrayCheck = false;
+        }
+      }
+
+      console.log('---- CHECKFORM:   arrayOfErrors', arrayOfErrors.length == 0, ' requireArrayCheck ', requireArrayCheck, 'result:', arrayOfErrors.length == 0 && requireArrayCheck);
+
+      _this.setState({
+        formValid: arrayOfErrors.length == 0 && requireArrayCheck
+      });
     });
 
     return _this;
