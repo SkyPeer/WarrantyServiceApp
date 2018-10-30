@@ -5,7 +5,7 @@ import {Layout} from "../controls/layout";
 class ServiceCenters extends Component{
     state = {
         sc: [],
-
+        scTickets: [],
         openformForCreate: false,
         openformForEdit: '',
         idOfupdatedSC: '',
@@ -20,6 +20,14 @@ class ServiceCenters extends Component{
         fetch(`/mongooseGetDataSC`)
             .then(res => res.json())
             .then(json => this.setState({ sc: json }));
+
+        fetch(`/mongooseGetTicketsSC`)
+            .then(res => res.json())
+            .then(json => this.setState({scTickets: json}))
+            //.then(console.log(this.state.scTickets))
+        /*.then(res => res.json())
+            .then(json => this.setState({ scTelnum: json }))
+            .then(console.log('this.state.scTelnum', this.state.scTelnum));*/
     };
 
     updateSericeCenter = (stateForUpdate) => {
@@ -110,7 +118,7 @@ class ServiceCenters extends Component{
         return (
             <Layout>
                 <h1>Сервисные центры: </h1>
-                {this.state.newCs && <div>Новый сервис-центр добавлен! <div onClick={()=>{this.setState({newCs:false})}}><b>- Скрыть -</b></div></div>}
+                {this.state.newCs ? <div>Новый сервис-центр добавлен! <p onClick={()=>{this.setState({newCs:false})}}><b>- Скрыть -</b></p></div> : ''}
                     <button onClick={()=>{this.setState({openformForCreate: true})}}>Добавить сервисный центр</button>
                     <button onClick={()=>{this.setState({openformForCreate: false})}}>Закрыть</button>
 
@@ -118,7 +126,7 @@ class ServiceCenters extends Component{
 
                 <div>{this.state.sc.map(serviceCenter =>(
                         <div key={serviceCenter._id}>
-                            <p>{this.state.idOfupdatedSC === serviceCenter._id && <div> Данные обновлены! </div>}<b>Сервисный Центр: </b>{serviceCenter.scTitle}</p>
+                            {this.state.idOfupdatedSC === serviceCenter._id && <div> Данные обновлены! </div>}<b>Сервисный Центр: </b>{serviceCenter.scTitle}
                             <p><b>Обслуживает: </b>{serviceCenter.scVendors}</p>
                             <p><b>Адрес и контакты: </b>{serviceCenter.scAdress}</p>
                                 <button onClick={()=>{this.setState({openformForEdit: serviceCenter._id})}}>Редакктировать СЦ</button>

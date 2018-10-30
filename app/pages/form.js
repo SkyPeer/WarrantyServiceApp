@@ -308,12 +308,7 @@ class Form extends Component{
 
 
     render(){
-
-
-
-        /*this.state.newTicketNumber !== '' ? alert('Создано обращение №', {this.state.newTicketNumber} + '  ' + this.state.datetimeOfCreate}, МСК) : ''; */
-
-
+        
         return (
             <Layout>
                 <h1>Form, {this.state.newTicketNumber !== '' ? <div>Создано обращение № {this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate} МСК</div> : ''}</h1>
@@ -389,7 +384,6 @@ class Form extends Component{
                                          buttonStyle={this.state.telnumCheck}/>
                     { this.state.formErrors.hasOwnProperty('telnum') ? <span className="form__error">Номер телефона должен быть в формате +79876543210 </span> : '' }
                     </div>
-
 
                     <div>
                     <label>  внутр. №: </label>
@@ -468,7 +462,6 @@ class Form extends Component{
                     { this.state.formErrors.hasOwnProperty('projectCode') ?  <span className="form__error">Просьба указать внутренний код проекта</span> : '' }
                     </div>
 
-
                     <div>
                     <label>* Местонахождение оборудования: </label><br />
                     <select id="place"
@@ -487,7 +480,8 @@ class Form extends Component{
                         className="input_error"
                         data-validator="placeAnother"
                         /> : '' }
-                        </div>
+                    </div>
+
                     <div>
                     <label>Приоритет заявки: </label>
                     <select className="selectPriority" onChange={this.changePriority} value={this.state.ticketPriority}>
@@ -496,7 +490,6 @@ class Form extends Component{
                         )}
                     </select>
                     </div>
-
 
                     <button onClick={this.saveData} className="btn btn-primary" disabled={!this.state.formValid}>Отправить</button>
                     <button onClick={()=>{

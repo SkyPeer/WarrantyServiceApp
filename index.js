@@ -153,7 +153,20 @@ app.get('/mongooseGetDataTickets', function(req, res, next){
 
     TicketModel.find(function (err, ticketsDocs){
         if (err) return next (err);
+
         res.json(ticketsDocs.reverse())
+    })
+});
+
+app.get('/mongooseGetTicketsSC', function(req, res, next){
+
+    TicketModel.find(function (err, ticketsDocs){
+        if (err) return next (err);
+        res.json(
+            ticketsDocs.map(result => {
+                return {ticketNumber: result.ticketNumber,  sc: result.serviceCenter}
+            })
+        )
     })
 });
 

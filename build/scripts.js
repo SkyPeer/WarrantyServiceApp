@@ -1184,7 +1184,6 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      /*this.state.newTicketNumber !== '' ? alert('Создано обращение №', {this.state.newTicketNumber} + '  ' + this.state.datetimeOfCreate}, МСК) : ''; */
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Form, ", this.state.newTicketNumber !== '' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0421\u043E\u0437\u0434\u0430\u043D\u043E \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u0435 \u2116 ", this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate, " \u041C\u0421\u041A") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         id: "CreateTicket",
         onSubmit: function onSubmit(event) {
@@ -1485,6 +1484,7 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
       sc: [],
+      scTickets: [],
       openformForCreate: false,
       openformForEdit: '',
       idOfupdatedSC: '',
@@ -1499,6 +1499,17 @@ function (_Component) {
           sc: json
         });
       });
+      fetch("/mongooseGetTicketsSC").then(function (res) {
+        return res.json();
+      }).then(function (json) {
+        return _this.setState({
+          scTickets: json
+        });
+      }); //.then(console.log(this.state.scTickets))
+
+      /*.then(res => res.json())
+          .then(json => this.setState({ scTelnum: json }))
+          .then(console.log('this.state.scTelnum', this.state.scTelnum));*/
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateSericeCenter", function (stateForUpdate) {
@@ -1597,13 +1608,13 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0435 \u0446\u0435\u043D\u0442\u0440\u044B: "), this.state.newCs && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041D\u043E\u0432\u044B\u0439 \u0441\u0435\u0440\u0432\u0438\u0441-\u0446\u0435\u043D\u0442\u0440 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D! ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0435 \u0446\u0435\u043D\u0442\u0440\u044B: "), this.state.newCs ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041D\u043E\u0432\u044B\u0439 \u0441\u0435\u0440\u0432\u0438\u0441-\u0446\u0435\u043D\u0442\u0440 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D! ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         onClick: function onClick() {
           _this2.setState({
             newCs: false
           });
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "- \u0421\u043A\u0440\u044B\u0442\u044C -"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "- \u0421\u043A\u0440\u044B\u0442\u044C -"))) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           _this2.setState({
             openformForCreate: true
@@ -1620,7 +1631,7 @@ function (_Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.sc.map(function (serviceCenter) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: serviceCenter._id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this2.state.idOfupdatedSC === serviceCenter._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " \u0414\u0430\u043D\u043D\u044B\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u044B! "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0426\u0435\u043D\u0442\u0440: "), serviceCenter.scTitle), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u041E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u0435\u0442: "), serviceCenter.scVendors), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0438 \u043A\u043E\u043D\u0442\u0430\u043A\u0442\u044B: "), serviceCenter.scAdress), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, _this2.state.idOfupdatedSC === serviceCenter._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " \u0414\u0430\u043D\u043D\u044B\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u044B! "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0426\u0435\u043D\u0442\u0440: "), serviceCenter.scTitle, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u041E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u0435\u0442: "), serviceCenter.scVendors), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0438 \u043A\u043E\u043D\u0442\u0430\u043A\u0442\u044B: "), serviceCenter.scAdress), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick() {
             _this2.setState({
               openformForEdit: serviceCenter._id
