@@ -201,7 +201,9 @@ function (_Component) {
         to: "/list"
       }, "List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/form"
-      }, "Form"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
+      }, "Form"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/sc"
+      }, "ServiceCentres"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
     }
   }]);
 
@@ -233,7 +235,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_main__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/main */ "./app/pages/main.js");
 /* harmony import */ var _pages_search__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/search */ "./app/pages/search.js");
 /* harmony import */ var _pages_form__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/form */ "./app/pages/form.js");
-/* harmony import */ var _controls_layout__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./controls/layout */ "./app/controls/layout.js");
+/* harmony import */ var _pages_sc__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/sc */ "./app/pages/sc.js");
+/* harmony import */ var _controls_layout__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./controls/layout */ "./app/controls/layout.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -255,6 +258,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -329,8 +333,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "timerGetAllData", setInterval(function () {
-      console.log("time");
-
+      //console.log( "time" );
       _this.getAllData();
     }, 5000));
 
@@ -412,7 +415,7 @@ function (_Component) {
       var _this3 = this;
 
       //console.log(this.state.data);
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_8__["Layout"], null, this.state.data.map(function (ticket) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_9__["Layout"], null, this.state.data.map(function (ticket) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: ticket._id
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.state.idOfupdatedTicket === ticket._id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0410!!!") : '', "\u0417\u0430\u044F\u0432\u043A\u0430 ", ticket.ticketNumber, " \u043E\u0442 ", ticket.ticketDate, " ", ticket.finishDate ? 'Дата завершения: ' + ticket.finishDate + ' ' : '', "\u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", _this3.ticketPriorityOptinons[ticket.ticketPriority].label, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _this3.statusOptions[ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.firstname + ' ' + ticket.lasname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -732,7 +735,7 @@ function (_Component3) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_8__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Title: ", this.state.data.ticketNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Desc: ", this.state.data.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_9__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Title: ", this.state.data.ticketNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Desc: ", this.state.data.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: '../list'
       }, "\u041E\u0431\u0440\u0430\u0442\u043D\u043E \u043A \u0437\u0430\u044F\u0432\u043A\u0430\u043C"));
     }
@@ -759,6 +762,9 @@ var Routing = function Routing() {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/form",
     component: _pages_form__WEBPACK_IMPORTED_MODULE_7__["Form"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/sc",
+    component: _pages_sc__WEBPACK_IMPORTED_MODULE_8__["ServiceCenters"]
   }));
 }; //const Api = () => (<TicketsComponent />,);
 
@@ -1413,6 +1419,268 @@ function (_Component) {
   }]);
 
   return Main;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./app/pages/sc.js":
+/*!*************************!*\
+  !*** ./app/pages/sc.js ***!
+  \*************************/
+/*! exports provided: ServiceCenters */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServiceCenters", function() { return ServiceCenters; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _controls_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controls/layout */ "./app/controls/layout.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var ServiceCenters =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(ServiceCenters, _Component);
+
+  function ServiceCenters() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _classCallCheck(this, ServiceCenters);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ServiceCenters)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+      sc: [],
+      scTitle: '',
+      scVendros: '',
+      scAdress: '',
+      openformForCreate: false,
+      openformForEdit: ''
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getAllServiceCenters", function () {
+      fetch("/mongooseGetDataSC").then(function (res) {
+        return res.json();
+      }).then(function (json) {
+        return _this.setState({
+          sc: json
+        });
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateSericeCenter", function (updateSc, id) {
+      fetch('/mongooseSCUpdate', {
+        method: 'post',
+
+        /*body: JSON.stringify({
+         _id: id,
+         status: updatearg.status
+         }), */
+        body: JSON.stringify(_objectSpread({
+          _id: id
+        }, updateSc)),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).then(checkStatus) //.then(()=>console.log('updated'))
+      .then(function () {
+        return _this.getAllData();
+      }).then(function () {
+        return _this.setState({
+          idOfupdatedTicket: id,
+          openTicketDescId: null
+        });
+      });
+
+      function checkStatus(response) {
+        if (response.status >= 200 && response.status < 300) {
+          return response;
+        } else {
+          var error = new Error(response.statusText);
+          error.response = response;
+          throw error;
+        }
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "foo", function () {
+      console.log(_this.state.sc);
+      return 'open console:)))';
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "userChangeHandler", function (event, type) {
+      var scArray = _this.state.sc;
+      console.log(' ---- userChangeHandler = ', event.target, 'type', type
+      /*event.target.value, event.target.id, event.target.keyId*/
+      );
+      /*state[event.target.id] = event.target.value;
+      this.setState({state: state})*/
+
+      var serviceCenter = scArray.find(function (serviceCenter) {
+        return serviceCenter._id === event.target.id;
+      });
+      serviceCenter[type] = event.target.value;
+      console.log(scArray);
+
+      _this.setState({
+        sc: scArray
+      });
+    });
+
+    return _this;
+  }
+
+  _createClass(ServiceCenters, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getAllServiceCenters();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0435 \u0446\u0435\u043D\u0442\u0440\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          _this2.setState({
+            openformForCreate: true
+          });
+        }
+      }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0441\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          _this2.setState({
+            openformForCreate: false
+          });
+        }
+      }, "\u0417\u0430\u043A\u0440\u044B\u0442\u044C"), this.state.openformForCreate && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ServiceCenterForm, null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.sc.map(function (serviceCenter) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: serviceCenter._id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0426\u0435\u043D\u0442\u0440: "), serviceCenter.scTitle), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u041E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u0435\u0442: "), serviceCenter.scVendors), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0438 \u043A\u043E\u043D\u0442\u0430\u043A\u0442\u044B: "), serviceCenter.scAdress), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            _this2.setState({
+              openformForEdit: serviceCenter._id
+            });
+          }
+        }, "\u0420\u0435\u0434\u0430\u043A\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0421\u0426"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            _this2.setState({
+              openformForEdit: ''
+            });
+          }
+        }, "\u0417\u0430\u043A\u0440\u044B\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0421\u0426"), _this2.state.openformForEdit === serviceCenter._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ServiceCenterForm, {
+          userChangeHandler: _this2.userChangeHandler,
+          scTitle: serviceCenter.scTitle,
+          scVendors: serviceCenter.scVendors,
+          scAdress: serviceCenter.scAdress,
+          id: serviceCenter._id //value = {this.state.sctitle}
+
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          console.log(_this2.state);
+        }
+      }, " ---- TEST ")));
+    }
+  }]);
+
+  return ServiceCenters;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+var ServiceCenterForm =
+/*#__PURE__*/
+function (_Component2) {
+  _inherits(ServiceCenterForm, _Component2);
+
+  function ServiceCenterForm() {
+    _classCallCheck(this, ServiceCenterForm);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(ServiceCenterForm).apply(this, arguments));
+  }
+
+  _createClass(ServiceCenterForm, [{
+    key: "render",
+
+    /*state = {
+        scTitle: '',
+        scAdress: '',
+        scVendors: ''
+    };
+    
+      componentDidMount(){
+            this.setState({
+                scTitle: this.props.scTitle,
+                scAdress: this.props.scAdress,
+                scVendors: this.props.scVendors,
+                id: this.props.id
+            });
+            console.log(this.props);
+            //console.log(this.state);
+    
+        }*/
+    value: function render() {
+      var _this3 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Form: add"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041D\u0430\u0437\u0430\u0432\u043D\u0438\u0435 \u0421\u0426!!: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: this.props.id //placeholder={this.props.scTitle}
+        ,
+        onChange: function onChange(event) {
+          _this3.props.userChangeHandler(event, 'scTitle');
+        },
+        value: this.props.scTitle
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041F\u0435\u0440\u0435\u0447\u0435\u043D\u044C \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u0435\u043C\u044B\u0445 \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "scVendors",
+        onChange: function onChange(event) {
+          _this3.props.userChangeHandler(event);
+        },
+        value: this.props.scVendors
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0410\u0434\u0440\u0435\u0441 \u0438 \u043A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u0430\u044F \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "scAdress",
+        onChange: function onChange(event) {
+          _this3.props.userChangeHandler(event);
+        },
+        value: this.props.scAdress
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          console.log(_this3.state);
+        }
+      }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "\u0421\u0431\u0440\u043E\u0441\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
+    }
+  }]);
+
+  return ServiceCenterForm;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 

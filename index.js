@@ -143,6 +143,44 @@ app.post('/mongooseUpdate', bodyParser.json(), function (req, res) {
         })
 });
 
+app.post('/mongooseScUpdate', bodyParser.json(), function (req, res) {
+    console.log('------- mongooseUpdate ' +
+        'req.body:   id', req.body._id,
+        'body.scTitle:',req.body.scTitle,
+        'body.scVendors:',req.body.scVendors,
+        'body.scAdress:',req.body.scAdress
+
+    );
+
+    ServiceCenterModel.findOneAndUpdate(
+        {
+            _id: req.body._id  // search query
+        },
+        {
+            scTitle: req.body.scTitle,
+            scVendors: req.body.scTitle,
+            scAdress: req.body.scAdress
+        },
+        {
+            new: true,                       // return updated doc
+            runValidators: true              // validate before update
+        })
+        .then(() => {
+            //console.log(doc)
+            console.log('ok');
+            res.sendStatus(200)
+        })
+        .catch(err => {
+            console.error(err)
+        })
+});
+
+
+
+
+
+
+
 
 
 app.post('/mongooseInsert', bodyParser.json(), function (req, res) {

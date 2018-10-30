@@ -6,7 +6,9 @@ import 'react-dropdown/style.css'
 import {Main} from "./pages/main";
 import {Search} from "./pages/search";
 import {Form} from "./pages/form";
+import {ServiceCenters} from "./pages/sc";
 import {Layout} from "./controls/layout";
+
 
 class TicketsComponent extends Component{
     state = {
@@ -85,7 +87,7 @@ class TicketsComponent extends Component{
     }
 
     timerGetAllData = setInterval(() => {
-    console.log( "time" );
+    //console.log( "time" );
     this.getAllData()
     }, 5000);
 
@@ -370,6 +372,7 @@ const Routing = () => (
         <Route path='/list' component={TicketsComponent}/>
         <Route path='/search' component={Search}/>
         <Route path='/form' component={Form}/>
+        <Route path='/sc' component={ServiceCenters}/>
     </Switch>
 );
 
