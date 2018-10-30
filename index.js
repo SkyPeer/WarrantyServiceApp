@@ -23,8 +23,9 @@ mongoose.connect('mongodb://localhost:27017/warranty', {
     .then(() => {console.log('mongodb has started')})
     .catch((err) => {console.log(err)});
 
-
 mongoose.Promise = global.Promise;
+
+
 let TicketsSchema = new mongoose.Schema({
     ticketNumber: Number,
     ticketDate: String,
@@ -54,14 +55,15 @@ let TicketsSchema = new mongoose.Schema({
 });
 let TicketModel = mongoose.model('tickets', TicketsSchema);
 
+
 let ServiceCentersSchema = new mongoose.Schema({
     scTitle: String,
     scVendors: String,
     scAdress: String
 
 });
+let ServiceCenterModel = mongoose.model('servicecenters', ServiceCentersSchema);
 
-    let ServiceCenterModel = mongoose.model('servicecenters', ServiceCentersSchema);
 
     function getRandomTicketNumber() {
         let random = parseInt(Math.random() * (9999 - 1) + 2000);
@@ -80,15 +82,73 @@ app.get('/getTicketRandomNumber', (req, res) => {
     res.json({ticketNumber: getRandomTicketNumber()})
 });
 
-
+// ----- get/post for ServiceCenters
 app.get('/mongooseGetDataSC', function(req, res, next){
 
     ServiceCenterModel.find(function (err, scDocs){
         if (err) return next (err);
-        res.json(scDocs)
+        res.json(scDocs.reverse())
     })
 });
 
+app.post('/mongooseSCUpdate', bodyParser.json(), function (req, res) {
+    console.log('------- mongooseUpdate ' +
+        'req.body:   id', req.body._id,
+        'body.scTitle:',req.body.scTitle,
+        'body.scVendors:',req.body.scVendors,
+        'body.scAdress:',req.body.scAdress
+
+    );
+
+    ServiceCenterModel.findOneAndUpdate(
+        {
+            _id: req.body._id  // search query
+        },
+        {
+            scTitle: req.body.scTitle,
+            scVendors: req.body.scVendors,
+            scAdress: req.body.scAdress
+        },
+        {
+            new: true,                       // return updated doc
+            runValidators: true              // validate before update
+        })
+        .then(() => {
+            //console.log(doc)
+            console.log('ok');
+            res.sendStatus(200)
+        })
+        .catch(err => {
+            console.error(err)
+        })
+});
+
+app.post('/mongooseSCInsert', bodyParser.json(), function (req, res) {
+    console.log('------- mongooseInsertSC ' +
+        'SC: ', req.body
+    );
+
+    ServiceCenterModel.create(
+        {
+            scTitle: req.body.scTitle,
+            scVendors: req.body.scVendors,
+            scAdress: req.body.scAdress
+        })
+        .then(() => {
+            console.log('new SC inserted');
+            res.sendStatus(200)})
+        .catch(err => {
+            console.error(err)
+        })
+});
+
+
+
+// ----- get/post for ServiceCenters
+
+
+
+// ----- get/post for Tickets
 app.get('/mongooseGetDataTickets', function(req, res, next){
 
     TicketModel.find(function (err, ticketsDocs){
@@ -143,48 +203,8 @@ app.post('/mongooseUpdate', bodyParser.json(), function (req, res) {
         })
 });
 
-app.post('/mongooseScUpdate', bodyParser.json(), function (req, res) {
-    console.log('------- mongooseUpdate ' +
-        'req.body:   id', req.body._id,
-        'body.scTitle:',req.body.scTitle,
-        'body.scVendors:',req.body.scVendors,
-        'body.scAdress:',req.body.scAdress
-
-    );
-
-    ServiceCenterModel.findOneAndUpdate(
-        {
-            _id: req.body._id  // search query
-        },
-        {
-            scTitle: req.body.scTitle,
-            scVendors: req.body.scTitle,
-            scAdress: req.body.scAdress
-        },
-        {
-            new: true,                       // return updated doc
-            runValidators: true              // validate before update
-        })
-        .then(() => {
-            //console.log(doc)
-            console.log('ok');
-            res.sendStatus(200)
-        })
-        .catch(err => {
-            console.error(err)
-        })
-});
-
-
-
-
-
-
-
-
-
 app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
-    console.log('------- mongooseinsert ' +
+    console.log('------- mongooseInsertTicket ' +
             'name: ', req.body.firstname
     );
 
@@ -235,11 +255,12 @@ app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
             console.error(err)
         })
 });
+// ----- get/post for Tickets
 
 
 
 
-
+// ----------------------------------------------- OLD MongoClient
 app.post('/delete', bodyParser.json(), function (req, res){
     console.log('--- delete', req.body);
 
@@ -254,7 +275,6 @@ app.post('/delete', bodyParser.json(), function (req, res){
 
         });
 });
-
 
 app.post('/update', bodyParser.json(), function (req, res) {
     console.log('--- update', req.body);

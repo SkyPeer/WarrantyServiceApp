@@ -5,11 +5,11 @@ import {Layout} from "../controls/layout";
 class ServiceCenters extends Component{
     state = {
         sc: [],
-        scTitle: '',
-        scVendros: '',
-        scAdress: '',
+
         openformForCreate: false,
-        openformForEdit: ''
+        openformForEdit: '',
+        idOfupdatedSC: '',
+        newCs: '',
     };
 
     componentDidMount() {
@@ -22,17 +22,12 @@ class ServiceCenters extends Component{
             .then(json => this.setState({ sc: json }));
     };
 
-    updateSericeCenter = (updateSc, id) => {
+    updateSericeCenter = (stateForUpdate) => {
+        console.log(stateForUpdate);
         fetch('/mongooseSCUpdate', {
             method: 'post',
-            /*body: JSON.stringify({
-             _id: id,
-             status: updatearg.status
-             }), */
             body: JSON.stringify({
-                _id: id,
-                ...updateSc
-
+                ...stateForUpdate
             }),
             headers: {
                 'Accept': 'application/json',
@@ -41,8 +36,8 @@ class ServiceCenters extends Component{
         })
             .then(checkStatus)
             //.then(()=>console.log('updated'))
-            .then(() => this.getAllData())
-            .then(() => this.setState({idOfupdatedTicket: id, openTicketDescId: null}));
+            .then(() => this.getAllServiceCenters())
+            .then(() => this.setState({idOfupdatedSC: stateForUpdate._id, openformForEdit: null}));
 
         function checkStatus(response) {
             if (response.status >= 200 && response.status < 300) {
@@ -56,37 +51,74 @@ class ServiceCenters extends Component{
         }
     };
 
-    foo = () =>{
+    insertServiceCenter = (saveData) => {
+            console.log('insertServiceCenter', saveData);
+
+            fetch('/mongooseSCInsert', {
+                method: 'post',
+                body: JSON.stringify({
+                    ...saveData
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(checkStatus)
+                //.then(checkStatus => checkStatus.json())
+                /*.then((json)=> this.setState({
+                    newTicketNumber: json.resJson.ticketNumber,
+                    datetimeOfCreate: json.resJson.currnetDateTime}))*/
+                .then(()=>{this.getAllServiceCenters()})
+                .then(()=>{this.setState({openformForCreate: false, newCs: true})})
+                .then(()=>console.log('new sc inserted'));
+
+
+
+            function checkStatus(responsee) {
+                if (responsee.status >= 200 && responsee.status < 300) {
+                    //console.log(response);
+                    return responsee
+                } else {
+                    let error = new Error(response.statusText);
+                    error.response = response;
+                    throw error
+                }
+            }
+        };
+
+    /*foo = () =>{
         console.log(this.state.sc);
         return 'open console:)))'
-    };
+    };*/
 
-    userChangeHandler = (event, type) => {
+    /*userChangeHandler = (event, type) => {
         let scArray = this.state.sc;
-        console.log(' ---- userChangeHandler = ',event.target,'type', type /*event.target.value, event.target.id, event.target.keyId*/);
-        /*state[event.target.id] = event.target.value;
-        this.setState({state: state})*/
+        console.log(' ---- userChangeHandler = ',event.target,'type', type , event.target.value, event.target.id, event.target.keyId);
+        //state[event.target.id] = event.target.value;
+        //this.setState({state: state})
         let serviceCenter = scArray.find(serviceCenter => serviceCenter._id === event.target.id);
         serviceCenter[type] = event.target.value;
         console.log(scArray);
         this.setState({sc: scArray});
+    }; */
 
 
-    };
 
 
     render(){
         return (
             <Layout>
-                <h1>Сервисные центры:</h1>
+                <h1>Сервисные центры: </h1>
+                {this.state.newCs && <div>Новый сервис-центр добавлен! <div onClick={()=>{this.setState({newCs:false})}}><b>- Скрыть -</b></div></div>}
                     <button onClick={()=>{this.setState({openformForCreate: true})}}>Добавить сервисный центр</button>
                     <button onClick={()=>{this.setState({openformForCreate: false})}}>Закрыть</button>
 
-                        {this.state.openformForCreate && <ServiceCenterForm/> }
+                        {this.state.openformForCreate && <ServiceCenterForm  clickSaveFunc = {this.insertServiceCenter}/> }
 
                 <div>{this.state.sc.map(serviceCenter =>(
                         <div key={serviceCenter._id}>
-                            <p><b>Сервисный Центр: </b>{serviceCenter.scTitle}</p>
+                            <p>{this.state.idOfupdatedSC === serviceCenter._id && <div> Данные обновлены! </div>}<b>Сервисный Центр: </b>{serviceCenter.scTitle}</p>
                             <p><b>Обслуживает: </b>{serviceCenter.scVendors}</p>
                             <p><b>Адрес и контакты: </b>{serviceCenter.scAdress}</p>
                                 <button onClick={()=>{this.setState({openformForEdit: serviceCenter._id})}}>Редакктировать СЦ</button>
@@ -95,12 +127,8 @@ class ServiceCenters extends Component{
 
                             {this.state.openformForEdit === serviceCenter._id &&
                                     <ServiceCenterForm
-                                        userChangeHandler = {this.userChangeHandler}
-                                        scTitle = {serviceCenter.scTitle}
-                                        scVendors = {serviceCenter.scVendors}
-                                        scAdress = {serviceCenter.scAdress}
-                                        id={serviceCenter._id}
-                                        //value = {this.state.sctitle}
+                                        clickSaveFunc = {this.updateSericeCenter}
+                                        {...serviceCenter}
                                     /> }
 
 
@@ -117,23 +145,28 @@ class ServiceCenters extends Component{
 
 
 class ServiceCenterForm extends Component {
-/*state = {
+state = {
     scTitle: '',
     scAdress: '',
-    scVendors: ''
+    scVendors: '',
+    _id: '',
 };
 
   componentDidMount(){
-        this.setState({
-            scTitle: this.props.scTitle,
-            scAdress: this.props.scAdress,
-            scVendors: this.props.scVendors,
-            id: this.props.id
-        });
-        console.log(this.props);
-        //console.log(this.state);
+      this.getState()
+    }
 
-    }*/
+    getState = () => {
+        this.setState({...this.props});
+    };
+
+    scChangeHandler = (event) => {
+        let state = this.state;
+        state[event.target.id] = event.target.value;
+        this.setState({[event.target.id]:state[event.target.id]});
+
+    };
+
 
     render(){
         return(
@@ -142,33 +175,31 @@ class ServiceCenterForm extends Component {
             <hr />
             <h4>Form: add</h4>
             <label>Назавние СЦ!!: </label>
-            <input id={this.props.id}
-                //placeholder={this.props.scTitle}
-                onChange={(event)=>{this.props.userChangeHandler(event, 'scTitle')}}
-                value={this.props.scTitle}
+            <input id='scTitle'
+               onChange={this.scChangeHandler} value={this.state.scTitle}
             />
 
             <label>Перечень обслуживаемых вендоров: </label>
             <input id="scVendors"
-                onChange={(event)=>{this.props.userChangeHandler(event)}}
-                value={this.props.scVendors}
+               onChange={this.scChangeHandler}
+                   value={this.state.scVendors}
             />
 
             <label>Адрес и контактная информация</label>
             <input id="scAdress"
-                onChange={(event)=>{this.props.userChangeHandler(event)}}
-                value={this.props.scAdress}
+                   onChange={this.scChangeHandler}
+                   value={this.state.scAdress}
             />
 
-            <button onClick={()=>{console.log(this.state)}}>Сохранить</button><button>Сбросить</button>
+            <button onClick={ () => {this.props.clickSaveFunc(this.state)} }>Сохранить</button><button onClick={()=>{this.getState()}}>Сбросить</button>
+
+
+                <button onClick={()=>{console.log(this.state)}}> --- TEST STATE</button>
             <hr />
         </div>
         )
     }
 }
-
-
-
 
 export {ServiceCenters}
 

@@ -1440,6 +1440,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controls_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controls/layout */ "./app/controls/layout.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1483,11 +1485,10 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
       sc: [],
-      scTitle: '',
-      scVendros: '',
-      scAdress: '',
       openformForCreate: false,
-      openformForEdit: ''
+      openformForEdit: '',
+      idOfupdatedSC: '',
+      newCs: ''
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getAllServiceCenters", function () {
@@ -1500,28 +1501,22 @@ function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateSericeCenter", function (updateSc, id) {
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateSericeCenter", function (stateForUpdate) {
+      console.log(stateForUpdate);
       fetch('/mongooseSCUpdate', {
         method: 'post',
-
-        /*body: JSON.stringify({
-         _id: id,
-         status: updatearg.status
-         }), */
-        body: JSON.stringify(_objectSpread({
-          _id: id
-        }, updateSc)),
+        body: JSON.stringify(_objectSpread({}, stateForUpdate)),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         }
       }).then(checkStatus) //.then(()=>console.log('updated'))
       .then(function () {
-        return _this.getAllData();
+        return _this.getAllServiceCenters();
       }).then(function () {
         return _this.setState({
-          idOfupdatedTicket: id,
-          openTicketDescId: null
+          idOfupdatedSC: stateForUpdate._id,
+          openformForEdit: null
         });
       });
 
@@ -1536,28 +1531,41 @@ function (_Component) {
       }
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "foo", function () {
-      console.log(_this.state.sc);
-      return 'open console:)))';
-    });
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "insertServiceCenter", function (saveData) {
+      console.log('insertServiceCenter', saveData);
+      fetch('/mongooseSCInsert', {
+        method: 'post',
+        body: JSON.stringify(_objectSpread({}, saveData)),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).then(checkStatus) //.then(checkStatus => checkStatus.json())
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "userChangeHandler", function (event, type) {
-      var scArray = _this.state.sc;
-      console.log(' ---- userChangeHandler = ', event.target, 'type', type
-      /*event.target.value, event.target.id, event.target.keyId*/
-      );
-      /*state[event.target.id] = event.target.value;
-      this.setState({state: state})*/
-
-      var serviceCenter = scArray.find(function (serviceCenter) {
-        return serviceCenter._id === event.target.id;
+      /*.then((json)=> this.setState({
+          newTicketNumber: json.resJson.ticketNumber,
+          datetimeOfCreate: json.resJson.currnetDateTime}))*/
+      .then(function () {
+        _this.getAllServiceCenters();
+      }).then(function () {
+        _this.setState({
+          openformForCreate: false,
+          newCs: true
+        });
+      }).then(function () {
+        return console.log('new sc inserted');
       });
-      serviceCenter[type] = event.target.value;
-      console.log(scArray);
 
-      _this.setState({
-        sc: scArray
-      });
+      function checkStatus(responsee) {
+        if (responsee.status >= 200 && responsee.status < 300) {
+          //console.log(response);
+          return responsee;
+        } else {
+          var error = new Error(response.statusText);
+          error.response = response;
+          throw error;
+        }
+      }
     });
 
     return _this;
@@ -1570,10 +1578,32 @@ function (_Component) {
     }
   }, {
     key: "render",
+
+    /*foo = () =>{
+        console.log(this.state.sc);
+        return 'open console:)))'
+    };*/
+
+    /*userChangeHandler = (event, type) => {
+        let scArray = this.state.sc;
+        console.log(' ---- userChangeHandler = ',event.target,'type', type , event.target.value, event.target.id, event.target.keyId);
+        //state[event.target.id] = event.target.value;
+        //this.setState({state: state})
+        let serviceCenter = scArray.find(serviceCenter => serviceCenter._id === event.target.id);
+        serviceCenter[type] = event.target.value;
+        console.log(scArray);
+        this.setState({sc: scArray});
+    }; */
     value: function render() {
       var _this2 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0435 \u0446\u0435\u043D\u0442\u0440\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0435 \u0446\u0435\u043D\u0442\u0440\u044B: "), this.state.newCs && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041D\u043E\u0432\u044B\u0439 \u0441\u0435\u0440\u0432\u0438\u0441-\u0446\u0435\u043D\u0442\u0440 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D! ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: function onClick() {
+          _this2.setState({
+            newCs: false
+          });
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "- \u0421\u043A\u0440\u044B\u0442\u044C -"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           _this2.setState({
             openformForCreate: true
@@ -1585,10 +1615,12 @@ function (_Component) {
             openformForCreate: false
           });
         }
-      }, "\u0417\u0430\u043A\u0440\u044B\u0442\u044C"), this.state.openformForCreate && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ServiceCenterForm, null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.sc.map(function (serviceCenter) {
+      }, "\u0417\u0430\u043A\u0440\u044B\u0442\u044C"), this.state.openformForCreate && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ServiceCenterForm, {
+        clickSaveFunc: this.insertServiceCenter
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.sc.map(function (serviceCenter) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: serviceCenter._id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0426\u0435\u043D\u0442\u0440: "), serviceCenter.scTitle), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u041E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u0435\u0442: "), serviceCenter.scVendors), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0438 \u043A\u043E\u043D\u0442\u0430\u043A\u0442\u044B: "), serviceCenter.scAdress), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this2.state.idOfupdatedSC === serviceCenter._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " \u0414\u0430\u043D\u043D\u044B\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u044B! "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0426\u0435\u043D\u0442\u0440: "), serviceCenter.scTitle), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u041E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u0435\u0442: "), serviceCenter.scVendors), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0438 \u043A\u043E\u043D\u0442\u0430\u043A\u0442\u044B: "), serviceCenter.scAdress), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick() {
             _this2.setState({
               openformForEdit: serviceCenter._id
@@ -1600,14 +1632,9 @@ function (_Component) {
               openformForEdit: ''
             });
           }
-        }, "\u0417\u0430\u043A\u0440\u044B\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0421\u0426"), _this2.state.openformForEdit === serviceCenter._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ServiceCenterForm, {
-          userChangeHandler: _this2.userChangeHandler,
-          scTitle: serviceCenter.scTitle,
-          scVendors: serviceCenter.scVendors,
-          scAdress: serviceCenter.scAdress,
-          id: serviceCenter._id //value = {this.state.sctitle}
-
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
+        }, "\u0417\u0430\u043A\u0440\u044B\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0421\u0426"), _this2.state.openformForEdit === serviceCenter._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ServiceCenterForm, _extends({
+          clickSaveFunc: _this2.updateSericeCenter
+        }, serviceCenter)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           console.log(_this2.state);
@@ -1625,58 +1652,74 @@ function (_Component2) {
   _inherits(ServiceCenterForm, _Component2);
 
   function ServiceCenterForm() {
+    var _getPrototypeOf3;
+
+    var _this3;
+
     _classCallCheck(this, ServiceCenterForm);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(ServiceCenterForm).apply(this, arguments));
+    for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+
+    _this3 = _possibleConstructorReturn(this, (_getPrototypeOf3 = _getPrototypeOf(ServiceCenterForm)).call.apply(_getPrototypeOf3, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this3)), "state", {
+      scTitle: '',
+      scAdress: '',
+      scVendors: '',
+      _id: ''
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this3)), "getState", function () {
+      _this3.setState(_objectSpread({}, _this3.props));
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this3)), "scChangeHandler", function (event) {
+      var state = _this3.state;
+      state[event.target.id] = event.target.value;
+
+      _this3.setState(_defineProperty({}, event.target.id, state[event.target.id]));
+    });
+
+    return _this3;
   }
 
   _createClass(ServiceCenterForm, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getState();
+    }
+  }, {
     key: "render",
-
-    /*state = {
-        scTitle: '',
-        scAdress: '',
-        scVendors: ''
-    };
-    
-      componentDidMount(){
-            this.setState({
-                scTitle: this.props.scTitle,
-                scAdress: this.props.scAdress,
-                scVendors: this.props.scVendors,
-                id: this.props.id
-            });
-            console.log(this.props);
-            //console.log(this.state);
-    
-        }*/
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Form: add"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041D\u0430\u0437\u0430\u0432\u043D\u0438\u0435 \u0421\u0426!!: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        id: this.props.id //placeholder={this.props.scTitle}
-        ,
-        onChange: function onChange(event) {
-          _this3.props.userChangeHandler(event, 'scTitle');
-        },
-        value: this.props.scTitle
+        id: "scTitle",
+        onChange: this.scChangeHandler,
+        value: this.state.scTitle
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041F\u0435\u0440\u0435\u0447\u0435\u043D\u044C \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u0435\u043C\u044B\u0445 \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "scVendors",
-        onChange: function onChange(event) {
-          _this3.props.userChangeHandler(event);
-        },
-        value: this.props.scVendors
+        onChange: this.scChangeHandler,
+        value: this.state.scVendors
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0410\u0434\u0440\u0435\u0441 \u0438 \u043A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u0430\u044F \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "scAdress",
-        onChange: function onChange(event) {
-          _this3.props.userChangeHandler(event);
-        },
-        value: this.props.scAdress
+        onChange: this.scChangeHandler,
+        value: this.state.scAdress
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
-          console.log(_this3.state);
+          _this4.props.clickSaveFunc(_this4.state);
         }
-      }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "\u0421\u0431\u0440\u043E\u0441\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
+      }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          _this4.getState();
+        }
+      }, "\u0421\u0431\u0440\u043E\u0441\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          console.log(_this4.state);
+        }
+      }, " --- TEST STATE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
     }
   }]);
 
