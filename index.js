@@ -124,9 +124,7 @@ app.post('/mongooseSCUpdate', bodyParser.json(), function (req, res) {
 });
 
 app.post('/mongooseSCInsert', bodyParser.json(), function (req, res) {
-    console.log('------- mongooseInsertSC ' +
-        'SC: ', req.body
-    );
+    console.log('------- mongooseInsertSC ' + 'SC: ', req.body);
 
     ServiceCenterModel.create(
         {
@@ -142,8 +140,24 @@ app.post('/mongooseSCInsert', bodyParser.json(), function (req, res) {
         })
 });
 
+app.post('/mongooseSCDelete', bodyParser.json(), function (req, res) {
+    console.log('------- mongooseDeleteSC ' + 'SC: ', req.body);
 
+    ServiceCenterModel.remove(
+        {
+            _id: req.body._id
+        }
+    )
+        .then(() => {
+        //console.log(doc)
+        console.log('SC Deleted');
+        res.sendStatus(200)
+        })
+        .catch(err => {
+            console.error(err)
+        })
 
+});
 // ----- get/post for ServiceCenters
 
 

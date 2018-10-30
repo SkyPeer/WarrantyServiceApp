@@ -10,6 +10,7 @@ class ServiceCenters extends Component{
         openformForEdit: '',
         idOfupdatedSC: '',
         newCs: '',
+        deleteCs: '',
     };
 
     componentDidMount() {
@@ -95,6 +96,40 @@ class ServiceCenters extends Component{
             }
         };
 
+    deleteServiceCenter = (id) => {
+        console.log('deleteServiceCenter, id', id);
+
+        fetch('/mongooseSCDelete', {
+            method: 'post',
+            body: JSON.stringify({ _id: id }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(checkStatus)
+            //.then(checkStatus => checkStatus.json())
+            /*.then((json)=> this.setState({
+             newTicketNumber: json.resJson.ticketNumber,
+             datetimeOfCreate: json.resJson.currnetDateTime}))*/
+            .then(()=>{this.getAllServiceCenters()})
+            .then(()=>{this.setState({openformForCreate: false, deleteCs: true})})
+            .then(()=>console.log('sc deleted'));
+
+
+
+        function checkStatus(responsee) {
+            if (responsee.status >= 200 && responsee.status < 300) {
+                //console.log(response);
+                return responsee
+            } else {
+                let error = new Error(response.statusText);
+                error.response = response;
+                throw error
+            }
+        }
+    };
+
     /*foo = () =>{
         console.log(this.state.sc);
         return 'open console:)))'
@@ -111,7 +146,17 @@ class ServiceCenters extends Component{
         this.setState({sc: scArray});
     }; */
 
+    checkServiceCenterInTickets = (scId) => {
 
+        let tickets = this.state.scTickets.filter(tickets => tickets.sc === scId);
+
+        return( tickets.map(assignedSC => assignedSC.ticketNumber) )
+    };
+
+    deleteHandler = (scId) =>{
+        let checkSc = this.checkServiceCenterInTickets(scId);
+      checkSc.length > 0 ? alert('Ошибка, СЦ назначен по заявк(е/ам): ' + checkSc) : this.deleteServiceCenter(scId)
+    };
 
 
     render(){
@@ -131,11 +176,12 @@ class ServiceCenters extends Component{
                             <p><b>Адрес и контакты: </b>{serviceCenter.scAdress}</p>
                                 <button onClick={()=>{this.setState({openformForEdit: serviceCenter._id})}}>Редакктировать СЦ</button>
                                 <button onClick={()=>{this.setState({openformForEdit: ''})}}>Закрыть</button>
-                                <button>Удалить СЦ</button>
+
 
                             {this.state.openformForEdit === serviceCenter._id &&
                                     <ServiceCenterForm
                                         clickSaveFunc = {this.updateSericeCenter}
+                                        clickDelFunc = {this.deleteHandler}
                                         {...serviceCenter}
                                     /> }
 
@@ -144,7 +190,14 @@ class ServiceCenters extends Component{
                         </div>
 
                     ))}
-                    <button onClick={()=>{console.log(this.state)}}> ---- TEST </button></div>
+                    <button onClick={()=>{
+                        console.log(this.state);
+                        console.log(this.checkServiceCenterInTickets('5bcea6360c898a5cbe269f9a'));
+
+                    }}> ---- TEST </button>
+                    <button onClick={()=>{this.deleteServiceCenter('5bd87131691704064098311b')}}> TEST DEL </button>
+
+                </div>
             </Layout>
 
         )
@@ -175,7 +228,6 @@ state = {
 
     };
 
-
     render(){
         return(
 
@@ -200,9 +252,11 @@ state = {
             />
 
             <button onClick={ () => {this.props.clickSaveFunc(this.state)} }>Сохранить</button><button onClick={()=>{this.getState()}}>Сбросить</button>
-
+            <button onClick={ () => {this.props.clickDelFunc(this.state._id)} }>Удалить СЦ</button>
 
                 <button onClick={()=>{console.log(this.state)}}> --- TEST STATE</button>
+
+
             <hr />
         </div>
         )

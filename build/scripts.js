@@ -1488,7 +1488,8 @@ function (_Component) {
       openformForCreate: false,
       openformForEdit: '',
       idOfupdatedSC: '',
-      newCs: ''
+      newCs: '',
+      deleteCs: ''
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getAllServiceCenters", function () {
@@ -1579,6 +1580,61 @@ function (_Component) {
       }
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "deleteServiceCenter", function (id) {
+      console.log('deleteServiceCenter, id', id);
+      fetch('/mongooseSCDelete', {
+        method: 'post',
+        body: JSON.stringify({
+          _id: id
+        }),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).then(checkStatus) //.then(checkStatus => checkStatus.json())
+
+      /*.then((json)=> this.setState({
+       newTicketNumber: json.resJson.ticketNumber,
+       datetimeOfCreate: json.resJson.currnetDateTime}))*/
+      .then(function () {
+        _this.getAllServiceCenters();
+      }).then(function () {
+        _this.setState({
+          openformForCreate: false,
+          deleteCs: true
+        });
+      }).then(function () {
+        return console.log('sc deleted');
+      });
+
+      function checkStatus(responsee) {
+        if (responsee.status >= 200 && responsee.status < 300) {
+          //console.log(response);
+          return responsee;
+        } else {
+          var error = new Error(response.statusText);
+          error.response = response;
+          throw error;
+        }
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "checkServiceCenterInTickets", function (scId) {
+      var tickets = _this.state.scTickets.filter(function (tickets) {
+        return tickets.sc === scId;
+      });
+
+      return tickets.map(function (assignedSC) {
+        return assignedSC.ticketNumber;
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "deleteHandler", function (scId) {
+      var checkSc = _this.checkServiceCenterInTickets(scId);
+
+      checkSc.length > 0 ? alert('Ошибка, СЦ назначен по заявк(е/ам): ' + checkSc) : _this.deleteServiceCenter(scId);
+    });
+
     return _this;
   }
 
@@ -1589,22 +1645,6 @@ function (_Component) {
     }
   }, {
     key: "render",
-
-    /*foo = () =>{
-        console.log(this.state.sc);
-        return 'open console:)))'
-    };*/
-
-    /*userChangeHandler = (event, type) => {
-        let scArray = this.state.sc;
-        console.log(' ---- userChangeHandler = ',event.target,'type', type , event.target.value, event.target.id, event.target.keyId);
-        //state[event.target.id] = event.target.value;
-        //this.setState({state: state})
-        let serviceCenter = scArray.find(serviceCenter => serviceCenter._id === event.target.id);
-        serviceCenter[type] = event.target.value;
-        console.log(scArray);
-        this.setState({sc: scArray});
-    }; */
     value: function render() {
       var _this2 = this;
 
@@ -1643,14 +1683,20 @@ function (_Component) {
               openformForEdit: ''
             });
           }
-        }, "\u0417\u0430\u043A\u0440\u044B\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0421\u0426"), _this2.state.openformForEdit === serviceCenter._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ServiceCenterForm, _extends({
-          clickSaveFunc: _this2.updateSericeCenter
+        }, "\u0417\u0430\u043A\u0440\u044B\u0442\u044C"), _this2.state.openformForEdit === serviceCenter._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ServiceCenterForm, _extends({
+          clickSaveFunc: _this2.updateSericeCenter,
+          clickDelFunc: _this2.deleteHandler
         }, serviceCenter)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           console.log(_this2.state);
+          console.log(_this2.checkServiceCenterInTickets('5bcea6360c898a5cbe269f9a'));
         }
-      }, " ---- TEST ")));
+      }, " ---- TEST "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          _this2.deleteServiceCenter('5bd87131691704064098311b');
+        }
+      }, " TEST DEL ")));
     }
   }]);
 
@@ -1727,6 +1773,10 @@ function (_Component2) {
           _this4.getState();
         }
       }, "\u0421\u0431\u0440\u043E\u0441\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          _this4.props.clickDelFunc(_this4.state._id);
+        }
+      }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0421\u0426"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           console.log(_this4.state);
         }

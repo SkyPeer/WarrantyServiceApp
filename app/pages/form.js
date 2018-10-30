@@ -308,7 +308,7 @@ class Form extends Component{
 
 
     render(){
-        
+
         return (
             <Layout>
                 <h1>Form, {this.state.newTicketNumber !== '' ? <div>Создано обращение № {this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate} МСК</div> : ''}</h1>
