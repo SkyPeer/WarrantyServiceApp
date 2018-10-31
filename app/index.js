@@ -7,7 +7,7 @@ import {Search} from "./pages/search";
 import {Form} from "./pages/form";
 import {ServiceCentres} from "./pages/servicecenters";
 import {Layout} from "./controls/layout";
-import {statusOptions, typeOfServiceOptions, ticketPriorityOptions} from "./pages/props"
+import {statusOptions, typeOfServiceOptions, ticketPriorityOptions, placeOptions} from "./pages/props"
 
 
 class TicketsComponent extends Component{
@@ -135,7 +135,9 @@ class TicketsComponent extends Component{
                                                     ticketNumber={ticket.ticketNumber}
                                                     problem={ticket.problem}
                                                     projectCode={ticket.projectCode}
-                                                    place={ticket.place}
+                                                    place={ticket.place} placeAnother={ticket.placeAnother}
+                                                    placeOptions={placeOptions}
+
                                                     status={ticket.status} statusOptions={statusOptions}
                                                     finishDate={ticket.finishDate}
 
@@ -181,6 +183,9 @@ class OpenFormComponent extends  Component {
     ticketPriorityOptions = this.props.ticketPriorityOptions;
     serviceCenterOptions = this.props.serviceCenterOptions;
     ticketNumber = this.props.ticketNumber;
+    placeOptions = this.props.placeOptions;
+    place = this.props.place;
+    placeAnother = this.props.placeAnother
     _id = this.props._id;
 
 
@@ -232,7 +237,16 @@ class OpenFormComponent extends  Component {
 
             <form id="OpenDescComponent" onSubmit={(event)=>{event.preventDefault()}}>
                 <div>Причина: {this.props.problem}</div><br />
-                <div>Код проекта: {this.props.projectCode}</div><div>Местонахождение оборудования: {this.props.place}</div><br />
+                <div>Код проекта: {this.props.projectCode}</div>
+
+                <div>Местонахождение оборудования:
+                    {
+                        this.place !==5 ? ' ' + this.placeOptions[this.place].label + ' ' : ' ' + this.placeAnother + ' '
+                    }
+                </div>
+
+                <br />
+
                 <div>Контакты:</div>
                 <div>Email:<a href={"mailto:" + this.props.contacts.email +"?subject=Заявка на гарантийное обслуживание № "+this.props.ticketNumber}>{this.props.contacts.email +' '}</a>
                  Тел.: {this.props.contacts.telnum +' '}
