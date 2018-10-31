@@ -5,7 +5,7 @@ import 'react-dropdown/style.css'
 import {Main} from "./pages/main";
 import {Search} from "./pages/search";
 import {Form} from "./pages/form";
-import {ServiceCentres} from "./pages/sc";
+import {ServiceCentres} from "./pages/servicecenters";
 import {Layout} from "./controls/layout";
 import {statusOptions, typeOfServiceOptions, ticketPriorityOptions} from "./pages/props"
 
@@ -351,7 +351,7 @@ const Routing = () => (
         <Route path='/list' component={TicketsComponent}/>
         <Route path='/search' component={Search}/>
         <Route path='/form' component={Form}/>
-        <Route path='/sc' component={ServiceCentres}/>
+        <Route path='/servicecenters' component={ServiceCentres}/>
     </Switch>
 );
 

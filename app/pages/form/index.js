@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Layout} from "../controls/layout";
+import {Layout} from "../../controls/layout";
 import ReactPhoneInput from 'react-phone-input-2'
-import {ticketPriorityOptions, placeOptions} from './props'
+import {ticketPriorityOptions, placeOptions} from '../props'
 
 
 class Form extends Component{
