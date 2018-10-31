@@ -24,7 +24,7 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
+            <state relative-caret-position="598">
               <caret line="195" column="31" lean-forward="true" selection-start-line="195" selection-start-column="10" selection-end-line="195" selection-end-column="31" />
               <folding>
                 <element signature="e#588#646#0" expanded="false" />
@@ -53,14 +53,15 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="243" column="120" lean-forward="false" selection-start-line="243" selection-start-column="120" selection-end-line="243" selection-end-column="120" />
+            <state relative-caret-position="222">
+              <caret line="358" column="37" lean-forward="false" selection-start-line="358" selection-start-column="37" selection-end-line="358" selection-end-column="37" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
                 <element signature="e#2250#3138#0" expanded="false" />
                 <element signature="n#!!block;n#componentDidMount#0;n#TicketsComponent#0" expanded="false" />
-                <element signature="e#8672#8712#0" expanded="false" />
-                <element signature="n#DescComponent#0" expanded="false" />
+                <element signature="n#OpenFormComponent#0" expanded="false" />
+                <element signature="e#8671#8711#0" expanded="false" />
+                <element signature="n#!!block;n#render#0;n#OpenFormComponent#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -312,28 +313,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="form" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WarrantyServiceApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WarrantyServiceApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="controls" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -497,12 +476,12 @@
       <workItem from="1540644376679" duration="6309000" />
       <workItem from="1540664823840" duration="22887000" />
       <workItem from="1540749746042" duration="61217000" />
-      <workItem from="1540900594767" duration="44254000" />
+      <workItem from="1540900594767" duration="45546000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="381484000" />
+    <option name="totallyTimeSpent" value="382776000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -660,8 +639,9 @@
             <element signature="e#0#39#0" expanded="true" />
             <element signature="e#2250#3138#0" expanded="false" />
             <element signature="n#!!block;n#componentDidMount#0;n#TicketsComponent#0" expanded="false" />
-            <element signature="e#8672#8712#0" expanded="false" />
-            <element signature="n#DescComponent#0" expanded="false" />
+            <element signature="n#OpenFormComponent#0" expanded="false" />
+            <element signature="e#8671#8711#0" expanded="false" />
+            <element signature="n#!!block;n#render#0;n#OpenFormComponent#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -749,8 +729,9 @@
             <element signature="e#0#39#0" expanded="true" />
             <element signature="e#2250#3138#0" expanded="false" />
             <element signature="n#!!block;n#componentDidMount#0;n#TicketsComponent#0" expanded="false" />
-            <element signature="e#8672#8712#0" expanded="false" />
-            <element signature="n#DescComponent#0" expanded="false" />
+            <element signature="n#OpenFormComponent#0" expanded="false" />
+            <element signature="e#8671#8711#0" expanded="false" />
+            <element signature="n#!!block;n#render#0;n#OpenFormComponent#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -838,8 +819,9 @@
             <element signature="e#0#39#0" expanded="true" />
             <element signature="e#2250#3138#0" expanded="false" />
             <element signature="n#!!block;n#componentDidMount#0;n#TicketsComponent#0" expanded="false" />
-            <element signature="e#8672#8712#0" expanded="false" />
-            <element signature="n#DescComponent#0" expanded="false" />
+            <element signature="n#OpenFormComponent#0" expanded="false" />
+            <element signature="e#8671#8711#0" expanded="false" />
+            <element signature="n#!!block;n#render#0;n#OpenFormComponent#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -887,8 +869,9 @@
             <element signature="e#0#39#0" expanded="true" />
             <element signature="e#2250#3138#0" expanded="false" />
             <element signature="n#!!block;n#componentDidMount#0;n#TicketsComponent#0" expanded="false" />
-            <element signature="e#8672#8712#0" expanded="false" />
-            <element signature="n#DescComponent#0" expanded="false" />
+            <element signature="n#OpenFormComponent#0" expanded="false" />
+            <element signature="e#8671#8711#0" expanded="false" />
+            <element signature="n#!!block;n#render#0;n#OpenFormComponent#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1055,33 +1038,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="195" column="31" lean-forward="true" selection-start-line="195" selection-start-column="10" selection-end-line="195" selection-end-column="31" />
-          <folding>
-            <element signature="e#588#646#0" expanded="false" />
-            <element signature="e#821#1338#0" expanded="false" />
-            <element signature="e#1450#1519#0" expanded="false" />
-            <element signature="n#!!block;n#getRandomTicketNumber#0" expanded="false" />
-            <element signature="n#!!block;n#getCurrnetDateTime#0" expanded="false" />
-            <element signature="e#2237#2371#0" expanded="false" />
-            <element signature="e#2444#3275#0" expanded="false" />
-            <element signature="e#3348#3757#0" expanded="false" />
-            <element signature="e#3830#4176#0" expanded="false" />
-            <element signature="e#3937#3978#0" expanded="false" />
-            <element signature="e#4308#4446#0" expanded="false" />
-            <element signature="e#4507#4773#0" expanded="false" />
-            <element signature="e#4840#5049#0" expanded="false" />
-            <element signature="e#6776#8315#0" expanded="false" />
-            <element signature="e#8477#8974#0" expanded="false" />
-            <element signature="e#9037#9546#0" expanded="false" />
-            <element signature="e#9605#9842#0" expanded="false" />
-            <element signature="e#9877#11487#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controls/layout.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="26">
@@ -1159,16 +1115,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="195" column="31" lean-forward="true" selection-start-line="195" selection-start-column="10" selection-end-line="195" selection-end-column="31" />
+          <folding>
+            <element signature="e#588#646#0" expanded="false" />
+            <element signature="e#821#1338#0" expanded="false" />
+            <element signature="e#1450#1519#0" expanded="false" />
+            <element signature="n#!!block;n#getRandomTicketNumber#0" expanded="false" />
+            <element signature="n#!!block;n#getCurrnetDateTime#0" expanded="false" />
+            <element signature="e#2237#2371#0" expanded="false" />
+            <element signature="e#2444#3275#0" expanded="false" />
+            <element signature="e#3348#3757#0" expanded="false" />
+            <element signature="e#3830#4176#0" expanded="false" />
+            <element signature="e#3937#3978#0" expanded="false" />
+            <element signature="e#4308#4446#0" expanded="false" />
+            <element signature="e#4507#4773#0" expanded="false" />
+            <element signature="e#4840#5049#0" expanded="false" />
+            <element signature="e#6776#8315#0" expanded="false" />
+            <element signature="e#8477#8974#0" expanded="false" />
+            <element signature="e#9037#9546#0" expanded="false" />
+            <element signature="e#9605#9842#0" expanded="false" />
+            <element signature="e#9877#11487#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="243" column="120" lean-forward="false" selection-start-line="243" selection-start-column="120" selection-end-line="243" selection-end-column="120" />
+        <state relative-caret-position="222">
+          <caret line="358" column="37" lean-forward="false" selection-start-line="358" selection-start-column="37" selection-end-line="358" selection-end-column="37" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
             <element signature="e#2250#3138#0" expanded="false" />
             <element signature="n#!!block;n#componentDidMount#0;n#TicketsComponent#0" expanded="false" />
-            <element signature="e#8672#8712#0" expanded="false" />
-            <element signature="n#DescComponent#0" expanded="false" />
+            <element signature="n#OpenFormComponent#0" expanded="false" />
+            <element signature="e#8671#8711#0" expanded="false" />
+            <element signature="n#!!block;n#render#0;n#OpenFormComponent#0" expanded="false" />
           </folding>
         </state>
       </provider>

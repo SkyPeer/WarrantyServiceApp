@@ -122,8 +122,8 @@ class TicketsComponent extends Component{
                             <div>{this.state.idOfupdatedTicket === ticket._id && <div><b> --- ОБНОВЛЕНА!!! --- </b> <button onClick={ ()=>{this.setState({idOfupdatedTicket:null})} }>OK</button></div>}</div>
                             Заявка {ticket.ticketNumber} от {ticket.ticketDate} {ticket.finishDate ? 'Дата завершения: '+ticket.finishDate + ' ' : ''}
                             приоритет: {ticketPriorityOptions[ticket.ticketPriority].label} Статус: {statusOptions[ticket.status].label}</div>
-                            <div>Инициатор {ticket.firstname +' '+ ticket.lasname + ' '+ ticket.familyname}</div>
-                            <Link to={'/list/'+ticket._id}>Подробнее об оборудовании {ticket.vendor} {ticket.model}</Link>
+                            <div>Инициатор {ticket.lasname +' '+ ticket.firstname + ' '+ ticket.familyname}</div>
+                            <Link to={'/tickets/'+ticket._id}>Подробнее об оборудовании {ticket.vendor} {ticket.model}</Link>
 
                                     <div>
                                         {ticket._id === this.state.openTicketDescId && (
@@ -165,7 +165,7 @@ class TicketsComponent extends Component{
         )}
 }// end of RouterComponent
 
-class OpenFormComponent extends  Component {
+class OpenFormComponent extends Component {
 
     state = {
         comment: '',
@@ -189,7 +189,6 @@ class OpenFormComponent extends  Component {
     _id = this.props._id;
 
 
-
     fullSetStateFunc = () => {
         this.setState({
             ...this.props
@@ -202,10 +201,9 @@ class OpenFormComponent extends  Component {
         this.setState({serviceCenterDetails: scDetais})
     };
 
-    componentDidMount(){
-      this.fullSetStateFunc()
+    componentDidMount() {
+        this.fullSetStateFunc()
     }
-
 
 
     handleUserInput = (e) => {
@@ -223,7 +221,7 @@ class OpenFormComponent extends  Component {
 
     saveFormFunc = () => {
         this.props.saveButtonClick({
-                ...this.state
+            ...this.state
         });
     };
 
@@ -232,48 +230,52 @@ class OpenFormComponent extends  Component {
     };
 
 
-    render(){
-        return(
+    render() {
+        return (
 
-            <form id="OpenDescComponent" onSubmit={(event)=>{event.preventDefault()}}>
-                <div>Причина: {this.props.problem}</div><br />
+            <form id="OpenDescComponent" onSubmit={(event) => {
+                event.preventDefault()
+            }}>
+                <div>Причина: {this.props.problem}</div>
+                <br />
                 <div>Код проекта: {this.props.projectCode}</div>
 
                 <div>Местонахождение оборудования:
-                    {
-                        this.place !==5 ? ' ' + this.placeOptions[this.place].label + ' ' : ' ' + this.placeAnother + ' '
-                    }
+                    {this.place !== 5 ? ' ' + this.placeOptions[this.place].label + ' ' : ' ' + this.placeAnother + ' '}
                 </div>
 
                 <br />
 
                 <div>Контакты:</div>
-                <div>Email:<a href={"mailto:" + this.props.contacts.email +"?subject=Заявка на гарантийное обслуживание № "+this.props.ticketNumber}>{this.props.contacts.email +' '}</a>
-                 Тел.: {this.props.contacts.telnum +' '}
-                 Внутр: {this.props.contacts.extum +' '}
+                <div>Email:<a
+                    href={"mailto:" + this.props.contacts.email + "?subject=Заявка на гарантийное обслуживание № " + this.props.ticketNumber}>{this.props.contacts.email + ' '}</a>
+                    Тел.: {this.props.contacts.telnum + ' '}
+                    Внутр: {this.props.contacts.extum + ' '}
                 </div>
 
                 <hr />
 
                 <div>
                     <label>Коментарий:</label>
-                    <input type="text" id="comment" value={this.state.comment} onChange={this.handleUserInput} />
+                    <input type="text" id="comment" value={this.state.comment} onChange={this.handleUserInput}/>
                 </div>
-                    <br /><br />
+                <br /><br />
 
                 <div>
-                <label>Сервисный центр: </label>
+                    <label>Сервисный центр: </label>
                     <select id="serviceCenter" onChange={this.changeServiceCenter} value={this.state.serviceCenter}>
                         <option value="" defaultValue>Выбрать сервисный центр</option>
                         {this.props.serviceCenterOptions.map(sc =>
                             <option key={sc._id} value={sc._id}>{sc.scTitle}</option>
                         )}
                     </select>
-                    {this.state.serviceCenterDetails !== undefined ? <div><b>Адрес СЦ: </b>{this.state.serviceCenterDetails.scAdress} <br /> <b>Авторизация вендоров:</b> {this.state.serviceCenterDetails.scVendors}</div> : ''}
+                    {this.state.serviceCenterDetails !== undefined ?
+                        <div><b>Адрес СЦ: </b>{this.state.serviceCenterDetails.scAdress} <br /> <b>Авторизация
+                            вендоров:</b> {this.state.serviceCenterDetails.scVendors}</div> : ''}
                 </div>
 
                 <div>
-                <label>Ремонт: </label>
+                    <label>Ремонт: </label>
                     <select id="typeOfService" onChange={this.handleUserInput} value={this.state.typeOfService}>
                         {typeOfServiceOptions.map(typeOfService =>
                             <option key={typeOfService.value} value={typeOfService.value}>{typeOfService.label}</option>
@@ -288,13 +290,15 @@ class OpenFormComponent extends  Component {
 
                 <div>
                     <label>Сервисный контракт / № обращения</label>
-                    <input id="serviceCenterTicket" onChange={this.handleUserInput} value={this.state.serviceCenterTicket}/>
+                    <input id="serviceCenterTicket" onChange={this.handleUserInput}
+                           value={this.state.serviceCenterTicket}/>
                 </div>
                 <br /><br />
 
                 <div>
-                <label>Приоритет заявки:</label>
-                    <select id="ticketPriority" className="selectPriority" onChange={this.handleUserInput} value={this.state.ticketPriority}>
+                    <label>Приоритет заявки:</label>
+                    <select id="ticketPriority" className="selectPriority" onChange={this.handleUserInput}
+                            value={this.state.ticketPriority}>
                         {this.props.ticketPriorityOptions.map(priority =>
                             <option key={priority.value} value={priority.value}>{priority.label}</option>
                         )}
@@ -310,14 +314,16 @@ class OpenFormComponent extends  Component {
                     </select>
                 </div>
 
-                    <button onClick={this.saveFormFunc}> SAVE </button>
-                    <button onClick={this.resetForm}>RESET</button>
-                    <button onClick={ () => {this.props.deleteButtonClick(this.ticketNumber, this._id)
+                <button onClick={this.saveFormFunc}> SAVE</button>
+                <button onClick={this.resetForm}>RESET</button>
+                <button onClick={ () => {
+                    this.props.deleteButtonClick(this.ticketNumber, this._id)
 
-                    } }>DELETE</button>
+                } }>DELETE
+                </button>
                 <hr />
 
-        </form>
+            </form>
         )
     }
 }
@@ -350,7 +356,7 @@ class DescComponent extends Component{
             <Layout>
                 <h5>Title: {this.state.data.ticketNumber}</h5>
                 <h5>Desc: {this.state.data.problem}</h5>
-                <Link to={'../list'}>Обратно к заявкам</Link>
+                <Link to={'../tickets'}>Обратно к заявкам</Link>
             </Layout>);
     }
 

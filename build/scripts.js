@@ -424,8 +424,8 @@ function (_Component) {
               idOfupdatedTicket: null
             });
           }
-        }, "OK"))), "\u0417\u0430\u044F\u0432\u043A\u0430 ", ticket.ticketNumber, " \u043E\u0442 ", ticket.ticketDate, " ", ticket.finishDate ? 'Дата завершения: ' + ticket.finishDate + ' ' : '', "\u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", _pages_props__WEBPACK_IMPORTED_MODULE_9__["ticketPriorityOptions"][ticket.ticketPriority].label, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _pages_props__WEBPACK_IMPORTED_MODULE_9__["statusOptions"][ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.firstname + ' ' + ticket.lasname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: '/list/' + ticket._id
+        }, "OK"))), "\u0417\u0430\u044F\u0432\u043A\u0430 ", ticket.ticketNumber, " \u043E\u0442 ", ticket.ticketDate, " ", ticket.finishDate ? 'Дата завершения: ' + ticket.finishDate + ' ' : '', "\u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", _pages_props__WEBPACK_IMPORTED_MODULE_9__["ticketPriorityOptions"][ticket.ticketPriority].label, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _pages_props__WEBPACK_IMPORTED_MODULE_9__["statusOptions"][ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.lasname + ' ' + ticket.firstname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: '/tickets/' + ticket._id
         }, "\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435 \u043E\u0431 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0438 ", ticket.vendor, " ", ticket.model), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, ticket._id === _this3.state.openTicketDescId && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(OpenFormComponent, {
           _id: ticket._id,
           contacts: {
@@ -635,7 +635,7 @@ function (_Component2) {
         }, status.label);
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.saveFormFunc
-      }, " SAVE "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, " SAVE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.resetForm
       }, "RESET"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
@@ -702,7 +702,7 @@ function (_Component3) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_8__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Title: ", this.state.data.ticketNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Desc: ", this.state.data.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: '../list'
+        to: '../tickets'
       }, "\u041E\u0431\u0440\u0430\u0442\u043D\u043E \u043A \u0437\u0430\u044F\u0432\u043A\u0430\u043C"));
     }
   }]);
