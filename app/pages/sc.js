@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Layout} from "../controls/layout";
-
+import {landing} from './props'
 
 class ServiceCenters extends Component{
     state = {
@@ -213,6 +213,7 @@ state = {
     _id: '',
 };
 
+
   componentDidMount(){
       this.getState()
     }
@@ -254,7 +255,9 @@ state = {
             <button onClick={ () => {this.props.clickSaveFunc(this.state)} }>Сохранить</button><button onClick={()=>{this.getState()}}>Сбросить</button>
             <button onClick={ () => {this.props.clickDelFunc(this.state._id)} }>Удалить СЦ</button>
 
-                <button onClick={()=>{console.log(this.state)}}> --- TEST STATE</button>
+                <button onClick={()=>{
+                    console.log(this.state);
+                }}> --- TEST STATE</button>
 
 
             <hr />

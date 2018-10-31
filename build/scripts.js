@@ -237,6 +237,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_form__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/form */ "./app/pages/form.js");
 /* harmony import */ var _pages_sc__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/sc */ "./app/pages/sc.js");
 /* harmony import */ var _controls_layout__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./controls/layout */ "./app/controls/layout.js");
+/* harmony import */ var _pages_props__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/props */ "./app/pages/props.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -258,6 +259,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -337,42 +339,6 @@ function (_Component) {
       _this.getAllData();
     }, 5000));
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "statusOptions", [{
-      value: 0,
-      label: 'Новая'
-    }, {
-      value: 1,
-      label: 'Необходимы уточнения'
-    }, {
-      value: 2,
-      label: 'В работе'
-    }, {
-      value: 3,
-      label: 'Завершена'
-    }, {
-      value: 4,
-      label: 'Отклонена'
-    }]);
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "typeOfServiceOptions", [{
-      value: 0,
-      label: 'Гарантийный'
-    }, {
-      value: 1,
-      label: 'Не гарантийный'
-    }]);
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "ticketPriorityOptinons", [{
-      value: 0,
-      label: "Низкий"
-    }, {
-      value: 1,
-      label: "Средний"
-    }, {
-      value: 2,
-      label: "Высокий"
-    }]);
-
     return _this;
   }
 
@@ -411,6 +377,23 @@ function (_Component) {
     }
   }, {
     key: "render",
+
+    /*statusOptions = [
+        { value: 0, label: 'Новая' },
+        { value: 1, label: 'Необходимы уточнения' },
+        { value: 2, label: 'В работе' },
+        { value: 3, label: 'Завершена' },
+        { value: 4, label: 'Отклонена' },
+    ];
+    typeOfServiceOptions = [
+        {value: 0, label: 'Гарантийный'},
+        {value: 1, label: 'Не гарантийный'}
+    ];
+      ticketPriorityOptinons = [
+        {value: 0, label: "Низкий"},
+        {value: 1, label: "Средний"},
+        {value: 2, label: "Высокий"}
+    ];*/
     value: function render() {
       var _this3 = this;
 
@@ -418,7 +401,7 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_9__["Layout"], null, this.state.data.map(function (ticket) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: ticket._id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.state.idOfupdatedTicket === ticket._id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0410!!!") : '', "\u0417\u0430\u044F\u0432\u043A\u0430 ", ticket.ticketNumber, " \u043E\u0442 ", ticket.ticketDate, " ", ticket.finishDate ? 'Дата завершения: ' + ticket.finishDate + ' ' : '', "\u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", _this3.ticketPriorityOptinons[ticket.ticketPriority].label, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _this3.statusOptions[ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.firstname + ' ' + ticket.lasname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.state.idOfupdatedTicket === ticket._id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0410!!!") : '', "\u0417\u0430\u044F\u0432\u043A\u0430 ", ticket.ticketNumber, " \u043E\u0442 ", ticket.ticketDate, " ", ticket.finishDate ? 'Дата завершения: ' + ticket.finishDate + ' ' : '', "\u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", _pages_props__WEBPACK_IMPORTED_MODULE_10__["ticketPriorityOptions"][ticket.ticketPriority].label, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _pages_props__WEBPACK_IMPORTED_MODULE_10__["statusOptions"][ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.firstname + ' ' + ticket.lasname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: '/list/' + ticket._id
         }, "\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435 \u043E\u0431 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0438 ", ticket.vendor, " ", ticket.model), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, ticket._id === _this3.state.openTicketDescId && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(OpenDescComponent, {
           contacts: {
@@ -432,19 +415,19 @@ function (_Component) {
           projectCode: ticket.projectCode,
           place: ticket.place,
           status: ticket.status,
-          statusOptions: _this3.statusOptions,
+          statusOptions: _pages_props__WEBPACK_IMPORTED_MODULE_10__["statusOptions"],
           finishDate: ticket.finishDate,
           comment: ticket.comment,
           saveButtonClick: function saveButtonClick(updatearg) {
             _this3.updateDataFunc(updatearg, ticket._id);
           },
           ticketPriority: ticket.ticketPriority,
-          ticketPriorityOptions: _this3.ticketPriorityOptinons,
+          ticketPriorityOptions: _pages_props__WEBPACK_IMPORTED_MODULE_10__["ticketPriorityOptions"],
           serviceCenter: ticket.serviceCenter,
           serviceCenterOptions: _this3.state.sc,
           serviceCenterTicket: ticket.serviceCenterTicket,
           typeOfService: ticket.typeOfService,
-          typeOfServiceOptions: _this3.typeOfServiceOptions
+          typeOfServiceOptions: _pages_props__WEBPACK_IMPORTED_MODULE_10__["typeOfServiceOptions"]
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick() {
             _this3.setState({
@@ -637,7 +620,7 @@ function (_Component2) {
         className: "typeOfService",
         onChange: this.changeTypeOfService,
         value: this.state.typeOfService
-      }, this.typeOfServiceOptions.map(function (typeOfService) {
+      }, _pages_props__WEBPACK_IMPORTED_MODULE_10__["typeOfServiceOptions"].map(function (typeOfService) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: typeOfService.value,
           value: typeOfService.value
@@ -788,6 +771,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controls_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controls/layout */ "./app/controls/layout.js");
 /* harmony import */ var react_phone_input_2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-phone-input-2 */ "./node_modules/react-phone-input-2/dist/index.js");
 /* harmony import */ var react_phone_input_2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_phone_input_2__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _props__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./props */ "./app/pages/props.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -809,6 +793,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -892,136 +877,33 @@ function (_Component) {
       }
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "ticketPriorityOptions", [{
-      value: 0,
-      label: "Низкий"
-    }, {
-      value: 1,
-      label: "Средний"
-    }, {
-      value: 2,
-      label: "Высокий"
-    }]);
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleUserInput", function (e) {
+      var name = e.target.id;
+      var value = e.target.value;
+      console.log(name, ' ', value);
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "placeOptions", [{
-      value: 0,
-      label: "Головной офис"
-    }, {
-      value: 1,
-      label: "Доп. офис №1"
-    }, {
-      value: 2,
-      label: "Доп. офис №2"
-    }, {
-      value: 3,
-      label: "Склад"
-    }, {
-      value: 4,
-      label: "Заказчик"
-    }, {
-      value: 5,
-      label: "Другое"
-    }]);
+      _this.setState(_defineProperty({}, name, value));
+    });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onChangeHandler", function (event) {});
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "telnumChange", function (e) {
+      console.log('telnumnChange:', e);
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "firstNameChange", function (event) {
-      // console.log('firstNameChange', event.target.value);
       _this.setState({
-        firstname: event.target.value
+        telnum: e
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "lastNameChange", function (event) {
-      //console.log('lastNameChange', event.target.value);
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "placeChange", function (e) {
       _this.setState({
-        lastname: event.target.value
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "familyNameChange", function (event) {
-      // console.log('familyNameChange', event.target.value);
-      _this.setState({
-        familyname: event.target.value
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "emailChange", function (event) {
-      //console.log('emailChange', event.target.value);
-      _this.setState({
-        email: event.target.value
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "extnumChange", function (event) {
-      // console.log('extnumChange', event.target.value);
-      _this.setState({
-        extnum: event.target.value
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "changePriority", function (event) {
-      //console.log('changePriority:', event.target.value);
-      _this.setState({
-        ticketPriority: event.target.value
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "placeChange", function (event) {
-      _this.setState({
-        place: event.target.value
+        place: e.target.value
       }); //console.log('this.state.place', this.state.place); // ПОЧЕМУ ТУТ ОСТАЕТСЯ СТАРОЕ ЗНАЧЕНИЕ, потому что обновление проихсодит внутри метода render() ???
 
 
       var errorsObj = _this.state.formErrors;
-      event.target.value == '5' ? errorsObj['placeAnother'] = 'error' : delete errorsObj['placeAnother'];
+      e.target.value == '5' ? errorsObj['placeAnother'] = 'error' : delete errorsObj['placeAnother'];
 
       _this.setState({
         formErrors: errorsObj
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "placeAnotherChange", function (event) {
-      //console.log('changeAnotherPlace:', event.target.value);
-      _this.setState({
-        placeAnother: event.target.value
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "vendorChange", function (event) {
-      // console.log('changeVendor:', event.target.value);
-      _this.setState({
-        vendor: event.target.value
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "modelChange", function (event) {
-      console.log('changeModel:', event.target.value);
-
-      _this.setState({
-        model: event.target.value
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "partNumberChange", function (event) {
-      console.log('changepartNumber:', event.target.value);
-
-      _this.setState({
-        partNumber: event.target.value
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "problemChange", function (event) {
-      //console.log('changepartProblem:', event.target.value);
-      _this.setState({
-        problem: event.target.value
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "projectCodechange", function (event) {
-      //console.log('changeProjectCodec:', event.target.value);
-      _this.setState({
-        projectCode: event.target.value
       });
     });
 
@@ -1043,12 +925,12 @@ function (_Component) {
       _this.state.formErrors.hasOwnProperty(target.id) ? target.className = "input_error" : target.className = "input_correct";
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onBlur", function (event) {
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onBlur", function (e) {
       //   console.log('blur');
-      var target = event.target;
-      var targetId = event.target.id;
-      var required = event.target.required;
-      var validator = event.target.dataset.validator;
+      var target = e.target;
+      var targetId = e.target.id;
+      var required = e.target.required;
+      var validator = e.target.dataset.validator;
       var checkValue = _this.state[targetId];
       console.log('validator: ', validator); //!required ? targetId = "notrequired" : '';
 
@@ -1124,8 +1006,8 @@ function (_Component) {
 
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onFocus", function (event) {
-      event.target.className = '';
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onFocus", function (e) {
+      e.target.className = '';
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onTelNumBlur", function () {
@@ -1150,14 +1032,6 @@ function (_Component) {
       });
 
       _this.checkform();
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "telnumChange", function (event) {
-      console.log('telnumnChange:', event);
-
-      _this.setState({
-        telnum: event
-      });
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "checkform", function () {
@@ -1194,7 +1068,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u0418\u043C\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "firstname",
         placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0418\u043C\u044F",
-        onChange: this.firstNameChange,
+        onChange: this.handleUserInput,
         onFocus: this.onFocus,
         onBlur: this.onBlur,
         value: this.state.firstname,
@@ -1206,7 +1080,7 @@ function (_Component) {
       }, "\u041F\u043E\u043B\u0435 \"\u0418\u043C\u044F\" \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0411\u043E\u043B\u044C\u0449\u0435 2\u0445 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u0424\u0430\u043C\u0438\u043B\u0438\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "lastname",
         placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0424\u0430\u043C\u0438\u043B\u0438\u044E",
-        onChange: this.lastNameChange,
+        onChange: this.handleUserInput,
         onFocus: this.onFocus,
         onBlur: this.onBlur,
         value: this.state.lastname,
@@ -1217,7 +1091,7 @@ function (_Component) {
         className: "form__error"
       }, "\u041F\u043E\u043B\u0435 \"\u0424\u0430\u043C\u0438\u043B\u0438\u044F\" \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0411\u043E\u043B\u044C\u0449\u0435 2\u0445 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "  \u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "familyname",
-        onChange: this.familyNameChange,
+        onChange: this.handleUserInput,
         placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E",
         onFocus: this.onFocus,
         onBlur: this.onBlur,
@@ -1229,7 +1103,7 @@ function (_Component) {
       }, "\u041F\u043E\u043B\u0435 \"\u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E\" \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0411\u043E\u043B\u044C\u0449\u0435 2\u0445 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* E-mail:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "email",
         placeholder: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 E-mail \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 example@site.com",
-        onChange: this.emailChange,
+        onChange: this.handleUserInput,
         onFocus: this.onFocus,
         onBlur: this.onBlur,
         value: this.state.email,
@@ -1252,14 +1126,14 @@ function (_Component) {
         className: "form__error"
       }, "\u041D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430 \u0434\u043E\u043B\u0436\u0435\u043D \u0431\u044B\u0442\u044C \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 +79876543210 ") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "  \u0432\u043D\u0443\u0442\u0440. \u2116: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "extnum",
-        onChange: this.extnumChange,
+        onChange: this.handleUserInput,
         onFocus: this.onFocus,
         onBlur: this.onBlur,
         value: this.state.extnum,
         "data-validator": "standart"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C / \u0432\u0435\u043D\u0434\u043E\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "vendor",
-        onChange: this.vendorChange,
+        onChange: this.handleUserInput,
         onFocus: this.onFocus,
         onBlur: this.onBlur,
         value: this.state.vendor,
@@ -1271,7 +1145,7 @@ function (_Component) {
       }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044F") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041C\u043E\u0434\u0435\u043B\u044C: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "model",
         className: "",
-        onChange: this.modelChange,
+        onChange: this.handleUserInput,
         onFocus: this.onFocus,
         onBlur: this.onBlur,
         value: this.state.model,
@@ -1281,7 +1155,7 @@ function (_Component) {
         className: "form__error"
       }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C \u043C\u043E\u0434\u0435\u043B\u044C / \u0430\u0440\u0442\u0438\u043A\u0443\u043B") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* P/N \u0438\u043B\u0438 \u0417\u0430\u0432\u043E\u0434\u0441\u043A\u043E\u0439 \u043D\u043E\u043C\u0435\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "partNumber",
-        onChange: this.partNumberChange,
+        onChange: this.handleUserInput,
         onFocus: this.onFocus,
         onBlur: this.onBlur,
         value: this.state.partNumber,
@@ -1291,7 +1165,7 @@ function (_Component) {
         className: "form__error"
       }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C partnumber / \u0445\u0430\u0432\u043E\u0434\u0441\u043A\u043E\u0439 \u043D\u043E\u043C\u0435\u0440") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         id: "problem",
-        onChange: this.problemChange,
+        onChange: this.handleUserInput,
         onFocus: this.onFocus,
         onBlur: this.onBlur,
         value: this.state.problem,
@@ -1301,7 +1175,7 @@ function (_Component) {
         className: "form__error"
       }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C \u043F\u0440\u0438\u0447\u0438\u043D\u0443 \u043E\u0442 7-\u043C\u0438 \u0441\u0438\u0432\u043E\u043B\u043E\u0432") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "  \u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "projectCode",
-        onChange: this.projectCodechange,
+        onChange: this.handleUserInput,
         onFocus: this.onFocus,
         onBlur: this.onBlur,
         value: this.state.projectCode,
@@ -1312,7 +1186,7 @@ function (_Component) {
         id: "place",
         onChange: this.placeChange,
         value: this.state.place
-      }, this.placeOptions.map(function (place) {
+      }, _props__WEBPACK_IMPORTED_MODULE_3__["placeOptions"].map(function (place) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: place.value,
           value: place.value
@@ -1320,7 +1194,7 @@ function (_Component) {
       })), this.state.place === '5' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "placeAnother",
         placeholder: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u043C\u0435\u0441\u0442\u043E\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0435",
-        onChange: this.placeAnotherChange,
+        onChange: this.handleUserInput,
         onFocus: this.onFocus,
         onBlur: this.onBlur,
         value: this.state.placeAnother,
@@ -1328,9 +1202,9 @@ function (_Component) {
         "data-validator": "placeAnother"
       }) : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 \u0437\u0430\u044F\u0432\u043A\u0438: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         className: "selectPriority",
-        onChange: this.changePriority,
+        onChange: this.handleUserInput,
         value: this.state.ticketPriority
-      }, this.ticketPriorityOptions.map(function (priority) {
+      }, _props__WEBPACK_IMPORTED_MODULE_3__["ticketPriorityOptions"].map(function (priority) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: priority.value,
           value: priority.value
@@ -1346,16 +1220,7 @@ function (_Component) {
           console.log('formValid:', _this2.state.formValid);
         },
         className: "btn btn-primary"
-      }, "--- TEST"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          var test = document.getElementById('model');
-          test.className = "input_error2";
-        }
-      }, "  --- TEST CSS --- "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          _this2.telTestFunc();
-        }
-      }, "  --- TEST TEL2 --- ")));
+      }, "--- TEST")));
     }
   }]);
 
@@ -1426,6 +1291,74 @@ function (_Component) {
 
 /***/ }),
 
+/***/ "./app/pages/props.js":
+/*!****************************!*\
+  !*** ./app/pages/props.js ***!
+  \****************************/
+/*! exports provided: ticketPriorityOptions, placeOptions, statusOptions, typeOfServiceOptions */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ticketPriorityOptions", function() { return ticketPriorityOptions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "placeOptions", function() { return placeOptions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "statusOptions", function() { return statusOptions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "typeOfServiceOptions", function() { return typeOfServiceOptions; });
+var ticketPriorityOptions = [{
+  value: 0,
+  label: "Низкий"
+}, {
+  value: 1,
+  label: "Средний"
+}, {
+  value: 2,
+  label: "Высокий"
+}];
+var placeOptions = [{
+  value: 0,
+  label: "Головной офис"
+}, {
+  value: 1,
+  label: "Доп. офис №1"
+}, {
+  value: 2,
+  label: "Доп. офис №2"
+}, {
+  value: 3,
+  label: "Склад"
+}, {
+  value: 4,
+  label: "Заказчик"
+}, {
+  value: 5,
+  label: "Другое"
+}];
+var statusOptions = [{
+  value: 0,
+  label: 'Новая'
+}, {
+  value: 1,
+  label: 'Необходимы уточнения'
+}, {
+  value: 2,
+  label: 'В работе'
+}, {
+  value: 3,
+  label: 'Завершена'
+}, {
+  value: 4,
+  label: 'Отклонена'
+}];
+var typeOfServiceOptions = [{
+  value: 0,
+  label: 'Гарантийный'
+}, {
+  value: 1,
+  label: 'Не гарантийный'
+}];
+
+/***/ }),
+
 /***/ "./app/pages/sc.js":
 /*!*************************!*\
   !*** ./app/pages/sc.js ***!
@@ -1439,6 +1372,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _controls_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controls/layout */ "./app/controls/layout.js");
+/* harmony import */ var _props__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./props */ "./app/pages/props.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -1462,6 +1396,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 

@@ -8,6 +8,7 @@ import {Search} from "./pages/search";
 import {Form} from "./pages/form";
 import {ServiceCenters} from "./pages/sc";
 import {Layout} from "./controls/layout";
+import {statusOptions, typeOfServiceOptions, ticketPriorityOptions} from "./pages/props"
 
 
 class TicketsComponent extends Component{
@@ -91,7 +92,9 @@ class TicketsComponent extends Component{
     this.getAllData()
     }, 5000);
 
-    statusOptions = [
+
+
+    /*statusOptions = [
         { value: 0, label: 'Новая' },
         { value: 1, label: 'Необходимы уточнения' },
         { value: 2, label: 'В работе' },
@@ -107,7 +110,7 @@ class TicketsComponent extends Component{
         {value: 0, label: "Низкий"},
         {value: 1, label: "Средний"},
         {value: 2, label: "Высокий"}
-    ];
+    ];*/
 
 
     render(){
@@ -119,7 +122,7 @@ class TicketsComponent extends Component{
                             <div>
                                 <div>{this.state.idOfupdatedTicket === ticket._id ? <div>ОБНОВЛЕНА!!!</div> : ''}
                                 Заявка {ticket.ticketNumber} от {ticket.ticketDate} {ticket.finishDate ? 'Дата завершения: '+ticket.finishDate + ' ' : ''}
-                                приоритет: {this.ticketPriorityOptinons[ticket.ticketPriority].label} Статус: {this.statusOptions[ticket.status].label}</div>
+                                приоритет: {ticketPriorityOptions[ticket.ticketPriority].label} Статус: {statusOptions[ticket.status].label}</div>
                                 <div>Инициатор {ticket.firstname +' '+ ticket.lasname + ' '+ ticket.familyname}</div>
                                 <Link to={'/list/'+ticket._id}>Подробнее об оборудовании {ticket.vendor} {ticket.model}</Link>
 
@@ -135,16 +138,16 @@ class TicketsComponent extends Component{
                                                     problem={ticket.problem}
                                                     projectCode={ticket.projectCode}
                                                     place={ticket.place}
-                                                    status={ticket.status} statusOptions={this.statusOptions}
+                                                    status={ticket.status} statusOptions={statusOptions}
                                                     finishDate={ticket.finishDate}
 
                                                     comment={ticket.comment}
                                                     saveButtonClick={(updatearg)=>{this.updateDataFunc(updatearg, ticket._id)}}
-                                                    ticketPriority={ticket.ticketPriority} ticketPriorityOptions={this.ticketPriorityOptinons}
+                                                    ticketPriority={ticket.ticketPriority} ticketPriorityOptions={ticketPriorityOptions}
 
                                                     serviceCenter={ticket.serviceCenter} serviceCenterOptions={this.state.sc}
                                                     serviceCenterTicket={ticket.serviceCenterTicket}
-                                                    typeOfService={ticket.typeOfService} typeOfServiceOptions={this.typeOfServiceOptions}
+                                                    typeOfService={ticket.typeOfService} typeOfServiceOptions={typeOfServiceOptions}
 
 
 
@@ -290,7 +293,7 @@ class OpenDescComponent extends  Component {
 
                     <label>Ремонт: </label>
                     <select className="typeOfService" onChange={this.changeTypeOfService} value={this.state.typeOfService}>
-                        {this.typeOfServiceOptions.map(typeOfService =>
+                        {typeOfServiceOptions.map(typeOfService =>
                             <option key={typeOfService.value} value={typeOfService.value}>{typeOfService.label}</option>
                         )}
                     </select>

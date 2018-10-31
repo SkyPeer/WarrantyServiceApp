@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Layout} from "../controls/layout";
 import ReactPhoneInput from 'react-phone-input-2'
+import {ticketPriorityOptions, placeOptions} from './props'
+
 
 class Form extends Component{
     state =  {
@@ -69,102 +71,27 @@ class Form extends Component{
         }
     };
 
-    ticketPriorityOptions = [
-        {value: 0, label: "Низкий"},
-        {value: 1, label: "Средний"},
-        {value: 2, label: "Высокий"}
-    ];
-
-    placeOptions = [
-        {value: 0, label: "Головной офис"},
-        {value: 1, label: "Доп. офис №1"},
-        {value: 2, label: "Доп. офис №2"},
-        {value: 3, label: "Склад"},
-        {value: 4, label: "Заказчик"},
-        {value: 5, label: "Другое"}
-    ];
-
-    /*Заменить все функции
-    * handleUserInput (e) {
-     const name = e.target.name;
-     const value = e.target.value;
-     this.setState({[name]: value});
-     }*/
-
-    onChangeHandler = (event) => {
-
+    handleUserInput = (e) => {
+        const name = e.target.id;
+        const value = e.target.value;
+        console.log(name, ' ', value);
+        this.setState({[name]: value})
     };
 
-    firstNameChange = (event) => {
-       // console.log('firstNameChange', event.target.value);
-        this.setState({firstname:event.target.value})
+    telnumChange = (e) => {
+        console.log('telnumnChange:', e);
+        this.setState({telnum:e})
     };
 
-    lastNameChange = (event) => {
-        //console.log('lastNameChange', event.target.value);
-        this.setState({lastname:event.target.value})
-    };
-
-    familyNameChange = (event) => {
-       // console.log('familyNameChange', event.target.value);
-        this.setState({familyname:event.target.value})
-    };
-
-    emailChange = (event) => {
-        //console.log('emailChange', event.target.value);
-        this.setState({email:event.target.value})
-    };
-
-    extnumChange = (event) => {
-       // console.log('extnumChange', event.target.value);
-        this.setState({extnum:event.target.value})
-    };
-
-    changePriority = (event) =>{
-        //console.log('changePriority:', event.target.value);
-        this.setState({ticketPriority: event.target.value})
-    };
-
-    placeChange = (event) => {
-        this.setState({place: event.target.value});
+    placeChange = (e) => {
+        this.setState({place: e.target.value});
         //console.log('this.state.place', this.state.place); // ПОЧЕМУ ТУТ ОСТАЕТСЯ СТАРОЕ ЗНАЧЕНИЕ, потому что обновление проихсодит внутри метода render() ???
 
         let errorsObj = this.state.formErrors;
-        event.target.value == '5' ? errorsObj['placeAnother'] = 'error' : delete errorsObj['placeAnother'];
+        e.target.value == '5' ? errorsObj['placeAnother'] = 'error' : delete errorsObj['placeAnother'];
         this.setState({formErrors: errorsObj})
 
     };
-
-    placeAnotherChange = (event) =>{
-        //console.log('changeAnotherPlace:', event.target.value);
-        this.setState({placeAnother: event.target.value})
-    };
-
-    vendorChange = (event) =>{
-       // console.log('changeVendor:', event.target.value);
-        this.setState({vendor: event.target.value})
-    };
-
-    modelChange = (event) =>{
-        console.log('changeModel:', event.target.value);
-        this.setState({model: event.target.value})
-    };
-
-    partNumberChange = (event) =>{
-        console.log('changepartNumber:', event.target.value);
-        this.setState({partNumber: event.target.value})
-    };
-
-    problemChange = (event) =>{
-        //console.log('changepartProblem:', event.target.value);
-        this.setState({problem: event.target.value})
-    };
-
-    projectCodechange = (event) =>{
-        //console.log('changeProjectCodec:', event.target.value);
-        this.setState({projectCode: event.target.value})
-    };
-
 
     checkLetters = (target) => {
         let value = target;
@@ -184,12 +111,12 @@ class Form extends Component{
         this.state.formErrors.hasOwnProperty(target.id) ? target.className = "input_error" : target.className = "input_correct"
     };
 
-    onBlur = (event) => {
+    onBlur = (e) => {
         //   console.log('blur');
-        let target = event.target;
-        let targetId = event.target.id;
-        let required = event.target.required;
-        let validator = event.target.dataset.validator;
+        let target = e.target;
+        let targetId = e.target.id;
+        let required = e.target.required;
+        let validator = e.target.dataset.validator;
         let checkValue = this.state[targetId];
 
         console.log('validator: ',validator);
@@ -256,9 +183,8 @@ class Form extends Component{
 
     };
 
-    onFocus = (event) => {
-        event.target.className='';
-
+    onFocus = (e) => {
+        e.target.className='';
     };
 
     onTelNumBlur = () => {
@@ -278,11 +204,6 @@ class Form extends Component{
             this.setState({telnumCheck:{borderColor: 'green'}});
         this.checkform();
 
-    };
-
-    telnumChange = (event) => {
-        console.log('telnumnChange:', event);
-        this.setState({telnum:event})
     };
 
     checkform = () => {
@@ -324,7 +245,7 @@ class Form extends Component{
                     <label>* Имя</label>
                     <input id="firstname"
                            placeholder="Введите Имя"
-                           onChange={this.firstNameChange}
+                           onChange={this.handleUserInput}
                            onFocus={this.onFocus}
                            onBlur={this.onBlur}
                            value={this.state.firstname}
@@ -338,7 +259,7 @@ class Form extends Component{
                         <label>* Фамилия: </label>
                         <input id="lastname"
                             placeholder="Введите Фамилию"
-                            onChange={this.lastNameChange}
+                            onChange={this.handleUserInput}
                             onFocus={this.onFocus}
                             onBlur={this.onBlur}
                             value={this.state.lastname}
@@ -351,7 +272,7 @@ class Form extends Component{
                     <div>
                         <label>  Отчество: </label>
                         <input id="familyname"
-                           onChange={this.familyNameChange}
+                           onChange={this.handleUserInput}
                            placeholder="Введите Отчество"
                            onFocus={this.onFocus}
                            onBlur={this.onBlur}
@@ -365,7 +286,7 @@ class Form extends Component{
                         <label>* E-mail:</label>
                         <input id="email"
                             placeholder="Укажите E-mail в формате example@site.com"
-                            onChange={this.emailChange}
+                            onChange={this.handleUserInput}
                             onFocus={this.onFocus}
                             onBlur={this.onBlur}
                             value={this.state.email}
@@ -392,7 +313,7 @@ class Form extends Component{
                     <div>
                     <label>  внутр. №: </label>
                     <input id="extnum"
-                        onChange={this.extnumChange}
+                        onChange={this.handleUserInput}
                         onFocus={this.onFocus}
                         onBlur={this.onBlur}
                         value={this.state.extnum}
@@ -405,7 +326,7 @@ class Form extends Component{
                     <div>
                     <label>* Производитель / вендор: </label>
                     <input id="vendor"
-                        onChange={this.vendorChange}
+                        onChange={this.handleUserInput}
                         onFocus={this.onFocus}
                         onBlur={this.onBlur}
                         value={this.state.vendor}
@@ -421,7 +342,7 @@ class Form extends Component{
                     <label>* Модель: </label>
                     <input id="model"
                         className=""
-                        onChange={this.modelChange}
+                        onChange={this.handleUserInput}
                         onFocus={this.onFocus}
                         onBlur={this.onBlur}
                         value={this.state.model}
@@ -434,7 +355,7 @@ class Form extends Component{
                     <div>
                     <label>* P/N или Заводской номер: </label>
                     <input id="partNumber"
-                        onChange={this.partNumberChange}
+                        onChange={this.handleUserInput}
                         onFocus={this.onFocus}
                         onBlur={this.onBlur}
                         value={this.state.partNumber}
@@ -446,7 +367,7 @@ class Form extends Component{
                     <div>
                     <label>* Описание проблемы:</label>
                     <textarea id="problem"
-                        onChange={this.problemChange}
+                        onChange={this.handleUserInput}
                         onFocus={this.onFocus}
                         onBlur={this.onBlur}
                         value={this.state.problem}
@@ -458,7 +379,7 @@ class Form extends Component{
                     <div>
                     <label>  Код проекта: </label>
                     <input id="projectCode"
-                        onChange={this.projectCodechange}
+                        onChange={this.handleUserInput}
                         onFocus={this.onFocus}
                         onBlur={this.onBlur}
                         value={this.state.projectCode}
@@ -471,13 +392,13 @@ class Form extends Component{
                     <select id="place"
                             onChange={this.placeChange}
                             value={this.state.place}>
-                        {this.placeOptions.map(place =>
+                        {placeOptions.map(place =>
                             <option key={place.value} value={place.value}>{place.label}</option>
                         )}
                     </select>{this.state.place === '5' ?
                     <input id="placeAnother"
                         placeholder="Укажите местоположение оборудование"
-                        onChange={this.placeAnotherChange}
+                        onChange={this.handleUserInput}
                         onFocus={this.onFocus}
                         onBlur={this.onBlur}
                         value={this.state.placeAnother}
@@ -488,8 +409,8 @@ class Form extends Component{
 
                     <div>
                     <label>Приоритет заявки: </label>
-                    <select className="selectPriority" onChange={this.changePriority} value={this.state.ticketPriority}>
-                        {this.ticketPriorityOptions.map(priority =>
+                    <select className="selectPriority" onChange={this.handleUserInput} value={this.state.ticketPriority}>
+                        {ticketPriorityOptions.map(priority =>
                             <option key={priority.value} value={priority.value}>{priority.label}</option>
                         )}
                     </select>
@@ -499,12 +420,6 @@ class Form extends Component{
                     <button onClick={()=>{
                         console.log(this.state.formErrors); console.log(this.state); console.log('formValid:', this.state.formValid)
                     }} className="btn btn-primary" >--- TEST</button>
-                    <button onClick={()=>{
-                        let test = document.getElementById('model');
-                        test.className="input_error2"
-                    }}>  --- TEST CSS --- </button>
-
-                    <button onClick={()=>{this.telTestFunc()}}>  --- TEST TEL2 --- </button>
                 </form>
 
             </Layout>
