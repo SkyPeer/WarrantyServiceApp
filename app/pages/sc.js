@@ -21,14 +21,9 @@ class ServiceCentres extends Component{
         fetch(`/mongooseGetDataSC`)
             .then(res => res.json())
             .then(json => this.setState({ sc: json }));
-
         fetch(`/mongooseGetTicketsSC`)
             .then(res => res.json())
             .then(json => this.setState({scTickets: json}))
-            //.then(console.log(this.state.scTickets))
-        /*.then(res => res.json())
-            .then(json => this.setState({ scTelnum: json }))
-            .then(console.log('this.state.scTelnum', this.state.scTelnum));*/
     };
 
     updateSericeCenter = (stateForUpdate) => {
@@ -44,7 +39,6 @@ class ServiceCentres extends Component{
             }
         })
             .then(checkStatus)
-            //.then(()=>console.log('updated'))
             .then(() => this.getAllServiceCenters())
             .then(() => this.setState({idOfupdatedSC: stateForUpdate._id, openformForEdit: null}));
 
@@ -74,15 +68,9 @@ class ServiceCentres extends Component{
                 }
             })
                 .then(checkStatus)
-                //.then(checkStatus => checkStatus.json())
-                /*.then((json)=> this.setState({
-                    newTicketNumber: json.resJson.ticketNumber,
-                    datetimeOfCreate: json.resJson.currnetDateTime}))*/
                 .then(()=>{this.getAllServiceCenters()})
                 .then(()=>{this.setState({openformForCreate: false, newCs: true})})
                 .then(()=>console.log('new sc inserted'));
-
-
 
             function checkStatus(responsee) {
                 if (responsee.status >= 200 && responsee.status < 300) {
@@ -168,22 +156,11 @@ class ServiceCentres extends Component{
                                         clickDelFunc = {this.deleteHandler}
                                         {...serviceCenter}
                                     /> }
-
-
                             <hr />
                         </div>
-
                     ))}
-                    <button onClick={()=>{
-                        console.log(this.state);
-                        console.log(this.checkServiceCenterInTickets('5bcea6360c898a5cbe269f9a'));
-
-                    }}> ---- TEST </button>
-                    <button onClick={()=>{this.deleteServiceCenter('5bd87131691704064098311b')}}> TEST DEL </button>
-
                 </div>
             </Layout>
-
         )
     }
 }

@@ -409,10 +409,22 @@ function (_Component) {
     value: function render() {
       var _this3 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_8__["Layout"], null, this.state.data.map(function (ticket) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_8__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.ticketWasDeleted && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0417\u0430\u044F\u0432\u043A\u0430 \u0443\u0434\u0430\u043B\u0435\u043D\u0430! ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          _this3.setState({
+            ticketWasDeleted: false
+          });
+        }
+      }, "OK"))), this.state.data.map(function (ticket) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: ticket._id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.state.idOfupdatedTicket === ticket._id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0410!!!") : '', "\u0417\u0430\u044F\u0432\u043A\u0430 ", ticket.ticketNumber, " \u043E\u0442 ", ticket.ticketDate, " ", ticket.finishDate ? 'Дата завершения: ' + ticket.finishDate + ' ' : '', "\u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", _pages_props__WEBPACK_IMPORTED_MODULE_9__["ticketPriorityOptions"][ticket.ticketPriority].label, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _pages_props__WEBPACK_IMPORTED_MODULE_9__["statusOptions"][ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.firstname + ' ' + ticket.lasname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.state.idOfupdatedTicket === ticket._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " --- \u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0410!!! --- "), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            _this3.setState({
+              idOfupdatedTicket: null
+            });
+          }
+        }, "OK"))), "\u0417\u0430\u044F\u0432\u043A\u0430 ", ticket.ticketNumber, " \u043E\u0442 ", ticket.ticketDate, " ", ticket.finishDate ? 'Дата завершения: ' + ticket.finishDate + ' ' : '', "\u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", _pages_props__WEBPACK_IMPORTED_MODULE_9__["ticketPriorityOptions"][ticket.ticketPriority].label, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _pages_props__WEBPACK_IMPORTED_MODULE_9__["statusOptions"][ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.firstname + ' ' + ticket.lasname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: '/list/' + ticket._id
         }, "\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435 \u043E\u0431 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0438 ", ticket.vendor, " ", ticket.model), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, ticket._id === _this3.state.openTicketDescId && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(OpenFormComponent, {
           _id: ticket._id,
@@ -452,7 +464,7 @@ function (_Component) {
               openTicketDescId: null
             });
           }
-        }, "CLOSE")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)));
+        }, "CLOSE")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
       }));
     }
   }]);
@@ -1405,11 +1417,7 @@ function (_Component) {
         return _this.setState({
           scTickets: json
         });
-      }); //.then(console.log(this.state.scTickets))
-
-      /*.then(res => res.json())
-          .then(json => this.setState({ scTelnum: json }))
-          .then(console.log('this.state.scTelnum', this.state.scTelnum));*/
+      });
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateSericeCenter", function (stateForUpdate) {
@@ -1421,8 +1429,7 @@ function (_Component) {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         }
-      }).then(checkStatus) //.then(()=>console.log('updated'))
-      .then(function () {
+      }).then(checkStatus).then(function () {
         return _this.getAllServiceCenters();
       }).then(function () {
         return _this.setState({
@@ -1451,12 +1458,7 @@ function (_Component) {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         }
-      }).then(checkStatus) //.then(checkStatus => checkStatus.json())
-
-      /*.then((json)=> this.setState({
-          newTicketNumber: json.resJson.ticketNumber,
-          datetimeOfCreate: json.resJson.currnetDateTime}))*/
-      .then(function () {
+      }).then(checkStatus).then(function () {
         _this.getAllServiceCenters();
       }).then(function () {
         _this.setState({
@@ -1586,16 +1588,7 @@ function (_Component) {
           clickSaveFunc: _this2.updateSericeCenter,
           clickDelFunc: _this2.deleteHandler
         }, serviceCenter)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          console.log(_this2.state);
-          console.log(_this2.checkServiceCenterInTickets('5bcea6360c898a5cbe269f9a'));
-        }
-      }, " ---- TEST "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          _this2.deleteServiceCenter('5bd87131691704064098311b');
-        }
-      }, " TEST DEL ")));
+      })));
     }
   }]);
 

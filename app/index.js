@@ -114,17 +114,18 @@ class TicketsComponent extends Component{
     render(){
         return(
             <Layout>
-                {this.state.data.map((ticket) => (
+                <div>{this.state.ticketWasDeleted && <div>Заявка удалена! <button onClick={()=>{this.setState({ticketWasDeleted:false})}}>OK</button></div> }</div>
+
+                    {this.state.data.map((ticket) => (
                             <div key={ticket._id}>
                             <div>
-                                <div>{this.state.idOfupdatedTicket === ticket._id ? <div>ОБНОВЛЕНА!!!</div> : ''}
-                                Заявка {ticket.ticketNumber} от {ticket.ticketDate} {ticket.finishDate ? 'Дата завершения: '+ticket.finishDate + ' ' : ''}
-                                приоритет: {ticketPriorityOptions[ticket.ticketPriority].label} Статус: {statusOptions[ticket.status].label}</div>
-                                <div>Инициатор {ticket.firstname +' '+ ticket.lasname + ' '+ ticket.familyname}</div>
-                                <Link to={'/list/'+ticket._id}>Подробнее об оборудовании {ticket.vendor} {ticket.model}</Link>
+                            <div>{this.state.idOfupdatedTicket === ticket._id && <div><b> --- ОБНОВЛЕНА!!! --- </b> <button onClick={ ()=>{this.setState({idOfupdatedTicket:null})} }>OK</button></div>}</div>
+                            Заявка {ticket.ticketNumber} от {ticket.ticketDate} {ticket.finishDate ? 'Дата завершения: '+ticket.finishDate + ' ' : ''}
+                            приоритет: {ticketPriorityOptions[ticket.ticketPriority].label} Статус: {statusOptions[ticket.status].label}</div>
+                            <div>Инициатор {ticket.firstname +' '+ ticket.lasname + ' '+ ticket.familyname}</div>
+                            <Link to={'/list/'+ticket._id}>Подробнее об оборудовании {ticket.vendor} {ticket.model}</Link>
 
                                     <div>
-
                                         {ticket._id === this.state.openTicketDescId && (
                                             <section>
 
@@ -157,7 +158,7 @@ class TicketsComponent extends Component{
                                     </div>
                                     <hr />
                                 </div>
-                            </div>))}
+                            ))}
             </Layout>
         )}
 }// end of RouterComponent
