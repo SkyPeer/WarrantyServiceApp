@@ -228,16 +228,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_dropdown__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dropdown */ "./node_modules/react-dropdown/dist/index.js");
-/* harmony import */ var react_dropdown__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_dropdown__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_dropdown_style_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-dropdown/style.css */ "./node_modules/react-dropdown/style.css");
-/* harmony import */ var react_dropdown_style_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_dropdown_style_css__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _pages_main__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/main */ "./app/pages/main.js");
-/* harmony import */ var _pages_search__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/search */ "./app/pages/search.js");
-/* harmony import */ var _pages_form__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/form */ "./app/pages/form.js");
-/* harmony import */ var _pages_sc__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/sc */ "./app/pages/sc.js");
-/* harmony import */ var _controls_layout__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./controls/layout */ "./app/controls/layout.js");
-/* harmony import */ var _pages_props__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/props */ "./app/pages/props.js");
+/* harmony import */ var react_dropdown_style_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dropdown/style.css */ "./node_modules/react-dropdown/style.css");
+/* harmony import */ var react_dropdown_style_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_dropdown_style_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _pages_main__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/main */ "./app/pages/main.js");
+/* harmony import */ var _pages_search__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/search */ "./app/pages/search.js");
+/* harmony import */ var _pages_form__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/form */ "./app/pages/form.js");
+/* harmony import */ var _pages_sc__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/sc */ "./app/pages/sc.js");
+/* harmony import */ var _controls_layout__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./controls/layout */ "./app/controls/layout.js");
+/* harmony import */ var _pages_props__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/props */ "./app/pages/props.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -259,7 +257,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -294,18 +291,51 @@ function (_Component) {
       data: [],
       openTicketDescId: null,
       idOfupdatedTicket: null,
-      sc: []
+      sc: [],
+      ticketWasDeleted: false
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "deleteData", function (id) {
+      console.log('deleteTicket, id', id);
+      fetch('/mongooseTicketDelete', {
+        method: 'post',
+        body: JSON.stringify({
+          _id: id
+        }),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).then(checkStatus).then(function () {
+        _this.setState({
+          idOfupdatedTicket: null,
+          ticketWasDeleted: true
+        });
+      }).then(_this.getAllData()).then(function () {
+        return console.log('ticket deleted');
+      });
+
+      function checkStatus(responsee) {
+        if (responsee.status >= 200 && responsee.status < 300) {
+          //console.log(response);
+          return responsee;
+        } else {
+          var error = new Error(response.statusText);
+          error.response = response;
+          throw error;
+        }
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "promtToDelete", function (ticketNumber, _id) {
+      var originalPrompt = window.prompt;
+      var answer = originalPrompt("Для удаление заявки № " + ticketNumber + " лвведите ее номер для подтверждения");
+      answer == ticketNumber ? _this.deleteData(_id) : alert('Ошибка ввода, удаление отменено');
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateDataFunc", function (updatearg, id) {
-      //console.log('clickFunc', updatearg, id);
       fetch('/mongooseUpdate', {
         method: 'post',
-
-        /*body: JSON.stringify({
-            _id: id,
-            status: updatearg.status
-        }), */
         body: JSON.stringify(_objectSpread({
           _id: id
         }, updatearg)),
@@ -313,8 +343,7 @@ function (_Component) {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         }
-      }).then(checkStatus) //.then(()=>console.log('updated'))
-      .then(function () {
+      }).then(checkStatus).then(function () {
         return _this.getAllData();
       }).then(function () {
         return _this.setState({
@@ -360,7 +389,7 @@ function (_Component) {
         return _this2.setState({
           sc: json
         });
-      }); //.then(()=>{console.log(' --- sc: ', this.state.sc)})
+      });
     }
   }, {
     key: "componentDidMount",
@@ -377,57 +406,40 @@ function (_Component) {
     }
   }, {
     key: "render",
-
-    /*statusOptions = [
-        { value: 0, label: 'Новая' },
-        { value: 1, label: 'Необходимы уточнения' },
-        { value: 2, label: 'В работе' },
-        { value: 3, label: 'Завершена' },
-        { value: 4, label: 'Отклонена' },
-    ];
-    typeOfServiceOptions = [
-        {value: 0, label: 'Гарантийный'},
-        {value: 1, label: 'Не гарантийный'}
-    ];
-      ticketPriorityOptinons = [
-        {value: 0, label: "Низкий"},
-        {value: 1, label: "Средний"},
-        {value: 2, label: "Высокий"}
-    ];*/
     value: function render() {
       var _this3 = this;
 
-      //console.log(this.state.data);
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_9__["Layout"], null, this.state.data.map(function (ticket) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_8__["Layout"], null, this.state.data.map(function (ticket) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: ticket._id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.state.idOfupdatedTicket === ticket._id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0410!!!") : '', "\u0417\u0430\u044F\u0432\u043A\u0430 ", ticket.ticketNumber, " \u043E\u0442 ", ticket.ticketDate, " ", ticket.finishDate ? 'Дата завершения: ' + ticket.finishDate + ' ' : '', "\u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", _pages_props__WEBPACK_IMPORTED_MODULE_10__["ticketPriorityOptions"][ticket.ticketPriority].label, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _pages_props__WEBPACK_IMPORTED_MODULE_10__["statusOptions"][ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.firstname + ' ' + ticket.lasname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.state.idOfupdatedTicket === ticket._id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0410!!!") : '', "\u0417\u0430\u044F\u0432\u043A\u0430 ", ticket.ticketNumber, " \u043E\u0442 ", ticket.ticketDate, " ", ticket.finishDate ? 'Дата завершения: ' + ticket.finishDate + ' ' : '', "\u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", _pages_props__WEBPACK_IMPORTED_MODULE_9__["ticketPriorityOptions"][ticket.ticketPriority].label, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _pages_props__WEBPACK_IMPORTED_MODULE_9__["statusOptions"][ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.firstname + ' ' + ticket.lasname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: '/list/' + ticket._id
-        }, "\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435 \u043E\u0431 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0438 ", ticket.vendor, " ", ticket.model), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, ticket._id === _this3.state.openTicketDescId && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(OpenDescComponent, {
+        }, "\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435 \u043E\u0431 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0438 ", ticket.vendor, " ", ticket.model), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, ticket._id === _this3.state.openTicketDescId && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(OpenFormComponent, {
+          _id: ticket._id,
           contacts: {
             telnum: ticket.telnum,
             email: ticket.email,
             extum: ticket.extnum
           },
-          idshnik: ticket._id,
           ticketNumber: ticket.ticketNumber,
           problem: ticket.problem,
           projectCode: ticket.projectCode,
           place: ticket.place,
           status: ticket.status,
-          statusOptions: _pages_props__WEBPACK_IMPORTED_MODULE_10__["statusOptions"],
+          statusOptions: _pages_props__WEBPACK_IMPORTED_MODULE_9__["statusOptions"],
           finishDate: ticket.finishDate,
           comment: ticket.comment,
-          saveButtonClick: function saveButtonClick(updatearg) {
-            _this3.updateDataFunc(updatearg, ticket._id);
-          },
           ticketPriority: ticket.ticketPriority,
-          ticketPriorityOptions: _pages_props__WEBPACK_IMPORTED_MODULE_10__["ticketPriorityOptions"],
+          ticketPriorityOptions: _pages_props__WEBPACK_IMPORTED_MODULE_9__["ticketPriorityOptions"],
           serviceCenter: ticket.serviceCenter,
           serviceCenterOptions: _this3.state.sc,
           serviceCenterTicket: ticket.serviceCenterTicket,
           typeOfService: ticket.typeOfService,
-          typeOfServiceOptions: _pages_props__WEBPACK_IMPORTED_MODULE_10__["typeOfServiceOptions"]
+          typeOfServiceOptions: _pages_props__WEBPACK_IMPORTED_MODULE_9__["typeOfServiceOptions"],
+          saveButtonClick: function saveButtonClick(updatearg) {
+            _this3.updateDataFunc(updatearg, ticket._id);
+          },
+          deleteButtonClick: _this3.promtToDelete
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick() {
             _this3.setState({
@@ -449,23 +461,23 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); // end of RouterComponent
 
 
-var OpenDescComponent =
+var OpenFormComponent =
 /*#__PURE__*/
 function (_Component2) {
-  _inherits(OpenDescComponent, _Component2);
+  _inherits(OpenFormComponent, _Component2);
 
-  function OpenDescComponent() {
+  function OpenFormComponent() {
     var _getPrototypeOf3;
 
     var _this4;
 
-    _classCallCheck(this, OpenDescComponent);
+    _classCallCheck(this, OpenFormComponent);
 
     for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
       args[_key2] = arguments[_key2];
     }
 
-    _this4 = _possibleConstructorReturn(this, (_getPrototypeOf3 = _getPrototypeOf(OpenDescComponent)).call.apply(_getPrototypeOf3, [this].concat(args)));
+    _this4 = _possibleConstructorReturn(this, (_getPrototypeOf3 = _getPrototypeOf(OpenFormComponent)).call.apply(_getPrototypeOf3, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "state", {
       comment: '',
@@ -480,26 +492,18 @@ function (_Component2) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "statusOptions", _this4.props.statusOptions);
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "typeOfServiceOptions", _this4.props.typeOfServiceOptions);
-
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "ticketPriorityOptions", _this4.props.ticketPriorityOptions);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "serviceCenterOptions", _this4.props.serviceCenterOptions);
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "ticketNumber", _this4.props.ticketNumber);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "_id", _this4.props._id);
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "fullSetStateFunc", function () {
-      //console.log(' --- fullSetStateFunc');
-      _this4.setState({
-        comment: _this4.props.comment,
-        status: _this4.props.status,
-        typeOfService: _this4.props.typeOfService,
-        ticketPriority: _this4.props.ticketPriority,
-        serviceCenter: _this4.props.serviceCenter,
-        finishDate: _this4.props.finishDate,
-        serviceCenterTicket: _this4.props.serviceCenterTicket
-      });
+      _this4.setState(_objectSpread({}, _this4.props));
 
       _this4.props.serviceCenter !== '' ? _this4.getServiceCenterDetails(_this4.props.serviceCenter) : '';
-      /*console.log('fullSetStateFunc: serviceCenter Not checked') */
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "getServiceCenterDetails", function (id) {
@@ -512,43 +516,15 @@ function (_Component2) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "changeComment", function (event) {
-      //console.log(event.target.value);
-      _this4.setState({
-        comment: event.target.value
-      });
-    });
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "handleUserInput", function (e) {
+      var name = e.target.id;
+      var value = e.target.value;
+      console.log(name, ' ', value);
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "changeFinishDate", function (event) {
-      //console.log(event.target.value);
-      _this4.setState({
-        finishDate: event.target.value
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "changeServiceCenterTicket", function (event) {
-      //console.log(event.target.value);
-      _this4.setState({
-        serviceCenterTicket: event.target.value
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "changePriority", function (event) {
-      //console.log('changePriority', event.target.value);
-      _this4.setState({
-        ticketPriority: event.target.value
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "changeStatus", function (event) {
-      //console.log('changeStatus', event.target.value);
-      _this4.setState({
-        status: event.target.value
-      });
+      _this4.setState(_defineProperty({}, name, value));
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "changeServiceCenter", function (event) {
-      //console.log(event.target.value);
       _this4.getServiceCenterDetails(event.target.value);
 
       _this4.setState({
@@ -556,24 +532,8 @@ function (_Component2) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "changeTypeOfService", function (event) {
-      //console.log('changeTypeOfService',event.target.value);
-      _this4.setState({
-        typeOfService: event.target.value
-      });
-    });
-
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "saveFormFunc", function () {
-      //console.log('this.state', this.state);
-      _this4.props.saveButtonClick({
-        comment: _this4.state.comment,
-        status: _this4.state.status,
-        typeOfService: _this4.state.typeOfService,
-        ticketPriority: _this4.state.ticketPriority,
-        serviceCenter: _this4.state.serviceCenter,
-        serviceCenterTicket: _this4.state.serviceCenterTicket,
-        finishDate: _this4.state.finishDate
-      });
+      _this4.props.saveButtonClick(_objectSpread({}, _this4.state));
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "resetForm", function () {
@@ -583,29 +543,30 @@ function (_Component2) {
     return _this4;
   }
 
-  _createClass(OpenDescComponent, [{
+  _createClass(OpenFormComponent, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      //console.log('--componentDidMount');
       this.fullSetStateFunc();
     }
   }, {
     key: "render",
     value: function render() {
+      var _this5 = this;
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         id: "OpenDescComponent",
         onSubmit: function onSubmit(event) {
           event.preventDefault();
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Key: ", this.props.idshnik, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041F\u0440\u0438\u0447\u0438\u043D\u0430: ", this.props.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430: ", this.props.projectCode), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041C\u0435\u0441\u0442\u043E\u043D\u0430\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F: ", this.props.place), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Email:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041F\u0440\u0438\u0447\u0438\u043D\u0430: ", this.props.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430: ", this.props.projectCode), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041C\u0435\u0441\u0442\u043E\u043D\u0430\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F: ", this.props.place), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Email:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "mailto:" + this.props.contacts.email + "?subject=Заявка на гарантийное обслуживание № " + this.props.ticketNumber
-      }, this.props.contacts.email + ' '), "\u0422\u0435\u043B.: ", this.props.contacts.telnum + ' ', "\u0412\u043D\u0443\u0442\u0440: ", this.props.contacts.extum + ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, this.props.contacts.email + ' '), "\u0422\u0435\u043B.: ", this.props.contacts.telnum + ' ', "\u0412\u043D\u0443\u0442\u0440: ", this.props.contacts.extum + ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041A\u043E\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         id: "comment",
         value: this.state.comment,
-        onChange: this.changeComment
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        className: "selectServiceCenter",
+        onChange: this.handleUserInput
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        id: "serviceCenter",
         onChange: this.changeServiceCenter,
         value: this.state.serviceCenter
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
@@ -616,53 +577,55 @@ function (_Component2) {
           key: sc._id,
           value: sc._id
         }, sc.scTitle);
-      })), this.state.serviceCenterDetails !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0421\u0426: "), this.state.serviceCenterDetails.scAdress, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432:"), " ", this.state.serviceCenterDetails.scVendors) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0420\u0435\u043C\u043E\u043D\u0442: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        className: "typeOfService",
-        onChange: this.changeTypeOfService,
+      })), this.state.serviceCenterDetails !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0421\u0426: "), this.state.serviceCenterDetails.scAdress, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432:"), " ", this.state.serviceCenterDetails.scVendors) : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0420\u0435\u043C\u043E\u043D\u0442: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        id: "typeOfService",
+        onChange: this.handleUserInput,
         value: this.state.typeOfService
-      }, _pages_props__WEBPACK_IMPORTED_MODULE_10__["typeOfServiceOptions"].map(function (typeOfService) {
+      }, _pages_props__WEBPACK_IMPORTED_MODULE_9__["typeOfServiceOptions"].map(function (typeOfService) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: typeOfService.value,
           value: typeOfService.value
         }, typeOfService.label);
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0414\u0430\u0442\u0430 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u044F:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        onChange: this.changeFinishDate,
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0414\u0430\u0442\u0430 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u044F:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "finishDate",
+        onChange: this.handleUserInput,
         value: this.state.finishDate
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u043A\u043E\u043D\u0442\u0440\u0430\u043A\u0442 / \u2116 \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        onChange: this.changeServiceCenterTicket,
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u043A\u043E\u043D\u0442\u0440\u0430\u043A\u0442 / \u2116 \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "serviceCenterTicket",
+        onChange: this.handleUserInput,
         value: this.state.serviceCenterTicket
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 \u0437\u0430\u044F\u0432\u043A\u0438:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 \u0437\u0430\u044F\u0432\u043A\u0438:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        id: "ticketPriority",
         className: "selectPriority",
-        onChange: this.changePriority,
+        onChange: this.handleUserInput,
         value: this.state.ticketPriority
       }, this.props.ticketPriorityOptions.map(function (priority) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: priority.value,
           value: priority.value
         }, priority.label);
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0442\u0430\u0442\u0443\u0441 \u0437\u0430\u044F\u0432\u043A\u0438:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        className: "selectStatus",
-        onChange: this.changeStatus,
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0442\u0430\u0442\u0443\u0441 \u0437\u0430\u044F\u0432\u043A\u0438:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        id: "status",
+        onChange: this.handleUserInput,
         value: this.state.status
       }, this.props.statusOptions.map(function (status) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: status.value,
           value: status.value
         }, status.label);
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.saveFormFunc
       }, " SAVE "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.resetForm
-      }, "Reset"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {//console.log('this.state.serviceCenter', this.state.serviceCenter);
-          //console.log('this.props.serviceCenterOptions: ', this.props.serviceCenterOptions)
-          //console.log('this.state.serviceCenterDetails: ',this.state.serviceCenterDetails)
+      }, "RESET"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          _this5.props.deleteButtonClick(_this5.ticketNumber, _this5._id);
         }
-      }, " --- TEST --- "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)));
+      }, "DELETE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
     }
   }]);
 
-  return OpenDescComponent;
+  return OpenFormComponent;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 var DescComponent =
@@ -673,7 +636,7 @@ function (_Component3) {
   function DescComponent() {
     var _getPrototypeOf4;
 
-    var _this5;
+    var _this6;
 
     _classCallCheck(this, DescComponent);
 
@@ -681,22 +644,22 @@ function (_Component3) {
       args[_key3] = arguments[_key3];
     }
 
-    _this5 = _possibleConstructorReturn(this, (_getPrototypeOf4 = _getPrototypeOf(DescComponent)).call.apply(_getPrototypeOf4, [this].concat(args)));
+    _this6 = _possibleConstructorReturn(this, (_getPrototypeOf4 = _getPrototypeOf(DescComponent)).call.apply(_getPrototypeOf4, [this].concat(args)));
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this5)), "state", {
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this6)), "state", {
       data: {}
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this5)), "arg", _this5.props.match.params.ticketid);
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this6)), "arg", _this6.props.match.params.ticketid);
 
-    return _this5;
+    return _this6;
   }
 
   _createClass(DescComponent, [{
     key: "componentDidMount",
     //foo = console.log('DescComponent, this.arg: ',this.arg);
     value: function componentDidMount() {
-      var _this6 = this;
+      var _this7 = this;
 
       fetch('/mongoosefind', {
         method: 'post',
@@ -710,7 +673,7 @@ function (_Component3) {
       }).then(function (res) {
         return res.json();
       }).then(function (json) {
-        return _this6.setState({
+        return _this7.setState({
           data: json
         });
       });
@@ -718,7 +681,7 @@ function (_Component3) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_9__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Title: ", this.state.data.ticketNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Desc: ", this.state.data.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_8__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Title: ", this.state.data.ticketNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Desc: ", this.state.data.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: '../list'
       }, "\u041E\u0431\u0440\u0430\u0442\u043D\u043E \u043A \u0437\u0430\u044F\u0432\u043A\u0430\u043C"));
     }
@@ -732,7 +695,7 @@ var Routing = function Routing() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/",
-    component: _pages_main__WEBPACK_IMPORTED_MODULE_5__["Main"]
+    component: _pages_main__WEBPACK_IMPORTED_MODULE_4__["Main"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/list/:ticketid",
     component: DescComponent
@@ -741,16 +704,15 @@ var Routing = function Routing() {
     component: TicketsComponent
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/search",
-    component: _pages_search__WEBPACK_IMPORTED_MODULE_6__["Search"]
+    component: _pages_search__WEBPACK_IMPORTED_MODULE_5__["Search"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/form",
-    component: _pages_form__WEBPACK_IMPORTED_MODULE_7__["Form"]
+    component: _pages_form__WEBPACK_IMPORTED_MODULE_6__["Form"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/sc",
-    component: _pages_sc__WEBPACK_IMPORTED_MODULE_8__["ServiceCenters"]
+    component: _pages_sc__WEBPACK_IMPORTED_MODULE_7__["ServiceCentres"]
   }));
-}; //const Api = () => (<TicketsComponent />,);
-
+};
 
 Object(react_dom__WEBPACK_IMPORTED_MODULE_2__["render"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Routing, null)), document.getElementById('root'));
 
@@ -1363,12 +1325,12 @@ var typeOfServiceOptions = [{
 /*!*************************!*\
   !*** ./app/pages/sc.js ***!
   \*************************/
-/*! exports provided: ServiceCenters */
+/*! exports provided: ServiceCentres */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServiceCenters", function() { return ServiceCenters; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServiceCentres", function() { return ServiceCentres; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _controls_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controls/layout */ "./app/controls/layout.js");
@@ -1401,23 +1363,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var ServiceCenters =
+var ServiceCentres =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(ServiceCenters, _Component);
+  _inherits(ServiceCentres, _Component);
 
-  function ServiceCenters() {
+  function ServiceCentres() {
     var _getPrototypeOf2;
 
     var _this;
 
-    _classCallCheck(this, ServiceCenters);
+    _classCallCheck(this, ServiceCentres);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ServiceCenters)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ServiceCentres)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
       sc: [],
@@ -1575,7 +1537,7 @@ function (_Component) {
     return _this;
   }
 
-  _createClass(ServiceCenters, [{
+  _createClass(ServiceCentres, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       this.getAllServiceCenters();
@@ -1637,7 +1599,7 @@ function (_Component) {
     }
   }]);
 
-  return ServiceCenters;
+  return ServiceCentres;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 var ServiceCenterForm =
@@ -1783,68 +1745,6 @@ function (_Component) {
   return Search;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-
-
-/***/ }),
-
-/***/ "./node_modules/classnames/index.js":
-/*!******************************************!*\
-  !*** ./node_modules/classnames/index.js ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-  Copyright (c) 2017 Jed Watson.
-  Licensed under the MIT License (MIT), see
-  http://jedwatson.github.io/classnames
-*/
-/* global define */
-
-(function () {
-	'use strict';
-
-	var hasOwn = {}.hasOwnProperty;
-
-	function classNames () {
-		var classes = [];
-
-		for (var i = 0; i < arguments.length; i++) {
-			var arg = arguments[i];
-			if (!arg) continue;
-
-			var argType = typeof arg;
-
-			if (argType === 'string' || argType === 'number') {
-				classes.push(arg);
-			} else if (Array.isArray(arg) && arg.length) {
-				var inner = classNames.apply(null, arg);
-				if (inner) {
-					classes.push(inner);
-				}
-			} else if (argType === 'object') {
-				for (var key in arg) {
-					if (hasOwn.call(arg, key) && arg[key]) {
-						classes.push(key);
-					}
-				}
-			}
-		}
-
-		return classes.join(' ');
-	}
-
-	if (typeof module !== 'undefined' && module.exports) {
-		classNames.default = classNames;
-		module.exports = classNames;
-	} else if (true) {
-		// register as 'classnames', consistent with npm package name
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
-			return classNames;
-		}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else {}
-}());
 
 
 /***/ }),
@@ -22552,293 +22452,6 @@ function checkDCE() {
 if (false) {} else {
   module.exports = __webpack_require__(/*! ./cjs/react-dom.development.js */ "./node_modules/react-dom/cjs/react-dom.development.js");
 }
-
-
-/***/ }),
-
-/***/ "./node_modules/react-dropdown/dist/index.js":
-/*!***************************************************!*\
-  !*** ./node_modules/react-dropdown/dist/index.js ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var DEFAULT_PLACEHOLDER_STRING = 'Select...';
-
-var Dropdown = function (_Component) {
-  _inherits(Dropdown, _Component);
-
-  function Dropdown(props) {
-    _classCallCheck(this, Dropdown);
-
-    var _this = _possibleConstructorReturn(this, (Dropdown.__proto__ || Object.getPrototypeOf(Dropdown)).call(this, props));
-
-    _this.state = {
-      selected: _this.parseValue(props.value, props.options) || {
-        label: typeof props.placeholder === 'undefined' ? DEFAULT_PLACEHOLDER_STRING : props.placeholder,
-        value: ''
-      },
-      isOpen: false
-    };
-    _this.mounted = true;
-    _this.handleDocumentClick = _this.handleDocumentClick.bind(_this);
-    _this.fireChangeEvent = _this.fireChangeEvent.bind(_this);
-    return _this;
-  }
-
-  _createClass(Dropdown, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(newProps) {
-      if (newProps.value) {
-        var selected = this.parseValue(newProps.value, newProps.options);
-        if (selected !== this.state.selected) {
-          this.setState({ selected: selected });
-        }
-      } else {
-        this.setState({ selected: {
-            label: typeof newProps.placeholder === 'undefined' ? DEFAULT_PLACEHOLDER_STRING : newProps.placeholder,
-            value: ''
-          } });
-      }
-    }
-  }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      document.addEventListener('click', this.handleDocumentClick, false);
-      document.addEventListener('touchend', this.handleDocumentClick, false);
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this.mounted = false;
-      document.removeEventListener('click', this.handleDocumentClick, false);
-      document.removeEventListener('touchend', this.handleDocumentClick, false);
-    }
-  }, {
-    key: 'handleMouseDown',
-    value: function handleMouseDown(event) {
-      if (this.props.onFocus && typeof this.props.onFocus === 'function') {
-        this.props.onFocus(this.state.isOpen);
-      }
-      if (event.type === 'mousedown' && event.button !== 0) return;
-      event.stopPropagation();
-      event.preventDefault();
-
-      if (!this.props.disabled) {
-        this.setState({
-          isOpen: !this.state.isOpen
-        });
-      }
-    }
-  }, {
-    key: 'parseValue',
-    value: function parseValue(value, options) {
-      var option = void 0;
-
-      if (typeof value === 'string') {
-        for (var i = 0, num = options.length; i < num; i++) {
-          if (options[i].type === 'group') {
-            var match = options[i].items.filter(function (item) {
-              return item.value === value;
-            });
-            if (match.length) {
-              option = match[0];
-            }
-          } else if (typeof options[i].value !== 'undefined' && options[i].value === value) {
-            option = options[i];
-          }
-        }
-      }
-
-      return option || value;
-    }
-  }, {
-    key: 'setValue',
-    value: function setValue(value, label) {
-      var newState = {
-        selected: {
-          value: value,
-          label: label },
-        isOpen: false
-      };
-      this.fireChangeEvent(newState);
-      this.setState(newState);
-    }
-  }, {
-    key: 'fireChangeEvent',
-    value: function fireChangeEvent(newState) {
-      if (newState.selected !== this.state.selected && this.props.onChange) {
-        this.props.onChange(newState.selected);
-      }
-    }
-  }, {
-    key: 'renderOption',
-    value: function renderOption(option) {
-      var _classes;
-
-      var value = option.value;
-      if (typeof value === 'undefined') {
-        value = option.label || option;
-      }
-      var label = option.label || option.value || option;
-
-      var classes = (_classes = {}, _defineProperty(_classes, this.props.baseClassName + '-option', true), _defineProperty(_classes, option.className, !!option.className), _defineProperty(_classes, 'is-selected', value === this.state.selected.value || value === this.state.selected), _classes);
-
-      var optionClass = (0, _classnames2.default)(classes);
-
-      return _react2.default.createElement(
-        'div',
-        {
-          key: value,
-          className: optionClass,
-          onMouseDown: this.setValue.bind(this, value, label),
-          onClick: this.setValue.bind(this, value, label) },
-        label
-      );
-    }
-  }, {
-    key: 'buildMenu',
-    value: function buildMenu() {
-      var _this2 = this;
-
-      var _props = this.props,
-          options = _props.options,
-          baseClassName = _props.baseClassName;
-
-      var ops = options.map(function (option) {
-        if (option.type === 'group') {
-          var groupTitle = _react2.default.createElement(
-            'div',
-            { className: baseClassName + '-title' },
-            option.name
-          );
-          var _options = option.items.map(function (item) {
-            return _this2.renderOption(item);
-          });
-
-          return _react2.default.createElement(
-            'div',
-            { className: baseClassName + '-group', key: option.name },
-            groupTitle,
-            _options
-          );
-        } else {
-          return _this2.renderOption(option);
-        }
-      });
-
-      return ops.length ? ops : _react2.default.createElement(
-        'div',
-        { className: baseClassName + '-noresults' },
-        'No options found'
-      );
-    }
-  }, {
-    key: 'handleDocumentClick',
-    value: function handleDocumentClick(event) {
-      if (this.mounted) {
-        if (!_reactDom2.default.findDOMNode(this).contains(event.target)) {
-          if (this.state.isOpen) {
-            this.setState({ isOpen: false });
-          }
-        }
-      }
-    }
-  }, {
-    key: 'isValueSelected',
-    value: function isValueSelected() {
-      return typeof this.state.selected === 'string' || this.state.selected.value !== '';
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _classNames, _classNames2, _classNames3, _classNames4, _classNames5;
-
-      var _props2 = this.props,
-          baseClassName = _props2.baseClassName,
-          controlClassName = _props2.controlClassName,
-          placeholderClassName = _props2.placeholderClassName,
-          menuClassName = _props2.menuClassName,
-          arrowClassName = _props2.arrowClassName,
-          arrowClosed = _props2.arrowClosed,
-          arrowOpen = _props2.arrowOpen,
-          className = _props2.className;
-
-
-      var disabledClass = this.props.disabled ? 'Dropdown-disabled' : '';
-      var placeHolderValue = typeof this.state.selected === 'string' ? this.state.selected : this.state.selected.label;
-
-      var dropdownClass = (0, _classnames2.default)((_classNames = {}, _defineProperty(_classNames, baseClassName + '-root', true), _defineProperty(_classNames, className, !!className), _defineProperty(_classNames, 'is-open', this.state.isOpen), _classNames));
-      var controlClass = (0, _classnames2.default)((_classNames2 = {}, _defineProperty(_classNames2, baseClassName + '-control', true), _defineProperty(_classNames2, controlClassName, !!controlClassName), _defineProperty(_classNames2, disabledClass, !!disabledClass), _classNames2));
-      var placeholderClass = (0, _classnames2.default)((_classNames3 = {}, _defineProperty(_classNames3, baseClassName + '-placeholder', true), _defineProperty(_classNames3, placeholderClassName, !!placeholderClassName), _defineProperty(_classNames3, 'is-selected', this.isValueSelected()), _classNames3));
-      var menuClass = (0, _classnames2.default)((_classNames4 = {}, _defineProperty(_classNames4, baseClassName + '-menu', true), _defineProperty(_classNames4, menuClassName, !!menuClassName), _classNames4));
-      var arrowClass = (0, _classnames2.default)((_classNames5 = {}, _defineProperty(_classNames5, baseClassName + '-arrow', true), _defineProperty(_classNames5, arrowClassName, !!arrowClassName), _classNames5));
-
-      var value = _react2.default.createElement(
-        'div',
-        { className: placeholderClass },
-        placeHolderValue
-      );
-      var menu = this.state.isOpen ? _react2.default.createElement(
-        'div',
-        { className: menuClass },
-        this.buildMenu()
-      ) : null;
-
-      return _react2.default.createElement(
-        'div',
-        { className: dropdownClass },
-        _react2.default.createElement(
-          'div',
-          { className: controlClass, onMouseDown: this.handleMouseDown.bind(this), onTouchEnd: this.handleMouseDown.bind(this) },
-          value,
-          _react2.default.createElement(
-            'div',
-            { className: baseClassName + '-arrow-wrapper' },
-            arrowOpen && arrowClosed ? this.state.isOpen ? arrowOpen : arrowClosed : _react2.default.createElement('span', { className: arrowClass })
-          )
-        ),
-        menu
-      );
-    }
-  }]);
-
-  return Dropdown;
-}(_react.Component);
-
-Dropdown.defaultProps = { baseClassName: 'Dropdown' };
-exports.default = Dropdown;
 
 
 /***/ }),

@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import { render } from 'react-dom'
-import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 import {Main} from "./pages/main";
 import {Search} from "./pages/search";
 import {Form} from "./pages/form";
-import {ServiceCenters} from "./pages/sc";
+import {ServiceCentres} from "./pages/sc";
 import {Layout} from "./controls/layout";
 import {statusOptions, typeOfServiceOptions, ticketPriorityOptions} from "./pages/props"
 
@@ -16,9 +15,10 @@ class TicketsComponent extends Component{
         data: [],
         openTicketDescId: null,
         idOfupdatedTicket: null,
-        sc: []
-    };
+        sc: [],
+        ticketWasDeleted: false
 
+    };
 
     getAllData () {
         fetch(`/mongooseGetDataTickets`)
@@ -27,31 +27,51 @@ class TicketsComponent extends Component{
         fetch(`/mongooseGetDataSC`)
             .then(res => res.json())
             .then(json => this.setState({sc: json}))
-            //.then(()=>{console.log(' --- sc: ', this.state.sc)})
     }
 
+    deleteData = (id) => {
+        console.log('deleteTicket, id', id);
 
+        fetch('/mongooseTicketDelete', {
+            method: 'post',
+            body: JSON.stringify({ _id: id }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(checkStatus)
+            .then(()=>{this.setState({idOfupdatedTicket: null, ticketWasDeleted: true})})
+            .then(this.getAllData())
+            .then(()=>console.log('ticket deleted'));
+
+
+
+        function checkStatus(responsee) {
+            if (responsee.status >= 200 && responsee.status < 300) {
+                //console.log(response);
+                return responsee
+            } else {
+                let error = new Error(response.statusText);
+                error.response = response;
+                throw error
+            }
+        }
+    };
+
+    promtToDelete = (ticketNumber, _id) => {
+
+        let originalPrompt = window.prompt;
+            let answer = originalPrompt("Для удаление заявки № " + ticketNumber + " лвведите ее номер для подтверждения");
+        answer == ticketNumber ? this.deleteData(_id) : alert('Ошибка ввода, удаление отменено')
+    };
 
     updateDataFunc = (updatearg, id) => {
-        //console.log('clickFunc', updatearg, id);
-
             fetch('/mongooseUpdate', {
                 method: 'post',
-                /*body: JSON.stringify({
-                    _id: id,
-                    status: updatearg.status
-                }), */
                 body: JSON.stringify({
                     _id: id,
-                    /*comment: updatearg.comment,
-                    status: updatearg.status,
-                    place: updatearg.place,
-                    finishDate: updatearg.finishDate,
-                    serviceCentre: updatearg.serviceCentre,
-                    serviceCenterTicket: updatearg.serviceCentreTicket,
-                    typeOfservice: updatearg.typeOfservice */
                     ...updatearg
-
                 }),
                 headers: {
                     'Accept': 'application/json',
@@ -59,7 +79,6 @@ class TicketsComponent extends Component{
                 }
             })
                 .then(checkStatus)
-                //.then(()=>console.log('updated'))
                 .then(()=>this.getAllData())
                 .then(()=>this.setState({idOfupdatedTicket: id, openTicketDescId: null}));
 
@@ -73,7 +92,6 @@ class TicketsComponent extends Component{
                 }
             }
     };
-
 
     componentDidMount() {
         console.log('componentDidMount');
@@ -93,28 +111,7 @@ class TicketsComponent extends Component{
     }, 5000);
 
 
-
-    /*statusOptions = [
-        { value: 0, label: 'Новая' },
-        { value: 1, label: 'Необходимы уточнения' },
-        { value: 2, label: 'В работе' },
-        { value: 3, label: 'Завершена' },
-        { value: 4, label: 'Отклонена' },
-    ];
-    typeOfServiceOptions = [
-        {value: 0, label: 'Гарантийный'},
-        {value: 1, label: 'Не гарантийный'}
-    ];
-
-    ticketPriorityOptinons = [
-        {value: 0, label: "Низкий"},
-        {value: 1, label: "Средний"},
-        {value: 2, label: "Высокий"}
-    ];*/
-
-
     render(){
-        //console.log(this.state.data);
         return(
             <Layout>
                 {this.state.data.map((ticket) => (
@@ -131,9 +128,9 @@ class TicketsComponent extends Component{
                                         {ticket._id === this.state.openTicketDescId && (
                                             <section>
 
-                                                <OpenDescComponent
+                                                <OpenFormComponent
+                                                    _id={ticket._id}
                                                     contacts={{telnum: ticket.telnum, email: ticket.email, extum: ticket.extnum}}
-                                                    idshnik={ticket._id}
                                                     ticketNumber={ticket.ticketNumber}
                                                     problem={ticket.problem}
                                                     projectCode={ticket.projectCode}
@@ -142,14 +139,14 @@ class TicketsComponent extends Component{
                                                     finishDate={ticket.finishDate}
 
                                                     comment={ticket.comment}
-                                                    saveButtonClick={(updatearg)=>{this.updateDataFunc(updatearg, ticket._id)}}
                                                     ticketPriority={ticket.ticketPriority} ticketPriorityOptions={ticketPriorityOptions}
 
                                                     serviceCenter={ticket.serviceCenter} serviceCenterOptions={this.state.sc}
                                                     serviceCenterTicket={ticket.serviceCenterTicket}
                                                     typeOfService={ticket.typeOfService} typeOfServiceOptions={typeOfServiceOptions}
 
-
+                                                    saveButtonClick={(updatearg)=>{this.updateDataFunc(updatearg, ticket._id)}}
+                                                    deleteButtonClick={this.promtToDelete}
 
                                                 />
                                             </section>)
@@ -165,7 +162,7 @@ class TicketsComponent extends Component{
         )}
 }// end of RouterComponent
 
-class OpenDescComponent extends  Component {
+class OpenFormComponent extends  Component {
 
     state = {
         comment: '',
@@ -180,27 +177,18 @@ class OpenDescComponent extends  Component {
     };
 
     statusOptions = this.props.statusOptions;
-    typeOfServiceOptions = this.props.typeOfServiceOptions;
     ticketPriorityOptions = this.props.ticketPriorityOptions;
     serviceCenterOptions = this.props.serviceCenterOptions;
+    ticketNumber = this.props.ticketNumber;
+    _id = this.props._id;
 
 
 
     fullSetStateFunc = () => {
-        //console.log(' --- fullSetStateFunc');
         this.setState({
-            comment: this.props.comment,
-            status: this.props.status,
-            typeOfService: this.props.typeOfService,
-            ticketPriority: this.props.ticketPriority,
-            serviceCenter: this.props.serviceCenter,
-            finishDate: this.props.finishDate,
-            serviceCenterTicket: this.props.serviceCenterTicket
-
+            ...this.props
         });
-        this.props.serviceCenter !== '' ? this.getServiceCenterDetails(this.props.serviceCenter) : '' /*console.log('fullSetStateFunc: serviceCenter Not checked') */
-
-
+        this.props.serviceCenter !== '' ? this.getServiceCenterDetails(this.props.serviceCenter) : ''
     };
 
     getServiceCenterDetails = (id) => {
@@ -209,60 +197,30 @@ class OpenDescComponent extends  Component {
     };
 
     componentDidMount(){
-        //console.log('--componentDidMount');
       this.fullSetStateFunc()
     }
 
-    changeComment = (event) => {
-        //console.log(event.target.value);
-        this.setState({comment: event.target.value});
-    };
 
-    changeFinishDate = (event) => {
-        //console.log(event.target.value);
-        this.setState({finishDate: event.target.value});
-    };
 
-    changeServiceCenterTicket = (event) => {
-        //console.log(event.target.value);
-        this.setState({serviceCenterTicket: event.target.value})
-    };
-
-    changePriority = (event) =>{
-        //console.log('changePriority', event.target.value);
-        this.setState({ticketPriority: event.target.value})
-    };
-
-    changeStatus = (event) => {
-        //console.log('changeStatus', event.target.value);
-        this.setState({status: event.target.value})
+    handleUserInput = (e) => {
+        const name = e.target.id;
+        const value = e.target.value;
+        console.log(name, ' ', value);
+        this.setState({[name]: value})
     };
 
     changeServiceCenter = (event) => {
-        //console.log(event.target.value);
         this.getServiceCenterDetails(event.target.value);
         this.setState({serviceCenter: event.target.value})
 
     };
 
-    changeTypeOfService = (event) => {
-        //console.log('changeTypeOfService',event.target.value);
-        this.setState({typeOfService: event.target.value})
-    };
-
     saveFormFunc = () => {
-        //console.log('this.state', this.state);
         this.props.saveButtonClick({
-            comment: this.state.comment,
-            status: this.state.status,
-            typeOfService: this.state.typeOfService,
-            ticketPriority: this.state.ticketPriority,
-            serviceCenter: this.state.serviceCenter,
-            serviceCenterTicket: this.state.serviceCenterTicket,
-            finishDate: this.state.finishDate,
-
+                ...this.state
         });
     };
+
     resetForm = () => {
         this.fullSetStateFunc();
     };
@@ -272,7 +230,6 @@ class OpenDescComponent extends  Component {
         return(
 
             <form id="OpenDescComponent" onSubmit={(event)=>{event.preventDefault()}}>
-                <div>Key: {this.props.idshnik} </div>
                 <div>Причина: {this.props.problem}</div><br />
                 <div>Код проекта: {this.props.projectCode}</div><div>Местонахождение оборудования: {this.props.place}</div><br />
                 <div>Контакты:</div>
@@ -280,55 +237,71 @@ class OpenDescComponent extends  Component {
                  Тел.: {this.props.contacts.telnum +' '}
                  Внутр: {this.props.contacts.extum +' '}
                 </div>
-                <hr />
-                <div>Коментарий:<input type="text" id="comment" value={this.state.comment} onChange={this.changeComment} /><br /><br />
 
-                <label>Сервисный центр: </label><select className="selectServiceCenter" onChange={this.changeServiceCenter} value={this.state.serviceCenter}>
+                <hr />
+
+                <div>
+                    <label>Коментарий:</label>
+                    <input type="text" id="comment" value={this.state.comment} onChange={this.handleUserInput} />
+                </div>
+                    <br /><br />
+
+                <div>
+                <label>Сервисный центр: </label>
+                    <select id="serviceCenter" onChange={this.changeServiceCenter} value={this.state.serviceCenter}>
                         <option value="" defaultValue>Выбрать сервисный центр</option>
                         {this.props.serviceCenterOptions.map(sc =>
                             <option key={sc._id} value={sc._id}>{sc.scTitle}</option>
                         )}
                     </select>
                     {this.state.serviceCenterDetails !== undefined ? <div><b>Адрес СЦ: </b>{this.state.serviceCenterDetails.scAdress} <br /> <b>Авторизация вендоров:</b> {this.state.serviceCenterDetails.scVendors}</div> : ''}
+                </div>
 
-                    <label>Ремонт: </label>
-                    <select className="typeOfService" onChange={this.changeTypeOfService} value={this.state.typeOfService}>
+                <div>
+                <label>Ремонт: </label>
+                    <select id="typeOfService" onChange={this.handleUserInput} value={this.state.typeOfService}>
                         {typeOfServiceOptions.map(typeOfService =>
                             <option key={typeOfService.value} value={typeOfService.value}>{typeOfService.label}</option>
                         )}
                     </select>
+                </div>
 
-                    <label>Дата завершения обслуживания:</label><input onChange={this.changeFinishDate} value={this.state.finishDate}/>
-                    <label>Сервисный контракт / № обращения</label><input onChange={this.changeServiceCenterTicket} value={this.state.serviceCenterTicket}/>
-                    <br /><br />
-                    <label>Приоритет заявки:</label>
+                <div>
+                    <label>Дата завершения обслуживания:</label>
+                    <input id="finishDate" onChange={this.handleUserInput} value={this.state.finishDate}/>
+                </div>
 
-                    <select className="selectPriority" onChange={this.changePriority} value={this.state.ticketPriority}>
+                <div>
+                    <label>Сервисный контракт / № обращения</label>
+                    <input id="serviceCenterTicket" onChange={this.handleUserInput} value={this.state.serviceCenterTicket}/>
+                </div>
+                <br /><br />
+
+                <div>
+                <label>Приоритет заявки:</label>
+                    <select id="ticketPriority" className="selectPriority" onChange={this.handleUserInput} value={this.state.ticketPriority}>
                         {this.props.ticketPriorityOptions.map(priority =>
                             <option key={priority.value} value={priority.value}>{priority.label}</option>
                         )}
                     </select>
+                </div>
 
+                <div>
                     <label>Статус заявки:</label>
-
-                    <select className="selectStatus" onChange={this.changeStatus} value={this.state.status}>
+                    <select id="status" onChange={this.handleUserInput} value={this.state.status}>
                         {this.props.statusOptions.map(status =>
                             <option key={status.value} value={status.value}>{status.label}</option>
                         )}
                     </select>
+                </div>
 
                     <button onClick={this.saveFormFunc}> SAVE </button>
-                    <button onClick={this.resetForm}>Reset</button>
+                    <button onClick={this.resetForm}>RESET</button>
+                    <button onClick={ () => {this.props.deleteButtonClick(this.ticketNumber, this._id)
 
-                    <button onClick={ ()=> {
-
-                        //console.log('this.state.serviceCenter', this.state.serviceCenter);
-                        //console.log('this.props.serviceCenterOptions: ', this.props.serviceCenterOptions)
-                        //console.log('this.state.serviceCenterDetails: ',this.state.serviceCenterDetails)
-                    }}> --- TEST --- </button>
-
+                    } }>DELETE</button>
                 <hr />
-        </div>
+
         </form>
         )
     }
@@ -368,6 +341,8 @@ class DescComponent extends Component{
 
 } //NewDeafultComponent
 
+
+
 const Routing = () => (
     <Switch>
         <Route exact path='/' component={Main}/>
@@ -375,12 +350,9 @@ const Routing = () => (
         <Route path='/list' component={TicketsComponent}/>
         <Route path='/search' component={Search}/>
         <Route path='/form' component={Form}/>
-        <Route path='/sc' component={ServiceCenters}/>
+        <Route path='/sc' component={ServiceCentres}/>
     </Switch>
 );
-
-
-//const Api = () => (<TicketsComponent />,);
 
 render(
     <BrowserRouter>

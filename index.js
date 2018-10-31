@@ -193,6 +193,25 @@ app.post('/mongooseFind', bodyParser.json(), function(req, res){
     })
 });
 
+app.post('/mongooseTicketDelete', bodyParser.json(), function (req, res) {
+    console.log('------- mongooseDeleteTicket ' + 'TickedId: ', req.body);
+
+    TicketModel.remove(
+        {
+            _id: req.body._id
+        }
+    )
+        .then(() => {
+            //console.log(doc)
+            console.log('Ticket Deleted');
+            res.sendStatus(200)
+        })
+        .catch(err => {
+            console.error(err)
+        })
+
+});
+
 app.post('/mongooseUpdate', bodyParser.json(), function (req, res) {
     console.log('------- mongooseUpdate ' +
         'req.body:   id', req.body._id,

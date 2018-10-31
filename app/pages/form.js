@@ -20,7 +20,6 @@ class Form extends Component{
         placeAnother: '',
         projectCode: '',
         ticketPriority: 0,
-
         newTicketNumber: '',
         datetimeOfCreate: '',
 

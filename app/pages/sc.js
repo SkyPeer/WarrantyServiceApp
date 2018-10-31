@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Layout} from "../controls/layout";
 import {landing} from './props'
 
-class ServiceCenters extends Component{
+class ServiceCentres extends Component{
     state = {
         sc: [],
         scTickets: [],
@@ -130,22 +130,6 @@ class ServiceCenters extends Component{
         }
     };
 
-    /*foo = () =>{
-        console.log(this.state.sc);
-        return 'open console:)))'
-    };*/
-
-    /*userChangeHandler = (event, type) => {
-        let scArray = this.state.sc;
-        console.log(' ---- userChangeHandler = ',event.target,'type', type , event.target.value, event.target.id, event.target.keyId);
-        //state[event.target.id] = event.target.value;
-        //this.setState({state: state})
-        let serviceCenter = scArray.find(serviceCenter => serviceCenter._id === event.target.id);
-        serviceCenter[type] = event.target.value;
-        console.log(scArray);
-        this.setState({sc: scArray});
-    }; */
-
     checkServiceCenterInTickets = (scId) => {
 
         let tickets = this.state.scTickets.filter(tickets => tickets.sc === scId);
@@ -266,7 +250,7 @@ state = {
     }
 }
 
-export {ServiceCenters}
+export {ServiceCentres}
 
 
 
