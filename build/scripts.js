@@ -250,383 +250,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/*
-class TicketsComponent extends Component {
-    state = {
-        data: [],
-        openTicketDescId: null,
-        idOfupdatedTicket: null,
-        sc: [],
-        ticketWasDeleted: false
-
-    };
-
-    getAllData() {
-        fetch(`/mongooseGetDataTickets`)
-            .then(res => res.json())
-            .then(json => this.setState({data: json}));
-        fetch(`/mongooseGetDataSC`)
-            .then(res => res.json())
-            .then(json => this.setState({sc: json}))
-    }
-
-    deleteData = (id) => {
-        console.log('deleteTicket, id', id);
-
-        fetch('/mongooseTicketDelete', {
-            method: 'post',
-            body: JSON.stringify({_id: id}),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(checkStatus)
-            .then(() => {
-                this.setState({idOfupdatedTicket: null, ticketWasDeleted: true})
-            })
-            .then(this.getAllData())
-            .then(() => console.log('ticket deleted'));
-
-
-        function checkStatus(responsee) {
-            if (responsee.status >= 200 && responsee.status < 300) {
-                //console.log(response);
-                return responsee
-            } else {
-                let error = new Error(response.statusText);
-                error.response = response;
-                throw error
-            }
-        }
-    };
-
-    promtToDelete = (ticketNumber, _id) => {
-
-        let originalPrompt = window.prompt;
-        let answer = originalPrompt("Для удаление заявки № " + ticketNumber + " лвведите ее номер для подтверждения");
-        answer == ticketNumber ? this.deleteData(_id) : alert('Ошибка ввода, удаление отменено')
-    };
-
-    updateDataFunc = (updatearg, id) => {
-        fetch('/mongooseUpdate', {
-            method: 'post',
-            body: JSON.stringify({
-                _id: id,
-                ...updatearg
-            }),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(checkStatus)
-            .then(() => this.getAllData())
-            .then(() => this.setState({idOfupdatedTicket: id, openTicketDescId: null}));
-
-        function checkStatus(response) {
-            if (response.status >= 200 && response.status < 300) {
-                return response
-            } else {
-                let error = new Error(response.statusText);
-                error.response = response;
-                throw error
-            }
-        }
-    };
-
-    componentDidMount() {
-        console.log('componentDidMount');
-        this.getAllData();
-        this.timerGetAllData;
-
-    }
-
-    componentWillUnmount() {
-        console.log('componentWillUnmount');
-        clearInterval(this.timerGetAllData)
-    }
-
-    timerGetAllData = setInterval(() => {
-        //console.log( "time" );
-        this.getAllData()
-    }, 5000);
-
-
-    render() {
-        return (
-            <Layout>
-                <div>{this.state.ticketWasDeleted && <div>Заявка удалена!
-                    <button onClick={() => {
-                        this.setState({ticketWasDeleted: false})
-                    }}>OK
-                    </button>
-                </div> }</div>
-
-                {this.state.data.map((ticket) => (
-                    <div key={ticket._id}>
-                        <div>
-                            <div>{this.state.idOfupdatedTicket === ticket._id && <div><b> --- ОБНОВЛЕНА!!! --- </b>
-                                <button onClick={ () => {
-                                    this.setState({idOfupdatedTicket: null})
-                                } }>OK
-                                </button>
-                            </div>}</div>
-                            Заявка {ticket.ticketNumber}
-                            от {ticket.ticketDate} {ticket.finishDate ? 'Дата завершения: ' + ticket.finishDate + ' ' : ''}
-                            приоритет: {ticketPriorityOptions[ticket.ticketPriority].label}
-                            Статус: {statusOptions[ticket.status].label}</div>
-                        <div>Инициатор {ticket.lasname + ' ' + ticket.firstname + ' ' + ticket.familyname}</div>
-                        <Link to={'/tickets/' + ticket._id}>Подробнее об
-                            оборудовании {ticket.vendor} {ticket.model}</Link>
-
-                        <div>
-                            {ticket._id === this.state.openTicketDescId && (
-                                <section>
-
-                                    <OpenFormComponent
-                                        _id={ticket._id}
-                                        contacts={{telnum: ticket.telnum, email: ticket.email, extum: ticket.extnum}}
-                                        ticketNumber={ticket.ticketNumber}
-                                        problem={ticket.problem}
-                                        projectCode={ticket.projectCode}
-                                        place={ticket.place} placeAnother={ticket.placeAnother}
-                                        placeOptions={placeOptions}
-
-                                        status={ticket.status} statusOptions={statusOptions}
-                                        finishDate={ticket.finishDate}
-
-                                        comment={ticket.comment}
-                                        ticketPriority={ticket.ticketPriority}
-                                        ticketPriorityOptions={ticketPriorityOptions}
-
-                                        serviceCenter={ticket.serviceCenter} serviceCenterOptions={this.state.sc}
-                                        serviceCenterTicket={ticket.serviceCenterTicket}
-                                        typeOfService={ticket.typeOfService} typeOfServiceOptions={typeOfServiceOptions}
-
-                                        saveButtonClick={(updatearg) => {
-                                            this.updateDataFunc(updatearg, ticket._id)
-                                        }}
-                                        deleteButtonClick={this.promtToDelete}
-
-                                    />
-                                </section>)
-                            }
-                            <button onClick={() => {
-                                this.setState({openTicketDescId: ticket._id})
-                            }}>OPEN
-                            </button>
-                            <button onClick={() => {
-                                this.setState({openTicketDescId: null})
-                            }}>CLOSE
-                            </button>
-
-                        </div>
-                        <hr />
-                    </div>
-                ))}
-            </Layout>
-        )
-    }
-}// end of RouterComponent
-
-class OpenFormComponent extends Component {
-
-    state = {
-        comment: '',
-        status: '',
-        typeOfService: '',
-        ticketPriority: '',
-        serviceCenter: '',
-        serviceCenterDetails: '',
-        serviceCenterTicket: '',
-        finishDate: ''
-
-    };
-
-    statusOptions = this.props.statusOptions;
-    ticketPriorityOptions = this.props.ticketPriorityOptions;
-    serviceCenterOptions = this.props.serviceCenterOptions;
-    ticketNumber = this.props.ticketNumber;
-    placeOptions = this.props.placeOptions;
-    place = this.props.place;
-    placeAnother = this.props.placeAnother
-    _id = this.props._id;
-
-
-    fullSetStateFunc = () => {
-        this.setState({
-            ...this.props
-        });
-        this.props.serviceCenter !== '' ? this.getServiceCenterDetails(this.props.serviceCenter) : ''
-    };
-
-    getServiceCenterDetails = (id) => {
-        let scDetais = this.props.serviceCenterOptions.find(item => item._id === id)
-        this.setState({serviceCenterDetails: scDetais})
-    };
-
-    componentDidMount() {
-        this.fullSetStateFunc()
-    }
-
-
-    handleUserInput = (e) => {
-        const name = e.target.id;
-        const value = e.target.value;
-        console.log(name, ' ', value);
-        this.setState({[name]: value})
-    };
-
-    changeServiceCenter = (event) => {
-        this.getServiceCenterDetails(event.target.value);
-        this.setState({serviceCenter: event.target.value})
-
-    };
-
-    saveFormFunc = () => {
-        this.props.saveButtonClick({
-            ...this.state
-        });
-    };
-
-    resetForm = () => {
-        this.fullSetStateFunc();
-    };
-
-
-    render() {
-        return (
-
-            <form id="OpenDescComponent" onSubmit={(event) => {
-                event.preventDefault()
-            }}>
-                <div>Причина: {this.props.problem}</div>
-                <br />
-                <div>Код проекта: {this.props.projectCode}</div>
-
-                <div>Местонахождение оборудования:
-                    {this.place !== 5 ? ' ' + this.placeOptions[this.place].label + ' ' : ' ' + this.placeAnother + ' '}
-                </div>
-
-                <br />
-
-                <div>Контакты:</div>
-                <div>Email:<a
-                    href={"mailto:" + this.props.contacts.email + "?subject=Заявка на гарантийное обслуживание № " + this.props.ticketNumber}>{this.props.contacts.email + ' '}</a>
-                    Тел.: {this.props.contacts.telnum + ' '}
-                    Внутр: {this.props.contacts.extum + ' '}
-                </div>
-
-                <hr />
-
-                <div>
-                    <label>Коментарий:</label>
-                    <input type="text" id="comment" value={this.state.comment} onChange={this.handleUserInput}/>
-                </div>
-                <br /><br />
-
-                <div>
-                    <label>Сервисный центр: </label>
-                    <select id="serviceCenter" onChange={this.changeServiceCenter} value={this.state.serviceCenter}>
-                        <option value="" defaultValue>Выбрать сервисный центр</option>
-                        {this.props.serviceCenterOptions.map(sc =>
-                            <option key={sc._id} value={sc._id}>{sc.scTitle}</option>
-                        )}
-                    </select>
-                    {this.state.serviceCenterDetails !== undefined ?
-                        <div><b>Адрес СЦ: </b>{this.state.serviceCenterDetails.scAdress} <br /> <b>Авторизация
-                            вендоров:</b> {this.state.serviceCenterDetails.scVendors}</div> : ''}
-                </div>
-
-                <div>
-                    <label>Ремонт: </label>
-                    <select id="typeOfService" onChange={this.handleUserInput} value={this.state.typeOfService}>
-                        {typeOfServiceOptions.map(typeOfService =>
-                            <option key={typeOfService.value} value={typeOfService.value}>{typeOfService.label}</option>
-                        )}
-                    </select>
-                </div>
-
-                <div>
-                    <label>Дата завершения обслуживания:</label>
-                    <input id="finishDate" onChange={this.handleUserInput} value={this.state.finishDate}/>
-                </div>
-
-                <div>
-                    <label>Сервисный контракт / № обращения</label>
-                    <input id="serviceCenterTicket" onChange={this.handleUserInput}
-                           value={this.state.serviceCenterTicket}/>
-                </div>
-                <br /><br />
-
-                <div>
-                    <label>Приоритет заявки:</label>
-                    <select id="ticketPriority" className="selectPriority" onChange={this.handleUserInput}
-                            value={this.state.ticketPriority}>
-                        {this.props.ticketPriorityOptions.map(priority =>
-                            <option key={priority.value} value={priority.value}>{priority.label}</option>
-                        )}
-                    </select>
-                </div>
-
-                <div>
-                    <label>Статус заявки:</label>
-                    <select id="status" onChange={this.handleUserInput} value={this.state.status}>
-                        {this.props.statusOptions.map(status =>
-                            <option key={status.value} value={status.value}>{status.label}</option>
-                        )}
-                    </select>
-                </div>
-
-                <button onClick={this.saveFormFunc}> SAVE</button>
-                <button onClick={this.resetForm}>RESET</button>
-                <button onClick={ () => {
-                    this.props.deleteButtonClick(this.ticketNumber, this._id)
-
-                } }>DELETE
-                </button>
-                <hr />
-
-            </form>
-        )
-    }
-}
-
-class DescComponent extends Component {
-    state =
-        {
-            data: {}
-        };
-    arg = this.props.match.params.ticketid;
-    //foo = console.log('DescComponent, this.arg: ',this.arg);
-
-    componentDidMount() {
-
-        fetch('/mongoosefind', {
-            method: 'post',
-            body: JSON.stringify({_id: this.arg}),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(res => res.json())
-            .then(json => this.setState({data: json}))
-    };
-
-
-    render() {
-        return (
-            <Layout>
-                <h5>Title: {this.state.data.ticketNumber}</h5>
-                <h5>Desc: {this.state.data.problem}</h5>
-                <Link to={'../tickets'}>Обратно к заявкам</Link>
-            </Layout>);
-    }
-
-} //NewDeafultComponent
-*/
 
 var Routing = function Routing() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
@@ -1271,6 +894,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _controls_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controls/layout */ "./app/controls/layout.js");
+/* harmony import */ var _props__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./props */ "./app/pages/props.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1281,13 +905,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1298,15 +925,100 @@ function (_Component) {
   _inherits(Search, _Component);
 
   function Search() {
+    var _getPrototypeOf2;
+
+    var _this;
+
     _classCallCheck(this, Search);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Search).apply(this, arguments));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Search)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+      data: {},
+      ticketNumber: '',
+      lasname: '',
+      firstname: '',
+      familyname: '',
+      ticketDate: '',
+      comment: '',
+      status: '',
+      finishDate: '',
+      checkData: '',
+      search: false
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "inputUserHandler", function (e) {
+      _this.setState({
+        ticketNumber: e.target.value
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "trySearch", function (number) {
+      fetch('/mongooseSearchbyTicketNumber', {
+        method: 'post',
+        body: JSON.stringify({
+          ticketNumber: number
+        }),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).then(function (res) {
+        return res.json();
+      })
+      /*.then(json => this.setState({data: json})) */
+      .then(function (json) {
+        return _this.checkData(json);
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "checkData", function (data) {
+      console.log(data);
+      data !== null ? _this.setState({
+        data: data,
+        checkData: true
+      }) : _this.setState({
+        checkData: false
+      });
+    });
+
+    return _this;
   }
 
   _createClass(Search, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {}
+  }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Search"));
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: function onSubmit(event) {
+          event.preventDefault();
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Search"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "ticketNumber",
+        onChange: this.inputUserHandler,
+        value: this.state.ticketNumber,
+        placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u043D\u043E\u043C\u0435\u0440 \u0437\u0430\u044F\u0432\u043A\u0438"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          _this2.trySearch(_this2.state.ticketNumber);
+
+          _this2.setState({
+            search: true
+          });
+        }
+      }, "Search"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          console.log(_this2.state.data);
+        }
+      }, "TEST"), this.state.search && (this.state.checkData ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440: "), this.state.data.lasname + ' ' + this.state.data.firstname + ' ' + this.state.data.familyname, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u2116 \u0437\u0430\u044F\u0432\u043A\u0438: "), this.state.data.ticketNumber, ", \u0434\u0430\u0442\u0430 \u0438 \u0432\u0440\u0435\u043C\u044F \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F: ", this.state.data.ticketDate, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " \u041A\u043E\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439: ", this.state.data.comment, ", \u0441\u0442\u0430\u0442\u0443\u0441: ", _props__WEBPACK_IMPORTED_MODULE_2__["statusOptions"][this.state.data.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0414\u0430\u0442\u0430 \u0437\u0430\u0432\u0435\u0448\u0435\u043D\u0438\u044F: "), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("u", null, this.state.data.finishDate))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0417\u0430\u044F\u0432\u043A\u0430 \u0441 \u0442\u0430\u043A\u0438\u043C \u043D\u043E\u043C\u0435\u0440\u043E\u043C \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u0430"))));
     }
   }]);
 
@@ -2027,7 +1739,7 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "promtToDelete", function (ticketNumber, _id) {
       var originalPrompt = window.prompt;
-      var answer = originalPrompt("Для удаление заявки № " + ticketNumber + " лвведите ее номер для подтверждения");
+      var answer = originalPrompt("Для удаление заявки № " + ticketNumber + " введите ее номер для подтверждения");
       answer == ticketNumber ? _this.deleteData(_id) : alert('Ошибка ввода, удаление отменено');
     });
 

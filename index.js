@@ -193,6 +193,15 @@ app.post('/mongooseFind', bodyParser.json(), function(req, res){
     })
 });
 
+app.post('/mongooseSearchbyTicketNumber', bodyParser.json(), function(req, res){
+    console.log('req.body', req.body);
+    TicketModel.findOne({ticketNumber: req.body.ticketNumber}, function (err, taskDocs) {
+        if (err) return next (err);
+        console.log(taskDocs);
+        res.json(taskDocs)
+    })
+});
+
 app.post('/mongooseTicketDelete', bodyParser.json(), function (req, res) {
     console.log('------- mongooseDeleteTicket ' + 'TickedId: ', req.body);
 
@@ -301,6 +310,11 @@ app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
             console.error(err)
         })
 });
+
+///
+
+
+
 // ----- get/post for Tickets
 
 

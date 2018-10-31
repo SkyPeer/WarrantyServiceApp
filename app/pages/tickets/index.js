@@ -59,7 +59,7 @@ class TicketsComponent extends Component {
     promtToDelete = (ticketNumber, _id) => {
 
         let originalPrompt = window.prompt;
-        let answer = originalPrompt("Для удаление заявки № " + ticketNumber + " лвведите ее номер для подтверждения");
+        let answer = originalPrompt("Для удаление заявки № " + ticketNumber + " введите ее номер для подтверждения");
         answer == ticketNumber ? this.deleteData(_id) : alert('Ошибка ввода, удаление отменено')
     };
 
