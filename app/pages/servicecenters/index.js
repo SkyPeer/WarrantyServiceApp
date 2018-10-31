@@ -85,8 +85,6 @@ class ServiceCentres extends Component {
     };
 
     deleteServiceCenter = (id) => {
-        console.log('deleteServiceCenter, id', id);
-
         fetch('/mongooseSCDelete', {
             method: 'post',
             body: JSON.stringify({_id: id}),
@@ -96,10 +94,6 @@ class ServiceCentres extends Component {
             }
         })
             .then(checkStatus)
-            //.then(checkStatus => checkStatus.json())
-            /*.then((json)=> this.setState({
-             newTicketNumber: json.resJson.ticketNumber,
-             datetimeOfCreate: json.resJson.currnetDateTime}))*/
             .then(() => {
                 this.getAllServiceCenters()
             })
@@ -132,7 +126,6 @@ class ServiceCentres extends Component {
         let checkSc = this.checkServiceCenterInTickets(scId);
         checkSc.length > 0 ? alert('Ошибка, СЦ назначен по заявк(е/ам): ' + checkSc) : this.deleteServiceCenter(scId)
     };
-
 
     render() {
         return (

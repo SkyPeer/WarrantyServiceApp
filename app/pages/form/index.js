@@ -408,7 +408,7 @@ class Form extends Component{
 
                     <div>
                     <label>Приоритет заявки: </label>
-                    <select className="selectPriority" onChange={this.handleUserInput} value={this.state.ticketPriority}>
+                    <select id="ticketPriority" onChange={this.handleUserInput} value={this.state.ticketPriority}>
                         {ticketPriorityOptions.map(priority =>
                             <option key={priority.value} value={priority.value}>{priority.label}</option>
                         )}

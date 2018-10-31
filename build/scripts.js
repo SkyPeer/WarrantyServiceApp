@@ -195,15 +195,15 @@ function (_Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/"
-      }, "Main"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }, " Main "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/search"
-      }, "Search"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/list"
-      }, "List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }, " Search "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/tickets"
+      }, " Tickets "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/form"
-      }, "Form"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }, " Form "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/servicecenters"
-      }, "ServiceCentres"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
+      }, " ServiceCentres "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
     }
   }]);
 
@@ -709,10 +709,10 @@ var Routing = function Routing() {
     path: "/",
     component: _pages_main__WEBPACK_IMPORTED_MODULE_4__["Main"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: "/list/:ticketid",
+    path: "/tickets/:ticketid",
     component: DescComponent
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: "/list",
+    path: "/tickets",
     component: TicketsComponent
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/search",
@@ -1175,7 +1175,7 @@ function (_Component) {
         className: "input_error",
         "data-validator": "placeAnother"
       }) : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 \u0437\u0430\u044F\u0432\u043A\u0438: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        className: "selectPriority",
+        id: "ticketPriority",
         onChange: this.handleUserInput,
         value: this.state.ticketPriority
       }, _props__WEBPACK_IMPORTED_MODULE_3__["ticketPriorityOptions"].map(function (priority) {
@@ -1658,7 +1658,6 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "deleteServiceCenter", function (id) {
-      console.log('deleteServiceCenter, id', id);
       fetch('/mongooseSCDelete', {
         method: 'post',
         body: JSON.stringify({
@@ -1668,12 +1667,7 @@ function (_Component) {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         }
-      }).then(checkStatus) //.then(checkStatus => checkStatus.json())
-
-      /*.then((json)=> this.setState({
-       newTicketNumber: json.resJson.ticketNumber,
-       datetimeOfCreate: json.resJson.currnetDateTime}))*/
-      .then(function () {
+      }).then(checkStatus).then(function () {
         _this.getAllServiceCenters();
       }).then(function () {
         _this.setState({

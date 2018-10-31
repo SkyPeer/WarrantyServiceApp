@@ -347,8 +347,8 @@ class DescComponent extends Component{
 const Routing = () => (
     <Switch>
         <Route exact path='/' component={Main}/>
-        <Route path='/list/:ticketid' component={DescComponent}/>
-        <Route path='/list' component={TicketsComponent}/>
+        <Route path='/tickets/:ticketid' component={DescComponent}/>
+        <Route path='/tickets' component={TicketsComponent}/>
         <Route path='/search' component={Search}/>
         <Route path='/form' component={Form}/>
         <Route path='/servicecenters' component={ServiceCentres}/>
