@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-import { render } from 'react-dom'
+import {BrowserRouter, Switch, Route, Link} from 'react-router-dom';
+import {render} from 'react-dom'
 import 'react-dropdown/style.css'
 import {Main} from "./pages/main";
+import {TicketsComponent} from "./pages/tickets"
 import {Search} from "./pages/search";
 import {Form} from "./pages/form";
 import {ServiceCentres} from "./pages/servicecenters";
+import {DescComponent} from "./pages/tickets/othertickets"
 import {Layout} from "./controls/layout";
 import {statusOptions, typeOfServiceOptions, ticketPriorityOptions, placeOptions} from "./pages/props"
 
-
-class TicketsComponent extends Component{
+/*
+class TicketsComponent extends Component {
     state = {
         data: [],
         openTicketDescId: null,
@@ -20,7 +22,7 @@ class TicketsComponent extends Component{
 
     };
 
-    getAllData () {
+    getAllData() {
         fetch(`/mongooseGetDataTickets`)
             .then(res => res.json())
             .then(json => this.setState({data: json}));
@@ -34,17 +36,18 @@ class TicketsComponent extends Component{
 
         fetch('/mongooseTicketDelete', {
             method: 'post',
-            body: JSON.stringify({ _id: id }),
+            body: JSON.stringify({_id: id}),
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
         })
             .then(checkStatus)
-            .then(()=>{this.setState({idOfupdatedTicket: null, ticketWasDeleted: true})})
+            .then(() => {
+                this.setState({idOfupdatedTicket: null, ticketWasDeleted: true})
+            })
             .then(this.getAllData())
-            .then(()=>console.log('ticket deleted'));
-
+            .then(() => console.log('ticket deleted'));
 
 
         function checkStatus(responsee) {
@@ -62,35 +65,35 @@ class TicketsComponent extends Component{
     promtToDelete = (ticketNumber, _id) => {
 
         let originalPrompt = window.prompt;
-            let answer = originalPrompt("Для удаление заявки № " + ticketNumber + " лвведите ее номер для подтверждения");
+        let answer = originalPrompt("Для удаление заявки № " + ticketNumber + " лвведите ее номер для подтверждения");
         answer == ticketNumber ? this.deleteData(_id) : alert('Ошибка ввода, удаление отменено')
     };
 
     updateDataFunc = (updatearg, id) => {
-            fetch('/mongooseUpdate', {
-                method: 'post',
-                body: JSON.stringify({
-                    _id: id,
-                    ...updatearg
-                }),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(checkStatus)
-                .then(()=>this.getAllData())
-                .then(()=>this.setState({idOfupdatedTicket: id, openTicketDescId: null}));
-
-            function checkStatus(response) {
-                if (response.status >= 200 && response.status < 300) {
-                    return response
-                } else {
-                    let error = new Error(response.statusText);
-                    error.response = response;
-                    throw error
-                }
+        fetch('/mongooseUpdate', {
+            method: 'post',
+            body: JSON.stringify({
+                _id: id,
+                ...updatearg
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             }
+        })
+            .then(checkStatus)
+            .then(() => this.getAllData())
+            .then(() => this.setState({idOfupdatedTicket: id, openTicketDescId: null}));
+
+        function checkStatus(response) {
+            if (response.status >= 200 && response.status < 300) {
+                return response
+            } else {
+                let error = new Error(response.statusText);
+                error.response = response;
+                throw error
+            }
+        }
     };
 
     componentDidMount() {
@@ -100,69 +103,92 @@ class TicketsComponent extends Component{
 
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         console.log('componentWillUnmount');
         clearInterval(this.timerGetAllData)
     }
 
     timerGetAllData = setInterval(() => {
-    //console.log( "time" );
-    this.getAllData()
+        //console.log( "time" );
+        this.getAllData()
     }, 5000);
 
 
-    render(){
-        return(
+    render() {
+        return (
             <Layout>
-                <div>{this.state.ticketWasDeleted && <div>Заявка удалена! <button onClick={()=>{this.setState({ticketWasDeleted:false})}}>OK</button></div> }</div>
+                <div>{this.state.ticketWasDeleted && <div>Заявка удалена!
+                    <button onClick={() => {
+                        this.setState({ticketWasDeleted: false})
+                    }}>OK
+                    </button>
+                </div> }</div>
 
-                    {this.state.data.map((ticket) => (
-                            <div key={ticket._id}>
-                            <div>
-                            <div>{this.state.idOfupdatedTicket === ticket._id && <div><b> --- ОБНОВЛЕНА!!! --- </b> <button onClick={ ()=>{this.setState({idOfupdatedTicket:null})} }>OK</button></div>}</div>
-                            Заявка {ticket.ticketNumber} от {ticket.ticketDate} {ticket.finishDate ? 'Дата завершения: '+ticket.finishDate + ' ' : ''}
-                            приоритет: {ticketPriorityOptions[ticket.ticketPriority].label} Статус: {statusOptions[ticket.status].label}</div>
-                            <div>Инициатор {ticket.lasname +' '+ ticket.firstname + ' '+ ticket.familyname}</div>
-                            <Link to={'/tickets/'+ticket._id}>Подробнее об оборудовании {ticket.vendor} {ticket.model}</Link>
+                {this.state.data.map((ticket) => (
+                    <div key={ticket._id}>
+                        <div>
+                            <div>{this.state.idOfupdatedTicket === ticket._id && <div><b> --- ОБНОВЛЕНА!!! --- </b>
+                                <button onClick={ () => {
+                                    this.setState({idOfupdatedTicket: null})
+                                } }>OK
+                                </button>
+                            </div>}</div>
+                            Заявка {ticket.ticketNumber}
+                            от {ticket.ticketDate} {ticket.finishDate ? 'Дата завершения: ' + ticket.finishDate + ' ' : ''}
+                            приоритет: {ticketPriorityOptions[ticket.ticketPriority].label}
+                            Статус: {statusOptions[ticket.status].label}</div>
+                        <div>Инициатор {ticket.lasname + ' ' + ticket.firstname + ' ' + ticket.familyname}</div>
+                        <Link to={'/tickets/' + ticket._id}>Подробнее об
+                            оборудовании {ticket.vendor} {ticket.model}</Link>
 
-                                    <div>
-                                        {ticket._id === this.state.openTicketDescId && (
-                                            <section>
+                        <div>
+                            {ticket._id === this.state.openTicketDescId && (
+                                <section>
 
-                                                <OpenFormComponent
-                                                    _id={ticket._id}
-                                                    contacts={{telnum: ticket.telnum, email: ticket.email, extum: ticket.extnum}}
-                                                    ticketNumber={ticket.ticketNumber}
-                                                    problem={ticket.problem}
-                                                    projectCode={ticket.projectCode}
-                                                    place={ticket.place} placeAnother={ticket.placeAnother}
-                                                    placeOptions={placeOptions}
+                                    <OpenFormComponent
+                                        _id={ticket._id}
+                                        contacts={{telnum: ticket.telnum, email: ticket.email, extum: ticket.extnum}}
+                                        ticketNumber={ticket.ticketNumber}
+                                        problem={ticket.problem}
+                                        projectCode={ticket.projectCode}
+                                        place={ticket.place} placeAnother={ticket.placeAnother}
+                                        placeOptions={placeOptions}
 
-                                                    status={ticket.status} statusOptions={statusOptions}
-                                                    finishDate={ticket.finishDate}
+                                        status={ticket.status} statusOptions={statusOptions}
+                                        finishDate={ticket.finishDate}
 
-                                                    comment={ticket.comment}
-                                                    ticketPriority={ticket.ticketPriority} ticketPriorityOptions={ticketPriorityOptions}
+                                        comment={ticket.comment}
+                                        ticketPriority={ticket.ticketPriority}
+                                        ticketPriorityOptions={ticketPriorityOptions}
 
-                                                    serviceCenter={ticket.serviceCenter} serviceCenterOptions={this.state.sc}
-                                                    serviceCenterTicket={ticket.serviceCenterTicket}
-                                                    typeOfService={ticket.typeOfService} typeOfServiceOptions={typeOfServiceOptions}
+                                        serviceCenter={ticket.serviceCenter} serviceCenterOptions={this.state.sc}
+                                        serviceCenterTicket={ticket.serviceCenterTicket}
+                                        typeOfService={ticket.typeOfService} typeOfServiceOptions={typeOfServiceOptions}
 
-                                                    saveButtonClick={(updatearg)=>{this.updateDataFunc(updatearg, ticket._id)}}
-                                                    deleteButtonClick={this.promtToDelete}
+                                        saveButtonClick={(updatearg) => {
+                                            this.updateDataFunc(updatearg, ticket._id)
+                                        }}
+                                        deleteButtonClick={this.promtToDelete}
 
-                                                />
-                                            </section>)
-                                        }
-                                        <button onClick={()=>{this.setState({openTicketDescId:ticket._id})}}>OPEN</button>
-                                        <button onClick={()=>{this.setState({openTicketDescId:null})}}>CLOSE</button>
+                                    />
+                                </section>)
+                            }
+                            <button onClick={() => {
+                                this.setState({openTicketDescId: ticket._id})
+                            }}>OPEN
+                            </button>
+                            <button onClick={() => {
+                                this.setState({openTicketDescId: null})
+                            }}>CLOSE
+                            </button>
 
-                                    </div>
-                                    <hr />
-                                </div>
-                            ))}
+                        </div>
+                        <hr />
+                    </div>
+                ))}
             </Layout>
-        )}
+        )
+    }
 }// end of RouterComponent
 
 class OpenFormComponent extends Component {
@@ -328,10 +354,10 @@ class OpenFormComponent extends Component {
     }
 }
 
-class DescComponent extends Component{
+class DescComponent extends Component {
     state =
         {
-            data:{}
+            data: {}
         };
     arg = this.props.match.params.ticketid;
     //foo = console.log('DescComponent, this.arg: ',this.arg);
@@ -351,8 +377,8 @@ class DescComponent extends Component{
     };
 
 
-    render(){
-        return(
+    render() {
+        return (
             <Layout>
                 <h5>Title: {this.state.data.ticketNumber}</h5>
                 <h5>Desc: {this.state.data.problem}</h5>
@@ -361,8 +387,7 @@ class DescComponent extends Component{
     }
 
 } //NewDeafultComponent
-
-
+*/
 
 const Routing = () => (
     <Switch>

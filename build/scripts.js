@@ -231,32 +231,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dropdown_style_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dropdown/style.css */ "./node_modules/react-dropdown/style.css");
 /* harmony import */ var react_dropdown_style_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_dropdown_style_css__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _pages_main__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/main */ "./app/pages/main.js");
-/* harmony import */ var _pages_search__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/search */ "./app/pages/search.js");
-/* harmony import */ var _pages_form__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/form */ "./app/pages/form/index.js");
-/* harmony import */ var _pages_servicecenters__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/servicecenters */ "./app/pages/servicecenters/index.js");
-/* harmony import */ var _controls_layout__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./controls/layout */ "./app/controls/layout.js");
-/* harmony import */ var _pages_props__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/props */ "./app/pages/props.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+/* harmony import */ var _pages_tickets__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/tickets */ "./app/pages/tickets/index.js");
+/* harmony import */ var _pages_search__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/search */ "./app/pages/search.js");
+/* harmony import */ var _pages_form__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/form */ "./app/pages/form/index.js");
+/* harmony import */ var _pages_servicecenters__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/servicecenters */ "./app/pages/servicecenters/index.js");
+/* harmony import */ var _pages_tickets_othertickets__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/tickets/othertickets */ "./app/pages/tickets/othertickets.js");
+/* harmony import */ var _controls_layout__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./controls/layout */ "./app/controls/layout.js");
+/* harmony import */ var _pages_props__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pages/props */ "./app/pages/props.js");
 
 
 
@@ -269,447 +250,383 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var TicketsComponent =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(TicketsComponent, _Component);
+/*
+class TicketsComponent extends Component {
+    state = {
+        data: [],
+        openTicketDescId: null,
+        idOfupdatedTicket: null,
+        sc: [],
+        ticketWasDeleted: false
 
-  function TicketsComponent() {
-    var _getPrototypeOf2;
+    };
 
-    var _this;
-
-    _classCallCheck(this, TicketsComponent);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
+    getAllData() {
+        fetch(`/mongooseGetDataTickets`)
+            .then(res => res.json())
+            .then(json => this.setState({data: json}));
+        fetch(`/mongooseGetDataSC`)
+            .then(res => res.json())
+            .then(json => this.setState({sc: json}))
     }
 
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(TicketsComponent)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    deleteData = (id) => {
+        console.log('deleteTicket, id', id);
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      data: [],
-      openTicketDescId: null,
-      idOfupdatedTicket: null,
-      sc: [],
-      ticketWasDeleted: false
-    });
+        fetch('/mongooseTicketDelete', {
+            method: 'post',
+            body: JSON.stringify({_id: id}),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(checkStatus)
+            .then(() => {
+                this.setState({idOfupdatedTicket: null, ticketWasDeleted: true})
+            })
+            .then(this.getAllData())
+            .then(() => console.log('ticket deleted'));
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "deleteData", function (id) {
-      console.log('deleteTicket, id', id);
-      fetch('/mongooseTicketDelete', {
-        method: 'post',
-        body: JSON.stringify({
-          _id: id
-        }),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+
+        function checkStatus(responsee) {
+            if (responsee.status >= 200 && responsee.status < 300) {
+                //console.log(response);
+                return responsee
+            } else {
+                let error = new Error(response.statusText);
+                error.response = response;
+                throw error
+            }
         }
-      }).then(checkStatus).then(function () {
-        _this.setState({
-          idOfupdatedTicket: null,
-          ticketWasDeleted: true
+    };
+
+    promtToDelete = (ticketNumber, _id) => {
+
+        let originalPrompt = window.prompt;
+        let answer = originalPrompt("Для удаление заявки № " + ticketNumber + " лвведите ее номер для подтверждения");
+        answer == ticketNumber ? this.deleteData(_id) : alert('Ошибка ввода, удаление отменено')
+    };
+
+    updateDataFunc = (updatearg, id) => {
+        fetch('/mongooseUpdate', {
+            method: 'post',
+            body: JSON.stringify({
+                _id: id,
+                ...updatearg
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(checkStatus)
+            .then(() => this.getAllData())
+            .then(() => this.setState({idOfupdatedTicket: id, openTicketDescId: null}));
+
+        function checkStatus(response) {
+            if (response.status >= 200 && response.status < 300) {
+                return response
+            } else {
+                let error = new Error(response.statusText);
+                error.response = response;
+                throw error
+            }
+        }
+    };
+
+    componentDidMount() {
+        console.log('componentDidMount');
+        this.getAllData();
+        this.timerGetAllData;
+
+    }
+
+    componentWillUnmount() {
+        console.log('componentWillUnmount');
+        clearInterval(this.timerGetAllData)
+    }
+
+    timerGetAllData = setInterval(() => {
+        //console.log( "time" );
+        this.getAllData()
+    }, 5000);
+
+
+    render() {
+        return (
+            <Layout>
+                <div>{this.state.ticketWasDeleted && <div>Заявка удалена!
+                    <button onClick={() => {
+                        this.setState({ticketWasDeleted: false})
+                    }}>OK
+                    </button>
+                </div> }</div>
+
+                {this.state.data.map((ticket) => (
+                    <div key={ticket._id}>
+                        <div>
+                            <div>{this.state.idOfupdatedTicket === ticket._id && <div><b> --- ОБНОВЛЕНА!!! --- </b>
+                                <button onClick={ () => {
+                                    this.setState({idOfupdatedTicket: null})
+                                } }>OK
+                                </button>
+                            </div>}</div>
+                            Заявка {ticket.ticketNumber}
+                            от {ticket.ticketDate} {ticket.finishDate ? 'Дата завершения: ' + ticket.finishDate + ' ' : ''}
+                            приоритет: {ticketPriorityOptions[ticket.ticketPriority].label}
+                            Статус: {statusOptions[ticket.status].label}</div>
+                        <div>Инициатор {ticket.lasname + ' ' + ticket.firstname + ' ' + ticket.familyname}</div>
+                        <Link to={'/tickets/' + ticket._id}>Подробнее об
+                            оборудовании {ticket.vendor} {ticket.model}</Link>
+
+                        <div>
+                            {ticket._id === this.state.openTicketDescId && (
+                                <section>
+
+                                    <OpenFormComponent
+                                        _id={ticket._id}
+                                        contacts={{telnum: ticket.telnum, email: ticket.email, extum: ticket.extnum}}
+                                        ticketNumber={ticket.ticketNumber}
+                                        problem={ticket.problem}
+                                        projectCode={ticket.projectCode}
+                                        place={ticket.place} placeAnother={ticket.placeAnother}
+                                        placeOptions={placeOptions}
+
+                                        status={ticket.status} statusOptions={statusOptions}
+                                        finishDate={ticket.finishDate}
+
+                                        comment={ticket.comment}
+                                        ticketPriority={ticket.ticketPriority}
+                                        ticketPriorityOptions={ticketPriorityOptions}
+
+                                        serviceCenter={ticket.serviceCenter} serviceCenterOptions={this.state.sc}
+                                        serviceCenterTicket={ticket.serviceCenterTicket}
+                                        typeOfService={ticket.typeOfService} typeOfServiceOptions={typeOfServiceOptions}
+
+                                        saveButtonClick={(updatearg) => {
+                                            this.updateDataFunc(updatearg, ticket._id)
+                                        }}
+                                        deleteButtonClick={this.promtToDelete}
+
+                                    />
+                                </section>)
+                            }
+                            <button onClick={() => {
+                                this.setState({openTicketDescId: ticket._id})
+                            }}>OPEN
+                            </button>
+                            <button onClick={() => {
+                                this.setState({openTicketDescId: null})
+                            }}>CLOSE
+                            </button>
+
+                        </div>
+                        <hr />
+                    </div>
+                ))}
+            </Layout>
+        )
+    }
+}// end of RouterComponent
+
+class OpenFormComponent extends Component {
+
+    state = {
+        comment: '',
+        status: '',
+        typeOfService: '',
+        ticketPriority: '',
+        serviceCenter: '',
+        serviceCenterDetails: '',
+        serviceCenterTicket: '',
+        finishDate: ''
+
+    };
+
+    statusOptions = this.props.statusOptions;
+    ticketPriorityOptions = this.props.ticketPriorityOptions;
+    serviceCenterOptions = this.props.serviceCenterOptions;
+    ticketNumber = this.props.ticketNumber;
+    placeOptions = this.props.placeOptions;
+    place = this.props.place;
+    placeAnother = this.props.placeAnother
+    _id = this.props._id;
+
+
+    fullSetStateFunc = () => {
+        this.setState({
+            ...this.props
         });
-      }).then(_this.getAllData()).then(function () {
-        return console.log('ticket deleted');
-      });
+        this.props.serviceCenter !== '' ? this.getServiceCenterDetails(this.props.serviceCenter) : ''
+    };
 
-      function checkStatus(responsee) {
-        if (responsee.status >= 200 && responsee.status < 300) {
-          //console.log(response);
-          return responsee;
-        } else {
-          var error = new Error(response.statusText);
-          error.response = response;
-          throw error;
-        }
-      }
-    });
+    getServiceCenterDetails = (id) => {
+        let scDetais = this.props.serviceCenterOptions.find(item => item._id === id)
+        this.setState({serviceCenterDetails: scDetais})
+    };
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "promtToDelete", function (ticketNumber, _id) {
-      var originalPrompt = window.prompt;
-      var answer = originalPrompt("Для удаление заявки № " + ticketNumber + " лвведите ее номер для подтверждения");
-      answer == ticketNumber ? _this.deleteData(_id) : alert('Ошибка ввода, удаление отменено');
-    });
+    componentDidMount() {
+        this.fullSetStateFunc()
+    }
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateDataFunc", function (updatearg, id) {
-      fetch('/mongooseUpdate', {
-        method: 'post',
-        body: JSON.stringify(_objectSpread({
-          _id: id
-        }, updatearg)),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      }).then(checkStatus).then(function () {
-        return _this.getAllData();
-      }).then(function () {
-        return _this.setState({
-          idOfupdatedTicket: id,
-          openTicketDescId: null
+
+    handleUserInput = (e) => {
+        const name = e.target.id;
+        const value = e.target.value;
+        console.log(name, ' ', value);
+        this.setState({[name]: value})
+    };
+
+    changeServiceCenter = (event) => {
+        this.getServiceCenterDetails(event.target.value);
+        this.setState({serviceCenter: event.target.value})
+
+    };
+
+    saveFormFunc = () => {
+        this.props.saveButtonClick({
+            ...this.state
         });
-      });
+    };
 
-      function checkStatus(response) {
-        if (response.status >= 200 && response.status < 300) {
-          return response;
-        } else {
-          var error = new Error(response.statusText);
-          error.response = response;
-          throw error;
-        }
-      }
-    });
+    resetForm = () => {
+        this.fullSetStateFunc();
+    };
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "timerGetAllData", setInterval(function () {
-      //console.log( "time" );
-      _this.getAllData();
-    }, 5000));
 
-    return _this;
-  }
+    render() {
+        return (
 
-  _createClass(TicketsComponent, [{
-    key: "getAllData",
-    value: function getAllData() {
-      var _this2 = this;
+            <form id="OpenDescComponent" onSubmit={(event) => {
+                event.preventDefault()
+            }}>
+                <div>Причина: {this.props.problem}</div>
+                <br />
+                <div>Код проекта: {this.props.projectCode}</div>
 
-      fetch("/mongooseGetDataTickets").then(function (res) {
-        return res.json();
-      }).then(function (json) {
-        return _this2.setState({
-          data: json
-        });
-      });
-      fetch("/mongooseGetDataSC").then(function (res) {
-        return res.json();
-      }).then(function (json) {
-        return _this2.setState({
-          sc: json
-        });
-      });
+                <div>Местонахождение оборудования:
+                    {this.place !== 5 ? ' ' + this.placeOptions[this.place].label + ' ' : ' ' + this.placeAnother + ' '}
+                </div>
+
+                <br />
+
+                <div>Контакты:</div>
+                <div>Email:<a
+                    href={"mailto:" + this.props.contacts.email + "?subject=Заявка на гарантийное обслуживание № " + this.props.ticketNumber}>{this.props.contacts.email + ' '}</a>
+                    Тел.: {this.props.contacts.telnum + ' '}
+                    Внутр: {this.props.contacts.extum + ' '}
+                </div>
+
+                <hr />
+
+                <div>
+                    <label>Коментарий:</label>
+                    <input type="text" id="comment" value={this.state.comment} onChange={this.handleUserInput}/>
+                </div>
+                <br /><br />
+
+                <div>
+                    <label>Сервисный центр: </label>
+                    <select id="serviceCenter" onChange={this.changeServiceCenter} value={this.state.serviceCenter}>
+                        <option value="" defaultValue>Выбрать сервисный центр</option>
+                        {this.props.serviceCenterOptions.map(sc =>
+                            <option key={sc._id} value={sc._id}>{sc.scTitle}</option>
+                        )}
+                    </select>
+                    {this.state.serviceCenterDetails !== undefined ?
+                        <div><b>Адрес СЦ: </b>{this.state.serviceCenterDetails.scAdress} <br /> <b>Авторизация
+                            вендоров:</b> {this.state.serviceCenterDetails.scVendors}</div> : ''}
+                </div>
+
+                <div>
+                    <label>Ремонт: </label>
+                    <select id="typeOfService" onChange={this.handleUserInput} value={this.state.typeOfService}>
+                        {typeOfServiceOptions.map(typeOfService =>
+                            <option key={typeOfService.value} value={typeOfService.value}>{typeOfService.label}</option>
+                        )}
+                    </select>
+                </div>
+
+                <div>
+                    <label>Дата завершения обслуживания:</label>
+                    <input id="finishDate" onChange={this.handleUserInput} value={this.state.finishDate}/>
+                </div>
+
+                <div>
+                    <label>Сервисный контракт / № обращения</label>
+                    <input id="serviceCenterTicket" onChange={this.handleUserInput}
+                           value={this.state.serviceCenterTicket}/>
+                </div>
+                <br /><br />
+
+                <div>
+                    <label>Приоритет заявки:</label>
+                    <select id="ticketPriority" className="selectPriority" onChange={this.handleUserInput}
+                            value={this.state.ticketPriority}>
+                        {this.props.ticketPriorityOptions.map(priority =>
+                            <option key={priority.value} value={priority.value}>{priority.label}</option>
+                        )}
+                    </select>
+                </div>
+
+                <div>
+                    <label>Статус заявки:</label>
+                    <select id="status" onChange={this.handleUserInput} value={this.state.status}>
+                        {this.props.statusOptions.map(status =>
+                            <option key={status.value} value={status.value}>{status.label}</option>
+                        )}
+                    </select>
+                </div>
+
+                <button onClick={this.saveFormFunc}> SAVE</button>
+                <button onClick={this.resetForm}>RESET</button>
+                <button onClick={ () => {
+                    this.props.deleteButtonClick(this.ticketNumber, this._id)
+
+                } }>DELETE
+                </button>
+                <hr />
+
+            </form>
+        )
     }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      console.log('componentDidMount');
-      this.getAllData();
-      this.timerGetAllData;
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      console.log('componentWillUnmount');
-      clearInterval(this.timerGetAllData);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this3 = this;
+}
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_8__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.ticketWasDeleted && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0417\u0430\u044F\u0432\u043A\u0430 \u0443\u0434\u0430\u043B\u0435\u043D\u0430! ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          _this3.setState({
-            ticketWasDeleted: false
-          });
-        }
-      }, "OK"))), this.state.data.map(function (ticket) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          key: ticket._id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.state.idOfupdatedTicket === ticket._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " --- \u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0410!!! --- "), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          onClick: function onClick() {
-            _this3.setState({
-              idOfupdatedTicket: null
-            });
-          }
-        }, "OK"))), "\u0417\u0430\u044F\u0432\u043A\u0430 ", ticket.ticketNumber, " \u043E\u0442 ", ticket.ticketDate, " ", ticket.finishDate ? 'Дата завершения: ' + ticket.finishDate + ' ' : '', "\u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", _pages_props__WEBPACK_IMPORTED_MODULE_9__["ticketPriorityOptions"][ticket.ticketPriority].label, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _pages_props__WEBPACK_IMPORTED_MODULE_9__["statusOptions"][ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.lasname + ' ' + ticket.firstname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: '/tickets/' + ticket._id
-        }, "\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435 \u043E\u0431 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0438 ", ticket.vendor, " ", ticket.model), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, ticket._id === _this3.state.openTicketDescId && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(OpenFormComponent, {
-          _id: ticket._id,
-          contacts: {
-            telnum: ticket.telnum,
-            email: ticket.email,
-            extum: ticket.extnum
-          },
-          ticketNumber: ticket.ticketNumber,
-          problem: ticket.problem,
-          projectCode: ticket.projectCode,
-          place: ticket.place,
-          placeAnother: ticket.placeAnother,
-          placeOptions: _pages_props__WEBPACK_IMPORTED_MODULE_9__["placeOptions"],
-          status: ticket.status,
-          statusOptions: _pages_props__WEBPACK_IMPORTED_MODULE_9__["statusOptions"],
-          finishDate: ticket.finishDate,
-          comment: ticket.comment,
-          ticketPriority: ticket.ticketPriority,
-          ticketPriorityOptions: _pages_props__WEBPACK_IMPORTED_MODULE_9__["ticketPriorityOptions"],
-          serviceCenter: ticket.serviceCenter,
-          serviceCenterOptions: _this3.state.sc,
-          serviceCenterTicket: ticket.serviceCenterTicket,
-          typeOfService: ticket.typeOfService,
-          typeOfServiceOptions: _pages_props__WEBPACK_IMPORTED_MODULE_9__["typeOfServiceOptions"],
-          saveButtonClick: function saveButtonClick(updatearg) {
-            _this3.updateDataFunc(updatearg, ticket._id);
-          },
-          deleteButtonClick: _this3.promtToDelete
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          onClick: function onClick() {
-            _this3.setState({
-              openTicketDescId: ticket._id
-            });
-          }
-        }, "OPEN"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          onClick: function onClick() {
-            _this3.setState({
-              openTicketDescId: null
-            });
-          }
-        }, "CLOSE")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
-      }));
-    }
-  }]);
-
-  return TicketsComponent;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); // end of RouterComponent
-
-
-var OpenFormComponent =
-/*#__PURE__*/
-function (_Component2) {
-  _inherits(OpenFormComponent, _Component2);
-
-  function OpenFormComponent() {
-    var _getPrototypeOf3;
-
-    var _this4;
-
-    _classCallCheck(this, OpenFormComponent);
-
-    for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-      args[_key2] = arguments[_key2];
-    }
-
-    _this4 = _possibleConstructorReturn(this, (_getPrototypeOf3 = _getPrototypeOf(OpenFormComponent)).call.apply(_getPrototypeOf3, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "state", {
-      comment: '',
-      status: '',
-      typeOfService: '',
-      ticketPriority: '',
-      serviceCenter: '',
-      serviceCenterDetails: '',
-      serviceCenterTicket: '',
-      finishDate: ''
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "statusOptions", _this4.props.statusOptions);
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "ticketPriorityOptions", _this4.props.ticketPriorityOptions);
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "serviceCenterOptions", _this4.props.serviceCenterOptions);
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "ticketNumber", _this4.props.ticketNumber);
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "placeOptions", _this4.props.placeOptions);
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "place", _this4.props.place);
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "placeAnother", _this4.props.placeAnother);
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "_id", _this4.props._id);
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "fullSetStateFunc", function () {
-      _this4.setState(_objectSpread({}, _this4.props));
-
-      _this4.props.serviceCenter !== '' ? _this4.getServiceCenterDetails(_this4.props.serviceCenter) : '';
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "getServiceCenterDetails", function (id) {
-      var scDetais = _this4.props.serviceCenterOptions.find(function (item) {
-        return item._id === id;
-      });
-
-      _this4.setState({
-        serviceCenterDetails: scDetais
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "handleUserInput", function (e) {
-      var name = e.target.id;
-      var value = e.target.value;
-      console.log(name, ' ', value);
-
-      _this4.setState(_defineProperty({}, name, value));
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "changeServiceCenter", function (event) {
-      _this4.getServiceCenterDetails(event.target.value);
-
-      _this4.setState({
-        serviceCenter: event.target.value
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "saveFormFunc", function () {
-      _this4.props.saveButtonClick(_objectSpread({}, _this4.state));
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this4)), "resetForm", function () {
-      _this4.fullSetStateFunc();
-    });
-
-    return _this4;
-  }
-
-  _createClass(OpenFormComponent, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.fullSetStateFunc();
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this5 = this;
-
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        id: "OpenDescComponent",
-        onSubmit: function onSubmit(event) {
-          event.preventDefault();
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041F\u0440\u0438\u0447\u0438\u043D\u0430: ", this.props.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430: ", this.props.projectCode), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041C\u0435\u0441\u0442\u043E\u043D\u0430\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F:", this.place !== 5 ? ' ' + this.placeOptions[this.place].label + ' ' : ' ' + this.placeAnother + ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Email:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "mailto:" + this.props.contacts.email + "?subject=Заявка на гарантийное обслуживание № " + this.props.ticketNumber
-      }, this.props.contacts.email + ' '), "\u0422\u0435\u043B.: ", this.props.contacts.telnum + ' ', "\u0412\u043D\u0443\u0442\u0440: ", this.props.contacts.extum + ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041A\u043E\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        id: "comment",
-        value: this.state.comment,
-        onChange: this.handleUserInput
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        id: "serviceCenter",
-        onChange: this.changeServiceCenter,
-        value: this.state.serviceCenter
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "",
-        defaultValue: true
-      }, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u0441\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440"), this.props.serviceCenterOptions.map(function (sc) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-          key: sc._id,
-          value: sc._id
-        }, sc.scTitle);
-      })), this.state.serviceCenterDetails !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0421\u0426: "), this.state.serviceCenterDetails.scAdress, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432:"), " ", this.state.serviceCenterDetails.scVendors) : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0420\u0435\u043C\u043E\u043D\u0442: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        id: "typeOfService",
-        onChange: this.handleUserInput,
-        value: this.state.typeOfService
-      }, _pages_props__WEBPACK_IMPORTED_MODULE_9__["typeOfServiceOptions"].map(function (typeOfService) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-          key: typeOfService.value,
-          value: typeOfService.value
-        }, typeOfService.label);
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0414\u0430\u0442\u0430 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u044F:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        id: "finishDate",
-        onChange: this.handleUserInput,
-        value: this.state.finishDate
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u043A\u043E\u043D\u0442\u0440\u0430\u043A\u0442 / \u2116 \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        id: "serviceCenterTicket",
-        onChange: this.handleUserInput,
-        value: this.state.serviceCenterTicket
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 \u0437\u0430\u044F\u0432\u043A\u0438:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        id: "ticketPriority",
-        className: "selectPriority",
-        onChange: this.handleUserInput,
-        value: this.state.ticketPriority
-      }, this.props.ticketPriorityOptions.map(function (priority) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-          key: priority.value,
-          value: priority.value
-        }, priority.label);
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0442\u0430\u0442\u0443\u0441 \u0437\u0430\u044F\u0432\u043A\u0438:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        id: "status",
-        onChange: this.handleUserInput,
-        value: this.state.status
-      }, this.props.statusOptions.map(function (status) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-          key: status.value,
-          value: status.value
-        }, status.label);
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.saveFormFunc
-      }, " SAVE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.resetForm
-      }, "RESET"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          _this5.props.deleteButtonClick(_this5.ticketNumber, _this5._id);
-        }
-      }, "DELETE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
-    }
-  }]);
-
-  return OpenFormComponent;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-var DescComponent =
-/*#__PURE__*/
-function (_Component3) {
-  _inherits(DescComponent, _Component3);
-
-  function DescComponent() {
-    var _getPrototypeOf4;
-
-    var _this6;
-
-    _classCallCheck(this, DescComponent);
-
-    for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-      args[_key3] = arguments[_key3];
-    }
-
-    _this6 = _possibleConstructorReturn(this, (_getPrototypeOf4 = _getPrototypeOf(DescComponent)).call.apply(_getPrototypeOf4, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this6)), "state", {
-      data: {}
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this6)), "arg", _this6.props.match.params.ticketid);
-
-    return _this6;
-  }
-
-  _createClass(DescComponent, [{
-    key: "componentDidMount",
+class DescComponent extends Component {
+    state =
+        {
+            data: {}
+        };
+    arg = this.props.match.params.ticketid;
     //foo = console.log('DescComponent, this.arg: ',this.arg);
-    value: function componentDidMount() {
-      var _this7 = this;
 
-      fetch('/mongoosefind', {
-        method: 'post',
-        body: JSON.stringify({
-          _id: this.arg
-        }),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      }).then(function (res) {
-        return res.json();
-      }).then(function (json) {
-        return _this7.setState({
-          data: json
-        });
-      });
+    componentDidMount() {
+
+        fetch('/mongoosefind', {
+            method: 'post',
+            body: JSON.stringify({_id: this.arg}),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(json => this.setState({data: json}))
+    };
+
+
+    render() {
+        return (
+            <Layout>
+                <h5>Title: {this.state.data.ticketNumber}</h5>
+                <h5>Desc: {this.state.data.problem}</h5>
+                <Link to={'../tickets'}>Обратно к заявкам</Link>
+            </Layout>);
     }
-  }, {
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_8__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Title: ", this.state.data.ticketNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Desc: ", this.state.data.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: '../tickets'
-      }, "\u041E\u0431\u0440\u0430\u0442\u043D\u043E \u043A \u0437\u0430\u044F\u0432\u043A\u0430\u043C"));
-    }
-  }]);
 
-  return DescComponent;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); //NewDeafultComponent
-
+} //NewDeafultComponent
+*/
 
 var Routing = function Routing() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
@@ -718,19 +635,19 @@ var Routing = function Routing() {
     component: _pages_main__WEBPACK_IMPORTED_MODULE_4__["Main"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/tickets/:ticketid",
-    component: DescComponent
+    component: _pages_tickets_othertickets__WEBPACK_IMPORTED_MODULE_9__["DescComponent"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/tickets",
-    component: TicketsComponent
+    component: _pages_tickets__WEBPACK_IMPORTED_MODULE_5__["TicketsComponent"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/search",
-    component: _pages_search__WEBPACK_IMPORTED_MODULE_5__["Search"]
+    component: _pages_search__WEBPACK_IMPORTED_MODULE_6__["Search"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/form",
-    component: _pages_form__WEBPACK_IMPORTED_MODULE_6__["Form"]
+    component: _pages_form__WEBPACK_IMPORTED_MODULE_7__["Form"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/servicecenters",
-    component: _pages_servicecenters__WEBPACK_IMPORTED_MODULE_7__["ServiceCentres"]
+    component: _pages_servicecenters__WEBPACK_IMPORTED_MODULE_8__["ServiceCentres"]
   }));
 };
 
@@ -1772,6 +1689,597 @@ function (_Component) {
 
   return ServiceCentres;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./app/pages/tickets/form.js":
+/*!***********************************!*\
+  !*** ./app/pages/tickets/form.js ***!
+  \***********************************/
+/*! exports provided: OpenFormComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OpenFormComponent", function() { return OpenFormComponent; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_dropdown_style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dropdown/style.css */ "./node_modules/react-dropdown/style.css");
+/* harmony import */ var react_dropdown_style_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dropdown_style_css__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+var OpenFormComponent =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(OpenFormComponent, _Component);
+
+  function OpenFormComponent() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _classCallCheck(this, OpenFormComponent);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(OpenFormComponent)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+      comment: '',
+      status: '',
+      typeOfService: '',
+      ticketPriority: '',
+      serviceCenter: '',
+      serviceCenterDetails: '',
+      serviceCenterTicket: '',
+      finishDate: ''
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "statusOptions", _this.props.statusOptions);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "ticketPriorityOptions", _this.props.ticketPriorityOptions);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "serviceCenterOptions", _this.props.serviceCenterOptions);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "ticketNumber", _this.props.ticketNumber);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "placeOptions", _this.props.placeOptions);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "place", _this.props.place);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "placeAnother", _this.props.placeAnother);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "typeOfService", _this.props.typeOfService);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "typeOfServiceOptions", _this.props.typeOfServiceOptions);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "_id", _this.props._id);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "fullSetStateFunc", function () {
+      _this.setState(_objectSpread({}, _this.props));
+
+      _this.props.serviceCenter !== '' ? _this.getServiceCenterDetails(_this.props.serviceCenter) : '';
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getServiceCenterDetails", function (id) {
+      var scDetais = _this.props.serviceCenterOptions.find(function (item) {
+        return item._id === id;
+      });
+
+      _this.setState({
+        serviceCenterDetails: scDetais
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleUserInput", function (e) {
+      var name = e.target.id;
+      var value = e.target.value;
+      console.log(name, ' ', value);
+
+      _this.setState(_defineProperty({}, name, value));
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "changeServiceCenter", function (event) {
+      _this.getServiceCenterDetails(event.target.value);
+
+      _this.setState({
+        serviceCenter: event.target.value
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "saveFormFunc", function () {
+      _this.props.saveButtonClick(_objectSpread({}, _this.state));
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "resetForm", function () {
+      _this.fullSetStateFunc();
+    });
+
+    return _this;
+  }
+
+  _createClass(OpenFormComponent, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.fullSetStateFunc();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        id: "OpenDescComponent",
+        onSubmit: function onSubmit(event) {
+          event.preventDefault();
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041F\u0440\u0438\u0447\u0438\u043D\u0430: ", this.props.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430: ", this.props.projectCode), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041C\u0435\u0441\u0442\u043E\u043D\u0430\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F:", this.place !== 5 ? ' ' + this.placeOptions[this.place].label + ' ' : ' ' + this.placeAnother + ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Email:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "mailto:" + this.props.contacts.email + "?subject=Заявка на гарантийное обслуживание № " + this.props.ticketNumber
+      }, this.props.contacts.email + ' '), "\u0422\u0435\u043B.: ", this.props.contacts.telnum + ' ', "\u0412\u043D\u0443\u0442\u0440: ", this.props.contacts.extum + ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041A\u043E\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        id: "comment",
+        value: this.state.comment,
+        onChange: this.handleUserInput
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        id: "serviceCenter",
+        onChange: this.changeServiceCenter,
+        value: this.state.serviceCenter
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "",
+        defaultValue: true
+      }, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u0441\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440"), this.props.serviceCenterOptions.map(function (sc) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: sc._id,
+          value: sc._id
+        }, sc.scTitle);
+      })), this.state.serviceCenterDetails !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0421\u0426: "), this.state.serviceCenterDetails.scAdress, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432:"), " ", this.state.serviceCenterDetails.scVendors) : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0420\u0435\u043C\u043E\u043D\u0442: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        id: "typeOfService",
+        onChange: this.handleUserInput,
+        value: this.state.typeOfService
+      }, this.typeOfServiceOptions.map(function (typeOfService) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: typeOfService.value,
+          value: typeOfService.value
+        }, typeOfService.label);
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0414\u0430\u0442\u0430 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u044F:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "finishDate",
+        onChange: this.handleUserInput,
+        value: this.state.finishDate
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u043A\u043E\u043D\u0442\u0440\u0430\u043A\u0442 / \u2116 \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "serviceCenterTicket",
+        onChange: this.handleUserInput,
+        value: this.state.serviceCenterTicket
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 \u0437\u0430\u044F\u0432\u043A\u0438:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        id: "ticketPriority",
+        className: "selectPriority",
+        onChange: this.handleUserInput,
+        value: this.state.ticketPriority
+      }, this.props.ticketPriorityOptions.map(function (priority) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: priority.value,
+          value: priority.value
+        }, priority.label);
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0442\u0430\u0442\u0443\u0441 \u0437\u0430\u044F\u0432\u043A\u0438:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        id: "status",
+        onChange: this.handleUserInput,
+        value: this.state.status
+      }, this.props.statusOptions.map(function (status) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: status.value,
+          value: status.value
+        }, status.label);
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.saveFormFunc
+      }, " SAVE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.resetForm
+      }, "RESET"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          _this2.props.deleteButtonClick(_this2.ticketNumber, _this2._id);
+        }
+      }, "DELETE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
+    }
+  }]);
+
+  return OpenFormComponent;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./app/pages/tickets/index.js":
+/*!************************************!*\
+  !*** ./app/pages/tickets/index.js ***!
+  \************************************/
+/*! exports provided: TicketsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TicketsComponent", function() { return TicketsComponent; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_dropdown_style_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dropdown/style.css */ "./node_modules/react-dropdown/style.css");
+/* harmony import */ var react_dropdown_style_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_dropdown_style_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _controls_layout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../controls/layout */ "./app/controls/layout.js");
+/* harmony import */ var _props__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../props */ "./app/pages/props.js");
+/* harmony import */ var _form__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./form */ "./app/pages/tickets/form.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+
+
+var TicketsComponent =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(TicketsComponent, _Component);
+
+  function TicketsComponent() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _classCallCheck(this, TicketsComponent);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(TicketsComponent)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+      data: [],
+      openTicketDescId: null,
+      idOfupdatedTicket: null,
+      sc: [],
+      ticketWasDeleted: false
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "deleteData", function (id) {
+      console.log('deleteTicket, id', id);
+      fetch('/mongooseTicketDelete', {
+        method: 'post',
+        body: JSON.stringify({
+          _id: id
+        }),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).then(checkStatus).then(function () {
+        _this.setState({
+          idOfupdatedTicket: null,
+          ticketWasDeleted: true
+        });
+      }).then(_this.getAllData()).then(function () {
+        return console.log('ticket deleted');
+      });
+
+      function checkStatus(responsee) {
+        if (responsee.status >= 200 && responsee.status < 300) {
+          //console.log(response);
+          return responsee;
+        } else {
+          var error = new Error(response.statusText);
+          error.response = response;
+          throw error;
+        }
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "promtToDelete", function (ticketNumber, _id) {
+      var originalPrompt = window.prompt;
+      var answer = originalPrompt("Для удаление заявки № " + ticketNumber + " лвведите ее номер для подтверждения");
+      answer == ticketNumber ? _this.deleteData(_id) : alert('Ошибка ввода, удаление отменено');
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateDataFunc", function (updatearg, id) {
+      fetch('/mongooseUpdate', {
+        method: 'post',
+        body: JSON.stringify(_objectSpread({
+          _id: id
+        }, updatearg)),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).then(checkStatus).then(function () {
+        return _this.getAllData();
+      }).then(function () {
+        return _this.setState({
+          idOfupdatedTicket: id,
+          openTicketDescId: null
+        });
+      });
+
+      function checkStatus(response) {
+        if (response.status >= 200 && response.status < 300) {
+          return response;
+        } else {
+          var error = new Error(response.statusText);
+          error.response = response;
+          throw error;
+        }
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "timerGetAllData", setInterval(function () {
+      //console.log( "time" );
+      _this.getAllData();
+    }, 5000));
+
+    return _this;
+  }
+
+  _createClass(TicketsComponent, [{
+    key: "getAllData",
+    value: function getAllData() {
+      var _this2 = this;
+
+      fetch("/mongooseGetDataTickets").then(function (res) {
+        return res.json();
+      }).then(function (json) {
+        return _this2.setState({
+          data: json
+        });
+      });
+      fetch("/mongooseGetDataSC").then(function (res) {
+        return res.json();
+      }).then(function (json) {
+        return _this2.setState({
+          sc: json
+        });
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      console.log('componentDidMount');
+      this.getAllData();
+      this.timerGetAllData;
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      console.log('componentWillUnmount');
+      clearInterval(this.timerGetAllData);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_4__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "TICKETS!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.ticketWasDeleted && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0417\u0430\u044F\u0432\u043A\u0430 \u0443\u0434\u0430\u043B\u0435\u043D\u0430!", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          _this3.setState({
+            ticketWasDeleted: false
+          });
+        }
+      }, "OK"))), this.state.data.map(function (ticket) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: ticket._id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.state.idOfupdatedTicket === ticket._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " --- \u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0410!!! --- "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            _this3.setState({
+              idOfupdatedTicket: null
+            });
+          }
+        }, "OK"))), "\u0417\u0430\u044F\u0432\u043A\u0430 ", ticket.ticketNumber, " \u043E\u0442 ", ticket.ticketDate, " ", ticket.finishDate ? 'Дата завершения: ' + ticket.finishDate + ' ' : '', " \u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", _props__WEBPACK_IMPORTED_MODULE_5__["ticketPriorityOptions"][ticket.ticketPriority].label, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _props__WEBPACK_IMPORTED_MODULE_5__["statusOptions"][ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.lasname + ' ' + ticket.firstname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: '/tickets/' + ticket._id
+        }, "\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435 \u043E\u0431 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0438 ", ticket.vendor, " ", ticket.model), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, ticket._id === _this3.state.openTicketDescId && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form__WEBPACK_IMPORTED_MODULE_6__["OpenFormComponent"], {
+          _id: ticket._id,
+          contacts: {
+            telnum: ticket.telnum,
+            email: ticket.email,
+            extum: ticket.extnum
+          },
+          ticketNumber: ticket.ticketNumber,
+          problem: ticket.problem,
+          projectCode: ticket.projectCode,
+          place: ticket.place,
+          placeAnother: ticket.placeAnother,
+          placeOptions: _props__WEBPACK_IMPORTED_MODULE_5__["placeOptions"],
+          status: ticket.status,
+          statusOptions: _props__WEBPACK_IMPORTED_MODULE_5__["statusOptions"],
+          finishDate: ticket.finishDate,
+          comment: ticket.comment,
+          ticketPriority: ticket.ticketPriority,
+          ticketPriorityOptions: _props__WEBPACK_IMPORTED_MODULE_5__["ticketPriorityOptions"],
+          serviceCenter: ticket.serviceCenter,
+          serviceCenterOptions: _this3.state.sc,
+          serviceCenterTicket: ticket.serviceCenterTicket,
+          typeOfService: ticket.typeOfService,
+          typeOfServiceOptions: _props__WEBPACK_IMPORTED_MODULE_5__["typeOfServiceOptions"],
+          saveButtonClick: function saveButtonClick(updatearg) {
+            _this3.updateDataFunc(updatearg, ticket._id);
+          },
+          deleteButtonClick: _this3.promtToDelete
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            _this3.setState({
+              openTicketDescId: ticket._id
+            });
+          }
+        }, "OPEN"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            _this3.setState({
+              openTicketDescId: null
+            });
+          }
+        }, "CLOSE")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
+      }));
+    }
+  }]);
+
+  return TicketsComponent;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); // end of RouterComponent
+
+
+
+
+/***/ }),
+
+/***/ "./app/pages/tickets/othertickets.js":
+/*!*******************************************!*\
+  !*** ./app/pages/tickets/othertickets.js ***!
+  \*******************************************/
+/*! exports provided: DescComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DescComponent", function() { return DescComponent; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _controls_layout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../controls/layout */ "./app/controls/layout.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var DescComponent =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(DescComponent, _Component);
+
+  function DescComponent() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _classCallCheck(this, DescComponent);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(DescComponent)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+      data: {}
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "arg", _this.props.match.params.ticketid);
+
+    return _this;
+  }
+
+  _createClass(DescComponent, [{
+    key: "componentDidMount",
+    //foo = console.log('DescComponent, this.arg: ',this.arg);
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      fetch('/mongoosefind', {
+        method: 'post',
+        body: JSON.stringify({
+          _id: this.arg
+        }),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).then(function (res) {
+        return res.json();
+      }).then(function (json) {
+        return _this2.setState({
+          data: json
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_3__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Title: ", this.state.data.ticketNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Desc: ", this.state.data.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: '../tickets'
+      }, "\u041E\u0431\u0440\u0430\u0442\u043D\u043E \u043A \u0437\u0430\u044F\u0432\u043A\u0430\u043C"));
+    }
+  }]);
+
+  return DescComponent;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); //NewDeafultComponent
+
 
 
 
