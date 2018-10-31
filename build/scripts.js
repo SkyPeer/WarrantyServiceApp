@@ -232,7 +232,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dropdown_style_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_dropdown_style_css__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _pages_main__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/main */ "./app/pages/main.js");
 /* harmony import */ var _pages_tickets__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/tickets */ "./app/pages/tickets/index.js");
-/* harmony import */ var _pages_search__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/search */ "./app/pages/search.js");
+/* harmony import */ var _pages_search__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/search */ "./app/pages/search/index.js");
 /* harmony import */ var _pages_form__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/form */ "./app/pages/form/index.js");
 /* harmony import */ var _pages_servicecenters__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/servicecenters */ "./app/pages/servicecenters/index.js");
 /* harmony import */ var _pages_tickets_othertickets__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/tickets/othertickets */ "./app/pages/tickets/othertickets.js");
@@ -262,6 +262,9 @@ var Routing = function Routing() {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/tickets",
     component: _pages_tickets__WEBPACK_IMPORTED_MODULE_5__["TicketsComponent"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/search/:ticketid",
+    component: _pages_search__WEBPACK_IMPORTED_MODULE_6__["Search"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/search",
     component: _pages_search__WEBPACK_IMPORTED_MODULE_6__["Search"]
@@ -881,10 +884,10 @@ var typeOfServiceOptions = [{
 
 /***/ }),
 
-/***/ "./app/pages/search.js":
-/*!*****************************!*\
-  !*** ./app/pages/search.js ***!
-  \*****************************/
+/***/ "./app/pages/search/index.js":
+/*!***********************************!*\
+  !*** ./app/pages/search/index.js ***!
+  \***********************************/
 /*! exports provided: Search */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -893,8 +896,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Search", function() { return Search; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _controls_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controls/layout */ "./app/controls/layout.js");
-/* harmony import */ var _props__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./props */ "./app/pages/props.js");
+/* harmony import */ var _controls_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../controls/layout */ "./app/controls/layout.js");
+/* harmony import */ var _props__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../props */ "./app/pages/props.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -919,6 +922,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+var isNumber = __webpack_require__(/*! is-number */ "./node_modules/is-number/index.js");
+
 var Search =
 /*#__PURE__*/
 function (_Component) {
@@ -939,19 +944,27 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
       data: {},
-      ticketNumber: '',
-      lasname: '',
-      firstname: '',
-      familyname: '',
-      ticketDate: '',
-      comment: '',
-      status: '',
-      finishDate: '',
       checkData: '',
-      search: false
+      search: false,
+      buttonEnabled: true,
+      inputError: false
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "arg", _this.props.match.params.ticketid);
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "inputUserHandler", function (e) {
+      console.log(e.target.value);
+      isNumber(e.target.value) ? _this.setState({
+        buttonEnabled: true,
+        inputError: false
+      }) : _this.setState({
+        buttonEnabled: false,
+        inputError: true
+      });
+      e.target.value === '' ? _this.setState({
+        inputError: false
+      }) : '';
+
       _this.setState({
         ticketNumber: e.target.value
       });
@@ -991,7 +1004,9 @@ function (_Component) {
 
   _createClass(Search, [{
     key: "componentDidMount",
-    value: function componentDidMount() {}
+    value: function componentDidMount() {
+      console.log('this.arg', this.arg);
+    }
   }, {
     key: "render",
     value: function render() {
@@ -1005,8 +1020,12 @@ function (_Component) {
         id: "ticketNumber",
         onChange: this.inputUserHandler,
         value: this.state.ticketNumber,
-        placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u043D\u043E\u043C\u0435\u0440 \u0437\u0430\u044F\u0432\u043A\u0438"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u043D\u043E\u043C\u0435\u0440 \u0437\u0430\u044F\u0432\u043A\u0438",
+        className: this.state.inputError ? 'input_error2' : ''
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.inputError && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "form__error"
+      }, "\u041D\u043E\u043C\u0435\u0440 \u0437\u0430\u044F\u0432\u043A\u0438 \u0434\u043E\u043B\u0436\u0435\u043D \u0441\u043E\u0441\u0442\u043E\u044F\u0442\u044C \u0442\u043E\u043B\u044C\u043A\u043E \u0438\u0437 \u0447\u0438\u0441\u0435\u043B")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        disabled: !this.state.buttonEnabled,
         onClick: function onClick() {
           _this2.trySearch(_this2.state.ticketNumber);
 
@@ -1018,7 +1037,7 @@ function (_Component) {
         onClick: function onClick() {
           console.log(_this2.state.data);
         }
-      }, "TEST"), this.state.search && (this.state.checkData ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440: "), this.state.data.lasname + ' ' + this.state.data.firstname + ' ' + this.state.data.familyname, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u2116 \u0437\u0430\u044F\u0432\u043A\u0438: "), this.state.data.ticketNumber, ", \u0434\u0430\u0442\u0430 \u0438 \u0432\u0440\u0435\u043C\u044F \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F: ", this.state.data.ticketDate, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " \u041A\u043E\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439: ", this.state.data.comment, ", \u0441\u0442\u0430\u0442\u0443\u0441: ", _props__WEBPACK_IMPORTED_MODULE_2__["statusOptions"][this.state.data.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0414\u0430\u0442\u0430 \u0437\u0430\u0432\u0435\u0448\u0435\u043D\u0438\u044F: "), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("u", null, this.state.data.finishDate))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0417\u0430\u044F\u0432\u043A\u0430 \u0441 \u0442\u0430\u043A\u0438\u043C \u043D\u043E\u043C\u0435\u0440\u043E\u043C \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u0430"))));
+      }, "TEST"), this.state.search && (this.state.checkData ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440: "), this.state.data.lasname + ' ' + this.state.data.firstname + ' ' + this.state.data.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u2116 \u0437\u0430\u044F\u0432\u043A\u0438: "), this.state.data.ticketNumber, ", \u0434\u0430\u0442\u0430 \u0438 \u0432\u0440\u0435\u043C\u044F \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F: ", this.state.data.ticketDate, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " \u041A\u043E\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439: ", this.state.data.comment, ", \u0441\u0442\u0430\u0442\u0443\u0441: ", _props__WEBPACK_IMPORTED_MODULE_2__["statusOptions"][this.state.data.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0414\u0430\u0442\u0430 \u0437\u0430\u0432\u0435\u0448\u0435\u043D\u0438\u044F: "), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("u", null, this.state.data.finishDate))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0417\u0430\u044F\u0432\u043A\u0430 \u0441 \u0442\u0430\u043A\u0438\u043C \u043D\u043E\u043C\u0435\u0440\u043E\u043C \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u0430"))));
     }
   }]);
 
@@ -3413,6 +3432,36 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 };
 
 module.exports = invariant;
+
+
+/***/ }),
+
+/***/ "./node_modules/is-number/index.js":
+/*!*****************************************!*\
+  !*** ./node_modules/is-number/index.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*!
+ * is-number <https://github.com/jonschlinkert/is-number>
+ *
+ * Copyright (c) 2014-present, Jon Schlinkert.
+ * Released under the MIT License.
+ */
+
+
+
+module.exports = function(num) {
+  if (typeof num === 'number') {
+    return num - num === 0;
+  }
+  if (typeof num === 'string' && num.trim() !== '') {
+    return Number.isFinite ? Number.isFinite(+num) : isFinite(+num);
+  }
+  return false;
+};
 
 
 /***/ }),

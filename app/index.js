@@ -17,6 +17,7 @@ const Routing = () => (
         <Route exact path='/' component={Main}/>
         <Route path='/tickets/:ticketid' component={DescComponent}/>
         <Route path='/tickets' component={TicketsComponent}/>
+        <Route path='/search/:ticketid' component={Search}/>
         <Route path='/search' component={Search}/>
         <Route path='/form' component={Form}/>
         <Route path='/servicecenters' component={ServiceCentres}/>
