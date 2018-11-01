@@ -900,6 +900,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _props__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../props */ "./app/pages/props.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -922,8 +924,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var isNumber = __webpack_require__(/*! is-number */ "./node_modules/is-number/index.js");
-
 var Search =
 /*#__PURE__*/
 function (_Component) {
@@ -943,30 +943,21 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Search)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      data: {},
-      checkData: '',
-      search: false,
-      buttonEnabled: true,
-      inputError: false
+      firstname: '',
+      lastname: '',
+      status: 0,
+      ticketNumber: '',
+      comment: '',
+      search: '',
+      cantFind: false,
+      checkData: false
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "arg", _this.props.match.params.ticketid);
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "searcharg", _this.props.match.params.ticketid);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "inputUserHandler", function (e) {
-      console.log(e.target.value);
-      isNumber(e.target.value) ? _this.setState({
-        buttonEnabled: true,
-        inputError: false
-      }) : _this.setState({
-        buttonEnabled: false,
-        inputError: true
-      });
-      e.target.value === '' ? _this.setState({
-        inputError: false
-      }) : '';
-
       _this.setState({
-        ticketNumber: e.target.value
+        search: e.target.value
       });
     });
 
@@ -982,20 +973,21 @@ function (_Component) {
         }
       }).then(function (res) {
         return res.json();
-      })
-      /*.then(json => this.setState({data: json})) */
-      .then(function (json) {
+      }).then(function (json) {
         return _this.checkData(json);
       });
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "checkData", function (data) {
       console.log(data);
-      data !== null ? _this.setState({
-        data: data,
-        checkData: true
-      }) : _this.setState({
-        checkData: false
+      JSON.stringify(data) !== JSON.stringify({
+        error: 'mongoNotFound'
+      }) ? _this.setState(_objectSpread({}, data, {
+        checkData: true,
+        cantFind: false
+      })) : _this.setState({
+        checkData: false,
+        cantFind: true
       });
     });
 
@@ -1005,7 +997,8 @@ function (_Component) {
   _createClass(Search, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      console.log('this.arg', this.arg);
+      console.log('this.searcharg: ', this.searcharg);
+      this.searcharg !== undefined ? this.trySearch(this.searcharg) : ''; //this.setState({search:this.searcharg})
     }
   }, {
     key: "render",
@@ -1019,25 +1012,13 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Search"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "ticketNumber",
         onChange: this.inputUserHandler,
-        value: this.state.ticketNumber,
-        placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u043D\u043E\u043C\u0435\u0440 \u0437\u0430\u044F\u0432\u043A\u0438",
-        className: this.state.inputError ? 'input_error2' : ''
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.inputError && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "form__error"
-      }, "\u041D\u043E\u043C\u0435\u0440 \u0437\u0430\u044F\u0432\u043A\u0438 \u0434\u043E\u043B\u0436\u0435\u043D \u0441\u043E\u0441\u0442\u043E\u044F\u0442\u044C \u0442\u043E\u043B\u044C\u043A\u043E \u0438\u0437 \u0447\u0438\u0441\u0435\u043B")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        disabled: !this.state.buttonEnabled,
+        value: this.state.search,
+        placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u043D\u043E\u043C\u0435\u0440 \u0437\u0430\u044F\u0432\u043A\u0438"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
-          _this2.trySearch(_this2.state.ticketNumber);
-
-          _this2.setState({
-            search: true
-          });
+          _this2.trySearch(_this2.state.search);
         }
-      }, "Search"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          console.log(_this2.state.data);
-        }
-      }, "TEST"), this.state.search && (this.state.checkData ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440: "), this.state.data.lasname + ' ' + this.state.data.firstname + ' ' + this.state.data.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u2116 \u0437\u0430\u044F\u0432\u043A\u0438: "), this.state.data.ticketNumber, ", \u0434\u0430\u0442\u0430 \u0438 \u0432\u0440\u0435\u043C\u044F \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F: ", this.state.data.ticketDate, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " \u041A\u043E\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439: ", this.state.data.comment, ", \u0441\u0442\u0430\u0442\u0443\u0441: ", _props__WEBPACK_IMPORTED_MODULE_2__["statusOptions"][this.state.data.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0414\u0430\u0442\u0430 \u0437\u0430\u0432\u0435\u0448\u0435\u043D\u0438\u044F: "), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("u", null, this.state.data.finishDate))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0417\u0430\u044F\u0432\u043A\u0430 \u0441 \u0442\u0430\u043A\u0438\u043C \u043D\u043E\u043C\u0435\u0440\u043E\u043C \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u0430"))));
+      }, "\u041F\u043E\u0438\u0441\u043A"), this.state.checkData ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440: "), this.state.lastname + ' ' + this.state.firstname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u2116 \u0437\u0430\u044F\u0432\u043A\u0438: "), this.state.ticketNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0441\u0442\u0430\u0442\u0443\u0441: ", this.state.status !== 0 ? _props__WEBPACK_IMPORTED_MODULE_2__["statusOptions"][this.state.status].label : 'На рассмотрении')) : '', this.state.cantFind ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0417\u0430\u044F\u0432\u043A\u0438 \u0441 \u0442\u0430\u043A\u0438\u043C \u043D\u043E\u043C\u0435\u0440\u043E\u043C \u043D\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442") : ''));
     }
   }]);
 
@@ -1853,7 +1834,7 @@ function (_Component) {
               idOfupdatedTicket: null
             });
           }
-        }, "OK"))), "\u0417\u0430\u044F\u0432\u043A\u0430 ", ticket.ticketNumber, " \u043E\u0442 ", ticket.ticketDate, " ", ticket.finishDate ? 'Дата завершения: ' + ticket.finishDate + ' ' : '', " \u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", _props__WEBPACK_IMPORTED_MODULE_5__["ticketPriorityOptions"][ticket.ticketPriority].label, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _props__WEBPACK_IMPORTED_MODULE_5__["statusOptions"][ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.lasname + ' ' + ticket.firstname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        }, "OK"))), "\u0417\u0430\u044F\u0432\u043A\u0430 ", ticket.ticketNumber, " \u043E\u0442 ", ticket.ticketDate, " ", ticket.finishDate ? 'Дата завершения: ' + ticket.finishDate + ' ' : '', " \u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", _props__WEBPACK_IMPORTED_MODULE_5__["ticketPriorityOptions"][ticket.ticketPriority].label, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _props__WEBPACK_IMPORTED_MODULE_5__["statusOptions"][ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.lastname + ' ' + ticket.firstname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: '/tickets/' + ticket._id
         }, "\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435 \u043E\u0431 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0438 ", ticket.vendor, " ", ticket.model), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, ticket._id === _this3.state.openTicketDescId && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form__WEBPACK_IMPORTED_MODULE_6__["OpenFormComponent"], {
           _id: ticket._id,
@@ -3432,36 +3413,6 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 };
 
 module.exports = invariant;
-
-
-/***/ }),
-
-/***/ "./node_modules/is-number/index.js":
-/*!*****************************************!*\
-  !*** ./node_modules/is-number/index.js ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*!
- * is-number <https://github.com/jonschlinkert/is-number>
- *
- * Copyright (c) 2014-present, Jon Schlinkert.
- * Released under the MIT License.
- */
-
-
-
-module.exports = function(num) {
-  if (typeof num === 'number') {
-    return num - num === 0;
-  }
-  if (typeof num === 'string' && num.trim() !== '') {
-    return Number.isFinite ? Number.isFinite(+num) : isFinite(+num);
-  }
-  return false;
-};
 
 
 /***/ }),

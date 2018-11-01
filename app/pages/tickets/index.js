@@ -129,7 +129,7 @@ class TicketsComponent extends Component {
                                 </button>
                             </div>}</div>
                             Заявка {ticket.ticketNumber} от {ticket.ticketDate} {ticket.finishDate ? 'Дата завершения: ' + ticket.finishDate + ' ' : ''} приоритет: {ticketPriorityOptions[ticket.ticketPriority].label} Статус: {statusOptions[ticket.status].label}</div>
-                        <div>Инициатор {ticket.lasname + ' ' + ticket.firstname + ' ' + ticket.familyname}</div>
+                        <div>Инициатор {ticket.lastname + ' ' + ticket.firstname + ' ' + ticket.familyname}</div>
                         <Link to={'/tickets/' + ticket._id}>Подробнее об
                             оборудовании {ticket.vendor} {ticket.model}</Link>
 

@@ -41,7 +41,7 @@ let TicketsSchema = new mongoose.Schema({
     projectCode: String,
 
     firstname: String,
-    lasname: String,
+    lastname: String,
     familyname: String,
     email: String,
     telnum: String,
@@ -193,13 +193,16 @@ app.post('/mongooseFind', bodyParser.json(), function(req, res){
     })
 });
 
-app.post('/mongooseSearchbyTicketNumber', bodyParser.json(), function(req, res){
-    console.log('req.body', req.body);
-    TicketModel.findOne({ticketNumber: req.body.ticketNumber}, function (err, taskDocs) {
-        if (err) return (err);
-        console.log(taskDocs);
-        res.json(taskDocs)
-    })
+app.post('/mongooseSearchbyTicketNumber', bodyParser.json(), function (req, res) {
+    console.log('SearchbyTicketNumber req.body', req.body, 'isNAN:', isNaN(req.body.ticketNumber));
+
+    isNaN(req.body.ticketNumber) ? res.json({error: 'mongoNotFound'}) :
+
+        TicketModel.findOne({ticketNumber: req.body.ticketNumber}, function (err, ticket) {
+            if (err) return (err);
+            console.log('findOne', ticket);
+            ticket !== null ?  res.json(ticket): res.json({error: 'mongoNotFound'})
+        })
 });
 
 app.post('/mongooseTicketDelete', bodyParser.json(), function (req, res) {
@@ -273,7 +276,7 @@ app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
     TicketModel.create(
         {
             firstname: req.body.firstname,
-            lasname: req.body.lastname,
+            lastname: req.body.lastname,
             familyname: req.body.familyname,
             email: req.body.email,
             telnum: req.body.telnum,
