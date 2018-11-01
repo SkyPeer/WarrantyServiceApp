@@ -21,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1820">
-              <caret line="14" column="39" lean-forward="false" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
+            <state relative-caret-position="312">
+              <caret line="332" column="15" lean-forward="true" selection-start-line="332" selection-start-column="15" selection-end-line="332" selection-end-column="15" />
               <folding>
                 <element signature="e#728#786#0" expanded="false" />
                 <element signature="e#961#1479#0" expanded="false" />
@@ -44,16 +44,16 @@
                 <element signature="e#5795#6160#0" expanded="false" />
                 <element signature="e#6231#7374#0" expanded="false" />
                 <element signature="e#7445#8985#0" expanded="false" />
-                <element signature="e#10155#10652#0" expanded="false" />
-                <element signature="e#10715#11224#0" expanded="false" />
-                <element signature="e#11283#11520#0" expanded="false" />
-                <element signature="e#11555#13165#0" expanded="false" />
+                <element signature="e#10145#10642#0" expanded="false" />
+                <element signature="e#10705#11214#0" expanded="false" />
+                <element signature="e#11273#11510#0" expanded="false" />
+                <element signature="e#11545#13155#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="email.jade" pinned="false" current-in-tab="true">
+      <file leaf-file-name="email.jade" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/email.jade">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="26">
@@ -159,8 +159,8 @@
         <option value="$PROJECT_DIR$/app/pages/search/index.js" />
         <option value="$PROJECT_DIR$/../practice/Parctice/date.js" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/index.js" />
         <option value="$PROJECT_DIR$/views/email.jade" />
+        <option value="$PROJECT_DIR$/index.js" />
       </list>
     </option>
   </component>
@@ -393,12 +393,12 @@
       <workItem from="1540900594767" duration="63895000" />
       <workItem from="1541038284831" duration="18978000" />
       <workItem from="1541071945914" duration="3578000" />
-      <workItem from="1541076434686" duration="2096000" />
+      <workItem from="1541076434686" duration="2354000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="425777000" />
+    <option name="totallyTimeSpent" value="426035000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -503,10 +503,10 @@
             <element signature="e#5795#6160#0" expanded="false" />
             <element signature="e#6231#7374#0" expanded="false" />
             <element signature="e#7445#8985#0" expanded="false" />
-            <element signature="e#10155#10652#0" expanded="false" />
-            <element signature="e#10715#11224#0" expanded="false" />
-            <element signature="e#11283#11520#0" expanded="false" />
-            <element signature="e#11555#13165#0" expanded="false" />
+            <element signature="e#10145#10642#0" expanded="false" />
+            <element signature="e#10705#11214#0" expanded="false" />
+            <element signature="e#11273#11510#0" expanded="false" />
+            <element signature="e#11545#13155#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -587,10 +587,10 @@
             <element signature="e#5795#6160#0" expanded="false" />
             <element signature="e#6231#7374#0" expanded="false" />
             <element signature="e#7445#8985#0" expanded="false" />
-            <element signature="e#10155#10652#0" expanded="false" />
-            <element signature="e#10715#11224#0" expanded="false" />
-            <element signature="e#11283#11520#0" expanded="false" />
-            <element signature="e#11555#13165#0" expanded="false" />
+            <element signature="e#10145#10642#0" expanded="false" />
+            <element signature="e#10705#11214#0" expanded="false" />
+            <element signature="e#11273#11510#0" expanded="false" />
+            <element signature="e#11545#13155#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -634,10 +634,10 @@
             <element signature="e#5795#6160#0" expanded="false" />
             <element signature="e#6231#7374#0" expanded="false" />
             <element signature="e#7445#8985#0" expanded="false" />
-            <element signature="e#10155#10652#0" expanded="false" />
-            <element signature="e#10715#11224#0" expanded="false" />
-            <element signature="e#11283#11520#0" expanded="false" />
-            <element signature="e#11555#13165#0" expanded="false" />
+            <element signature="e#10145#10642#0" expanded="false" />
+            <element signature="e#10705#11214#0" expanded="false" />
+            <element signature="e#11273#11510#0" expanded="false" />
+            <element signature="e#11545#13155#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -934,10 +934,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/views/email.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="1" column="4" lean-forward="true" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1820">
-          <caret line="14" column="39" lean-forward="false" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
+        <state relative-caret-position="312">
+          <caret line="332" column="15" lean-forward="true" selection-start-line="332" selection-start-column="15" selection-end-line="332" selection-end-column="15" />
           <folding>
             <element signature="e#728#786#0" expanded="false" />
             <element signature="e#961#1479#0" expanded="false" />
@@ -956,19 +964,11 @@
             <element signature="e#5795#6160#0" expanded="false" />
             <element signature="e#6231#7374#0" expanded="false" />
             <element signature="e#7445#8985#0" expanded="false" />
-            <element signature="e#10155#10652#0" expanded="false" />
-            <element signature="e#10715#11224#0" expanded="false" />
-            <element signature="e#11283#11520#0" expanded="false" />
-            <element signature="e#11555#13165#0" expanded="false" />
+            <element signature="e#10145#10642#0" expanded="false" />
+            <element signature="e#10705#11214#0" expanded="false" />
+            <element signature="e#11273#11510#0" expanded="false" />
+            <element signature="e#11545#13155#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/email.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26">
-          <caret line="1" column="4" lean-forward="true" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>

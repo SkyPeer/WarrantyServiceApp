@@ -330,7 +330,7 @@ mailer.extend(app, {
     transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
     auth: {
         user: 'service@arroway.cloud',
-        pass: 'Qwerty0111'
+        pass: ''
     }
 });
 
