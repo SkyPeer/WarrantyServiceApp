@@ -11,9 +11,13 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     multer = require('multer'),
     ObjectID = require('mongodb').ObjectID,
-    mongoose = require('mongoose');
-
+    mongoose = require('mongoose'),
+    mailer = require('express-mailer'),
+    jade = require('jade');
 //mongoose = require('mongoose');
+
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
 
 
 mongoose.connect('mongodb://localhost:27017/warranty', {
@@ -315,6 +319,37 @@ app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
 });
 
 ///
+
+//---------------------------- mailer
+
+mailer.extend(app, {
+    from: 'service@arroway.cloud',
+    host: 'smtp.yandex.ru', // hostname
+    secureConnection: true, // use SSL
+    port: 465, // port for secure SMTP
+    transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+    auth: {
+        user: 'service@arroway.cloud',
+        pass: 'Qwerty0111'
+    }
+});
+
+app.get('/email', function (req, res, next) {
+    app.mailer.send('email', {
+        to: 'oleg.selivantsev@gmail.com', // REQUIRED. This can be a comma delimited string just like a normal email to field.
+        subject: 'Test Email', // REQUIRED.
+        otherProperty: 'Other Property' // All additional properties are also passed to the template as local variables.
+    }, function (err) {
+        if (err) {
+            // handle error
+            console.log(err);
+            res.send('There was an error sending the email');
+            return;
+        }
+        res.send('Email Sent');
+    });
+});
+
 
 
 
