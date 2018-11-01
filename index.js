@@ -313,6 +313,7 @@ app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
             //res.setHeader('Content-Type', 'application/json');
             res.json({resJson})
         })
+        .then(mailersend(req.body.email, randomTicketNumber))
         .catch(err => {
             console.error(err)
         })
@@ -333,8 +334,34 @@ mailer.extend(app, {
         pass: ''
     }
 });
+function mailersend(mailadress, subject) {
 
-app.get('/email', function (req, res, next) {
+    app.mailer.send('email', {
+        to: mailadress, // REQUIRED. This can be a comma delimited string just like a normal email to field.
+        subject: subject, // REQUIRED.
+        otherProperty: 'Other Property' // All additional properties are also passed to the template as local variables.
+    }, function (err) {
+        if (err) {
+            // handle error
+            console.log(err);
+            console.log('There was an error sending the email');
+            return;
+        }
+        console.log('Email Sent to:', mailadress);
+    });
+
+}
+
+
+
+
+
+
+
+
+
+
+/*app.get('/email', function (req, res, next) {
     app.mailer.send('email', {
         to: 'oleg.selivantsev@gmail.com', // REQUIRED. This can be a comma delimited string just like a normal email to field.
         subject: 'Test Email', // REQUIRED.
@@ -343,13 +370,12 @@ app.get('/email', function (req, res, next) {
         if (err) {
             // handle error
             console.log(err);
-            res.send('There was an error sending the email');
+            console.log('There was an error sending the email');
             return;
         }
-        res.send('Email Sent');
+        console.log('Email Sent');
     });
-});
-
+});*/
 
 
 
