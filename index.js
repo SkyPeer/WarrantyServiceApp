@@ -334,12 +334,12 @@ mailer.extend(app, {
         pass: ''
     }
 });
-function mailersend(mailadress, subject) {
+function mailersend(mailadress, ticketNumber) {
 
     app.mailer.send('email', {
         to: mailadress, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-        subject: subject, // REQUIRED.
-        otherProperty: 'Other Property' // All additional properties are also passed to the template as local variables.
+        subject: 'Создана заявка на сервисное обслуживание '+ ticketNumber, // REQUIRED.
+        otherProperty: ticketNumber // All additional properties are also passed to the template as local variables.
     }, function (err) {
         if (err) {
             // handle error
