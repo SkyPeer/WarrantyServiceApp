@@ -12,14 +12,17 @@ class TicketsComponent extends Component {
         openTicketDescId: null,
         idOfupdatedTicket: null,
         sc: [],
-        ticketWasDeleted: false
+        ticketWasDeleted: false,
 
+        finishDate: '',
+        daysLeft: '',
+        currentDate: ''
     };
 
     getAllData() {
         fetch(`/mongooseGetDataTickets`)
             .then(res => res.json())
-            .then(json => this.setState({data: json}));
+            .then(json => this.setState({data: json.data, currentDate: json.currentDate}));
         fetch(`/mongooseGetDataSC`)
             .then(res => res.json())
             .then(json => this.setState({sc: json}))
@@ -63,6 +66,25 @@ class TicketsComponent extends Component {
         answer == ticketNumber ? this.deleteData(_id) : alert('Ошибка ввода, удаление отменено')
     };
 
+    dateFunction = (ticketDate, daysLeft) => {
+
+        let dateOfCreatton = new Date(ticketDate);
+        let finishDate = new Date(ticketDate);
+        let currentDate = new Date(this.state.currentDate);
+
+        finishDate.setDate(dateOfCreatton.getDate()+parseInt(daysLeft));
+
+        let daysLeftLocal = new Date(finishDate - currentDate);
+        console.log('---------------------------------------');
+        console.log('currentDate : ', currentDate);
+        console.log('dateOfCreatton : ', dateOfCreatton);
+        console.log('finishDate : ', finishDate);
+        console.log('daysLeftLocal : ', daysLeftLocal.getDate());
+        console.log('---------------------------------------');
+
+    };
+
+
     updateDataFunc = (updatearg, id) => {
         fetch('/mongooseUpdate', {
             method: 'post',
@@ -93,7 +115,8 @@ class TicketsComponent extends Component {
     componentDidMount() {
         console.log('componentDidMount');
         this.getAllData();
-        this.timerGetAllData;
+        //this.timerGetAllData;
+
 
     }
 
@@ -102,16 +125,17 @@ class TicketsComponent extends Component {
         clearInterval(this.timerGetAllData)
     }
 
-    timerGetAllData = setInterval(() => {
+   /* timerGetAllData = setInterval(() => {
         //console.log( "time" );
         this.getAllData()
-    }, 5000);
+    }, 5000);*/
 
 
     render() {
         return (
             <Layout>
                 <h1>TICKETS!</h1>
+                <button onClick={()=>{console.log(this.state)}}> TEST </button>
                 <div>{this.state.ticketWasDeleted && <div>Заявка удалена!
                     <button onClick={() => {
                         this.setState({ticketWasDeleted: false})
@@ -128,7 +152,10 @@ class TicketsComponent extends Component {
                                 } }>OK
                                 </button>
                             </div>}</div>
-                            Заявка {ticket.ticketNumber} от {ticket.ticketDate} {ticket.finishDate ? 'Дата завершения: ' + ticket.finishDate + ' ' : ''} приоритет: {ticketPriorityOptions[ticket.ticketPriority].label} Статус: {statusOptions[ticket.status].label}</div>
+                            Заявка № {' ' + ticket.ticketNumber} от {ticket.ticketDate} {ticket.finishDate ? 'Дата завершения: ' + ticket.finishDate + ' ' : ''} приоритет: {ticketPriorityOptions[ticket.ticketPriority].label} Статус: {statusOptions[ticket.status].label}</div>
+                        <div>Дата создания {/*ticket.ticketDate*/ this.dateFunction(ticket.ticketDate, ticket.daysForService)}</div>
+
+
                         <div>Инициатор {ticket.lastname + ' ' + ticket.firstname + ' ' + ticket.familyname}</div>
                         <Link to={'/tickets/' + ticket._id}>Подробнее об
                             оборудовании {ticket.vendor} {ticket.model}</Link>
@@ -147,6 +174,8 @@ class TicketsComponent extends Component {
                                         placeOptions={placeOptions}
 
                                         status={ticket.status} statusOptions={statusOptions}
+                                        currentDate={this.state.currentDate}
+                                        ticketDate={ticket.ticketDate}
                                         finishDate={ticket.finishDate}
 
                                         comment={ticket.comment}

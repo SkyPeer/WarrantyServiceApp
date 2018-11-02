@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom'
 import 'react-dropdown/style.css'
+const isNumber = require('is-number');
 
 class OpenFormComponent extends Component {
 
@@ -12,20 +13,29 @@ class OpenFormComponent extends Component {
         serviceCenter: '',
         serviceCenterDetails: '',
         serviceCenterTicket: '',
-        finishDate: ''
+        finishDate: '',
+        //finishDateLocal: '',
+
+        //formErrors: {},
+        daysForService: '',
+        daysForServiceError: false
 
     };
 
+    ticketDate = this.props.ticketDate;
     statusOptions = this.props.statusOptions;
     ticketPriorityOptions = this.props.ticketPriorityOptions;
     serviceCenterOptions = this.props.serviceCenterOptions;
     ticketNumber = this.props.ticketNumber;
-    placeOptions = this.props.placeOptions;
+
     place = this.props.place;
     placeAnother = this.props.placeAnother;
     typeOfService = this.props.typeOfService;
     typeOfServiceOptions= this.props.typeOfServiceOptions;
     _id = this.props._id;
+
+
+    placeOptions = this.props.placeOptions;
 
 
     fullSetStateFunc = () => {
@@ -44,6 +54,31 @@ class OpenFormComponent extends Component {
         this.fullSetStateFunc()
     }
 
+    handleUserInputDate = (e) => {
+        let daysForService = e.target.value;
+        console.log('input days: ',e.target.value);
+        isNumber(daysForService) || daysForService == '' ? this.setState({daysForService: daysForService, daysForServiceError: false}) : this.setState({daysForServiceError: true})
+
+        let ticketDate = new Date(this.ticketDate);
+        let finishDate = new Date();
+        finishDate.setDate(ticketDate.getDate());
+        finishDate.setMonth(ticketDate.getMonth());
+        finishDate.setFullYear(ticketDate.getFullYear());
+        /*this.state.daysForService !== '' ? finishDate.setDate(this.ticketDate.getDate()+this.state.daysForService) : '';
+        this.setState({finishDate:finishDate}) */
+
+        //console.log(ticketDate);
+        finishDate.setDate(ticketDate.getDate()+parseInt(daysForService));
+        console.log(finishDate);
+
+        isNumber(finishDate.getDate()) ?
+            this.setState({finishDate:' '+ finishDate.getDate() +' / '+ (finishDate.getMonth()+parseInt(1)) +' / '+ finishDate.getFullYear() +' '}) :
+            this.setState({finishDate: ''})
+        //finishDate.setDate(35);
+
+       // console.log(finishDate);
+        //console.log(this.ticketDate);
+    };
 
     handleUserInput = (e) => {
         const name = e.target.id;
@@ -86,8 +121,7 @@ class OpenFormComponent extends Component {
                 <br />
 
                 <div>Контакты:</div>
-                <div>Email:<a
-                    href={"mailto:" + this.props.contacts.email + "?subject=Заявка на гарантийное обслуживание № " + this.props.ticketNumber}>{this.props.contacts.email + ' '}</a>
+                <div>Email:<a href={"mailto:" + this.props.contacts.email + "?subject=Заявка на гарантийное обслуживание № " + this.props.ticketNumber}>{this.props.contacts.email + ' '}</a>
                     Тел.: {this.props.contacts.telnum + ' '}
                     Внутр: {this.props.contacts.extum + ' '}
                 </div>
@@ -123,8 +157,17 @@ class OpenFormComponent extends Component {
                 </div>
 
                 <div>
-                    <label>Дата завершения обслуживания:</label>
-                    <input id="finishDate" onChange={this.handleUserInput} value={this.state.finishDate}/>
+                    <label>Требуемое время на проведение сервсных работ:</label>
+
+                    <input id="finishDate"
+                           onChange={this.handleUserInputDate}
+                           value={this.state.daysForService}
+                           placeholder="Введите количество дней (от даты заявки)"/>
+                    <div>Дада завершения: {this.state.finishDate}</div>
+
+                    { this.state.daysForServiceError && <span className="form__error">Необходимо ввести количество дней</span>}
+
+                    { /*this.state.finishDate !== '' ? <div>Дада завершения: {this.state.finishDate}</div> : '' */ }
                 </div>
 
                 <div>
@@ -160,6 +203,7 @@ class OpenFormComponent extends Component {
 
                 } }>DELETE
                 </button>
+                <button onClick={()=>{console.log(this.state)}}> TEST </button>
                 <hr />
 
             </form>
