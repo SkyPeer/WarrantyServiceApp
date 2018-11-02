@@ -13,7 +13,8 @@ const express = require('express'),
     ObjectID = require('mongodb').ObjectID,
     mongoose = require('mongoose'),
     mailer = require('express-mailer'),
-    jade = require('jade');
+    jade = require('jade'),
+    datetime = require('node-datetime');
 //mongoose = require('mongoose');
 
 app.set('views', __dirname + '/views');
@@ -51,7 +52,7 @@ let TicketsSchema = new mongoose.Schema({
     telnum: String,
     extnum: String,
 
-    finishDate: String,
+    daysForService: String,
     comment: String,
     serviceCenter: String,
     typeOfService: Number,
@@ -76,8 +77,10 @@ let ServiceCenterModel = mongoose.model('servicecenters', ServiceCentersSchema);
     }
 
     function getCurrnetDateTime() {
-        let date = new Date();
-        return(date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear() + ' ' + (date.getHours() + ':' + date.getMinutes()));
+        /*let date = new Date(); */
+        let date = datetime.create();
+        return date;
+        //return(date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear() + ' ' + (date.getHours() + ':' + date.getMinutes()));
     }
 
     console.log(getCurrnetDateTime());
@@ -172,7 +175,7 @@ app.get('/mongooseGetDataTickets', function(req, res, next){
     TicketModel.find(function (err, ticketsDocs){
         if (err) return next (err);
 
-        res.json(ticketsDocs.reverse())
+        res.json({data: ticketsDocs.reverse(), currentDate: getCurrnetDateTime()})
     })
 });
 
@@ -234,7 +237,7 @@ app.post('/mongooseUpdate', bodyParser.json(), function (req, res) {
         'body.comment:', req.body.comment,
         'body.status:', req.body.status,
         'body.serviceCenterTicket:',req.body.serviceCenterTicket,
-        'body.finishDate:',req.body.finishDate
+        'body.daysForService:',req.body.daysForService
     );
 
     TicketModel.findOneAndUpdate(
@@ -247,7 +250,7 @@ app.post('/mongooseUpdate', bodyParser.json(), function (req, res) {
             status: req.body.status,
             comment: req.body.comment,
             serviceCenter: req.body.serviceCenter,
-            finishDate: req.body.finishDate,
+            daysForService: req.body.daysForService,
             serviceCenterTicket: req.body.serviceCenterTicket
             // field:values to update
         },
@@ -271,7 +274,7 @@ app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
     );
 
     let randomTicketNumber = getRandomTicketNumber();
-    let currnetDateTime = getCurrnetDateTime();
+    let currnetDateTime = getCurrnetDateTime()._now;
     let resJson = {
         ticketNumber: randomTicketNumber,
         currnetDateTime: currnetDateTime,
@@ -299,7 +302,7 @@ app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
             placeAnother: req.body.placeAnother,
             projectCode: req.body.projectCode,
 
-            finishDate: '',
+            daysForService: '',
             comment: '',
             serviceCenter: '',
             typeOfService: 0,
@@ -313,7 +316,7 @@ app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
             //res.setHeader('Content-Type', 'application/json');
             res.json({resJson})
         })
-        .then(mailersend(req.body.email, randomTicketNumber))
+        .then(mailersend(req.body.email, randomTicketNumber, req.body.vendor))
         .catch(err => {
             console.error(err)
         })
@@ -334,17 +337,18 @@ mailer.extend(app, {
         pass: ''
     }
 });
-function mailersend(mailadress, ticketNumber) {
+function mailersend(mailadress, ticketNumber, vendor) {
 
     app.mailer.send('email', {
         to: mailadress, // REQUIRED. This can be a comma delimited string just like a normal email to field.
         subject: 'Создана заявка на сервисное обслуживание '+ ticketNumber, // REQUIRED.
-        otherProperty: ticketNumber // All additional properties are also passed to the template as local variables.
+        otherProperty: ticketNumber, // All additional properties are also passed to the template as local variables.
+
     }, function (err) {
         if (err) {
             // handle error
             console.log(err);
-            console.log('There was an error sending the email');
+            console.log('There was an error sending the email to', mailadress);
             return;
         }
         console.log('Email Sent to:', mailadress);
