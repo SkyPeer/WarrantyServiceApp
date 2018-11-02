@@ -68,20 +68,22 @@ class TicketsComponent extends Component {
 
     dateFunction = (ticketDate, daysLeft) => {
 
-        let dateOfCreatton = new Date(ticketDate);
+        let dateOfCreation = new Date(ticketDate);
         let finishDate = new Date(ticketDate);
-        let currentDate = new Date(this.state.currentDate);
+        let currentDate = new Date(this.state.currentDate._now);
 
-        finishDate.setDate(dateOfCreatton.getDate()+parseInt(daysLeft));
+        finishDate.setDate(dateOfCreation.getDate()+parseInt(daysLeft));
 
-        let daysLeftLocal = new Date(finishDate - currentDate);
-        console.log('---------------------------------------');
+        let daysLeftLocal = Math.round((finishDate - currentDate) / 1000 / 60 / 60/ 24);
+        /*console.log('---------------------------------------');
         console.log('currentDate : ', currentDate);
-        console.log('dateOfCreatton : ', dateOfCreatton);
+        console.log('dateOfCreatton : ', dateOfCreation);
         console.log('finishDate : ', finishDate);
         console.log('daysLeftLocal : ', daysLeftLocal.getDate());
-        console.log('---------------------------------------');
-
+        console.log('---------------------------------------'); */
+        return {dateOfCreation: (dateOfCreation.getDate() + '/' + (dateOfCreation.getMonth()+parseInt(1)) + '/' +dateOfCreation.getFullYear()+' '+dateOfCreation.getHours()+':'+dateOfCreation.getMinutes()),
+                finishDate: (finishDate.getDate() + '/' +(finishDate.getMonth()+parseInt(1)) + '/' +finishDate.getFullYear()),
+                daysLeftLocal: daysLeftLocal}
     };
 
 
@@ -125,10 +127,10 @@ class TicketsComponent extends Component {
         clearInterval(this.timerGetAllData)
     }
 
-   /* timerGetAllData = setInterval(() => {
+    timerGetAllData = setInterval(() => {
         //console.log( "time" );
         this.getAllData()
-    }, 5000);*/
+    }, 5000);
 
 
     render() {
@@ -152,8 +154,12 @@ class TicketsComponent extends Component {
                                 } }>OK
                                 </button>
                             </div>}</div>
-                            Заявка № {' ' + ticket.ticketNumber} от {ticket.ticketDate} {ticket.finishDate ? 'Дата завершения: ' + ticket.finishDate + ' ' : ''} приоритет: {ticketPriorityOptions[ticket.ticketPriority].label} Статус: {statusOptions[ticket.status].label}</div>
-                        <div>Дата создания {/*ticket.ticketDate*/ this.dateFunction(ticket.ticketDate, ticket.daysForService)}</div>
+                            Заявка № {' ' + ticket.ticketNumber} приоритет: {ticketPriorityOptions[ticket.ticketPriority].label} Статус: {statusOptions[ticket.status].label}</div>
+                        <div>
+                            <div>Дата создания {this.dateFunction(ticket.ticketDate, ticket.daysForService).dateOfCreation + ' '}</div><br /><br />
+                            <div>Завершение сервисного обслуживания {this.dateFunction(ticket.ticketDate, ticket.daysForService).finishDate+ ' '}</div><br /><br />
+                            <div>До завершения осталось {this.dateFunction(ticket.ticketDate, ticket.daysForService).daysLeftLocal} дней</div><br /><br />
+                        </div>
 
 
                         <div>Инициатор {ticket.lastname + ' ' + ticket.firstname + ' ' + ticket.familyname}</div>
@@ -176,7 +182,7 @@ class TicketsComponent extends Component {
                                         status={ticket.status} statusOptions={statusOptions}
                                         currentDate={this.state.currentDate}
                                         ticketDate={ticket.ticketDate}
-                                        finishDate={ticket.finishDate}
+                                        daysForService={ticket.daysForService}
 
                                         comment={ticket.comment}
                                         ticketPriority={ticket.ticketPriority}

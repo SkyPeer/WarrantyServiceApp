@@ -15,9 +15,8 @@ class OpenFormComponent extends Component {
         serviceCenterTicket: '',
         finishDate: '',
         //finishDateLocal: '',
-
-        //formErrors: {},
         daysForService: '',
+        //formErrors: {},
         daysForServiceError: false
 
     };
@@ -27,14 +26,12 @@ class OpenFormComponent extends Component {
     ticketPriorityOptions = this.props.ticketPriorityOptions;
     serviceCenterOptions = this.props.serviceCenterOptions;
     ticketNumber = this.props.ticketNumber;
-
+    daysForService = this.props.daysForService;
     place = this.props.place;
     placeAnother = this.props.placeAnother;
     typeOfService = this.props.typeOfService;
     typeOfServiceOptions= this.props.typeOfServiceOptions;
     _id = this.props._id;
-
-
     placeOptions = this.props.placeOptions;
 
 
@@ -57,7 +54,8 @@ class OpenFormComponent extends Component {
     handleUserInputDate = (e) => {
         let daysForService = e.target.value;
         console.log('input days: ',e.target.value);
-        isNumber(daysForService) || daysForService == '' ? this.setState({daysForService: daysForService, daysForServiceError: false}) : this.setState({daysForServiceError: true})
+        isNumber(daysForService) || daysForService == '' ?
+            this.setState({daysForService: daysForService, daysForServiceError: false}) : this.setState({daysForServiceError: true})
 
         let ticketDate = new Date(this.ticketDate);
         let finishDate = new Date();
@@ -159,11 +157,11 @@ class OpenFormComponent extends Component {
                 <div>
                     <label>Требуемое время на проведение сервсных работ:</label>
 
-                    <input id="finishDate"
+                    <input id="daysForService"
                            onChange={this.handleUserInputDate}
                            value={this.state.daysForService}
                            placeholder="Введите количество дней (от даты заявки)"/>
-                    <div>Дада завершения: {this.state.finishDate}</div>
+                    <div>Дада завершения: {/*this.state.finishDate*/}</div>
 
                     { this.state.daysForServiceError && <span className="form__error">Необходимо ввести количество дней</span>}
 
