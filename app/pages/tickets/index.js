@@ -156,9 +156,15 @@ class TicketsComponent extends Component {
                             </div>}</div>
                             Заявка № {' ' + ticket.ticketNumber} приоритет: {ticketPriorityOptions[ticket.ticketPriority].label} Статус: {statusOptions[ticket.status].label}</div>
                         <div>
-                            <div>Дата создания {this.dateFunction(ticket.ticketDate, ticket.daysForService).dateOfCreation + ' '}</div><br /><br />
-                            <div>Завершение сервисного обслуживания {this.dateFunction(ticket.ticketDate, ticket.daysForService).finishDate+ ' '}</div><br /><br />
-                            <div>До завершения осталось {this.dateFunction(ticket.ticketDate, ticket.daysForService).daysLeftLocal} дней</div><br /><br />
+                            <div>Дата создания {this.dateFunction(ticket.ticketDate, ticket.daysForService).dateOfCreation + ' '}</div>
+                            {
+                                ticket.daysForService && <div>
+                                    <div>Завершение сервисного обслуживания {this.dateFunction(ticket.ticketDate, ticket.daysForService).finishDate + ' '}</div>
+                                    <div>До завершения осталось {this.dateFunction(ticket.ticketDate, ticket.daysForService).daysLeftLocal} дней </div>
+                                </div>
+                            }
+
+
                         </div>
 
 
