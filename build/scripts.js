@@ -170,16 +170,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+ //import activeComponent from "react-router-active-component";
 
 var Navbar =
 /*#__PURE__*/
@@ -187,32 +189,64 @@ function (_Component) {
   _inherits(Navbar, _Component);
 
   function Navbar() {
+    var _getPrototypeOf2;
+
+    var _this;
+
     _classCallCheck(this, Navbar);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Navbar).apply(this, arguments));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Navbar)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+      navLinks: [{
+        to: '/',
+        title: 'Главная',
+        className: "normal"
+      }, {
+        to: '/search',
+        title: 'Поиск',
+        className: "normal"
+      }, {
+        to: '/tickets',
+        title: 'Управление заявками',
+        className: "normal"
+      }]
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "isActive", function (link) {
+      link === document.location.pathname ? "active" : "normal"; //console.log('link test:', link === document.location.pathname)
+    });
+
+    return _this;
   }
 
   _createClass(Navbar, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      console.log(document.location.pathname);
+    }
+  }, {
     key: "render",
     value: function render() {
+      //let isActive = this.context.router.route.location.pathname === this.props.to;
+      // let className = isActive ? 'active' : '';
+
+      /* OLD LINKS*/
+
+      /*
+      <NavLink to="/" className='normal' id={()=>this.isActive('/')}>Главная</NavLink>
+      <NavLink to="/search" className="normal"  activeClassName={this.isActive('/search')}>Поиск</NavLink>
+      <NavLink to="/tickets" className="normal" activeClassName={this.isActive('/search')}>Управление заявками</NavLink>
+      <NavLink to="/form" className="normal"  activeClassName={this.isActive('/search')}>Открыть заявку</NavLink>
+      <NavLink to="/servicecenters" className="normal" activeClassName={this.isActive('/search')}> ServiceCentres </NavLink>
+      */
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "navBar"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
-        to: "/",
-        activeClassName: "is-active"
-      }, "\u0413\u043B\u0430\u0432\u043D\u0430\u044F")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
-        to: "/search",
-        activeClassName: "is-active"
-      }, "\u041F\u043E\u0438\u0441\u043A")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
-        to: "/tickets",
-        activeClassName: "is-active"
-      }, "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0437\u0430\u044F\u0432\u043A\u0430\u043C\u0438")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
-        to: "/form",
-        activeClassName: "is-active"
-      }, "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0437\u0430\u044F\u0432\u043A\u0443")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
-        to: "/servicecenters",
-        activeClassName: "is-active"
-      }, " ServiceCentres "))));
+      }, this.state.navLinks.map(navLink));
     }
   }]);
 
