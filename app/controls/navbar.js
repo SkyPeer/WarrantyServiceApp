@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 class Navbar extends Component{
     render(){
         return (
-            <div>
-                <Link to="/"> Main </Link>
-                <Link to="/search"> Search </Link>
-                <Link to="/tickets"> Tickets </Link>
-                <Link to="/form"> Form </Link>
-                <Link to="/servicecenters"> ServiceCentres </Link>
-                <hr /><hr />
-            </div>
+            <div id="navBar"><ul>
+                <li><NavLink to="/" activeClassName='is-active'>Главная</NavLink></li>
+                <li><NavLink to="/search" activeClassName='is-active'>Поиск</NavLink></li>
+                <li><NavLink to="/tickets" activeClassName='is-active'>Управление заявками</NavLink></li>
+                <li><NavLink to="/form" activeClassName='is-active'>Открыть заявку</NavLink></li>
+                <li><NavLink to="/servicecenters" activeClassName='is-active'> ServiceCentres </NavLink></li>
+            </ul></div>
         )
     }
 }

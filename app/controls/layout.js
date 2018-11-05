@@ -5,7 +5,9 @@ class Layout extends Component{
         return (
             <div>
                 <Navbar/>
-                {this.props.children}
+                <div className="contenContainer">
+                    {this.props.children}
+                </div>
             </div>
         )
     }

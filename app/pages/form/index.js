@@ -242,9 +242,8 @@ class Form extends Component {
 
         return (
             <Layout>
-                <h1>Form, {this.state.newTicketNumber !== '' ?
-                    <div>Создано обращение № {this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate}
-                        МСК</div> : ''}</h1>
+                <h1>Form</h1>
+                {this.state.newTicketNumber !== '' ? <div>Создано обращение № {this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate} МСК</div> : ''}
                 <form id="CreateTicket" onSubmit={(event) => {
                     event.preventDefault()
                 }}>
