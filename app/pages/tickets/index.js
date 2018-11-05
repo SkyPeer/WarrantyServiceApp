@@ -80,7 +80,6 @@ class TicketsComponent extends Component {
                 daysLeftLocal: daysLeftLocal}
     };
 
-
     updateDataFunc = (updatearg, id) => {
         fetch('/mongooseUpdate', {
             method: 'post',
@@ -112,8 +111,6 @@ class TicketsComponent extends Component {
         console.log('componentDidMount');
         this.getAllData();
         //this.timerGetAllData;
-
-
     }
 
     componentWillUnmount() {
