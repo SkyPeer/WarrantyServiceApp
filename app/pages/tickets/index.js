@@ -75,12 +75,6 @@ class TicketsComponent extends Component {
         finishDate.setDate(dateOfCreation.getDate()+parseInt(daysLeft));
 
         let daysLeftLocal = Math.round((finishDate - currentDate) / 1000 / 60 / 60/ 24);
-        /*console.log('---------------------------------------');
-        console.log('currentDate : ', currentDate);
-        console.log('dateOfCreatton : ', dateOfCreation);
-        console.log('finishDate : ', finishDate);
-        console.log('daysLeftLocal : ', daysLeftLocal.getDate());
-        console.log('---------------------------------------'); */
         return {dateOfCreation: (dateOfCreation.getDate() + '/' + (dateOfCreation.getMonth()+parseInt(1)) + '/' +dateOfCreation.getFullYear()+' '+dateOfCreation.getHours()+':'+dateOfCreation.getMinutes()),
                 finishDate: (finishDate.getDate() + '/' +(finishDate.getMonth()+parseInt(1)) + '/' +finishDate.getFullYear()),
                 daysLeftLocal: daysLeftLocal}

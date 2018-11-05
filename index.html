@@ -7,9 +7,26 @@
     <style>
         body{
             font-family: Tahoma;
+            background-color: #53065a;
 
         }
 
+        #root{
+            /*position: relative; */
+            /*left: 50%;
+            transform: translateX(-50%); */
+            padding: 10px;
+            width: 50%;
+            margin: 1em auto 0;
+            background-color: white;
+
+
+
+            /*width: 70%; */
+            /*background-color: green;*/
+
+
+        }
 
         .input_error2 {
             border-color: red;
@@ -21,9 +38,9 @@
 
         #OpenDescComponent {
             background-color: blanchedalmond;
-            margin: 15px;
-            padding: 15px;
-            margin-left: 0px;
+            /*margin: 15px;
+            padding: 15px; */
+
         }
 
         .form__error {
@@ -32,14 +49,12 @@
             font-size: 12px;
             display: block;
             margin-top: 3px;
-            /*display: block; */
-            display: block;
         }
 
         input {
             outline: none;
             display: block;
-            width: 100%;
+            /*width: 100%; */
             border-radius: 2px;
             border: 1px solid #ccc;
             padding: 10px;
@@ -48,8 +63,8 @@
 
         .telInputClass {
             outline: none;
-            display: block;
-            width: 100%;
+            /*display: block; */
+            /*width: 100%; */
             border-radius: 2px;
             border: 1px solid #ccc;
             padding: 10px;
@@ -80,6 +95,15 @@
             box-sizing: border-box;
         }
 
+        .input_error {
+            border-color: red;
+        }
+
+        .input_correct{
+            border-color: green;
+        }
+
+
 
         /*button {
             width: 100%;
@@ -91,25 +115,20 @@
         }*/
 
 
-        .input_error {
-            border-color: red;
-        }
 
-        .input_error + .form__error {
-            display: block;
-        }
 
-        .input_correct{
-            border-color: green;
-        }
 
-        form {
+        /*.input_error + .form__error {
+           display: block;
+       }*/
+
+        /*form {
             display: inline-block;
-            padding: 25px;
+            padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             width: 500px;
-        }
+        }*/
 
         /*.form__field {
             margin-bottom: 10px;
@@ -133,7 +152,7 @@
 </head>
 <body>
 <h4>Заявки на гарантийное / постгарантийное обслуживание</h4>
-<section id="root"></section>
+<div id="root"></div>
 
 <script src="/build/scripts.js"></script>
 
