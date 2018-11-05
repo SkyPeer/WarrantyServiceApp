@@ -17,6 +17,7 @@ const express = require('express'),
     datetime = require('node-datetime');
 //mongoose = require('mongoose');
 
+
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
