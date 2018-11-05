@@ -218,7 +218,8 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "isActive", function (link) {
-      link === document.location.pathname ? "active" : "normal"; //console.log('link test:', link === document.location.pathname)
+      return link === document.location.pathname ? "active" : "normal";
+      console.log('link test:', link === document.location.pathname);
     });
 
     return _this;
@@ -232,6 +233,8 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       //let isActive = this.context.router.route.location.pathname === this.props.to;
       // let className = isActive ? 'active' : '';
 
@@ -246,7 +249,13 @@ function (_Component) {
       */
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "navBar"
-      }, this.state.navLinks.map(navLink));
+      }, this.state.navLinks.map(function (navLink) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+          to: navLink.to,
+          className: _this2.isActive(navLink.to),
+          key: navLink.index
+        }, navLink.title);
+      }));
     }
   }]);
 

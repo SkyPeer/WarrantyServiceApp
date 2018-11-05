@@ -12,8 +12,8 @@ class Navbar extends Component{
     };
 
     isActive = (link) => {
-        link === document.location.pathname ? "active" : "normal"
-        //console.log('link test:', link === document.location.pathname)
+        return(link === document.location.pathname ? "active" : "normal");
+        console.log('link test:', link === document.location.pathname)
     }
 
 
@@ -40,7 +40,9 @@ class Navbar extends Component{
         return (
             <div id="navBar">
                 {
-                    this.state.navLinks.map(navLink)
+                    this.state.navLinks.map((navLink=>(
+                        <NavLink to={navLink.to} className={this.isActive(navLink.to)} key={navLink.index}>{navLink.title}</NavLink>
+                    )))
                 }
 
             </div>
