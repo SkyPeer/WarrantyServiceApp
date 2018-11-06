@@ -3,22 +3,20 @@ import {Link, NavLink, Route} from "react-router-dom";
 //import activeComponent from "react-router-active-component";
 
 class Navbar extends Component{
-   /* state = {
-        navLinks:[
-            {to: '/', title: 'Главная', className: "normal"},
-            {to: '/search', title: 'Поиск', className: "normal"},
-            {to: '/tickets', title: 'Управление заявками', className: "normal"}
-        ]
-    };*/
 
     isActive = (link) => {
-        return(link === document.location.pathname ? "active" : "normal");
-     //   console.log('link test:', link === document.location.pathname)
+        return(link === document.location.pathname ? "active" : "normalLink");
     };
 
+    myFunction() {
+        let x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
 
-    componentDidMount() {
-      //  console.log(document.location.pathname)
+        console.log('x =', x);
     }
 
     render(){
@@ -30,11 +28,14 @@ class Navbar extends Component{
 
         return (
             <div id="navBar">
-                <NavLink to="/" className={this.isActive('/')} >Главная</NavLink>
-                <NavLink to="/search" className={this.isActive('/search')}>Поиск</NavLink>
-                <NavLink to="/tickets" className={this.isActive('/tickets')}>Управление заявками</NavLink>
-                <NavLink to="/form" className={this.isActive('/form')}>Открыть заявку</NavLink>
-
+            <div className="logo" >/LOGO/</div>
+                <div className="topnav" id="myTopnav">
+                    <NavLink to="/" className={this.isActive('/')} >Главная</NavLink>
+                    <NavLink to="/search" className={this.isActive('/search')}>Поиск</NavLink>
+                    <NavLink to="/tickets" className={this.isActive('/tickets')}>Управление заявками</NavLink>
+                    <NavLink to="/form" className={this.isActive('/form')}>Открыть заявку</NavLink>
+                </div>
+                <div id="menuIcon"><a href="javascript:void(0)" onClick={()=>{this.myFunction()}}><img src="../public/menu_bars5.png"/></a></div>
             </div>
         )
     }

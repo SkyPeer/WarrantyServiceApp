@@ -13,34 +13,12 @@
 
         }
 
-        @media(max-width: 640px){
-            body{
-                margin-top: 0; !important;
-            }
-
-            #navBar .normal{
-                display: none;
-            }
-            #navBar .active{
-                display: none;
-            }
-
-            /*.topnav a.icon {
-                float: right;
-                display: block;
-            }
-            .topnav.responsive {position: relative;}
-            .topnav.responsive .icon {
-                position: absolute;
-                right: 0;
-                top: 0;
-            }
-            .topnav.responsive a {
-                float: none;
-                display: block;
-                text-align: left;
-            } */
+        .logo{
+            float: left;
+            padding: 14.5px 16px;
+            display: block;
         }
+
 
 
         #root{
@@ -57,7 +35,6 @@
             /*background-color: green;*/
         }
 
-
         #navBar{
             background-color: #550a5f;
             color: white;
@@ -68,33 +45,49 @@
         #navBar .active{
             color: white;
             background-color: #9b0aa5;
+            padding: 14.5px 16px;
+            float: left;
+            display: block;
+            text-decoration: none;
+            font-size: 17px;
         }
 
 
-        #navBar a{
+
+        #navBar .normalLink{
             float: left;
             display: block;
             color: #f2f2f2;
             text-align: center;
-            padding: 14px 16px;
+            padding: 14.5px 16px;
             text-decoration: none;
             font-size: 17px;
 
         }
-        #navBar .icon{
-            content: url('./public/menu_bars.png')
-        }
 
-
-        #navBar a:hover{
+        #navBar .normalLink:hover{
             /**/
             text-decoration: none;
             background-color: #9b0aa5;
+
         }
+
+        #menuIcon {
+            float: right;
+            display: none;
+            padding: 11px 16px;
+            /*margin-right: 15px;
+            top:50%;
+            transform: translateY(50%); */
+            /*z-index: auto; */
+        }
+
 
         h1 {
             background-color: green;
         }
+
+
 
         .input_error2 {
             border-color: red;
@@ -203,6 +196,58 @@
             display: block;
         }*/
 
+
+        @media(max-width: 640px){
+            body{
+                margin-top: 0; !important;
+            }
+            #navBar #menuIcon{
+                display: block;
+            }
+            #navBar .normalLink{
+                display: none;!important;
+            }
+            #navBar .active{
+                display: none;!important;
+            }
+
+            #navBar .topnav.responsive {
+                position: relative;
+                margin-top: 50px;
+            }
+            #navBar #menuIcon {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+            #navBar .topnav.responsive a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+
+
+
+
+            /*.topnav a.icon {
+                float: right;
+                display: block;
+            }
+            .topnav.responsive {position: relative;}
+            .topnav.responsive .icon {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+            .topnav.responsive a {
+                float: none;
+                display: block;
+                text-align: left;
+            } */
+        }
+
+
+
     </style>
     <title>Сервис гарантийного обслуживания</title>
 </head>
@@ -211,7 +256,6 @@
 <div id="root"></div>
 
 <script src="/build/scripts.js"></script>
-
 
 </body>
 </html>

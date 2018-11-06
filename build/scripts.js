@@ -202,24 +202,40 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Navbar)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "isActive", function (link) {
-      return link === document.location.pathname ? "active" : "normal"; //   console.log('link test:', link === document.location.pathname)
+      return link === document.location.pathname ? "active" : "normalLink";
     });
 
     return _this;
   }
 
   _createClass(Navbar, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {//  console.log(document.location.pathname)
+    key: "myFunction",
+    value: function myFunction() {
+      var x = document.getElementById("myTopnav");
+
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+
+      console.log('x =', x);
     }
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       //let isActive = this.context.router.route.location.pathname === this.props.to;
       // let className = isActive ? 'active' : '';
       //<NavLink to="/servicecenters" className={this.isActive('/servicecenters')}> ServiceCentres </NavLink>
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "navBar"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "logo"
+      }, "/LOGO/"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "topnav",
+        id: "myTopnav"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
         to: "/",
         className: this.isActive('/')
@@ -232,7 +248,16 @@ function (_Component) {
       }, "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0437\u0430\u044F\u0432\u043A\u0430\u043C\u0438"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
         to: "/form",
         className: this.isActive('/form')
-      }, "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0437\u0430\u044F\u0432\u043A\u0443"));
+      }, "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0437\u0430\u044F\u0432\u043A\u0443")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "menuIcon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "javascript:void(0)",
+        onClick: function onClick() {
+          _this2.myFunction();
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "../public/menu_bars5.png"
+      }))));
     }
   }]);
 
