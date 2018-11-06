@@ -1972,17 +1972,17 @@ function (_Component) {
           }
         }, "OK"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "ticketNumber"
-        }, "\u0417\u0430\u044F\u0432\u043A\u0430 \u2116 ", ' ' + ticket.ticketNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "ticketPriority"
-        }, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", _props__WEBPACK_IMPORTED_MODULE_5__["ticketPriorityOptions"][ticket.ticketPriority].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "\u0417\u0430\u044F\u0432\u043A\u0430 \u2116 ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, ' ' + ticket.ticketNumber)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "status"
-        }, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _props__WEBPACK_IMPORTED_MODULE_5__["statusOptions"][ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _props__WEBPACK_IMPORTED_MODULE_5__["statusOptions"][ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "ticketDate"
-        }, "\u0414\u0430\u0442\u0430 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F ", _this3.dateFunction(ticket.ticketDate, ticket.daysForService).dateOfCreation + ' '), ticket.daysForService && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "C\u043E\u0437\u0434\u0430\u043D\u0430 ", _this3.dateFunction(ticket.ticketDate, ticket.daysForService).dateOfCreation + ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "ticketPriority"
+        }, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", _props__WEBPACK_IMPORTED_MODULE_5__["ticketPriorityOptions"][ticket.ticketPriority].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, ticket.daysForService && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "daysForService"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "finishDate"
-        }, "\u0417\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u0435 \u0441\u0435\u0440\u0432\u0438\u0441\u043D\u043E\u0433\u043E \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u044F: ", _this3.dateFunction(ticket.ticketDate, ticket.daysForService).finishDate + ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "\u0417\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u0435 \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u044F: ", _this3.dateFunction(ticket.ticketDate, ticket.daysForService).finishDate + ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "daysForService"
         }, "\u0414\u043E \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F \u043E\u0441\u0442\u0430\u043B\u043E\u0441\u044C: ", _this3.dateFunction(ticket.ticketDate, ticket.daysForService).daysLeftLocal, " \u0434\u043D\u0435\u0439 "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.lastname + ' ' + ticket.firstname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: '/tickets/' + ticket._id
@@ -2028,7 +2028,7 @@ function (_Component) {
               openTicketDescId: null
             });
           }
-        }, "CLOSE")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
+        }, "CLOSE")));
       })));
     }
   }]);

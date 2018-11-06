@@ -143,15 +143,15 @@ class TicketsComponent extends Component {
                         <div className="ticketUpdateMessage">{this.state.idOfupdatedTicket === ticket._id && <div><b> --- ОБНОВЛЕНА!!! --- </b>
                         <button onClick={ () => {this.setState({idOfupdatedTicket: null})} }>OK</button></div>}</div>
 
-                        <div className="ticketNumber">Заявка № {' ' + ticket.ticketNumber}</div>
-                        <div className="ticketPriority">Приоритет: {ticketPriorityOptions[ticket.ticketPriority].label}</div>
+                        <div className="ticketNumber">Заявка № <b>{' ' + ticket.ticketNumber}</b></div>
                         <div className="status"> Статус: {statusOptions[ticket.status].label}</div>
+                        <div className="ticketDate">Cоздана {this.dateFunction(ticket.ticketDate, ticket.daysForService).dateOfCreation + ' '}</div>
+                        <div className="ticketPriority">Приоритет: {ticketPriorityOptions[ticket.ticketPriority].label}</div>
 
                         <div>
-                            <div className="ticketDate">Дата создания {this.dateFunction(ticket.ticketDate, ticket.daysForService).dateOfCreation + ' '}</div>
                             {
                                 ticket.daysForService && <div className="daysForService">
-                                    <div className="finishDate">Завершение сервисного обслуживания: {this.dateFunction(ticket.ticketDate, ticket.daysForService).finishDate + ' '}</div>
+                                    <div className="finishDate">Завершение обслуживания: {this.dateFunction(ticket.ticketDate, ticket.daysForService).finishDate + ' '}</div>
                                     <div className="daysForService">До завершения осталось: {this.dateFunction(ticket.ticketDate, ticket.daysForService).daysLeftLocal} дней </div>
                                 </div>
                             }
@@ -204,7 +204,7 @@ class TicketsComponent extends Component {
                             </button>
 
                         </div>
-                        <hr />
+
                     </div>
                 ))}
             </div>
