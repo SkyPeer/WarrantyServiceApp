@@ -4,7 +4,7 @@ class List extends Component{
     render(){
         return (
             <Layout>
-                <h1>List</h1>
+                <header>list</header>
             </Layout>
 
         )

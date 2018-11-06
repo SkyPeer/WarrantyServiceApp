@@ -130,7 +130,7 @@ class ServiceCentres extends Component {
     render() {
         return (
             <Layout>
-                <h1>Сервисные центры: </h1>
+                <header><div className="header_title">Сервисные центры</div></header>
                 {this.state.newCs ? <div>Новый сервис-центр добавлен! <p onClick={() => {
                     this.setState({newCs: false})
                 }}><b>- Скрыть -</b></p></div> : ''}

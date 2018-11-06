@@ -135,7 +135,7 @@ function (_Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar__WEBPACK_IMPORTED_MODULE_1__["Navbar"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "contentContainer"
+        className: "container"
       }, this.props.children));
     }
   }]);
@@ -639,7 +639,9 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Form"), this.state.newTicketNumber !== '' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0421\u043E\u0437\u0434\u0430\u043D\u043E \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u0435 \u2116 ", this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate, " \u041C\u0421\u041A") : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "header_title"
+      }, "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0437\u0430\u044F\u0432\u043A\u0443")), this.state.newTicketNumber !== '' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0421\u043E\u0437\u0434\u0430\u043D\u043E \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u0435 \u2116 ", this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate, " \u041C\u0421\u041A") : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         id: "CreateTicket",
         className: "content",
         onSubmit: function onSubmit(event) {
@@ -860,7 +862,9 @@ function (_Component) {
   _createClass(Main, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Main"));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "header_title"
+      }, "Welcome ;)")));
     }
   }]);
 
@@ -1064,7 +1068,9 @@ function (_Component) {
         onSubmit: function onSubmit(event) {
           event.preventDefault();
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Search"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "header_title"
+      }, "\u041D\u0430\u0439\u0442\u0438 \u0437\u0430\u044F\u0432\u043A\u0443")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "ticketNumber",
         onChange: this.inputUserHandler,
         value: this.state.search,
@@ -1411,7 +1417,9 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0435 \u0446\u0435\u043D\u0442\u0440\u044B: "), this.state.newCs ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041D\u043E\u0432\u044B\u0439 \u0441\u0435\u0440\u0432\u0438\u0441-\u0446\u0435\u043D\u0442\u0440 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D! ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "header_title"
+      }, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0435 \u0446\u0435\u043D\u0442\u0440\u044B")), this.state.newCs ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041D\u043E\u0432\u044B\u0439 \u0441\u0435\u0440\u0432\u0438\u0441-\u0446\u0435\u043D\u0442\u0440 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D! ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         onClick: function onClick() {
           _this2.setState({
             newCs: false
@@ -1936,7 +1944,9 @@ function (_Component) {
     value: function render() {
       var _this3 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_4__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "TICKETS!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_4__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "header_title"
+      }, "\u0417\u0430\u044F\u0432\u043A\u0438 \u043D\u0430 \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u0435")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           console.log(_this3.state);
         }
@@ -1950,16 +1960,33 @@ function (_Component) {
         className: "content"
       }, this.state.data.map(function (ticket) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "ticket",
           key: ticket._id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.state.idOfupdatedTicket === ticket._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " --- \u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0410!!! --- "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "ticketUpdateMessage"
+        }, _this3.state.idOfupdatedTicket === ticket._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " --- \u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0410!!! --- "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick() {
             _this3.setState({
               idOfupdatedTicket: null
             });
           }
-        }, "OK"))), "\u0417\u0430\u044F\u0432\u043A\u0430 \u2116 ", ' ' + ticket.ticketNumber, " \u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", _props__WEBPACK_IMPORTED_MODULE_5__["ticketPriorityOptions"][ticket.ticketPriority].label, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _props__WEBPACK_IMPORTED_MODULE_5__["statusOptions"][ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0414\u0430\u0442\u0430 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F ", _this3.dateFunction(ticket.ticketDate, ticket.daysForService).dateOfCreation + ' '), ticket.daysForService && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0417\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u0435 \u0441\u0435\u0440\u0432\u0438\u0441\u043D\u043E\u0433\u043E \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u044F ", _this3.dateFunction(ticket.ticketDate, ticket.daysForService).finishDate + ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0414\u043E \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F \u043E\u0441\u0442\u0430\u043B\u043E\u0441\u044C ", _this3.dateFunction(ticket.ticketDate, ticket.daysForService).daysLeftLocal, " \u0434\u043D\u0435\u0439 "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.lastname + ' ' + ticket.firstname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        }, "OK"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "ticketNumber"
+        }, "\u0417\u0430\u044F\u0432\u043A\u0430 \u2116 ", ' ' + ticket.ticketNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "ticketPriority"
+        }, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", _props__WEBPACK_IMPORTED_MODULE_5__["ticketPriorityOptions"][ticket.ticketPriority].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "status"
+        }, " \u0421\u0442\u0430\u0442\u0443\u0441: ", _props__WEBPACK_IMPORTED_MODULE_5__["statusOptions"][ticket.status].label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "ticketDate"
+        }, "\u0414\u0430\u0442\u0430 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F ", _this3.dateFunction(ticket.ticketDate, ticket.daysForService).dateOfCreation + ' '), ticket.daysForService && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "daysForService"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "finishDate"
+        }, "\u0417\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u0435 \u0441\u0435\u0440\u0432\u0438\u0441\u043D\u043E\u0433\u043E \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u044F: ", _this3.dateFunction(ticket.ticketDate, ticket.daysForService).finishDate + ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "daysForService"
+        }, "\u0414\u043E \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F \u043E\u0441\u0442\u0430\u043B\u043E\u0441\u044C: ", _this3.dateFunction(ticket.ticketDate, ticket.daysForService).daysLeftLocal, " \u0434\u043D\u0435\u0439 "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.lastname + ' ' + ticket.firstname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: '/tickets/' + ticket._id
-        }, "\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435 \u043E\u0431 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0438 ", ticket.vendor, " ", ticket.model), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, ticket._id === _this3.state.openTicketDescId && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form__WEBPACK_IMPORTED_MODULE_6__["OpenFormComponent"], {
+        }, "\u0414\u0440\u0443\u0433\u0438\u0435 \u0437\u0430\u044F\u0432\u043A\u0438 \u043D\u0430 ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, ticket.vendor, " ", ticket.model, " ", ticket.partNumber)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, ticket._id === _this3.state.openTicketDescId && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form__WEBPACK_IMPORTED_MODULE_6__["OpenFormComponent"], {
           _id: ticket._id,
           contacts: {
             telnum: ticket.telnum,

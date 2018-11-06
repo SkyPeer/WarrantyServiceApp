@@ -63,7 +63,7 @@ class Search extends Component {
                 <form onSubmit={(event) => {
                     event.preventDefault()
                 }}>
-                    <h1>Search</h1>
+                    <header><div className="header_title">Найти заявку</div></header>
                     <input id="ticketNumber" onChange={this.inputUserHandler} value={this.state.search}
                            placeholder="введите номер заявки"/>
                     <button onClick={() => {this.trySearch(this.state.search);}}>Поиск</button>

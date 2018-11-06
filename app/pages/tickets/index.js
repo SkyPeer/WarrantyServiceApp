@@ -127,7 +127,7 @@ class TicketsComponent extends Component {
     render() {
         return (
         <Layout>
-                <h1>TICKETS!</h1>
+            <header><div className="header_title">Заявки на обслуживание</div></header>
                 <button onClick={()=>{console.log(this.state)}}> TEST </button>
                 <div>{this.state.ticketWasDeleted && <div>Заявка удалена!
                     <button onClick={() => {
@@ -139,28 +139,26 @@ class TicketsComponent extends Component {
             <div className="content">
 
                 {this.state.data.map((ticket) => (
-                    <div key={ticket._id}>
+                    <div className="ticket" key={ticket._id}>
+                        <div className="ticketUpdateMessage">{this.state.idOfupdatedTicket === ticket._id && <div><b> --- ОБНОВЛЕНА!!! --- </b>
+                        <button onClick={ () => {this.setState({idOfupdatedTicket: null})} }>OK</button></div>}</div>
+
+                        <div className="ticketNumber">Заявка № {' ' + ticket.ticketNumber}</div>
+                        <div className="ticketPriority">Приоритет: {ticketPriorityOptions[ticket.ticketPriority].label}</div>
+                        <div className="status"> Статус: {statusOptions[ticket.status].label}</div>
+
                         <div>
-                            <div>{this.state.idOfupdatedTicket === ticket._id && <div><b> --- ОБНОВЛЕНА!!! --- </b>
-                                <button onClick={ () => {
-                                    this.setState({idOfupdatedTicket: null})
-                                } }>OK
-                                </button>
-                            </div>}</div>
-                            Заявка № {' ' + ticket.ticketNumber} приоритет: {ticketPriorityOptions[ticket.ticketPriority].label} Статус: {statusOptions[ticket.status].label}</div>
-                        <div>
-                            <div>Дата создания {this.dateFunction(ticket.ticketDate, ticket.daysForService).dateOfCreation + ' '}</div>
+                            <div className="ticketDate">Дата создания {this.dateFunction(ticket.ticketDate, ticket.daysForService).dateOfCreation + ' '}</div>
                             {
-                                ticket.daysForService && <div>
-                                    <div>Завершение сервисного обслуживания {this.dateFunction(ticket.ticketDate, ticket.daysForService).finishDate + ' '}</div>
-                                    <div>До завершения осталось {this.dateFunction(ticket.ticketDate, ticket.daysForService).daysLeftLocal} дней </div>
+                                ticket.daysForService && <div className="daysForService">
+                                    <div className="finishDate">Завершение сервисного обслуживания: {this.dateFunction(ticket.ticketDate, ticket.daysForService).finishDate + ' '}</div>
+                                    <div className="daysForService">До завершения осталось: {this.dateFunction(ticket.ticketDate, ticket.daysForService).daysLeftLocal} дней </div>
                                 </div>
                             }
                         </div>
 
                         <div>Инициатор {ticket.lastname + ' ' + ticket.firstname + ' ' + ticket.familyname}</div>
-                        <Link to={'/tickets/' + ticket._id}>Подробнее об
-                            оборудовании {ticket.vendor} {ticket.model}</Link>
+                        <Link to={'/tickets/' + ticket._id}>Другие заявки на <b>{ticket.vendor} {ticket.model} {ticket.partNumber}</b></Link>
 
                         <div>
                             {ticket._id === this.state.openTicketDescId && (

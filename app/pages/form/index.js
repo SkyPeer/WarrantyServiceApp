@@ -242,7 +242,7 @@ class Form extends Component {
 
         return (
             <Layout>
-                <h1>Form</h1>
+                <header><div className="header_title">Открыть заявку</div></header>
                 {this.state.newTicketNumber !== '' ? <div>Создано обращение № {this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate} МСК</div> : ''}
                 <form id="CreateTicket" className="content" onSubmit={(event) => {
                     event.preventDefault()
