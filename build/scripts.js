@@ -135,7 +135,7 @@ function (_Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar__WEBPACK_IMPORTED_MODULE_1__["Navbar"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "contenContainer"
+        className: "contentContainer"
       }, this.props.children));
     }
   }]);
@@ -201,25 +201,8 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Navbar)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      navLinks: [{
-        to: '/',
-        title: 'Главная',
-        className: "normal"
-      }, {
-        to: '/search',
-        title: 'Поиск',
-        className: "normal"
-      }, {
-        to: '/tickets',
-        title: 'Управление заявками',
-        className: "normal"
-      }]
-    });
-
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "isActive", function (link) {
-      return link === document.location.pathname ? "active" : "normal";
-      console.log('link test:', link === document.location.pathname);
+      return link === document.location.pathname ? "active" : "normal"; //   console.log('link test:', link === document.location.pathname)
     });
 
     return _this;
@@ -227,35 +210,29 @@ function (_Component) {
 
   _createClass(Navbar, [{
     key: "componentDidMount",
-    value: function componentDidMount() {
-      console.log(document.location.pathname);
+    value: function componentDidMount() {//  console.log(document.location.pathname)
     }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       //let isActive = this.context.router.route.location.pathname === this.props.to;
       // let className = isActive ? 'active' : '';
-
-      /* OLD LINKS*/
-
-      /*
-      <NavLink to="/" className='normal' id={()=>this.isActive('/')}>Главная</NavLink>
-      <NavLink to="/search" className="normal"  activeClassName={this.isActive('/search')}>Поиск</NavLink>
-      <NavLink to="/tickets" className="normal" activeClassName={this.isActive('/search')}>Управление заявками</NavLink>
-      <NavLink to="/form" className="normal"  activeClassName={this.isActive('/search')}>Открыть заявку</NavLink>
-      <NavLink to="/servicecenters" className="normal" activeClassName={this.isActive('/search')}> ServiceCentres </NavLink>
-      */
+      //<NavLink to="/servicecenters" className={this.isActive('/servicecenters')}> ServiceCentres </NavLink>
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "navBar"
-      }, this.state.navLinks.map(function (navLink) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
-          to: navLink.to,
-          className: _this2.isActive(navLink.to),
-          key: navLink.index
-        }, navLink.title);
-      }));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        to: "/",
+        className: this.isActive('/')
+      }, "\u0413\u043B\u0430\u0432\u043D\u0430\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        to: "/search",
+        className: this.isActive('/search')
+      }, "\u041F\u043E\u0438\u0441\u043A"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        to: "/tickets",
+        className: this.isActive('/tickets')
+      }, "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0437\u0430\u044F\u0432\u043A\u0430\u043C\u0438"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+        to: "/form",
+        className: this.isActive('/form')
+      }, "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0437\u0430\u044F\u0432\u043A\u0443"));
     }
   }]);
 
@@ -639,6 +616,7 @@ function (_Component) {
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Form"), this.state.newTicketNumber !== '' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0421\u043E\u0437\u0434\u0430\u043D\u043E \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u0435 \u2116 ", this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate, " \u041C\u0421\u041A") : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         id: "CreateTicket",
+        className: "content",
         onSubmit: function onSubmit(event) {
           event.preventDefault();
         }
@@ -1943,7 +1921,9 @@ function (_Component) {
             ticketWasDeleted: false
           });
         }
-      }, "OK"))), this.state.data.map(function (ticket) {
+      }, "OK"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, this.state.data.map(function (ticket) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: ticket._id
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.state.idOfupdatedTicket === ticket._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " --- \u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0410!!! --- "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -1997,7 +1977,7 @@ function (_Component) {
             });
           }
         }, "CLOSE")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
-      }));
+      })));
     }
   }]);
 

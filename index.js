@@ -493,6 +493,8 @@ app.get('/test', (req, res) => {
 app.use(helmet());
 app.use(compression());
 
+app.use('/public', express.static(path.join(__dirname, 'public')));
+
 app.use('/build', express.static(path.join(__dirname, 'build')));
 app.use('/', (req, res, next) => {
    // console.log('send default')

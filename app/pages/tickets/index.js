@@ -126,7 +126,7 @@ class TicketsComponent extends Component {
 
     render() {
         return (
-            <Layout>
+        <Layout>
                 <h1>TICKETS!</h1>
                 <button onClick={()=>{console.log(this.state)}}> TEST </button>
                 <div>{this.state.ticketWasDeleted && <div>Заявка удалена!
@@ -135,6 +135,8 @@ class TicketsComponent extends Component {
                     }}>OK
                     </button>
                 </div> }</div>
+
+            <div className="content">
 
                 {this.state.data.map((ticket) => (
                     <div key={ticket._id}>
@@ -154,10 +156,7 @@ class TicketsComponent extends Component {
                                     <div>До завершения осталось {this.dateFunction(ticket.ticketDate, ticket.daysForService).daysLeftLocal} дней </div>
                                 </div>
                             }
-
-
                         </div>
-
 
                         <div>Инициатор {ticket.lastname + ' ' + ticket.firstname + ' ' + ticket.familyname}</div>
                         <Link to={'/tickets/' + ticket._id}>Подробнее об
@@ -210,7 +209,8 @@ class TicketsComponent extends Component {
                         <hr />
                     </div>
                 ))}
-            </Layout>
+            </div>
+        </Layout>
         )
     }
 }// end of RouterComponent
