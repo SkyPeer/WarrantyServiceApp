@@ -110,36 +110,31 @@ class OpenFormComponent extends Component {
     render() {
         return (
 
-            <form id="OpenDescComponent" onSubmit={(event) => {
+            <form id="openDescForm" onSubmit={(event) => {
                 event.preventDefault()
             }}>
 
-                <div>Оборудование: <b>{this.vendor +' '+ this.model + '  P/N: ' + this.partNumber}</b><br />
-                    <Link to={'/tickets/' + this.partNumber}>Посмотреть другие заявки с <b>{this.model} {this.partNumber}</b></Link>
-                </div>
-                <div>Причина: {this.props.problem}</div>
-                <br />
-                <div>Код проекта: {this.props.projectCode}</div>
+                <div className="openDescForm_problem">
 
-                <div>Местонахождение оборудования:
-                    {this.place !== 5 ? ' ' + this.placeOptions[this.place].label + ' ' : ' ' + this.placeAnother + ' '}
-                </div>
-
-                <br />
-
-                <div>Контакты:</div>
-                <div>Email:<a href={"mailto:" + this.props.contacts.email + "?subject=Заявка на гарантийное обслуживание № " + this.props.ticketNumber}>{this.props.contacts.email + ' '}</a>
-                    Тел.: {this.props.contacts.telnum + ' '}
-                    Внутр: {this.props.contacts.extum + ' '}
+                    <div>Оборудование: <b>{this.vendor +' '+ this.model + '  P/N: ' + this.partNumber}</b>
+                        <Link to={'/tickets/' + this.partNumber}>Посмотреть другие заявки с <b>{this.model} {this.partNumber}</b></Link></div>
+                        <div>Причина: {this.props.problem}</div>
+                        <div>Код проекта: {this.props.projectCode}</div>
+                        <div>Местонахождение оборудования: {this.place !== 5 ? ' ' + this.placeOptions[this.place].label + ' ' : ' ' + this.placeAnother + ' '}</div>
+                        <div className="openDescForm_contacts">Контакты:
+                            <div className="openDescForm_contacts_email">Email:<a href={"mailto:" + this.props.contacts.email + "?subject=Заявка на гарантийное обслуживание № " + this.props.ticketNumber}>{this.props.contacts.email + ' '}</a></div>
+                            <div className="openDescForm_contacts_tel">Тел.: {this.props.contacts.telnum + ' ' + ' Внутр:' + this.props.contacts.extum + ' '}</div>
+                    </div>
                 </div>
 
-                <hr />
 
-                <div>
-                    <label>Коментарий:</label>
-                    <input type="text" id="comment" value={this.state.comment} onChange={this.handleUserInput}/>
-                </div>
-                <br /><br />
+
+                <div className="openDescForm_form">
+
+                    <div className="openDescForm_form_comment">
+                        <label>Коментарий:</label>
+                        <input type="text" id="comment" value={this.state.comment} onChange={this.handleUserInput}/>
+                    </div>
 
                 <div>
                     <label>Сервисный центр: </label>
@@ -150,8 +145,8 @@ class OpenFormComponent extends Component {
                         )}
                     </select>
                     {this.state.serviceCenterDetails !== undefined ?
-                        <div><b>Адрес СЦ: </b>{this.state.serviceCenterDetails.scAdress} <br /> <b>Авторизация
-                            вендоров:</b> {this.state.serviceCenterDetails.scVendors}</div> : ''}
+                        <div><b>Адрес СЦ: </b>{this.state.serviceCenterDetails.scAdress} <b>
+                            Авторизация вендоров: </b> {this.state.serviceCenterDetails.scVendors}</div> : ''}
                 </div>
 
                 <div>
@@ -203,6 +198,8 @@ class OpenFormComponent extends Component {
                     </select>
                 </div>
 
+                </div>
+
                 <button onClick={this.saveFormFunc}> SAVE</button>
                 <button onClick={this.resetForm}>RESET</button>
                 <button onClick={ () => {
@@ -211,7 +208,7 @@ class OpenFormComponent extends Component {
                 } }>DELETE
                 </button>
                 <button onClick={()=>{console.log(this.state)}}> TEST </button>
-                <hr />
+
 
             </form>
         )

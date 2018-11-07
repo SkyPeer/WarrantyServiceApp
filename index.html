@@ -7,16 +7,16 @@
     <style>
         @font-face {
             font-family: AlegreyaSansRegular;
-            src: url(./public/fonts/AlegreyaSans-Regular.ttf);
+            src: url(/public/fonts/AlegreyaSans-Regular.ttf);
         }
 
         @font-face {
             font-family: AlegreyaSansBold;
-            src: url(./public/fonts/AlegreyaSans-Bold.ttf);
+            src: url(/public/fonts/AlegreyaSans-Bold.ttf);
         }
         @font-face {
             font-family: UbuntuRegular;
-            src: url(./public/fonts/Ubuntu-Regular.ttf);
+            src: url(/public/fonts/Ubuntu-Regular.ttf);
         }
 
         body{
@@ -38,7 +38,7 @@
             position: relative;
             width: auto;
             height: 200px;
-            background-image: url("./public/bg.jpg");
+            background-image: url("/public/bg.jpg");
             vertical-align:middle;
             background-position: center center;
         }
@@ -202,31 +202,6 @@
             border-color: green;
         }
 
-        /*button {
-            width: 100%;
-            padding: 10px;
-            border-radius: 2px;
-            border: 0;
-            background-color: #ccc;
-            color: #fff;
-        }*/
-
-
-        /*.input_error + .form__error {
-           display: block;
-       }*/
-
-        /*form {
-            display: inline-block;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 500px;
-        }*/
-
-        /*.form__field {
-            margin-bottom: 10px;
-        }*/
 
 
         /*input:invalid:not(:placeholder-shown) {
@@ -239,9 +214,8 @@
 
         .ticket_flex1{
             /*margin: 10px;*/
-            flex-basis: 200px;
+            flex-basis: 300px;
         }
-
         .ticket_flex2{
             /*margin: 10px;*/
             flex-basis: 400px;
@@ -262,7 +236,7 @@
             /*align-items: flex-start; */
             color: #424242;
             align-content: stretch;
-            padding: 15px 0;
+            padding: 15px 16px;
             /*background-color: #550a5f; */
             /*color: white */
 
@@ -271,10 +245,10 @@
             color: white
         }
 
-        #OpenDescComponent {
+        #openDescForm {
             /*background-color: blanchedalmond;*/
             /*margin: 15px; */
-            padding: 15px;
+            padding: 15px 14px;
 
             border-bottom: 1.5px #550a5f dotted;
             border-right: 1.5px #550a5f dotted;
@@ -284,14 +258,18 @@
 
 
         }
-
+        .openDescForm_form{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
 
         .ticketNumber{
             color: #550a5f;
         }
 
         .status_new{
-            color: #9b0aa5;
+            color: #d80ae2;
         }
         .status_red{
             color: red
@@ -393,13 +371,19 @@
             }
             .ticket_flex3{
                 /*margin: 15px 0; */
-                flex-basis: 320px;
+                flex-basis: 100%;
             }
             .ticketOpenCloseButton{
                 position: static;
                 top:0;
                 left:0;
                 transform: translateY(0) translateX(0);
+
+            }
+            @media(max-width: 450px) {
+                .ticketOpenCloseButton{
+                    width: 100%;
+                }
             }
             /*.topnav a.icon {
                 float: right;

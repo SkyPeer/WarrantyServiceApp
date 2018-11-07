@@ -1669,20 +1669,32 @@ function (_Component) {
       var _this2 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        id: "OpenDescComponent",
+        id: "openDescForm",
         onSubmit: function onSubmit(event) {
           event.preventDefault();
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0435: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, this.vendor + ' ' + this.model + '  P/N: ' + this.partNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "openDescForm_problem"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0435: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, this.vendor + ' ' + this.model + '  P/N: ' + this.partNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
         to: '/tickets/' + this.partNumber
-      }, "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0434\u0440\u0443\u0433\u0438\u0435 \u0437\u0430\u044F\u0432\u043A\u0438 \u0441 ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, this.model, " ", this.partNumber))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041F\u0440\u0438\u0447\u0438\u043D\u0430: ", this.props.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430: ", this.props.projectCode), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041C\u0435\u0441\u0442\u043E\u043D\u0430\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F:", this.place !== 5 ? ' ' + this.placeOptions[this.place].label + ' ' : ' ' + this.placeAnother + ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Email:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      }, "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0434\u0440\u0443\u0433\u0438\u0435 \u0437\u0430\u044F\u0432\u043A\u0438 \u0441 ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, this.model, " ", this.partNumber))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041F\u0440\u0438\u0447\u0438\u043D\u0430: ", this.props.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430: ", this.props.projectCode), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041C\u0435\u0441\u0442\u043E\u043D\u0430\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F: ", this.place !== 5 ? ' ' + this.placeOptions[this.place].label + ' ' : ' ' + this.placeAnother + ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "openDescForm_contacts"
+      }, "\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u044B:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "openDescForm_contacts_email"
+      }, "Email:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "mailto:" + this.props.contacts.email + "?subject=Заявка на гарантийное обслуживание № " + this.props.ticketNumber
-      }, this.props.contacts.email + ' '), "\u0422\u0435\u043B.: ", this.props.contacts.telnum + ' ', "\u0412\u043D\u0443\u0442\u0440: ", this.props.contacts.extum + ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041A\u043E\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, this.props.contacts.email + ' ')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "openDescForm_contacts_tel"
+      }, "\u0422\u0435\u043B.: ", this.props.contacts.telnum + ' ' + ' Внутр:' + this.props.contacts.extum + ' '))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "openDescForm_form"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "openDescForm_form_comment"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041A\u043E\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         id: "comment",
         value: this.state.comment,
         onChange: this.handleUserInput
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         id: "serviceCenter",
         onChange: this.changeServiceCenter,
         value: this.state.serviceCenter
@@ -1694,7 +1706,7 @@ function (_Component) {
           key: sc._id,
           value: sc._id
         }, sc.scTitle);
-      })), this.state.serviceCenterDetails !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0421\u0426: "), this.state.serviceCenterDetails.scAdress, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432:"), " ", this.state.serviceCenterDetails.scVendors) : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0420\u0435\u043C\u043E\u043D\u0442: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      })), this.state.serviceCenterDetails !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0421\u0426: "), this.state.serviceCenterDetails.scAdress, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432: "), " ", this.state.serviceCenterDetails.scVendors) : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0420\u0435\u043C\u043E\u043D\u0442: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         id: "typeOfService",
         onChange: this.handleUserInput,
         value: this.state.typeOfService
@@ -1733,7 +1745,7 @@ function (_Component) {
           key: status.value,
           value: status.value
         }, status.label);
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.saveFormFunc
       }, " SAVE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.resetForm
@@ -1745,7 +1757,7 @@ function (_Component) {
         onClick: function onClick() {
           console.log(_this2.state);
         }
-      }, " TEST "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
+      }, " TEST "));
     }
   }]);
 
