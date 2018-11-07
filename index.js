@@ -195,7 +195,8 @@ app.get('/mongooseGetTicketsSC', function(req, res, next){
 app.post('/mongooseFind', bodyParser.json(), function(req, res){
     //console.log('req.body', req.body);
     TicketModel.findById(req.body, function (err, taskDocs) {
-        if (err) return next (err);
+        //if (err) return next (err);
+        if (err) return (err);
         //console.log(taskDocs);
         res.json(taskDocs)
     })

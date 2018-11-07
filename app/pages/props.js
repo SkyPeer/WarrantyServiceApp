@@ -1,7 +1,7 @@
 export let ticketPriorityOptions = [
-    {value: 0, label: "Низкий"},
-    {value: 1, label: "Средний"},
-    {value: 2, label: "Высокий"}
+    {value: 0, label: "Низкий", className: 'priority priority_green' },
+    {value: 1, label: "Средний", className: 'priority priority_yellow'},
+    {value: 2, label: "Высокий", className: 'priority priority_red'}
 ];
 
 export let placeOptions = [
@@ -14,11 +14,11 @@ export let placeOptions = [
 ];
 
 export let statusOptions = [
-    { value: 0, label: 'Новая' },
-    { value: 1, label: 'Необходимы уточнения' },
-    { value: 2, label: 'В работе' },
-    { value: 3, label: 'Завершена' },
-    { value: 4, label: 'Отклонена' },
+    { value: 0, label: 'Новая', className: 'status_new' },
+    { value: 1, label: 'Необходимы уточнения', className: 'status_red' },
+    { value: 2, label: 'В работе', className: 'status_yellow'},
+    { value: 3, label: 'Завершена', className: 'status_green'  },
+    { value: 4, label: 'Отклонена', className: 'status_canceled'},
 ];
 export let typeOfServiceOptions = [
     {value: 0, label: 'Гарантийный'},

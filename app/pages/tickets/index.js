@@ -126,92 +126,132 @@ class TicketsComponent extends Component {
 
     render() {
         return (
-        <Layout>
-            <header><div className="header_title">Заявки на обслуживание</div></header>
-                <button onClick={()=>{console.log(this.state)}}> TEST </button>
+            <Layout>
+                <header>
+                    <div className="header_title">Заявки на обслуживание</div>
+                </header>
+                <button onClick={() => {
+                    console.log(this.state)
+                }}> TEST
+                </button>
                 <div>{this.state.ticketWasDeleted && <div>Заявка удалена!
-                    <button onClick={() => {this.setState({ticketWasDeleted: false})}}>OK</button></div> }</div>
+                    <button onClick={() => {
+                        this.setState({ticketWasDeleted: false})
+                    }}>OK
+                    </button>
+                </div> }</div>
+
+                <div className="content">
+
+                    {this.state.data.map((ticket) => (
+                        <div key={ticket._id}>
+
+                            <div className={this.state.openTicketDescId !== ticket._id ? 'content_ticket' : 'content_ticket open'}
+                                 style={this.state.openTicketDescId !== ticket._id ? {background: 'white'} : {background: '#550a5f'}}>
+
+                                <div className="ticket_flex1">
+                                    <div className="ticketUpdateMessage">{this.state.idOfupdatedTicket === ticket._id &&
+                                    <div><b> --- ОБНОВЛЕНА!!! --- </b>
+                                        <button onClick={() => {
+                                            this.setState({idOfupdatedTicket: null})
+                                        } }>OK
+                                        </button>
+                                    </div>}</div>
+
+                                    <div style={this.state.openTicketDescId !== ticket._id ? {color: '#550a5f'} : {color: 'white'} }
+                                         className={ticket.status !== 4 ? 'ticketNumber' : 'ticketNumber_canceled' }>
+                                        Заявка № <b>{' ' + ticket.ticketNumber}</b>
+                                    </div>
 
 
+                                    <div className="ticketDate">
+                                        Cоздана {this.dateFunction(ticket.ticketDate, ticket.daysForService).dateOfCreation + ' '}</div>
+                                    <div className="status"> Статус: <span
+                                        className={statusOptions[ticket.status].className}>{statusOptions[ticket.status].label}</span>
+                                    </div>
 
-
-            <div className="content">
-
-                {this.state.data.map((ticket) => (
-                    <div className="content_ticket" key={ticket._id}>
-
-                    <div className="ticket_flex1">
-                        <div className="ticketUpdateMessage">{this.state.idOfupdatedTicket === ticket._id && <div><b> --- ОБНОВЛЕНА!!! --- </b>
-                            <button onClick={ () => {this.setState({idOfupdatedTicket: null})} }>OK</button></div>}</div>
-                        <div className="ticketNumber">Заявка № <b>{' ' + ticket.ticketNumber}</b></div>
-                        <div className="ticketDate">Cоздана {this.dateFunction(ticket.ticketDate, ticket.daysForService).dateOfCreation + ' '}</div>
-                        <div className="status"> Статус: {statusOptions[ticket.status].label}</div>
-                        <div className="ticketPriority">Приоритет: {ticketPriorityOptions[ticket.ticketPriority].label}</div>
-                    </div>
-
-                    <div className="ticket_flex2">
-                        <div>
-                            {
-                                ticket.daysForService && <div className="daysForService">
-                                    <div className="finishDate">Завершение обслуживания: {this.dateFunction(ticket.ticketDate, ticket.daysForService).finishDate + ' '}</div>
-                                    <div className="daysForService">До завершения осталось: {this.dateFunction(ticket.ticketDate, ticket.daysForService).daysLeftLocal} дней </div>
                                 </div>
-                            }
-                        </div>
 
-                        <div>Инициатор {ticket.lastname + ' ' + ticket.firstname + ' ' + ticket.familyname}</div>
-                        <Link to={'/tickets/' + ticket._id}>Другие заявки на <b>{ticket.vendor} {ticket.model} {ticket.partNumber}</b></Link>
-                    </div>
+                                <div className="ticket_flex2">
 
-                        <div>
+                                    <div>
+                                        Инициатор {ticket.lastname + ' ' + ticket.firstname + ' ' + ticket.familyname}</div>
+
+                                    <div>
+                                        {
+                                            ticket.daysForService && <div className="daysForService">
+                                                <div className="finishDate">
+                                                    Завершение: {this.dateFunction(ticket.ticketDate, ticket.daysForService).finishDate + ' '}<span
+                                                    className="daysForService">осталось: {this.dateFunction(ticket.ticketDate, ticket.daysForService).daysLeftLocal}
+                                                    дней</span>
+                                                </div>
+
+                                            </div>
+                                        }
+                                    </div>
+                                    <div className="ticketPriority">Приоритет: <span
+                                        className={ticketPriorityOptions[ticket.ticketPriority].className}>{ticketPriorityOptions[ticket.ticketPriority].label}</span>
+                                    </div>
+                                </div>
+
+                                <div className="ticket_flex3">
+                                    <button className={this.state.openTicketDescId !== ticket._id ? 'ticketOpenCloseButton' : 'ticketOpenCloseButton open'} onClick={() => {
+                                        this.state.openTicketDescId !== ticket._id ? this.setState({openTicketDescId: ticket._id}) : this.setState({openTicketDescId: null})
+                                    }}>
+                                        {this.state.openTicketDescId !== ticket._id ? 'Открыть' : 'Закрыть'}
+                                    </button>
+                                </div>
+                            </div>
+
                             {ticket._id === this.state.openTicketDescId && (
-                                <section>
+                                <div>
+                                    <section>
+                                        <OpenFormComponent
+                                            _id={ticket._id}
+                                            contacts={{
+                                                telnum: ticket.telnum,
+                                                email: ticket.email,
+                                                extum: ticket.extnum
+                                            }}
+                                            ticketNumber={ticket.ticketNumber}
+                                            partNumber={ticket.partNumber}
+                                            vendor={ticket.vendor}
+                                            model={ticket.model}
+                                            problem={ticket.problem}
+                                            projectCode={ticket.projectCode}
+                                            place={ticket.place} placeAnother={ticket.placeAnother}
+                                            placeOptions={placeOptions}
 
-                                    <OpenFormComponent
-                                        _id={ticket._id}
-                                        contacts={{telnum: ticket.telnum, email: ticket.email, extum: ticket.extnum}}
-                                        ticketNumber={ticket.ticketNumber}
-                                        problem={ticket.problem}
-                                        projectCode={ticket.projectCode}
-                                        place={ticket.place} placeAnother={ticket.placeAnother}
-                                        placeOptions={placeOptions}
+                                            status={ticket.status} statusOptions={statusOptions}
+                                            currentDate={this.state.currentDate}
+                                            ticketDate={ticket.ticketDate}
+                                            daysForService={ticket.daysForService}
 
-                                        status={ticket.status} statusOptions={statusOptions}
-                                        currentDate={this.state.currentDate}
-                                        ticketDate={ticket.ticketDate}
-                                        daysForService={ticket.daysForService}
+                                            comment={ticket.comment}
+                                            ticketPriority={ticket.ticketPriority}
+                                            ticketPriorityOptions={ticketPriorityOptions}
 
-                                        comment={ticket.comment}
-                                        ticketPriority={ticket.ticketPriority}
-                                        ticketPriorityOptions={ticketPriorityOptions}
+                                            serviceCenter={ticket.serviceCenter} serviceCenterOptions={this.state.sc}
+                                            serviceCenterTicket={ticket.serviceCenterTicket}
+                                            typeOfService={ticket.typeOfService}
+                                            typeOfServiceOptions={typeOfServiceOptions}
 
-                                        serviceCenter={ticket.serviceCenter} serviceCenterOptions={this.state.sc}
-                                        serviceCenterTicket={ticket.serviceCenterTicket}
-                                        typeOfService={ticket.typeOfService} typeOfServiceOptions={typeOfServiceOptions}
+                                            saveButtonClick={(updatearg) => {
+                                                this.updateDataFunc(updatearg, ticket._id)
+                                            }}
+                                            deleteButtonClick={this.promtToDelete}
 
-                                        saveButtonClick={(updatearg) => {
-                                            this.updateDataFunc(updatearg, ticket._id)
-                                        }}
-                                        deleteButtonClick={this.promtToDelete}
-
-                                    />
-                                </section>)
+                                        />
+                                    </section>
+                                </div>)
                             }
-                            <button onClick={() => {
-                                this.setState({openTicketDescId: ticket._id})
-                            }}>OPEN
-                            </button>
-                            <button onClick={() => {
-                                this.setState({openTicketDescId: null})
-                            }}>CLOSE
-                            </button>
 
                         </div>
 
-                    </div>
-                ))}
-            </div>
-        </Layout>
+
+                    ))}
+                </div>
+            </Layout>
         )
     }
 }// end of RouterComponent

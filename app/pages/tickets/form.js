@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom'
 import 'react-dropdown/style.css'
+import {Link} from 'react-router-dom';
 const isNumber = require('is-number');
 
 class OpenFormComponent extends Component {
@@ -33,6 +34,10 @@ class OpenFormComponent extends Component {
     typeOfServiceOptions= this.props.typeOfServiceOptions;
     _id = this.props._id;
     placeOptions = this.props.placeOptions;
+    model=this.props.model;
+    vendor=this.props.vendor;
+    partNumber = this.props.partNumber;
+
 
 
     fullSetStateFunc = () => {
@@ -108,6 +113,10 @@ class OpenFormComponent extends Component {
             <form id="OpenDescComponent" onSubmit={(event) => {
                 event.preventDefault()
             }}>
+
+                <div>Оборудование: <b>{this.vendor +' '+ this.model + '  P/N: ' + this.partNumber}</b><br />
+                    <Link to={'/tickets/' + this.partNumber}>Посмотреть другие заявки с <b>{this.model} {this.partNumber}</b></Link>
+                </div>
                 <div>Причина: {this.props.problem}</div>
                 <br />
                 <div>Код проекта: {this.props.projectCode}</div>

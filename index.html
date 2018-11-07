@@ -14,6 +14,10 @@
             font-family: AlegreyaSansBold;
             src: url(./public/fonts/AlegreyaSans-Bold.ttf);
         }
+        @font-face {
+            font-family: UbuntuRegular;
+            src: url(./public/fonts/Ubuntu-Regular.ttf);
+        }
 
         body{
             font-family: Tahoma;
@@ -50,33 +54,16 @@
             font-family: AlegreyaSansRegular, Tahoma, sans-serif;
         }
 
+        .container{
+            font-family: UbuntuRegular, Tahoma, sans-serif;
+            font-size: 15px;
+            line-height: 1.4
+        }
+
         .container .content{
-            font-size: 20px;
-            margin: 20px;
+            /*font-size: 18px; */
+            margin: 16px;
         }
-
-        .content_ticket {
-            /*margin: 15px 0;*/
-            border-bottom: 1px #888888 dotted;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            /*align-items: flex-start; */
-            align-content: stretch;
-
-        }
-
-        .ticket_flex1{
-            /*margin: 10px;*/
-            flex-basis: 200px;
-        }
-
-        .ticket_flex2{
-            /*margin: 10px;*/
-            flex-basis: 400px;
-        }
-
-
 
 
         #root{
@@ -124,7 +111,6 @@
         }
 
 
-
         #navBar .normalLink:hover{
             /**/
             text-decoration: none;
@@ -155,11 +141,7 @@
             display: block;
         }
 
-        #OpenDescComponent {
-            background-color: blanchedalmond;
-            /*margin: 15px;
-            padding: 15px; */
-        }
+
 
         .form__error {
             color: red;
@@ -255,6 +237,124 @@
             display: block;
         }*/
 
+        .ticket_flex1{
+            /*margin: 10px;*/
+            flex-basis: 200px;
+        }
+
+        .ticket_flex2{
+            /*margin: 10px;*/
+            flex-basis: 400px;
+        }
+        .ticket_flex3{
+            flex-basis: auto;
+            /*position: relative; */
+
+
+        }
+
+        .content_ticket {
+            /*margin: 15px 0;*/
+            border-bottom: 1px /*#888888*/ #550a5f dotted;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            /*align-items: flex-start; */
+            color: #424242;
+            align-content: stretch;
+            padding: 15px 0;
+            /*background-color: #550a5f; */
+            /*color: white */
+
+        }
+        .content_ticket.open{
+            color: white
+        }
+
+        #OpenDescComponent {
+            /*background-color: blanchedalmond;*/
+            /*margin: 15px; */
+            padding: 15px;
+
+            border-bottom: 1.5px #550a5f dotted;
+            border-right: 1.5px #550a5f dotted;
+            border-left: 1.5px  #550a5f dotted;
+            border-radius: 0 0 15px 15px ;
+            margin-bottom: 15px;
+
+
+        }
+
+
+        .ticketNumber{
+            color: #550a5f;
+        }
+
+        .status_new{
+            color: #9b0aa5;
+        }
+        .status_red{
+            color: red
+        }
+        .status_yellow{
+            color: darkorange;
+        }
+        .status_green{
+            color: green
+        }
+        .status_canceled{
+            color: gray;
+        }
+
+        .ticketNumber_canceled{
+            color: gray;
+            text-decoration:line-through
+        }
+
+        .ticketDate {
+            color: gray;
+            font-size: 13px;
+        }
+
+        .priority {
+            padding: 2px;
+        }
+
+        .priority_green{
+            background-color: green;
+            color:white;
+        }
+        .priority_yellow{
+            background-color: darkorange;
+        }
+        .priority_red{
+            background-color: red;
+            color:white;
+        }
+        .ticketOpenCloseButton{
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 2px dotted  #550a5f;
+            border-radius: 5px;
+            background-color: white;
+            color: #550a5f;
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .ticketOpenCloseButton:hover {
+            background-color: #550a5f;
+            color: white;
+            transition: all 0.2s;
+        }
+        .ticketOpenCloseButton.open {
+            background-color: #550a5f;
+            border-color: white;
+            color: white;
+        }
+
 
         @media(max-width: 640px){
             body{
@@ -284,10 +384,23 @@
                 display: block;
                 text-align: left;
             }
-
-
-
-
+            .ticket_flex1{
+                flex-basis: 320px;
+            }
+            .ticket_flex2{
+                margin: 15px 0;
+                flex-basis: 320px;
+            }
+            .ticket_flex3{
+                /*margin: 15px 0; */
+                flex-basis: 320px;
+            }
+            .ticketOpenCloseButton{
+                position: static;
+                top:0;
+                left:0;
+                transform: translateY(0) translateX(0);
+            }
             /*.topnav a.icon {
                 float: right;
                 display: block;
@@ -304,7 +417,6 @@
                 text-align: left;
             } */
         }
-
 
 
     </style>
