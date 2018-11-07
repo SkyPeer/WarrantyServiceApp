@@ -130,24 +130,26 @@ class TicketsComponent extends Component {
             <header><div className="header_title">Заявки на обслуживание</div></header>
                 <button onClick={()=>{console.log(this.state)}}> TEST </button>
                 <div>{this.state.ticketWasDeleted && <div>Заявка удалена!
-                    <button onClick={() => {
-                        this.setState({ticketWasDeleted: false})
-                    }}>OK
-                    </button>
-                </div> }</div>
+                    <button onClick={() => {this.setState({ticketWasDeleted: false})}}>OK</button></div> }</div>
+
+
+
 
             <div className="content">
 
                 {this.state.data.map((ticket) => (
-                    <div className="ticket" key={ticket._id}>
+                    <div className="content_ticket" key={ticket._id}>
+
+                    <div className="ticket_flex1">
                         <div className="ticketUpdateMessage">{this.state.idOfupdatedTicket === ticket._id && <div><b> --- ОБНОВЛЕНА!!! --- </b>
-                        <button onClick={ () => {this.setState({idOfupdatedTicket: null})} }>OK</button></div>}</div>
-
+                            <button onClick={ () => {this.setState({idOfupdatedTicket: null})} }>OK</button></div>}</div>
                         <div className="ticketNumber">Заявка № <b>{' ' + ticket.ticketNumber}</b></div>
-                        <div className="status"> Статус: {statusOptions[ticket.status].label}</div>
                         <div className="ticketDate">Cоздана {this.dateFunction(ticket.ticketDate, ticket.daysForService).dateOfCreation + ' '}</div>
+                        <div className="status"> Статус: {statusOptions[ticket.status].label}</div>
                         <div className="ticketPriority">Приоритет: {ticketPriorityOptions[ticket.ticketPriority].label}</div>
+                    </div>
 
+                    <div className="ticket_flex2">
                         <div>
                             {
                                 ticket.daysForService && <div className="daysForService">
@@ -159,6 +161,7 @@ class TicketsComponent extends Component {
 
                         <div>Инициатор {ticket.lastname + ' ' + ticket.firstname + ' ' + ticket.familyname}</div>
                         <Link to={'/tickets/' + ticket._id}>Другие заявки на <b>{ticket.vendor} {ticket.model} {ticket.partNumber}</b></Link>
+                    </div>
 
                         <div>
                             {ticket._id === this.state.openTicketDescId && (

@@ -318,6 +318,7 @@ app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
             res.json({resJson})
         })
         .then(mailersend(req.body.email, randomTicketNumber, req.body.vendor))
+        .then(mailersend('oleg.selivantsev@gmail.com', randomTicketNumber, req.body.vendor))
         .catch(err => {
             console.error(err)
         })
@@ -344,7 +345,7 @@ function mailersend(mailadress, ticketNumber, vendor) {
         to: mailadress, // REQUIRED. This can be a comma delimited string just like a normal email to field.
         subject: 'Создана заявка на сервисное обслуживание '+ ticketNumber, // REQUIRED.
         otherProperty: ticketNumber, // All additional properties are also passed to the template as local variables.
-
+        vendorProperty: vendor
     }, function (err) {
         if (err) {
             // handle error

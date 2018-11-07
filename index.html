@@ -25,7 +25,7 @@
 
         .logo{
             float: left;
-            padding: 14.5px 16px;
+            padding: 16.5px 16px;
             display: block;
         }
 
@@ -55,13 +55,28 @@
             margin: 20px;
         }
 
-        .ticket{
-            margin: 15px 0;
-            border-bottom-style: dotted;
-            border-color: #cacaca;
-
+        .content_ticket {
+            /*margin: 15px 0;*/
+            border-bottom: 1px #888888 dotted;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            /*align-items: flex-start; */
+            align-content: stretch;
 
         }
+
+        .ticket_flex1{
+            /*margin: 10px;*/
+            flex-basis: 200px;
+        }
+
+        .ticket_flex2{
+            /*margin: 10px;*/
+            flex-basis: 400px;
+        }
+
+
 
 
         #root{
