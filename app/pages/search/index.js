@@ -37,15 +37,30 @@ class Search extends Component {
     };
 
 
-    checkData = (data) => {
-        console.log(data);
-        JSON.stringify(data) !== JSON.stringify({error: 'mongoNotFound'}) ?
+    checkData = (ticket) => {
+        console.log(ticket);
+        JSON.stringify(ticket) !== JSON.stringify({error: 'mongoNotFound'}) ?
             this.setState({
-                ...data, checkData: true, cantFind: false,
+                ...ticket.data,currentDate:ticket.currentDate, checkData: true, cantFind: false,
             }) : this.setState({checkData: false, cantFind: true})
 
 
     };
+
+    dateFunction = (ticketDate, daysLeft) => {
+
+        let dateOfCreation = new Date(ticketDate);
+        let finishDate = new Date(ticketDate);
+        let currentDate = new Date(this.state.currentDate._now);
+
+        finishDate.setDate(dateOfCreation.getDate()+parseInt(daysLeft));
+
+        let daysLeftLocal = Math.round((finishDate - currentDate) / 1000 / 60 / 60/ 24);
+        return {dateOfCreation: (dateOfCreation.getDate() + '/' + (dateOfCreation.getMonth()+parseInt(1)) + '/' +dateOfCreation.getFullYear()+' '+dateOfCreation.getHours()+':'+dateOfCreation.getMinutes()),
+            finishDate: (finishDate.getDate() + '/' +(finishDate.getMonth()+parseInt(1)) + '/' +finishDate.getFullYear()),
+            daysLeftLocal: daysLeftLocal}
+    };
+
 
 
     componentDidMount() {
@@ -64,22 +79,25 @@ class Search extends Component {
                     event.preventDefault()
                 }}>
                     <header><div className="header_title">Найти заявку</div></header>
+
                     <input id="ticketNumber" onChange={this.inputUserHandler} value={this.state.search}
                            placeholder="введите номер заявки"/>
                     <button onClick={() => {this.trySearch(this.state.search);}}>Поиск</button>
 
                     {this.state.checkData ?
                         <div><br />
-                            <div>
-                                <b>Инициатор: </b>{this.state.lastname + ' ' + this.state.firstname}
-                            </div>
+                            <div><b>Инициатор: </b>{this.state.lastname + ' ' + this.state.firstname}</div>
                             <div><b>№ заявки: </b>{this.state.ticketNumber}</div>
-                            <div>
-                                статус: {this.state.status !== 0 ? statusOptions[this.state.status].label : 'На рассмотрении'}</div>
+                            <div><b>Дата обращения: </b>{this.dateFunction(this.state.ticketDate).dateOfCreation}</div>
+                            {this.state.daysForService && <div>
+                                <b>Завершние заявки:</b> {this.dateFunction(this.state.ticketDate, this.state.daysForService).finishDate +
+                           ' осталось: ' +  this.dateFunction(this.state.ticketDate, this.state.daysForService).daysLeftLocal + ' дн.'}
+                            </div>}
+                                <div>статус: {this.state.status !== 0 ? statusOptions[this.state.status].label : 'На рассмотрении'}</div>
                         </div>
                         : ''}
                     {
-                        this.state.cantFind ? <div>Заявки с таким номером не существует</div> : ''
+                    this.state.cantFind ? <div className="search_error">Заявки с таким номером не существует</div> : ''
                     }
                 </form>
             </Layout>
