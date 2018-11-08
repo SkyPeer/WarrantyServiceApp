@@ -266,6 +266,10 @@
 
         }
 
+        .openDescForm_form div{
+            margin: 0 0 10px 0;
+        }
+
         .openDescForm_form label{
             color: #550a5f;
         }
@@ -278,12 +282,11 @@
             border: 2px dotted;
             border-radius: 5px;
             background-color: white;
-
             padding: 10px 15px;
             font-size: 14px;
             cursor: pointer;
             transition: all 0.2s;
-            margin: 0 15px 0 0;
+            margin: 10px 15px 15px 0;
         }
 
         .openDescForm_form_button.save{
@@ -465,6 +468,12 @@
             }
             @media(max-width: 450px) {
                 .ticketOpenCloseButton{
+                    width: 100%;
+                }
+                .openDescForm_form_button{
+                    width: 100%;
+                }
+                .openDescForm_form div{
                     width: 100%;
                 }
             }

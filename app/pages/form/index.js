@@ -248,7 +248,7 @@ class Form extends Component {
                     event.preventDefault()
                 }}>
                     <hr />
-                    <div><b>Инициатор:</b></div>
+                    <div><b>Инициатор:</b>
 
                     <div>
                         <label>* Имя</label>
@@ -330,6 +330,7 @@ class Form extends Component {
                                data-validator="standart"
                         />
                     </div>
+                </div>
 
                     <hr />
 
