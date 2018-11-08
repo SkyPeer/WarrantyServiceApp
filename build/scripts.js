@@ -637,17 +637,19 @@ function (_Component) {
   _createClass(Form, [{
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "header_title"
       }, "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0437\u0430\u044F\u0432\u043A\u0443")), this.state.newTicketNumber !== '' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0421\u043E\u0437\u0434\u0430\u043D\u043E \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u0435 \u2116 ", this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate, " \u041C\u0421\u041A") : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        id: "CreateTicket",
+        id: "createTicketForm",
         className: "content",
         onSubmit: function onSubmit(event) {
           event.preventDefault();
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u0418\u043C\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "createTicketForm_person"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "formInput"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u0418\u043C\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "firstname",
         placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0418\u043C\u044F",
         onChange: this.handleUserInput,
@@ -659,7 +661,9 @@ function (_Component) {
         required: true
       }), this.state.formErrors.hasOwnProperty('firstname') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "form__error"
-      }, "\u041F\u043E\u043B\u0435 \"\u0418\u043C\u044F\" \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0411\u043E\u043B\u044C\u0449\u0435 2\u0445 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u0424\u0430\u043C\u0438\u043B\u0438\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "\u041F\u043E\u043B\u0435 \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0411\u043E\u043B\u044C\u0449\u0435 2\u0445 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "formInput"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u0424\u0430\u043C\u0438\u043B\u0438\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "lastname",
         placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0424\u0430\u043C\u0438\u043B\u0438\u044E",
         onChange: this.handleUserInput,
@@ -671,7 +675,9 @@ function (_Component) {
         required: true
       }), this.state.formErrors.hasOwnProperty('lastname') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "form__error"
-      }, "\u041F\u043E\u043B\u0435 \"\u0424\u0430\u043C\u0438\u043B\u0438\u044F\" \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0411\u043E\u043B\u044C\u0449\u0435 2\u0445 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " \u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "\u041F\u043E\u043B\u0435 \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0411\u043E\u043B\u044C\u0449\u0435 2\u0445 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "formInput"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " \u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "familyname",
         onChange: this.handleUserInput,
         placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E",
@@ -682,7 +688,9 @@ function (_Component) {
         className: ""
       }), this.state.formErrors.hasOwnProperty('familyname') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "form__error"
-      }, "\u041F\u043E\u043B\u0435 \"\u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E\" \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0411\u043E\u043B\u044C\u0449\u0435 2\u0445 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* E-mail:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "\u041F\u043E\u043B\u0435 \"\u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E\" \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0411\u043E\u043B\u044C\u0449\u0435 2\u0445 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "formInput"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* E-mail:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "email",
         placeholder: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 E-mail \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 example@site.com",
         onChange: this.handleUserInput,
@@ -695,7 +703,9 @@ function (_Component) {
         required: true
       }), this.state.formErrors.hasOwnProperty('email') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "form__error"
-      }, "\u042D\u0442\u043E \u043F\u043E\u043B\u0435 \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C E-Mail \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 example@site.com") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u043C\u043E\u0431. \u0442\u0435\u043B\u0435\u0444\u043E\u043D: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_phone_input_2__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      }, "\u041F\u043E\u043B\u0435 \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C E-Mail \u0432 \u0432\u0438\u0434\u0435 example@site.com") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "createTicketForm_person_telnum formInput"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u043C\u043E\u0431. \u0442\u0435\u043B\u0435\u0444\u043E\u043D: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_phone_input_2__WEBPACK_IMPORTED_MODULE_2___default.a, {
         id: "telnum",
         onFocus: this.onFocus,
         onBlur: this.onTelNumBlur,
@@ -703,17 +713,24 @@ function (_Component) {
         onChange: this.telnumChange,
         value: this.state.telnum,
         inputStyle: this.state.telnumCheck,
-        buttonStyle: this.state.telnumCheck
+        buttonStyle: this.state.telnumCheck,
+        onlyCountries: ['ru']
       }), this.state.formErrors.hasOwnProperty('telnum') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "form__error"
-      }, "\u041D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430 \u0434\u043E\u043B\u0436\u0435\u043D \u0431\u044B\u0442\u044C \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 +79876543210 ") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " \u0432\u043D\u0443\u0442\u0440. \u2116: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "\u041D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430 \u0434\u043E\u043B\u0436\u0435\u043D \u0431\u044B\u0442\u044C \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 +79876543210 ") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "formInput"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " \u0432\u043D\u0443\u0442\u0440. \u2116: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "extnum",
         onChange: this.handleUserInput,
         onFocus: this.onFocus,
         onBlur: this.onBlur,
         value: this.state.extnum,
         "data-validator": "standart"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C / \u0432\u0435\u043D\u0434\u043E\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "createTicketForm_problem"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "formInput"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C / \u0432\u0435\u043D\u0434\u043E\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "vendor",
         onChange: this.handleUserInput,
         onFocus: this.onFocus,
@@ -724,7 +741,9 @@ function (_Component) {
         required: true
       }), this.state.formErrors.hasOwnProperty('vendor') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "form__error"
-      }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044F") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041C\u043E\u0434\u0435\u043B\u044C: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044F") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "formInput"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041C\u043E\u0434\u0435\u043B\u044C: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "model",
         className: "",
         onChange: this.handleUserInput,
@@ -735,7 +754,9 @@ function (_Component) {
         required: true
       }), this.state.formErrors.hasOwnProperty('model') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "form__error"
-      }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C \u043C\u043E\u0434\u0435\u043B\u044C / \u0430\u0440\u0442\u0438\u043A\u0443\u043B") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* P/N \u0438\u043B\u0438 \u0417\u0430\u0432\u043E\u0434\u0441\u043A\u043E\u0439 \u043D\u043E\u043C\u0435\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C \u043C\u043E\u0434\u0435\u043B\u044C / \u0430\u0440\u0442\u0438\u043A\u0443\u043B") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "formInput"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* P/N \u0438\u043B\u0438 \u0417\u0430\u0432\u043E\u0434\u0441\u043A\u043E\u0439 \u043D\u043E\u043C\u0435\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "partNumber",
         onChange: this.handleUserInput,
         onFocus: this.onFocus,
@@ -745,7 +766,20 @@ function (_Component) {
         required: true
       }), this.state.formErrors.hasOwnProperty('partNumber') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "form__error"
-      }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C partnumber / \u0445\u0430\u0432\u043E\u0434\u0441\u043A\u043E\u0439 \u043D\u043E\u043C\u0435\u0440") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+      }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C partnumber / \u0445\u0430\u0432\u043E\u0434\u0441\u043A\u043E\u0439 \u043D\u043E\u043C\u0435\u0440") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "formInput"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " \u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "projectCode",
+        onChange: this.handleUserInput,
+        onFocus: this.onFocus,
+        onBlur: this.onBlur,
+        value: this.state.projectCode,
+        "data-validator": "standart"
+      }), this.state.formErrors.hasOwnProperty('projectCode') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "form__error"
+      }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C \u0432\u043D\u0443\u0442\u0440\u0435\u043D\u043D\u0438\u0439 \u043A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "formInputArea"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u044B:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         id: "problem",
         onChange: this.handleUserInput,
         onFocus: this.onFocus,
@@ -755,16 +789,9 @@ function (_Component) {
         required: true
       }), this.state.formErrors.hasOwnProperty('problem') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "form__error"
-      }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C \u043F\u0440\u0438\u0447\u0438\u043D\u0443 \u043E\u0442 7-\u043C\u0438 \u0441\u0438\u0432\u043E\u043B\u043E\u0432") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " \u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        id: "projectCode",
-        onChange: this.handleUserInput,
-        onFocus: this.onFocus,
-        onBlur: this.onBlur,
-        value: this.state.projectCode,
-        "data-validator": "standart"
-      }), this.state.formErrors.hasOwnProperty('projectCode') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "form__error"
-      }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C \u0432\u043D\u0443\u0442\u0440\u0435\u043D\u043D\u0438\u0439 \u043A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041C\u0435\u0441\u0442\u043E\u043D\u0430\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      }, "\u041F\u0440\u043E\u0441\u044C\u0431\u0430 \u0443\u043A\u0430\u0437\u0430\u0442\u044C \u043F\u0440\u0438\u0447\u0438\u043D\u0443 \u043E\u0442 7-\u043C\u0438 \u0441\u0438\u0432\u043E\u043B\u043E\u0432") : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "formSelect"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "* \u041C\u0435\u0441\u0442\u043E\u043D\u0430\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         id: "place",
         onChange: this.placeChange,
         value: this.state.place
@@ -782,7 +809,9 @@ function (_Component) {
         value: this.state.placeAnother,
         className: "input_error",
         "data-validator": "placeAnother"
-      }) : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 \u0437\u0430\u044F\u0432\u043A\u0438: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      }) : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "formSelect"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 \u0437\u0430\u044F\u0432\u043A\u0438: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         id: "ticketPriority",
         onChange: this.handleUserInput,
         value: this.state.ticketPriority
@@ -791,18 +820,11 @@ function (_Component) {
           key: priority.value,
           value: priority.value
         }, priority.label);
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.saveData,
-        className: "btn btn-primary",
+        className: "createTicketForm_button",
         disabled: !this.state.formValid
-      }, "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          console.log(_this2.state.formErrors);
-          console.log(_this2.state);
-          console.log('formValid:', _this2.state.formValid);
-        },
-        className: "btn btn-primary"
-      }, "--- TEST")));
+      }, "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C")));
     }
   }]);
 

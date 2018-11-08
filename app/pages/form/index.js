@@ -244,13 +244,13 @@ class Form extends Component {
             <Layout>
                 <header><div className="header_title">Открыть заявку</div></header>
                 {this.state.newTicketNumber !== '' ? <div>Создано обращение № {this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate} МСК</div> : ''}
-                <form id="CreateTicket" className="content" onSubmit={(event) => {
+
+                <form id="createTicketForm" className="content" onSubmit={(event) => {
                     event.preventDefault()
                 }}>
-                    <hr />
-                    <div><b>Инициатор:</b>
+                    <div className="createTicketForm_person">
 
-                    <div>
+                    <div className="formInput">
                         <label>* Имя</label>
                         <input id="firstname"
                                placeholder="Введите Имя"
@@ -262,10 +262,10 @@ class Form extends Component {
                                className=""
                                required/>
                         { this.state.formErrors.hasOwnProperty('firstname') ?
-                            <span className="form__error">Поле "Имя" должно содержать Больще 2х символов</span> : ''}
+                            <span className="form__error">Поле должно содержать Больще 2х символов</span> : ''}
                     </div>
 
-                    <div>
+                    <div className="formInput">
                         <label>* Фамилия: </label>
                         <input id="lastname"
                                placeholder="Введите Фамилию"
@@ -276,10 +276,10 @@ class Form extends Component {
                                data-validator="person"
                                className=""
                                required/>
-                        { this.state.formErrors.hasOwnProperty('lastname') ? <span className="form__error">Поле "Фамилия" должно содержать Больще 2х символов</span> : ''}
+                        { this.state.formErrors.hasOwnProperty('lastname') ? <span className="form__error">Поле должно содержать Больще 2х символов</span> : ''}
                     </div>
 
-                    <div>
+                    <div className="formInput">
                         <label> Отчество: </label>
                         <input id="familyname"
                                onChange={this.handleUserInput}
@@ -292,7 +292,7 @@ class Form extends Component {
                         { this.state.formErrors.hasOwnProperty('familyname') ? <span className="form__error">Поле "Отчество" должно содержать Больще 2х символов</span> : ''}
                     </div>
 
-                    <div>
+                    <div className="formInput">
                         <label>* E-mail:</label>
                         <input id="email"
                                placeholder="Укажите E-mail в формате example@site.com"
@@ -304,10 +304,10 @@ class Form extends Component {
                                data-validator="email"
                                className=""
                                required/>
-                        { this.state.formErrors.hasOwnProperty('email') ? <span className="form__error">Это поле должно содержать E-Mail в формате example@site.com</span> : '' }
+                        { this.state.formErrors.hasOwnProperty('email') ? <span className="form__error">Поле должно содержать E-Mail в виде example@site.com</span> : '' }
                     </div>
 
-                    <div>
+                    <div className="createTicketForm_person_telnum formInput">
                         <label>* моб. телефон: </label>
                         <ReactPhoneInput id="telnum"
                                          onFocus={this.onFocus}
@@ -316,11 +316,13 @@ class Form extends Component {
                                          onChange={this.telnumChange}
                                          value={this.state.telnum}
                                          inputStyle={this.state.telnumCheck}
-                                         buttonStyle={this.state.telnumCheck}/>
+                                         buttonStyle={this.state.telnumCheck}
+                                         onlyCountries={['ru']}
+                        />
                         { this.state.formErrors.hasOwnProperty('telnum') ? <span className="form__error">Номер телефона должен быть в формате +79876543210 </span> : '' }
                     </div>
 
-                    <div>
+                    <div className="formInput">
                         <label> внутр. №: </label>
                         <input id="extnum"
                                onChange={this.handleUserInput}
@@ -332,9 +334,10 @@ class Form extends Component {
                     </div>
                 </div>
 
-                    <hr />
+                <div className="createTicketForm_problem">
 
-                    <div>
+
+                    <div className="formInput">
                         <label>* Производитель / вендор: </label>
                         <input id="vendor"
                                onChange={this.handleUserInput}
@@ -350,7 +353,7 @@ class Form extends Component {
 
                     </div>
 
-                    <div>
+                    <div className="formInput">
                         <label>* Модель: </label>
                         <input id="model"
                                className=""
@@ -365,7 +368,7 @@ class Form extends Component {
 
                     </div>
 
-                    <div>
+                    <div className="formInput">
                         <label>* P/N или Заводской номер: </label>
                         <input id="partNumber"
                                onChange={this.handleUserInput}
@@ -378,7 +381,19 @@ class Form extends Component {
                             <span className="form__error">Просьба указать partnumber / хаводской номер</span> : '' }
                     </div>
 
-                    <div>
+                    <div className="formInput">
+                        <label> Код проекта: </label>
+                        <input id="projectCode"
+                               onChange={this.handleUserInput}
+                               onFocus={this.onFocus}
+                               onBlur={this.onBlur}
+                               value={this.state.projectCode}
+                               data-validator="standart"/>
+                        { this.state.formErrors.hasOwnProperty('projectCode') ?
+                            <span className="form__error">Просьба указать внутренний код проекта</span> : '' }
+                    </div>
+
+                    <div className="formInputArea">
                         <label>* Описание проблемы:</label>
                         <textarea id="problem"
                                   onChange={this.handleUserInput}
@@ -391,19 +406,7 @@ class Form extends Component {
                             <span className="form__error">Просьба указать причину от 7-ми сиволов</span> : '' }
                     </div>
 
-                    <div>
-                        <label> Код проекта: </label>
-                        <input id="projectCode"
-                               onChange={this.handleUserInput}
-                               onFocus={this.onFocus}
-                               onBlur={this.onBlur}
-                               value={this.state.projectCode}
-                               data-validator="standart"/>
-                        { this.state.formErrors.hasOwnProperty('projectCode') ?
-                            <span className="form__error">Просьба указать внутренний код проекта</span> : '' }
-                    </div>
-
-                    <div>
+                    <div className="formSelect">
                         <label>* Местонахождение оборудования: </label><br />
                         <select id="place"
                                 onChange={this.placeChange}
@@ -423,7 +426,7 @@ class Form extends Component {
                         /> : '' }
                     </div>
 
-                    <div>
+                    <div className="formSelect">
                         <label>Приоритет заявки: </label>
                         <select id="ticketPriority" onChange={this.handleUserInput} value={this.state.ticketPriority}>
                             {ticketPriorityOptions.map(priority =>
@@ -432,15 +435,12 @@ class Form extends Component {
                         </select>
                     </div>
 
-                    <button onClick={this.saveData} className="btn btn-primary" disabled={!this.state.formValid}>
+                </div>
+
+                    <button onClick={this.saveData} className="createTicketForm_button" disabled={!this.state.formValid}>
                         Отправить
                     </button>
-                    <button onClick={() => {
-                        console.log(this.state.formErrors);
-                        console.log(this.state);
-                        console.log('formValid:', this.state.formValid)
-                    }} className="btn btn-primary">--- TEST
-                    </button>
+
                 </form>
 
             </Layout>
