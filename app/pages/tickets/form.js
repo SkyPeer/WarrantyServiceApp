@@ -3,6 +3,7 @@ import {render} from 'react-dom'
 import 'react-dropdown/style.css'
 import {Link} from 'react-router-dom';
 const isNumber = require('is-number');
+const getDate = require('../getDate');
 
 class OpenFormComponent extends Component {
 
@@ -23,11 +24,12 @@ class OpenFormComponent extends Component {
     };
 
     ticketDate = this.props.ticketDate;
+    //daysForService = this.props.daysForService;
+    currentDate = this.props.currentDate;
     statusOptions = this.props.statusOptions;
     ticketPriorityOptions = this.props.ticketPriorityOptions;
     serviceCenterOptions = this.props.serviceCenterOptions;
     ticketNumber = this.props.ticketNumber;
-    daysForService = this.props.daysForService;
     place = this.props.place;
     placeAnother = this.props.placeAnother;
     typeOfService = this.props.typeOfService;
@@ -165,7 +167,7 @@ class OpenFormComponent extends Component {
                            onChange={this.handleUserInputDate}
                            value={this.state.daysForService}
                            placeholder="Введите количество дней (от даты заявки)"/>
-                    <div>Дада завершения: {/*this.state.finishDate*/}</div>
+                    {this.state.daysForService &&<div>Дата завершения: {getDate(this.currentDate, this.ticketDate, this.state.daysForService).finishDate}</div> }
 
                     { this.state.daysForServiceError && <span className="form__error">Необходимо ввести количество дней</span>}
 

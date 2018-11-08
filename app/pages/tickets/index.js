@@ -5,6 +5,7 @@ import 'react-dropdown/style.css'
 import {Layout} from "../../controls/layout";
 import {statusOptions, typeOfServiceOptions, ticketPriorityOptions, placeOptions} from "../props"
 import {OpenFormComponent} from "./form"
+const getDate = require('../getDate');
 
 class TicketsComponent extends Component {
     state = {
@@ -64,20 +65,6 @@ class TicketsComponent extends Component {
         let originalPrompt = window.prompt;
         let answer = originalPrompt("Для удаление заявки № " + ticketNumber + " введите ее номер для подтверждения");
         answer == ticketNumber ? this.deleteData(_id) : alert('Ошибка ввода, удаление отменено')
-    };
-
-    dateFunction = (ticketDate, daysLeft) => {
-
-        let dateOfCreation = new Date(ticketDate);
-        let finishDate = new Date(ticketDate);
-        let currentDate = new Date(this.state.currentDate._now);
-
-        finishDate.setDate(dateOfCreation.getDate()+parseInt(daysLeft));
-
-        let daysLeftLocal = Math.round((finishDate - currentDate) / 1000 / 60 / 60/ 24);
-        return {dateOfCreation: (dateOfCreation.getDate() + '/' + (dateOfCreation.getMonth()+parseInt(1)) + '/' +dateOfCreation.getFullYear()+' '+dateOfCreation.getHours()+':'+dateOfCreation.getMinutes()),
-                finishDate: (finishDate.getDate() + '/' +(finishDate.getMonth()+parseInt(1)) + '/' +finishDate.getFullYear()),
-                daysLeftLocal: daysLeftLocal}
     };
 
     updateDataFunc = (updatearg, id) => {
@@ -165,7 +152,7 @@ class TicketsComponent extends Component {
 
 
                                     <div className="ticketDate">
-                                        Cоздана {this.dateFunction(ticket.ticketDate, ticket.daysForService).dateOfCreation + ' '}</div>
+                                        Cоздана {getDate(null, ticket.ticketDate).dateOfCreation}</div>
                                     <div className="status"> Статус: <span
                                         className={statusOptions[ticket.status].className}>{statusOptions[ticket.status].label}</span>
                                     </div>
@@ -181,9 +168,8 @@ class TicketsComponent extends Component {
                                         {
                                             ticket.daysForService && <div className="daysForService">
                                                 <div className="finishDate">
-                                                    Завершение: {this.dateFunction(ticket.ticketDate, ticket.daysForService).finishDate + ' '}<span
-                                                    className="daysForService">осталось: {this.dateFunction(ticket.ticketDate, ticket.daysForService).daysLeftLocal}
-                                                    дней</span>
+                                                    Завершение: {getDate(this.state.currentDate, ticket.ticketDate, ticket.daysForService).finishDate}
+                                                    <span className="daysForService"> осталось: {getDate(this.state.currentDate, ticket.ticketDate, ticket.daysForService).daysLeftLocal} дн.</span>
                                                 </div>
 
                                             </div>

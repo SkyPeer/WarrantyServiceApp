@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Layout} from "../../controls/layout";
 import ReactPhoneInput from 'react-phone-input-2'
-import {ticketPriorityOptions, placeOptions} from '../props'
+import {ticketPriorityOptions, placeOptions} from '../props';
+const getDate = require('../getDate');
 
 
 class Form extends Component {
@@ -50,7 +51,7 @@ class Form extends Component {
             .then(checkStatus => checkStatus.json())
             .then((json) => this.setState({
                 newTicketNumber: json.resJson.ticketNumber,
-                datetimeOfCreate: json.resJson.currnetDateTime
+                datetimeOfCreate: json.resJson.currentDateTime
             }))
             .then(() => console.log('inserted'));
         /*.then(
@@ -248,7 +249,7 @@ class Form extends Component {
 
 
                 {this.state.newTicketNumber !== '' ? <div className="createTicketFormMessage">Создано обращение
-                    № {this.state.newTicketNumber /* + '  ' + this.state.datetimeOfCreate*/ }</div> :
+                    № {this.state.newTicketNumber  + '  ' + getDate(null, this.state.datetimeOfCreate).dateOfCreation }</div> :
 
 
                     <form id="createTicketForm" className="content" onSubmit={(event) => {

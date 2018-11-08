@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Layout} from "../../controls/layout";
-import {statusOptions} from "../props"
+import {statusOptions} from "../props";
+const getDate = require('../getDate');
 
 class Search extends Component {
     state = {
@@ -47,22 +48,6 @@ class Search extends Component {
 
     };
 
-    dateFunction = (ticketDate, daysLeft) => {
-
-        let dateOfCreation = new Date(ticketDate);
-        let finishDate = new Date(ticketDate);
-        let currentDate = new Date(this.state.currentDate._now);
-        let minutes = dateOfCreation.getMinutes() < 10 ? '0'+dateOfCreation.getMinutes(): dateOfCreation.getMinutes()
-
-        finishDate.setDate(dateOfCreation.getDate()+parseInt(daysLeft));
-
-        let daysLeftLocal = Math.round((finishDate - currentDate) / 1000 / 60 / 60/ 24);
-        return {dateOfCreation: (dateOfCreation.getDate() + '/' + (dateOfCreation.getMonth()+parseInt(1)) + '/' +dateOfCreation.getFullYear()+' '+dateOfCreation.getHours()+':'+ minutes ),
-            finishDate: (finishDate.getDate() + '/' +(finishDate.getMonth()+parseInt(1)) + '/' +finishDate.getFullYear()),
-            daysLeftLocal: daysLeftLocal}
-    };
-
-
 
     componentDidMount() {
         console.log('this.searcharg: ', this.searcharg);
@@ -89,10 +74,10 @@ class Search extends Component {
                         <div><br />
                             <div><b>Инициатор: </b>{this.state.lastname + ' ' + this.state.firstname}</div>
                             <div><b>№ заявки: </b>{this.state.ticketNumber}</div>
-                            <div><b>Дата обращения: </b>{this.dateFunction(this.state.ticketDate).dateOfCreation}</div>
+                            <div><b>Дата обращения: </b>{getDate(null, this.state.ticketDate).dateOfCreation}</div>
                             {this.state.daysForService && <div>
-                                <b>Завершние заявки:</b> {this.dateFunction(this.state.ticketDate, this.state.daysForService).finishDate +
-                           ' осталось: ' +  this.dateFunction(this.state.ticketDate, this.state.daysForService).daysLeftLocal + ' дн.'}
+                                <b>Завершние заявки:</b> {getDate(this.state.currentDate, this.state.ticketDate, this.state.daysForService).finishDate +
+                           ' осталось: ' +  getDate(this.state.currentDate, this.state.ticketDate, this.state.daysForService).daysLeftLocal + ' дн.'}
                             </div>}
                                 <div>статус: {this.state.status !== 0 ? statusOptions[this.state.status].label : 'На рассмотрении'}</div>
                         </div>

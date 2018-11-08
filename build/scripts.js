@@ -378,6 +378,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+var getDate = __webpack_require__(/*! ../getDate */ "./app/pages/getDate.js");
+
 var Form =
 /*#__PURE__*/
 function (_Component) {
@@ -436,7 +438,7 @@ function (_Component) {
       }).then(function (json) {
         return _this.setState({
           newTicketNumber: json.resJson.ticketNumber,
-          datetimeOfCreate: json.resJson.currnetDateTime
+          datetimeOfCreate: json.resJson.currentDateTime
         });
       }).then(function () {
         return console.log('inserted');
@@ -644,9 +646,7 @@ function (_Component) {
         className: "header_title"
       }, "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0437\u0430\u044F\u0432\u043A\u0443")), this.state.newTicketNumber !== '' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "createTicketFormMessage"
-      }, "\u0421\u043E\u0437\u0434\u0430\u043D\u043E \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u0435 \u2116 ", this.state.newTicketNumber
-      /* + '  ' + this.state.datetimeOfCreate*/
-      ) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, "\u0421\u043E\u0437\u0434\u0430\u043D\u043E \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u0435 \u2116 ", this.state.newTicketNumber + '  ' + getDate(null, this.state.datetimeOfCreate).dateOfCreation) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         id: "createTicketForm",
         className: "content",
         onSubmit: function onSubmit(event) {
@@ -843,6 +843,29 @@ function (_Component) {
 
 /***/ }),
 
+/***/ "./app/pages/getDate.js":
+/*!******************************!*\
+  !*** ./app/pages/getDate.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function (_currentDate, _ticketDate, _daysLeft) {
+  var dateOfCreation = new Date(_ticketDate);
+  var finishDate = new Date(_ticketDate);
+  var currentDate = new Date(_currentDate);
+  var minutes = dateOfCreation.getMinutes() < 10 ? '0' + dateOfCreation.getMinutes() : dateOfCreation.getMinutes();
+  finishDate.setDate(dateOfCreation.getDate() + parseInt(_daysLeft));
+  var daysLeftLocal = Math.round((finishDate - currentDate) / 1000 / 60 / 60 / 24);
+  return {
+    dateOfCreation: dateOfCreation.getDate() + '/' + (dateOfCreation.getMonth() + parseInt(1)) + '/' + dateOfCreation.getFullYear() + ' ' + dateOfCreation.getHours() + ':' + minutes,
+    finishDate: finishDate.getDate() + '/' + (finishDate.getMonth() + parseInt(1)) + '/' + finishDate.getFullYear(),
+    daysLeftLocal: daysLeftLocal
+  };
+};
+
+/***/ }),
+
 /***/ "./app/pages/main.js":
 /*!***************************!*\
   !*** ./app/pages/main.js ***!
@@ -1020,6 +1043,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+var getDate = __webpack_require__(/*! ../getDate */ "./app/pages/getDate.js");
+
 var Search =
 /*#__PURE__*/
 function (_Component) {
@@ -1088,20 +1113,6 @@ function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "dateFunction", function (ticketDate, daysLeft) {
-      var dateOfCreation = new Date(ticketDate);
-      var finishDate = new Date(ticketDate);
-      var currentDate = new Date(_this.state.currentDate._now);
-      var minutes = dateOfCreation.getMinutes() < 10 ? '0' + dateOfCreation.getMinutes() : dateOfCreation.getMinutes();
-      finishDate.setDate(dateOfCreation.getDate() + parseInt(daysLeft));
-      var daysLeftLocal = Math.round((finishDate - currentDate) / 1000 / 60 / 60 / 24);
-      return {
-        dateOfCreation: dateOfCreation.getDate() + '/' + (dateOfCreation.getMonth() + parseInt(1)) + '/' + dateOfCreation.getFullYear() + ' ' + dateOfCreation.getHours() + ':' + minutes,
-        finishDate: finishDate.getDate() + '/' + (finishDate.getMonth() + parseInt(1)) + '/' + finishDate.getFullYear(),
-        daysLeftLocal: daysLeftLocal
-      };
-    });
-
     return _this;
   }
 
@@ -1131,7 +1142,7 @@ function (_Component) {
         onClick: function onClick() {
           _this2.trySearch(_this2.state.search);
         }
-      }, "\u041F\u043E\u0438\u0441\u043A"), this.state.checkData ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440: "), this.state.lastname + ' ' + this.state.firstname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u2116 \u0437\u0430\u044F\u0432\u043A\u0438: "), this.state.ticketNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0414\u0430\u0442\u0430 \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u044F: "), this.dateFunction(this.state.ticketDate).dateOfCreation), this.state.daysForService && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0417\u0430\u0432\u0435\u0440\u0448\u043D\u0438\u0435 \u0437\u0430\u044F\u0432\u043A\u0438:"), " ", this.dateFunction(this.state.ticketDate, this.state.daysForService).finishDate + ' осталось: ' + this.dateFunction(this.state.ticketDate, this.state.daysForService).daysLeftLocal + ' дн.'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0441\u0442\u0430\u0442\u0443\u0441: ", this.state.status !== 0 ? _props__WEBPACK_IMPORTED_MODULE_2__["statusOptions"][this.state.status].label : 'На рассмотрении')) : '', this.state.cantFind ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "\u041F\u043E\u0438\u0441\u043A"), this.state.checkData ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440: "), this.state.lastname + ' ' + this.state.firstname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u2116 \u0437\u0430\u044F\u0432\u043A\u0438: "), this.state.ticketNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0414\u0430\u0442\u0430 \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u044F: "), getDate(null, this.state.ticketDate).dateOfCreation), this.state.daysForService && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0417\u0430\u0432\u0435\u0440\u0448\u043D\u0438\u0435 \u0437\u0430\u044F\u0432\u043A\u0438:"), " ", getDate(this.state.currentDate, this.state.ticketDate, this.state.daysForService).finishDate + ' осталось: ' + getDate(this.state.currentDate, this.state.ticketDate, this.state.daysForService).daysLeftLocal + ' дн.'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0441\u0442\u0430\u0442\u0443\u0441: ", this.state.status !== 0 ? _props__WEBPACK_IMPORTED_MODULE_2__["statusOptions"][this.state.status].label : 'На рассмотрении')) : '', this.state.cantFind ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "search_error"
       }, "\u0417\u0430\u044F\u0432\u043A\u0438 \u0441 \u0442\u0430\u043A\u0438\u043C \u043D\u043E\u043C\u0435\u0440\u043E\u043C \u043D\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442") : ''));
     }
@@ -1569,6 +1580,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var isNumber = __webpack_require__(/*! is-number */ "./node_modules/is-number/index.js");
 
+var getDate = __webpack_require__(/*! ../getDate */ "./app/pages/getDate.js");
+
 var OpenFormComponent =
 /*#__PURE__*/
 function (_Component) {
@@ -1604,6 +1617,8 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "ticketDate", _this.props.ticketDate);
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "currentDate", _this.props.currentDate);
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "statusOptions", _this.props.statusOptions);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "ticketPriorityOptions", _this.props.ticketPriorityOptions);
@@ -1611,8 +1626,6 @@ function (_Component) {
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "serviceCenterOptions", _this.props.serviceCenterOptions);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "ticketNumber", _this.props.ticketNumber);
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "daysForService", _this.props.daysForService);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "place", _this.props.place);
 
@@ -1771,7 +1784,7 @@ function (_Component) {
         onChange: this.handleUserInputDate,
         value: this.state.daysForService,
         placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u0434\u043D\u0435\u0439 (\u043E\u0442 \u0434\u0430\u0442\u044B \u0437\u0430\u044F\u0432\u043A\u0438)"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0414\u0430\u0434\u0430 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F: "), this.state.daysForServiceError && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }), this.state.daysForService && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0414\u0430\u0442\u0430 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F: ", getDate(this.currentDate, this.ticketDate, this.state.daysForService).finishDate), this.state.daysForServiceError && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "form__error"
       }, "\u041D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E \u0432\u0432\u0435\u0441\u0442\u0438 \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u0434\u043D\u0435\u0439")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u043A\u043E\u043D\u0442\u0440\u0430\u043A\u0442 / \u2116 \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "serviceCenterTicket",
@@ -1868,6 +1881,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+var getDate = __webpack_require__(/*! ../getDate */ "./app/pages/getDate.js");
+
 var TicketsComponent =
 /*#__PURE__*/
 function (_Component) {
@@ -1933,19 +1948,6 @@ function (_Component) {
       var originalPrompt = window.prompt;
       var answer = originalPrompt("Для удаление заявки № " + ticketNumber + " введите ее номер для подтверждения");
       answer == ticketNumber ? _this.deleteData(_id) : alert('Ошибка ввода, удаление отменено');
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "dateFunction", function (ticketDate, daysLeft) {
-      var dateOfCreation = new Date(ticketDate);
-      var finishDate = new Date(ticketDate);
-      var currentDate = new Date(_this.state.currentDate._now);
-      finishDate.setDate(dateOfCreation.getDate() + parseInt(daysLeft));
-      var daysLeftLocal = Math.round((finishDate - currentDate) / 1000 / 60 / 60 / 24);
-      return {
-        dateOfCreation: dateOfCreation.getDate() + '/' + (dateOfCreation.getMonth() + parseInt(1)) + '/' + dateOfCreation.getFullYear() + ' ' + dateOfCreation.getHours() + ':' + dateOfCreation.getMinutes(),
-        finishDate: finishDate.getDate() + '/' + (finishDate.getMonth() + parseInt(1)) + '/' + finishDate.getFullYear(),
-        daysLeftLocal: daysLeftLocal
-      };
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateDataFunc", function (updatearg, id) {
@@ -2067,7 +2069,7 @@ function (_Component) {
           className: ticket.status !== 4 ? 'ticketNumber' : 'ticketNumber_canceled'
         }, "\u0417\u0430\u044F\u0432\u043A\u0430 \u2116 ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, ' ' + ticket.ticketNumber)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "ticketDate"
-        }, "C\u043E\u0437\u0434\u0430\u043D\u0430 ", _this3.dateFunction(ticket.ticketDate, ticket.daysForService).dateOfCreation + ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "C\u043E\u0437\u0434\u0430\u043D\u0430 ", getDate(null, ticket.ticketDate).dateOfCreation), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "status"
         }, " \u0421\u0442\u0430\u0442\u0443\u0441: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: _props__WEBPACK_IMPORTED_MODULE_5__["statusOptions"][ticket.status].className
@@ -2077,9 +2079,9 @@ function (_Component) {
           className: "daysForService"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "finishDate"
-        }, "\u0417\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u0435: ", _this3.dateFunction(ticket.ticketDate, ticket.daysForService).finishDate + ' ', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        }, "\u0417\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u0435: ", getDate(_this3.state.currentDate, ticket.ticketDate, ticket.daysForService).finishDate, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "daysForService"
-        }, "\u043E\u0441\u0442\u0430\u043B\u043E\u0441\u044C: ", _this3.dateFunction(ticket.ticketDate, ticket.daysForService).daysLeftLocal, "\u0434\u043D\u0435\u0439")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, " \u043E\u0441\u0442\u0430\u043B\u043E\u0441\u044C: ", getDate(_this3.state.currentDate, ticket.ticketDate, ticket.daysForService).daysLeftLocal, " \u0434\u043D.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "ticketPriority"
         }, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: _props__WEBPACK_IMPORTED_MODULE_5__["ticketPriorityOptions"][ticket.ticketPriority].className

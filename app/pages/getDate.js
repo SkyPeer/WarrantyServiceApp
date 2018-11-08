@@ -1,11 +1,13 @@
-module.exports = (ticketDate, daysLeft) => {
+module.exports = (_currentDate, _ticketDate, _daysLeft) => {
 
-        let dateOfCreation = new Date(ticketDate);
-        let finishDate = new Date(ticketDate);
-        let currentDate = new Date(this.state.currentDate._now);
+        let dateOfCreation = new Date(_ticketDate);
+        let finishDate = new Date(_ticketDate);
+        let currentDate = new Date(_currentDate);
         let minutes = dateOfCreation.getMinutes() < 10 ? '0'+dateOfCreation.getMinutes(): dateOfCreation.getMinutes()
 
-        finishDate.setDate(dateOfCreation.getDate()+parseInt(daysLeft));
+        finishDate.setDate(dateOfCreation.getDate()+parseInt(_daysLeft));
+
+        
 
         let daysLeftLocal = Math.round((finishDate - currentDate) / 1000 / 60 / 60/ 24);
         return {dateOfCreation: (dateOfCreation.getDate() + '/' + (dateOfCreation.getMonth()+parseInt(1)) + '/' +dateOfCreation.getFullYear()+' '+dateOfCreation.getHours()+':'+ minutes ),
