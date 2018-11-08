@@ -53,11 +53,11 @@ class Form extends Component {
                 datetimeOfCreate: json.resJson.currnetDateTime
             }))
             .then(() => console.log('inserted'));
-            /*.then(
-                () => {
-                    alert('Создано обращение №' + this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate)
-                }
-            );*/
+        /*.then(
+         () => {
+         alert('Создано обращение №' + this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate)
+         }
+         );*/
 
         function checkStatus(responsee) {
             if (responsee.status >= 200 && responsee.status < 300) {
@@ -242,10 +242,13 @@ class Form extends Component {
 
         return (
             <Layout>
-                <header><div className="header_title">Открыть заявку</div></header>
+                <header>
+                    <div className="header_title">Открыть заявку</div>
+                </header>
 
 
-                {this.state.newTicketNumber !== '' ? <div className="createTicketFormMessage">Создано обращение № {this.state.newTicketNumber /* + '  ' + this.state.datetimeOfCreate*/ }</div> :
+                {this.state.newTicketNumber !== '' ? <div className="createTicketFormMessage">Создано обращение
+                    № {this.state.newTicketNumber /* + '  ' + this.state.datetimeOfCreate*/ }</div> :
 
 
                     <form id="createTicketForm" className="content" onSubmit={(event) => {
@@ -279,7 +282,8 @@ class Form extends Component {
                                        data-validator="person"
                                        className=""
                                        required/>
-                                { this.state.formErrors.hasOwnProperty('lastname') ? <span className="form__error">Поле должно содержать Больще 2х символов</span> : ''}
+                                { this.state.formErrors.hasOwnProperty('lastname') ?
+                                    <span className="form__error">Поле должно содержать Больще 2х символов</span> : ''}
                             </div>
 
                             <div className="formInput">
@@ -380,7 +384,8 @@ class Form extends Component {
                                        data-validator="standart"
                                        required/>
                                 { this.state.formErrors.hasOwnProperty('partNumber') ?
-                                    <span className="form__error">Просьба указать partnumber / хаводской номер</span> : '' }
+                                    <span
+                                        className="form__error">Просьба указать partnumber / хаводской номер</span> : '' }
                             </div>
 
                             <div className="formInput">
@@ -429,7 +434,8 @@ class Form extends Component {
 
                             <div className="formSelect">
                                 <label>Приоритет заявки: </label>
-                                <select id="ticketPriority" onChange={this.handleUserInput} value={this.state.ticketPriority}>
+                                <select id="ticketPriority" onChange={this.handleUserInput}
+                                        value={this.state.ticketPriority}>
                                     {ticketPriorityOptions.map(priority =>
                                         <option key={priority.value} value={priority.value}>{priority.label}</option>
                                     )}
@@ -438,7 +444,8 @@ class Form extends Component {
 
                         </div>
 
-                        <button onClick={this.saveData} className="createTicketForm_button" disabled={!this.state.formValid}>
+                        <button onClick={this.saveData} className="createTicketForm_button"
+                                disabled={!this.state.formValid}>
                             Отправить
                         </button>
 

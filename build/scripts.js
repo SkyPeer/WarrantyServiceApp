@@ -442,10 +442,10 @@ function (_Component) {
         return console.log('inserted');
       });
       /*.then(
-          () => {
-              alert('Создано обращение №' + this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate)
-          }
-      );*/
+       () => {
+       alert('Создано обращение №' + this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate)
+       }
+       );*/
 
       function checkStatus(responsee) {
         if (responsee.status >= 200 && responsee.status < 300) {
@@ -1074,17 +1074,32 @@ function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "checkData", function (data) {
-      console.log(data);
-      JSON.stringify(data) !== JSON.stringify({
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "checkData", function (ticket) {
+      console.log(ticket);
+      JSON.stringify(ticket) !== JSON.stringify({
         error: 'mongoNotFound'
-      }) ? _this.setState(_objectSpread({}, data, {
+      }) ? _this.setState(_objectSpread({}, ticket.data, {
+        currentDate: ticket.currentDate,
         checkData: true,
         cantFind: false
       })) : _this.setState({
         checkData: false,
         cantFind: true
       });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "dateFunction", function (ticketDate, daysLeft) {
+      var dateOfCreation = new Date(ticketDate);
+      var finishDate = new Date(ticketDate);
+      var currentDate = new Date(_this.state.currentDate._now);
+      var minutes = dateOfCreation.getMinutes() < 10 ? '0' + dateOfCreation.getMinutes() : dateOfCreation.getMinutes();
+      finishDate.setDate(dateOfCreation.getDate() + parseInt(daysLeft));
+      var daysLeftLocal = Math.round((finishDate - currentDate) / 1000 / 60 / 60 / 24);
+      return {
+        dateOfCreation: dateOfCreation.getDate() + '/' + (dateOfCreation.getMonth() + parseInt(1)) + '/' + dateOfCreation.getFullYear() + ' ' + dateOfCreation.getHours() + ':' + minutes,
+        finishDate: finishDate.getDate() + '/' + (finishDate.getMonth() + parseInt(1)) + '/' + finishDate.getFullYear(),
+        daysLeftLocal: daysLeftLocal
+      };
     });
 
     return _this;
@@ -1116,7 +1131,9 @@ function (_Component) {
         onClick: function onClick() {
           _this2.trySearch(_this2.state.search);
         }
-      }, "\u041F\u043E\u0438\u0441\u043A"), this.state.checkData ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440: "), this.state.lastname + ' ' + this.state.firstname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u2116 \u0437\u0430\u044F\u0432\u043A\u0438: "), this.state.ticketNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0441\u0442\u0430\u0442\u0443\u0441: ", this.state.status !== 0 ? _props__WEBPACK_IMPORTED_MODULE_2__["statusOptions"][this.state.status].label : 'На рассмотрении')) : '', this.state.cantFind ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0417\u0430\u044F\u0432\u043A\u0438 \u0441 \u0442\u0430\u043A\u0438\u043C \u043D\u043E\u043C\u0435\u0440\u043E\u043C \u043D\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442") : ''));
+      }, "\u041F\u043E\u0438\u0441\u043A"), this.state.checkData ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440: "), this.state.lastname + ' ' + this.state.firstname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u2116 \u0437\u0430\u044F\u0432\u043A\u0438: "), this.state.ticketNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0414\u0430\u0442\u0430 \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u044F: "), this.dateFunction(this.state.ticketDate).dateOfCreation), this.state.daysForService && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0417\u0430\u0432\u0435\u0440\u0448\u043D\u0438\u0435 \u0437\u0430\u044F\u0432\u043A\u0438:"), " ", this.dateFunction(this.state.ticketDate, this.state.daysForService).finishDate + ' осталось: ' + this.dateFunction(this.state.ticketDate, this.state.daysForService).daysLeftLocal + ' дн.'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0441\u0442\u0430\u0442\u0443\u0441: ", this.state.status !== 0 ? _props__WEBPACK_IMPORTED_MODULE_2__["statusOptions"][this.state.status].label : 'На рассмотрении')) : '', this.state.cantFind ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "search_error"
+      }, "\u0417\u0430\u044F\u0432\u043A\u0438 \u0441 \u0442\u0430\u043A\u0438\u043C \u043D\u043E\u043C\u0435\u0440\u043E\u043C \u043D\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442") : ''));
     }
   }]);
 
