@@ -1675,7 +1675,7 @@ function (_Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "openDescForm_problem"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0435: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, this.vendor + ' ' + this.model + '  P/N: ' + this.partNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0435: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, this.vendor + ' ' + this.model + '  P/N: ' + this.partNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
         to: '/tickets/' + this.partNumber
       }, "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0434\u0440\u0443\u0433\u0438\u0435 \u0437\u0430\u044F\u0432\u043A\u0438 \u0441 ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, this.model, " ", this.partNumber))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041F\u0440\u0438\u0447\u0438\u043D\u0430: ", this.props.problem), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430: ", this.props.projectCode), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041C\u0435\u0441\u0442\u043E\u043D\u0430\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F: ", this.place !== 5 ? ' ' + this.placeOptions[this.place].label + ' ' : ' ' + this.placeAnother + ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "openDescForm_contacts"
@@ -1689,12 +1689,15 @@ function (_Component) {
         className: "openDescForm_form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "openDescForm_form_comment"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041A\u043E\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041A\u043E\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         type: "text",
         id: "comment",
+        placeholder: "",
         value: this.state.comment,
         onChange: this.handleUserInput
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "openDescForm_form_serviceCenter"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         id: "serviceCenter",
         onChange: this.changeServiceCenter,
         value: this.state.serviceCenter
@@ -1706,7 +1709,7 @@ function (_Component) {
           key: sc._id,
           value: sc._id
         }, sc.scTitle);
-      })), this.state.serviceCenterDetails !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0421\u0426: "), this.state.serviceCenterDetails.scAdress, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432: "), " ", this.state.serviceCenterDetails.scVendors) : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0420\u0435\u043C\u043E\u043D\u0442: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      })), this.state.serviceCenterDetails !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0421\u0426: "), this.state.serviceCenterDetails.scAdress, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432: "), " ", this.state.serviceCenterDetails.scVendors) : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0420\u0435\u043C\u043E\u043D\u0442: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         id: "typeOfService",
         onChange: this.handleUserInput,
         value: this.state.typeOfService
@@ -1715,7 +1718,9 @@ function (_Component) {
           key: typeOfService.value,
           value: typeOfService.value
         }, typeOfService.label);
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0422\u0440\u0435\u0431\u0443\u0435\u043C\u043E\u0435 \u0432\u0440\u0435\u043C\u044F \u043D\u0430 \u043F\u0440\u043E\u0432\u0435\u0434\u0435\u043D\u0438\u0435 \u0441\u0435\u0440\u0432\u0441\u043D\u044B\u0445 \u0440\u0430\u0431\u043E\u0442:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "openDescForm_form_daysForService"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0412\u0440\u0435\u043C\u044F \u043D\u0430 \u043F\u0440\u043E\u0432\u0435\u0434\u0435\u043D\u0438\u0435 \u0441\u0435\u0440\u0432\u0441\u043D\u044B\u0445 \u0440\u0430\u0431\u043E\u0442:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "daysForService",
         onChange: this.handleUserInputDate,
         value: this.state.daysForService,
@@ -1746,18 +1751,17 @@ function (_Component) {
           value: status.value
         }, status.label);
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "openDescForm_form_button save",
         onClick: this.saveFormFunc
-      }, " SAVE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "openDescForm_form_button reset",
         onClick: this.resetForm
-      }, "RESET"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "\u0421\u0431\u0440\u043E\u0441\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "openDescForm_form_button delete",
         onClick: function onClick() {
           _this2.props.deleteButtonClick(_this2.ticketNumber, _this2._id);
         }
-      }, "DELETE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          console.log(_this2.state);
-        }
-      }, " TEST "));
+      }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"));
     }
   }]);
 

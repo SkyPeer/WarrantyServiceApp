@@ -262,7 +262,90 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+            margin: 10px 0;
+
         }
+
+        .openDescForm_form label{
+            color: #550a5f;
+        }
+
+        .openDescForm_form input{
+            width: 100%;
+        }
+
+        .openDescForm_form_button{
+            border: 2px dotted;
+            border-radius: 5px;
+            background-color: white;
+
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin: 0 15px 0 0;
+        }
+
+        .openDescForm_form_button.save{
+            border-color: green;
+            /*color: #550a5f; */
+            color: green;
+        }
+        .openDescForm_form_button.save:hover{
+            border-color: green;
+            /*color: #550a5f; */
+            color: white;
+            background-color: green;
+            transition: all 0.2s;
+        }
+
+        .openDescForm_form_button.reset{
+             border-color: #550a5f;;
+             color: #550a5f;
+
+         }
+        .openDescForm_form_button.reset:hover{
+            border-color: #550a5f;;
+            color: white;
+            background-color: #550a5f;;
+            transition: all 0.2s;
+        }
+        .openDescForm_form_button.delete{
+            border-color: red;
+            color:red;
+
+        }
+        .openDescForm_form_button.delete:hover{
+            border-color: red;
+            color: white;
+            background-color: red;
+            transition: all 0.2s;
+        }
+
+
+
+
+
+
+        .openDescForm_form_serviceCenter {
+            flex-basis: 100%;
+            margin: 15px 0 25px;
+        }
+
+        .openDescForm_form_comment {
+            flex-basis: 100%;
+        }
+
+        .openDescForm_form_comment textarea{
+            width: 100%;
+            height: 120px;
+        }
+
+        .openDescForm_form_daysForService input{
+            width: 100%;
+        }
+
+
 
         .ticketNumber{
             color: #550a5f;

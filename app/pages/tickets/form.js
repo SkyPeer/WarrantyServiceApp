@@ -116,7 +116,7 @@ class OpenFormComponent extends Component {
 
                 <div className="openDescForm_problem">
 
-                    <div>Оборудование: <b>{this.vendor +' '+ this.model + '  P/N: ' + this.partNumber}</b>
+                    <div>Оборудование: <b>{this.vendor +' '+ this.model + '  P/N: ' + this.partNumber}</b><br />
                         <Link to={'/tickets/' + this.partNumber}>Посмотреть другие заявки с <b>{this.model} {this.partNumber}</b></Link></div>
                         <div>Причина: {this.props.problem}</div>
                         <div>Код проекта: {this.props.projectCode}</div>
@@ -133,19 +133,19 @@ class OpenFormComponent extends Component {
 
                     <div className="openDescForm_form_comment">
                         <label>Коментарий:</label>
-                        <input type="text" id="comment" value={this.state.comment} onChange={this.handleUserInput}/>
+                        <textarea type="text" id="comment" placeholder="" value={this.state.comment} onChange={this.handleUserInput}/>
                     </div>
 
-                <div>
-                    <label>Сервисный центр: </label>
-                    <select id="serviceCenter" onChange={this.changeServiceCenter} value={this.state.serviceCenter}>
-                        <option value="" defaultValue>Выбрать сервисный центр</option>
-                        {this.props.serviceCenterOptions.map(sc =>
-                            <option key={sc._id} value={sc._id}>{sc.scTitle}</option>
+                     <div className="openDescForm_form_serviceCenter">
+                        <label>Сервисный центр: </label>
+                        <select id="serviceCenter" onChange={this.changeServiceCenter} value={this.state.serviceCenter}>
+                            <option value="" defaultValue>Выбрать сервисный центр</option>
+                            {this.props.serviceCenterOptions.map(sc =>
+                                <option key={sc._id} value={sc._id}>{sc.scTitle}</option>
                         )}
                     </select>
                     {this.state.serviceCenterDetails !== undefined ?
-                        <div><b>Адрес СЦ: </b>{this.state.serviceCenterDetails.scAdress} <b>
+                        <div><b>Адрес СЦ: </b>{this.state.serviceCenterDetails.scAdress} <b><br />
                             Авторизация вендоров: </b> {this.state.serviceCenterDetails.scVendors}</div> : ''}
                 </div>
 
@@ -158,8 +158,8 @@ class OpenFormComponent extends Component {
                     </select>
                 </div>
 
-                <div>
-                    <label>Требуемое время на проведение сервсных работ:</label>
+                <div className="openDescForm_form_daysForService">
+                    <label>Время на проведение сервсных работ:</label>
 
                     <input id="daysForService"
                            onChange={this.handleUserInputDate}
@@ -200,14 +200,9 @@ class OpenFormComponent extends Component {
 
                 </div>
 
-                <button onClick={this.saveFormFunc}> SAVE</button>
-                <button onClick={this.resetForm}>RESET</button>
-                <button onClick={ () => {
-                    this.props.deleteButtonClick(this.ticketNumber, this._id)
-
-                } }>DELETE
-                </button>
-                <button onClick={()=>{console.log(this.state)}}> TEST </button>
+                <button className="openDescForm_form_button save" onClick={this.saveFormFunc}>Сохранить</button>
+                <button className="openDescForm_form_button reset" onClick={this.resetForm}>Сбросить</button>
+                <button className="openDescForm_form_button delete" onClick={ () => {this.props.deleteButtonClick(this.ticketNumber, this._id)} }>Удалить</button>
 
 
             </form>
