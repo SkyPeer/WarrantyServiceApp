@@ -440,9 +440,12 @@ function (_Component) {
         });
       }).then(function () {
         return console.log('inserted');
-      }).then(function () {
-        alert('Создано обращение №' + _this.state.newTicketNumber + '  ' + _this.state.datetimeOfCreate);
       });
+      /*.then(
+          () => {
+              alert('Создано обращение №' + this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate)
+          }
+      );*/
 
       function checkStatus(responsee) {
         if (responsee.status >= 200 && responsee.status < 300) {
@@ -639,7 +642,11 @@ function (_Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "header_title"
-      }, "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0437\u0430\u044F\u0432\u043A\u0443")), this.state.newTicketNumber !== '' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0421\u043E\u0437\u0434\u0430\u043D\u043E \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u0435 \u2116 ", this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate, " \u041C\u0421\u041A") : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0437\u0430\u044F\u0432\u043A\u0443")), this.state.newTicketNumber !== '' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "createTicketFormMessage"
+      }, "\u0421\u043E\u0437\u0434\u0430\u043D\u043E \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u0435 \u2116 ", this.state.newTicketNumber
+      /* + '  ' + this.state.datetimeOfCreate*/
+      ) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         id: "createTicketForm",
         className: "content",
         onSubmit: function onSubmit(event) {
@@ -801,13 +808,13 @@ function (_Component) {
           value: place.value
         }, place.label);
       })), this.state.place === '5' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "formInput",
         id: "placeAnother",
         placeholder: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u043C\u0435\u0441\u0442\u043E\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0435",
         onChange: this.handleUserInput,
         onFocus: this.onFocus,
         onBlur: this.onBlur,
         value: this.state.placeAnother,
-        className: "input_error",
         "data-validator": "placeAnother"
       }) : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "formSelect"
