@@ -61,31 +61,43 @@ class Search extends Component {
     render() {
         return (
             <Layout>
-                <form onSubmit={(event) => {
-                    event.preventDefault()
-                }}>
-                    <header><div className="header_title">Найти заявку</div></header>
+                <header><div className="header_title">Найти заявку</div></header>
+                    <div className="content search">
 
-                    <input id="ticketNumber" onChange={this.inputUserHandler} value={this.state.search}
-                           placeholder="введите номер заявки"/>
-                    <button onClick={() => {this.trySearch(this.state.search);}}>Поиск</button>
+                        <form className="searchForm" onSubmit={(event) => {
+                            event.preventDefault()
+                        }}>
 
-                    {this.state.checkData ?
-                        <div><br />
-                            <div><b>Инициатор: </b>{this.state.lastname + ' ' + this.state.firstname}</div>
-                            <div><b>№ заявки: </b>{this.state.ticketNumber}</div>
-                            <div><b>Дата обращения: </b>{getDate(null, this.state.ticketDate).dateOfCreation}</div>
-                            {this.state.daysForService && <div>
-                                <b>Завершние заявки:</b> {getDate(this.state.currentDate, this.state.ticketDate, this.state.daysForService).finishDate +
-                           ' осталось: ' +  getDate(this.state.currentDate, this.state.ticketDate, this.state.daysForService).daysLeftLocal + ' дн.'}
-                            </div>}
-                                <div>статус: {this.state.status !== 0 ? statusOptions[this.state.status].label : 'На рассмотрении'}</div>
-                        </div>
-                        : ''}
-                    {
-                    this.state.cantFind ? <div className="search_error">Заявки с таким номером не существует</div> : ''
-                    }
-                </form>
+                            <div className="searchForm_controls">
+
+                                <input id="searchForm_ticketNumber" onChange={this.inputUserHandler} value={this.state.search}
+                                                                        placeholder="введите номер заявки"/>
+
+                                <button id="searchForm_button" onClick={() => {this.trySearch(this.state.search);}}>
+                                    Поиск</button>
+
+                            </div>
+
+
+                            {this.state.checkData ?
+                                <div className="searchForm_result"><br />
+                                    <div><b>Инициатор: </b>{this.state.lastname + ' ' + this.state.firstname + ' ' + this.state.familyname}</div>
+                                    <div><b>№ заявки: </b>{this.state.ticketNumber}</div>
+                                    <div><b>Дата обращения: </b>{getDate(null, this.state.ticketDate).dateOfCreation}</div>
+                                    {this.state.daysForService && <div>
+                                        <b>Завершние заявки:</b> {getDate(this.state.currentDate, this.state.ticketDate, this.state.daysForService).finishDate +
+                                    ' осталось: ' +  getDate(this.state.currentDate, this.state.ticketDate, this.state.daysForService).daysLeftLocal + ' дн.'}
+                                    </div>}
+                                    <div><b>Статус: </b>{this.state.status !== 0 ? statusOptions[this.state.status].label : 'На рассмотрении'}</div>
+                                </div>
+                                : ''}
+                            {
+                                this.state.cantFind ? <div className="search_error">Заявки с таким номером не существует</div> : ''
+                            }
+                        </form>
+
+                </div>
+
             </Layout>
 
         )

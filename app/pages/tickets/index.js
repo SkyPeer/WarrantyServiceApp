@@ -133,18 +133,20 @@ class TicketsComponent extends Component {
                     {this.state.data.map((ticket) => (
                         <div key={ticket._id}>
 
+                            <div>{this.state.idOfupdatedTicket === ticket._id &&
+                            <div className="ticketUpdateMessage"><b> Заявка обновлена </b>
+                                <button className="ticketUpdateMessage_button" onClick={() => {this.setState({idOfupdatedTicket: null})} }>OK</button>
+                            </div>}</div>
+
+
                             <div className={this.state.openTicketDescId !== ticket._id ? 'content_ticket' : 'content_ticket open'}
                                  style={this.state.openTicketDescId !== ticket._id ? {background: 'white'} : {background: '#550a5f'}}>
 
-                                <div className="ticket_flex1">
-                                    <div className="ticketUpdateMessage">{this.state.idOfupdatedTicket === ticket._id &&
-                                    <div><b> --- ОБНОВЛЕНА!!! --- </b>
-                                        <button onClick={() => {
-                                            this.setState({idOfupdatedTicket: null})
-                                        } }>OK
-                                        </button>
-                                    </div>}</div>
 
+
+
+
+                                <div className="ticket_flex1">
                                     <div style={this.state.openTicketDescId !== ticket._id ? {color: '#550a5f'} : {color: 'white'} }
                                          className={ticket.status !== 4 ? 'ticketNumber' : 'ticketNumber_canceled' }>
                                         Заявка № <b>{' ' + ticket.ticketNumber}</b>

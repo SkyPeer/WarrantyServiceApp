@@ -7,7 +7,7 @@ module.exports = (_currentDate, _ticketDate, _daysLeft) => {
 
         finishDate.setDate(dateOfCreation.getDate()+parseInt(_daysLeft));
 
-        
+
 
         let daysLeftLocal = Math.round((finishDate - currentDate) / 1000 / 60 / 60/ 24);
         return {dateOfCreation: (dateOfCreation.getDate() + '/' + (dateOfCreation.getMonth()+parseInt(1)) + '/' +dateOfCreation.getFullYear()+' '+dateOfCreation.getHours()+':'+ minutes ),

@@ -1127,24 +1127,32 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "header_title"
+      }, "\u041D\u0430\u0439\u0442\u0438 \u0437\u0430\u044F\u0432\u043A\u0443")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content search"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "searchForm",
         onSubmit: function onSubmit(event) {
           event.preventDefault();
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "header_title"
-      }, "\u041D\u0430\u0439\u0442\u0438 \u0437\u0430\u044F\u0432\u043A\u0443")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        id: "ticketNumber",
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "searchForm_controls"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "searchForm_ticketNumber",
         onChange: this.inputUserHandler,
         value: this.state.search,
         placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u043D\u043E\u043C\u0435\u0440 \u0437\u0430\u044F\u0432\u043A\u0438"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        id: "searchForm_button",
         onClick: function onClick() {
           _this2.trySearch(_this2.state.search);
         }
-      }, "\u041F\u043E\u0438\u0441\u043A"), this.state.checkData ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440: "), this.state.lastname + ' ' + this.state.firstname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u2116 \u0437\u0430\u044F\u0432\u043A\u0438: "), this.state.ticketNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0414\u0430\u0442\u0430 \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u044F: "), getDate(null, this.state.ticketDate).dateOfCreation), this.state.daysForService && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0417\u0430\u0432\u0435\u0440\u0448\u043D\u0438\u0435 \u0437\u0430\u044F\u0432\u043A\u0438:"), " ", getDate(this.state.currentDate, this.state.ticketDate, this.state.daysForService).finishDate + ' осталось: ' + getDate(this.state.currentDate, this.state.ticketDate, this.state.daysForService).daysLeftLocal + ' дн.'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0441\u0442\u0430\u0442\u0443\u0441: ", this.state.status !== 0 ? _props__WEBPACK_IMPORTED_MODULE_2__["statusOptions"][this.state.status].label : 'На рассмотрении')) : '', this.state.cantFind ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "\u041F\u043E\u0438\u0441\u043A")), this.state.checkData ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "searchForm_result"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440: "), this.state.lastname + ' ' + this.state.firstname + ' ' + this.state.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u2116 \u0437\u0430\u044F\u0432\u043A\u0438: "), this.state.ticketNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0414\u0430\u0442\u0430 \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u044F: "), getDate(null, this.state.ticketDate).dateOfCreation), this.state.daysForService && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0417\u0430\u0432\u0435\u0440\u0448\u043D\u0438\u0435 \u0437\u0430\u044F\u0432\u043A\u0438:"), " ", getDate(this.state.currentDate, this.state.ticketDate, this.state.daysForService).finishDate + ' осталось: ' + getDate(this.state.currentDate, this.state.ticketDate, this.state.daysForService).daysLeftLocal + ' дн.'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0421\u0442\u0430\u0442\u0443\u0441: "), this.state.status !== 0 ? _props__WEBPACK_IMPORTED_MODULE_2__["statusOptions"][this.state.status].label : 'На рассмотрении')) : '', this.state.cantFind ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "search_error"
-      }, "\u0417\u0430\u044F\u0432\u043A\u0438 \u0441 \u0442\u0430\u043A\u0438\u043C \u043D\u043E\u043C\u0435\u0440\u043E\u043C \u043D\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442") : ''));
+      }, "\u0417\u0430\u044F\u0432\u043A\u0438 \u0441 \u0442\u0430\u043A\u0438\u043C \u043D\u043E\u043C\u0435\u0440\u043E\u043C \u043D\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442") : '')));
     }
   }]);
 
@@ -2043,7 +2051,16 @@ function (_Component) {
       }, this.state.data.map(function (ticket) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: ticket._id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.state.idOfupdatedTicket === ticket._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "ticketUpdateMessage"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " \u0417\u0430\u044F\u0432\u043A\u0430 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0430 "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "ticketUpdateMessage_button",
+          onClick: function onClick() {
+            _this3.setState({
+              idOfupdatedTicket: null
+            });
+          }
+        }, "OK"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: _this3.state.openTicketDescId !== ticket._id ? 'content_ticket' : 'content_ticket open',
           style: _this3.state.openTicketDescId !== ticket._id ? {
             background: 'white'
@@ -2053,14 +2070,6 @@ function (_Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "ticket_flex1"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "ticketUpdateMessage"
-        }, _this3.state.idOfupdatedTicket === ticket._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " --- \u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0410!!! --- "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          onClick: function onClick() {
-            _this3.setState({
-              idOfupdatedTicket: null
-            });
-          }
-        }, "OK"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           style: _this3.state.openTicketDescId !== ticket._id ? {
             color: '#550a5f'
           } : {
