@@ -117,24 +117,23 @@ class TicketsComponent extends Component {
                 <header>
                     <div className="header_title">Заявки на обслуживание</div>
                 </header>
-                <button onClick={() => {
-                    console.log(this.state)
-                }}> TEST
-                </button>
-                <div>{this.state.ticketWasDeleted && <div>Заявка удалена!
-                    <button onClick={() => {
-                        this.setState({ticketWasDeleted: false})
-                    }}>OK
-                    </button>
-                </div> }</div>
+
+
 
                 <div className="content">
 
+                    <div>{this.state.ticketWasDeleted &&
+                    <div className="ticketDeleteMessage">
+                        <div className="ticketDeleteMessage_text">Заявка удалена!</div>
+                        <button className="ticketDeleteMessage_button" onClick={() => {this.setState({ticketWasDeleted: false})}}>OK</button>
+                    </div> }
+                    </div>
+                    
                     {this.state.data.map((ticket) => (
                         <div key={ticket._id}>
 
                             <div>{this.state.idOfupdatedTicket === ticket._id &&
-                            <div className="ticketUpdateMessage"><b> Заявка обновлена </b>
+                            <div className="ticketUpdateMessage"><span className="ticketUpdateMessage_text"> Заявка № {ticket.ticketNumber} <b>обновлена!</b> </span>
                                 <button className="ticketUpdateMessage_button" onClick={() => {this.setState({idOfupdatedTicket: null})} }>OK</button>
                             </div>}</div>
 

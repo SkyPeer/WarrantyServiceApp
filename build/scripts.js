@@ -2036,24 +2036,27 @@ function (_Component) {
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_4__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "header_title"
-      }, "\u0417\u0430\u044F\u0432\u043A\u0438 \u043D\u0430 \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u0435")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          console.log(_this3.state);
-        }
-      }, " TEST"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.ticketWasDeleted && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0417\u0430\u044F\u0432\u043A\u0430 \u0443\u0434\u0430\u043B\u0435\u043D\u0430!", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "\u0417\u0430\u044F\u0432\u043A\u0438 \u043D\u0430 \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u0435")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.ticketWasDeleted && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "ticketDeleteMessage"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "ticketDeleteMessage_text"
+      }, "\u0417\u0430\u044F\u0432\u043A\u0430 \u0443\u0434\u0430\u043B\u0435\u043D\u0430!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "ticketDeleteMessage_button",
         onClick: function onClick() {
           _this3.setState({
             ticketWasDeleted: false
           });
         }
-      }, "OK"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "content"
-      }, this.state.data.map(function (ticket) {
+      }, "OK"))), this.state.data.map(function (ticket) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: ticket._id
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.state.idOfupdatedTicket === ticket._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "ticketUpdateMessage"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " \u0417\u0430\u044F\u0432\u043A\u0430 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0430 "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "ticketUpdateMessage_text"
+        }, " \u0417\u0430\u044F\u0432\u043A\u0430 \u2116 ", ticket.ticketNumber, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0430!"), " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           className: "ticketUpdateMessage_button",
           onClick: function onClick() {
             _this3.setState({

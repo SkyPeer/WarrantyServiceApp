@@ -296,13 +296,94 @@
         }
 
         .ticketUpdateMessage {
+            position: relative;
             width: 100%;
-            height: 40px;
-            border: dotted green 2px;
+            height: 50px;
+            border: dashed green 2px;
             border-radius: 5px;
-            background-color: #00b800;
-            flex: none;
+            /*background-color: green;*/
+            color: green;
+            /*text-align: center; */
+
+            /*flex: none; */
         }
+
+        .ticketUpdateMessage_text{
+            /*display: inline-block;*/
+            margin-left: 15px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+
+        .ticketUpdateMessage_button{
+            /*display: inline-block; */
+            width: 88px;
+            height: 25px;
+            background-color: white;
+            border: 2px dotted green;
+            border-radius: 5px;
+            margin-right: 20px;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            float: right;
+            cursor: pointer;
+        }
+        .ticketUpdateMessage_button:hover{
+            background-color: green;
+            border: 2px dotted green;
+            color: white;
+        }
+
+
+        .ticketDeleteMessage {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            border: dashed red 2px;
+            border-radius: 5px;
+            /*background-color: green;*/
+            color: red;
+            /*text-align: center; */
+
+            /*flex: none; */
+        }
+
+        .ticketDeleteMessage_text{
+            /*display: inline-block;*/
+            margin-left: 15px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+
+        .ticketDeleteMessage_button{
+            /*display: inline-block; */
+            width: 88px;
+            height: 25px;
+            background-color: white;
+            border: 2px dotted red;
+            border-radius: 5px;
+            margin-right: 20px;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            float: right;
+            cursor: pointer;
+        }
+        .ticketDeleteMessage_button:hover{
+            background-color: red;
+            border: 2px dotted red;
+            color: white;
+        }
+
+
+
 
         .ticket_flex1{
             /*margin: 10px;*/
