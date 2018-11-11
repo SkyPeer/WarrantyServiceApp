@@ -1241,6 +1241,7 @@ function (_Component) {
   _createClass(ServiceCenterForm, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      console.log('this.props', this.props);
       this.getState();
     }
   }, {
@@ -1248,7 +1249,7 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Form: add"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041D\u0430\u0437\u0430\u0432\u043D\u0438\u0435 \u0421\u0426: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041D\u0430\u0437\u0430\u0432\u043D\u0438\u0435 \u0421\u0426: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "scTitle",
         onChange: this.scChangeHandler,
         value: this.state.scTitle
@@ -1265,10 +1266,20 @@ function (_Component) {
           _this2.props.clickSaveFunc(_this2.state);
         }
       }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        style: this.props.deleteResetButtonsEnabled ? {
+          display: ''
+        } : {
+          display: 'none'
+        },
         onClick: function onClick() {
           _this2.getState();
         }
       }, "\u0421\u0431\u0440\u043E\u0441\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        style: this.props.deleteResetButtonsEnabled ? {
+          display: ''
+        } : {
+          display: 'none'
+        },
         onClick: function onClick() {
           _this2.props.clickDelFunc(_this2.state._id);
         }
@@ -1529,7 +1540,8 @@ function (_Component) {
           }
         }, "\u0417\u0430\u043A\u0440\u044B\u0442\u044C"), _this2.state.openformForEdit === serviceCenter._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form__WEBPACK_IMPORTED_MODULE_2__["ServiceCenterForm"], _extends({
           clickSaveFunc: _this2.updateSericeCenter,
-          clickDelFunc: _this2.deleteHandler
+          clickDelFunc: _this2.deleteHandler,
+          deleteResetButtonsEnabled: true
         }, serviceCenter)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
       })));
     }
@@ -1604,11 +1616,11 @@ function (_Component) {
 
     _classCallCheck(this, OpenFormComponent);
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
+    for (var _len = arguments.length, _args = new Array(_len), _key = 0; _key < _len; _key++) {
+      _args[_key] = arguments[_key];
     }
 
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(OpenFormComponent)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(OpenFormComponent)).call.apply(_getPrototypeOf2, [this].concat(_args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
       comment: '',
@@ -1622,7 +1634,9 @@ function (_Component) {
       //finishDateLocal: '',
       daysForService: '',
       //formErrors: {},
-      daysForServiceError: false
+      daysForServiceError: false,
+      openFormNewSc: false,
+      scListWasUpadted: ''
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "ticketDate", _this.props.ticketDate);
@@ -1654,6 +1668,8 @@ function (_Component) {
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "vendor", _this.props.vendor);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "partNumber", _this.props.partNumber);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "scListWasUpadted", _this.props.scListWasUpadted);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "fullSetStateFunc", function () {
       _this.setState(_objectSpread({}, _this.props));
@@ -1716,6 +1732,16 @@ function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "clickSaveSCFunc", function (args) {
+      _this.props.saveButtonClickSC(args);
+      /*console.log('argss',argss);*/
+
+
+      _this.setState({
+        openFormNewSc: false
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "saveFormFunc", function () {
       _this.props.saveButtonClick(_objectSpread({}, _this.state));
     });
@@ -1730,6 +1756,7 @@ function (_Component) {
   _createClass(OpenFormComponent, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      console.log('this.props', this.props);
       this.fullSetStateFunc();
     }
   }, {
@@ -1766,7 +1793,10 @@ function (_Component) {
         onChange: this.handleUserInput
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "openDescForm_form_serviceCenter"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "updateScList",
+        onClick: this.props.updateSpanClickSC
+      }, " \u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0441\u043F\u0438\u0441\u043E\u043A "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         id: "serviceCenter",
         onChange: this.changeServiceCenter,
         value: this.state.serviceCenter
@@ -1778,9 +1808,22 @@ function (_Component) {
           key: sc._id,
           value: sc._id
         }, sc.scTitle);
-      })), this.state.serviceCenterDetails !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0421\u0426: "), this.state.serviceCenterDetails.scAdress, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432: "), " ", this.state.serviceCenterDetails.scVendors) : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_servicecenters_form__WEBPACK_IMPORTED_MODULE_4__["ServiceCenterForm"], {
-        clickSaveFunc: this.props.saveButtonClickSC
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0420\u0435\u043C\u043E\u043D\u0442: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      })), this.state.serviceCenterDetails !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0421\u0426: "), this.state.serviceCenterDetails.scAdress, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432: "), " ", this.state.serviceCenterDetails.scVendors) : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          !_this2.state.openFormNewSc ? _this2.setState({
+            openFormNewSc: true
+          }) : _this2.setState({
+            openFormNewSc: false
+          });
+        }
+      }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0441\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "ServiceCenterFormDiv"
+      }, this.props.scListWasUpdated && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D!"), this.state.openFormNewSc ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_servicecenters_form__WEBPACK_IMPORTED_MODULE_4__["ServiceCenterForm"], {
+        clickSaveFunc: function clickSaveFunc(arg) {
+          return _this2.clickSaveSCFunc(arg);
+        },
+        deleteResetButtonsEnabled: false
+      }) : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0420\u0435\u043C\u043E\u043D\u0442: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         id: "typeOfService",
         onChange: this.handleUserInput,
         value: this.state.typeOfService
@@ -1921,7 +1964,9 @@ function (_Component) {
       ticketWasDeleted: false,
       finishDate: '',
       daysLeft: '',
-      currentDate: ''
+      currentDate: '',
+      scListWasUpadted: '',
+      openFormNewSc: ''
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "deleteData", function (id) {
@@ -2000,9 +2045,13 @@ function (_Component) {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         }
-      }).then(checkStatus)
-      /*.then(() => {this.getAllServiceCenters()})
-      .then(() => {this.setState({openformForCreate: false, newCs: true})}) */
+      }).then(checkStatus).then(function () {
+        _this.setState({
+          scListWasUpadted: true,
+          openFormNewSc: false
+        });
+      })
+      /*.then(() => {this.setState({openformForCreate: false, newCs: true})}) */
       .then(function () {
         return console.log('new sc inserted');
       });
@@ -2016,6 +2065,17 @@ function (_Component) {
           throw error;
         }
       }
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getAllServiceCenters", function () {
+      console.log('getAllServiceCenters');
+      fetch("/mongooseGetDataSC").then(function (res) {
+        return res.json();
+      }).then(function (json) {
+        return _this.setState({
+          sc: json
+        });
+      });
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "timerGetAllData", setInterval(function () {
@@ -2170,10 +2230,15 @@ function (_Component) {
           saveButtonClick: function saveButtonClick(updatearg) {
             _this3.updateDataFunc(updatearg, ticket._id);
           },
+          deleteButtonClick: _this3.promtToDelete,
           saveButtonClickSC: function saveButtonClickSC(newSC) {
             _this3.insertServiceCenter(newSC);
           },
-          deleteButtonClick: _this3.promtToDelete
+          updateSpanClickSC: function updateSpanClickSC() {
+            _this3.getAllServiceCenters();
+          },
+          scListWasUpdated: _this3.state.scListWasUpadted,
+          openFormNewSc: _this3.state.openFormNewSc
         }))));
       })));
     }

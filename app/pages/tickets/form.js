@@ -20,8 +20,10 @@ class OpenFormComponent extends Component {
         //finishDateLocal: '',
         daysForService: '',
         //formErrors: {},
-        daysForServiceError: false
+        daysForServiceError: false,
 
+        openFormNewSc: false,
+        scListWasUpadted: '',
     };
 
     ticketDate = this.props.ticketDate;
@@ -40,8 +42,9 @@ class OpenFormComponent extends Component {
     model=this.props.model;
     vendor=this.props.vendor;
     partNumber = this.props.partNumber;
-
+    scListWasUpadted = this.props.scListWasUpadted;
     /*saveButtonClickSC = this.props.saveButtonClickSC;*/
+
 
     fullSetStateFunc = () => {
         this.setState({
@@ -56,6 +59,7 @@ class OpenFormComponent extends Component {
     };
 
     componentDidMount() {
+        console.log('this.props',this.props);
         this.fullSetStateFunc()
     }
 
@@ -99,6 +103,13 @@ class OpenFormComponent extends Component {
 
     };
 
+    clickSaveSCFunc = (args) =>{
+
+        this.props.saveButtonClickSC(args);
+        /*console.log('argss',argss);*/
+        this.setState({openFormNewSc:false});
+    };
+
     saveFormFunc = () => {
         this.props.saveButtonClick({
             ...this.state
@@ -111,6 +122,7 @@ class OpenFormComponent extends Component {
 
 
     render() {
+
         return (
 
             <form id="openDescForm" onSubmit={(event) => {
@@ -140,7 +152,7 @@ class OpenFormComponent extends Component {
                     </div>
 
                      <div className="openDescForm_form_serviceCenter">
-                        <label>Сервисный центр: </label>
+                         <label>Сервисный центр: </label><span className="updateScList" onClick={this.props.updateSpanClickSC}> Обновить список </span>
                         <select id="serviceCenter" onChange={this.changeServiceCenter} value={this.state.serviceCenter}>
                             <option value="" defaultValue>Выбрать сервисный центр</option>
                             {this.props.serviceCenterOptions.map(sc =>
@@ -151,9 +163,18 @@ class OpenFormComponent extends Component {
                         <div><b>Адрес СЦ: </b>{this.state.serviceCenterDetails.scAdress} <b><br />
                             Авторизация вендоров: </b> {this.state.serviceCenterDetails.scVendors}</div> : ''}
                 </div>
-                <ServiceCenterForm
-                    clickSaveFunc={this.props.saveButtonClickSC}
-                />
+
+                    <button onClick={()=>{!this.state.openFormNewSc ? this.setState({openFormNewSc:true}) : this.setState({openFormNewSc:false})}}>
+                        Добавить сервисный центр
+                    </button>
+                    <div className="ServiceCenterFormDiv">
+                        {this.props.scListWasUpdated && <div>Сервисный центр добавлен!</div>}
+                            {this.state.openFormNewSc ?
+                                <ServiceCenterForm
+                                    clickSaveFunc={(arg)=>this.clickSaveSCFunc(arg)}
+                                    deleteResetButtonsEnabled={false}
+                                 /> : ''}
+                    </div>
                 <div>
                     <label>Ремонт: </label>
                     <select id="typeOfService" onChange={this.handleUserInput} value={this.state.typeOfService}>

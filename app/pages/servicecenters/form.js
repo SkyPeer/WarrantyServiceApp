@@ -10,6 +10,7 @@ class ServiceCenterForm extends Component {
 
 
     componentDidMount() {
+        console.log('this.props',this.props);
         this.getState()
     }
 
@@ -29,7 +30,7 @@ class ServiceCenterForm extends Component {
 
             <div>
                 <hr />
-                <h4>Form: add</h4>
+                <h4>Сервисный центр</h4>
                 <label>Назавние СЦ: </label>
                 <input id='scTitle'
                        onChange={this.scChangeHandler} value={this.state.scTitle}
@@ -51,11 +52,11 @@ class ServiceCenterForm extends Component {
                     this.props.clickSaveFunc(this.state)
                 } }>Сохранить
                 </button>
-                <button onClick={() => {
+                <button style={this.props.deleteResetButtonsEnabled ? {display: ''}: {display:'none'}} onClick={() => {
                     this.getState()
                 }}>Сбросить
                 </button>
-                <button onClick={ () => {
+                <button style={this.props.deleteResetButtonsEnabled ? {display: ''}: {display:'none'}} onClick={ () => {
                     this.props.clickDelFunc(this.state._id)
                 } }>Удалить СЦ
                 </button>

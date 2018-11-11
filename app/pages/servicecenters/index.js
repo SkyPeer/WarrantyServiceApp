@@ -169,6 +169,7 @@ class ServiceCentres extends Component {
                         <ServiceCenterForm
                             clickSaveFunc={this.updateSericeCenter}
                             clickDelFunc={this.deleteHandler}
+                            deleteResetButtonsEnabled={true}
                             {...serviceCenter}
                         /> }
                         <hr />

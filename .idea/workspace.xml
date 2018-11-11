@@ -21,24 +21,53 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="form.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/pages/servicecenters/form.js">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1300">
-              <caret line="50" column="56" lean-forward="true" selection-start-line="50" selection-start-column="56" selection-end-line="50" selection-end-column="56" />
-              <folding />
+            <state relative-caret-position="2453">
+              <caret line="516" column="28" lean-forward="false" selection-start-line="516" selection-start-column="28" selection-end-line="516" selection-end-column="28" />
+              <folding>
+                <element signature="e#906#1086#0" expanded="false" />
+                <element signature="e#1920#2049#0" expanded="false" />
+                <element signature="e#2078#2149#0" expanded="false" />
+                <element signature="e#2164#2538#0" expanded="false" />
+                <element signature="e#2555#2692#0" expanded="false" />
+                <element signature="e#2717#2944#0" expanded="false" />
+                <element signature="e#2973#3196#0" expanded="false" />
+                <element signature="e#3232#3334#0" expanded="false" />
+                <element signature="e#7046#7295#0" expanded="false" />
+                <element signature="e#7558#7600#0" expanded="false" />
+                <element signature="e#7624#7668#0" expanded="false" />
+                <element signature="e#9975#10047#0" expanded="false" />
+                <element signature="e#10069#10141#0" expanded="false" />
+                <element signature="e#10163#10243#0" expanded="false" />
+                <element signature="e#13265#13304#0" expanded="false" />
+                <element signature="e#13324#13358#0" expanded="false" />
+                <element signature="e#13381#13423#0" expanded="false" />
+                <element signature="e#13445#13481#0" expanded="false" />
+                <element signature="e#13506#13542#0" expanded="false" />
+                <element signature="e#13564#13603#0" expanded="false" />
+                <element signature="e#13634#13711#0" expanded="false" />
+                <element signature="e#13732#13797#0" expanded="false" />
+                <element signature="e#13816#13853#0" expanded="false" />
+                <element signature="e#13877#13950#0" expanded="false" />
+                <element signature="e#13975#14028#0" expanded="false" />
+                <element signature="e#14050#14121#0" expanded="false" />
+                <element signature="e#14152#14520#0" expanded="false" />
+                <element signature="e#14558#14668#0" expanded="false" />
+                <element signature="e#14705#14814#0" expanded="false" />
+                <element signature="e#16124#17979#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="form.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/pages/tickets/form.js">
+      <file leaf-file-name="form.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/pages/servicecenters/form.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="43" column="57" lean-forward="false" selection-start-line="43" selection-start-column="57" selection-end-line="43" selection-end-column="57" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-564">
+              <caret line="12" column="6" lean-forward="false" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="45" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -46,23 +75,31 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/pages/tickets/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="477">
-              <caret line="257" column="61" lean-forward="false" selection-start-line="257" selection-start-column="44" selection-end-line="257" selection-end-column="61" />
+            <state relative-caret-position="-2970">
+              <caret line="140" column="8" lean-forward="false" selection-start-line="140" selection-start-column="8" selection-end-line="140" selection-end-column="8" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
-                <element signature="e#986#1907#0" expanded="false" />
-                <element signature="e#1953#2220#0" expanded="false" />
+                <element signature="e#1044#1965#0" expanded="false" />
+                <element signature="e#2011#2278#0" expanded="false" />
+                <element signature="e#2321#3121#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/pages/servicecenters/index.js">
+      <file leaf-file-name="form.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/pages/tickets/form.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="466">
-              <caret line="84" column="6" lean-forward="true" selection-start-line="55" selection-start-column="4" selection-end-line="84" selection-end-column="6" />
-              <folding />
+            <state relative-caret-position="294">
+              <caret line="108" column="39" lean-forward="false" selection-start-line="108" selection-start-column="39" selection-end-line="108" selection-end-column="39" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+                <element signature="e#7315#7750#0" expanded="false" />
+                <element signature="e#7768#8577#0" expanded="false" />
+                <element signature="e#8595#8843#0" expanded="false" />
+                <element signature="e#8890#9378#0" expanded="false" />
+                <element signature="e#9396#9794#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -78,7 +115,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>placeChan</find>
       <find>changePri</find>
       <find>ids</find>
       <find>fullSetStateFunc</find>
@@ -108,6 +144,7 @@
       <find>sea</find>
       <find>header</find>
       <find>logo</find>
+      <find>style</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -134,7 +171,6 @@
         <option value="$PROJECT_DIR$/app/index.js" />
         <option value="$USER_HOME$/AppData/Local/Temp/Rar$DIa0.790/styles.css" />
         <option value="$PROJECT_DIR$/app/pages/list.js" />
-        <option value="$PROJECT_DIR$/app/pages/servicecenters/index.js" />
         <option value="$PROJECT_DIR$/app/pages/main.js" />
         <option value="$PROJECT_DIR$/app/controls/layout.js" />
         <option value="$PROJECT_DIR$/../practice/Parctice/flex.html" />
@@ -143,9 +179,10 @@
         <option value="$PROJECT_DIR$/app/pages/getDate.js" />
         <option value="$PROJECT_DIR$/app/pages/search/index.js" />
         <option value="$PROJECT_DIR$/app/controls/navbar.js" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/index.js" />
         <option value="$PROJECT_DIR$/views/email.jade" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/app/pages/servicecenters/index.js" />
         <option value="$PROJECT_DIR$/app/pages/servicecenters/form.js" />
         <option value="$PROJECT_DIR$/app/pages/tickets/index.js" />
         <option value="$PROJECT_DIR$/app/pages/tickets/form.js" />
@@ -282,28 +319,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="servicecenters" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WarrantyServiceApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WarrantyServiceApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="search" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -341,16 +356,16 @@
     <property name="SearchEverywhereHistoryKey" value="lasname&#9;null&#9;null&#10;las&#9;null&#9;null" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="R:\GitHub\WarrantyServiceApp\app\controls" />
+      <recent name="R:\GitHub\WarrantyServiceApp\app" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="R:\GitHub\WarrantyServiceApp\app\pages\saerch" />
       <recent name="R:\GitHub\WarrantyServiceApp\app\pages\form" />
       <recent name="R:\GitHub\WarrantyServiceApp\app\pages\servicecenters" />
       <recent name="R:\GitHub\WarrantyServiceApp\app\controls" />
       <recent name="R:\GitHub\WarrantyServiceApp\app\pages" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="R:\GitHub\WarrantyServiceApp\app\controls" />
-      <recent name="R:\GitHub\WarrantyServiceApp\app" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -512,12 +527,12 @@
       <workItem from="1541650433370" duration="52543000" />
       <workItem from="1541770981217" duration="5425000" />
       <workItem from="1541937748305" duration="3063000" />
-      <workItem from="1541952631245" duration="4458000" />
+      <workItem from="1541952631245" duration="14835000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="622017000" />
+    <option name="totallyTimeSpent" value="632394000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -532,12 +547,12 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12802951" sideWeight="0.79765886" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12802951" sideWeight="0.79969186" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.49578503" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48160174" sideWeight="0.50842994" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35281384" sideWeight="0.4915701" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12802951" sideWeight="0.20234114" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29761904" sideWeight="0.4915701" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12802951" sideWeight="0.20030816" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973656" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33982685" sideWeight="0.49789253" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -861,45 +876,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="753" column="0" lean-forward="false" selection-start-line="753" selection-start-column="0" selection-end-line="753" selection-end-column="0" />
-          <folding>
-            <element signature="e#906#1086#0" expanded="false" />
-            <element signature="e#1920#2049#0" expanded="false" />
-            <element signature="e#2078#2149#0" expanded="false" />
-            <element signature="e#2164#2538#0" expanded="false" />
-            <element signature="e#2555#2692#0" expanded="false" />
-            <element signature="e#2717#2944#0" expanded="false" />
-            <element signature="e#2973#3196#0" expanded="false" />
-            <element signature="e#3232#3334#0" expanded="false" />
-            <element signature="e#7046#7295#0" expanded="false" />
-            <element signature="e#7558#7600#0" expanded="false" />
-            <element signature="e#7624#7668#0" expanded="false" />
-            <element signature="e#9975#10047#0" expanded="false" />
-            <element signature="e#10069#10141#0" expanded="false" />
-            <element signature="e#10163#10243#0" expanded="false" />
-            <element signature="e#13192#13231#0" expanded="false" />
-            <element signature="e#13251#13285#0" expanded="false" />
-            <element signature="e#13308#13350#0" expanded="false" />
-            <element signature="e#13372#13408#0" expanded="false" />
-            <element signature="e#13433#13469#0" expanded="false" />
-            <element signature="e#13491#13530#0" expanded="false" />
-            <element signature="e#13561#13638#0" expanded="false" />
-            <element signature="e#13659#13724#0" expanded="false" />
-            <element signature="e#13743#13780#0" expanded="false" />
-            <element signature="e#13804#13877#0" expanded="false" />
-            <element signature="e#13902#13955#0" expanded="false" />
-            <element signature="e#13977#14048#0" expanded="false" />
-            <element signature="e#14079#14447#0" expanded="false" />
-            <element signature="e#14485#14595#0" expanded="false" />
-            <element signature="e#14632#14741#0" expanded="false" />
-            <element signature="e#16051#17906#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="52">
@@ -926,38 +902,88 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/pages/servicecenters/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="84" column="6" lean-forward="true" selection-start-line="55" selection-start-column="4" selection-end-line="84" selection-end-column="6" />
-          <folding />
+        <state relative-caret-position="2366">
+          <caret line="171" column="59" lean-forward="false" selection-start-line="171" selection-start-column="59" selection-end-line="171" selection-end-column="59" />
+          <folding>
+            <element signature="n#!!block;n#componentDidMount#0;n#ServiceCentres#0" expanded="false" />
+            <element signature="e#2568#3476#0" expanded="false" />
+            <element signature="e#3523#3685#0" expanded="false" />
+            <element signature="e#3718#3905#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2453">
+          <caret line="516" column="28" lean-forward="false" selection-start-line="516" selection-start-column="28" selection-end-line="516" selection-end-column="28" />
+          <folding>
+            <element signature="e#906#1086#0" expanded="false" />
+            <element signature="e#1920#2049#0" expanded="false" />
+            <element signature="e#2078#2149#0" expanded="false" />
+            <element signature="e#2164#2538#0" expanded="false" />
+            <element signature="e#2555#2692#0" expanded="false" />
+            <element signature="e#2717#2944#0" expanded="false" />
+            <element signature="e#2973#3196#0" expanded="false" />
+            <element signature="e#3232#3334#0" expanded="false" />
+            <element signature="e#7046#7295#0" expanded="false" />
+            <element signature="e#7558#7600#0" expanded="false" />
+            <element signature="e#7624#7668#0" expanded="false" />
+            <element signature="e#9975#10047#0" expanded="false" />
+            <element signature="e#10069#10141#0" expanded="false" />
+            <element signature="e#10163#10243#0" expanded="false" />
+            <element signature="e#13265#13304#0" expanded="false" />
+            <element signature="e#13324#13358#0" expanded="false" />
+            <element signature="e#13381#13423#0" expanded="false" />
+            <element signature="e#13445#13481#0" expanded="false" />
+            <element signature="e#13506#13542#0" expanded="false" />
+            <element signature="e#13564#13603#0" expanded="false" />
+            <element signature="e#13634#13711#0" expanded="false" />
+            <element signature="e#13732#13797#0" expanded="false" />
+            <element signature="e#13816#13853#0" expanded="false" />
+            <element signature="e#13877#13950#0" expanded="false" />
+            <element signature="e#13975#14028#0" expanded="false" />
+            <element signature="e#14050#14121#0" expanded="false" />
+            <element signature="e#14152#14520#0" expanded="false" />
+            <element signature="e#14558#14668#0" expanded="false" />
+            <element signature="e#14705#14814#0" expanded="false" />
+            <element signature="e#16124#17979#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/pages/servicecenters/form.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1300">
-          <caret line="50" column="56" lean-forward="true" selection-start-line="50" selection-start-column="56" selection-end-line="50" selection-end-column="56" />
+        <state relative-caret-position="-564">
+          <caret line="12" column="6" lean-forward="false" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/pages/tickets/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="257" column="61" lean-forward="false" selection-start-line="257" selection-start-column="44" selection-end-line="257" selection-end-column="61" />
+        <state relative-caret-position="-2970">
+          <caret line="140" column="8" lean-forward="false" selection-start-line="140" selection-start-column="8" selection-end-line="140" selection-end-column="8" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
-            <element signature="e#986#1907#0" expanded="false" />
-            <element signature="e#1953#2220#0" expanded="false" />
+            <element signature="e#1044#1965#0" expanded="false" />
+            <element signature="e#2011#2278#0" expanded="false" />
+            <element signature="e#2321#3121#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/pages/tickets/form.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="43" column="57" lean-forward="false" selection-start-line="43" selection-start-column="57" selection-end-line="43" selection-end-column="57" />
+        <state relative-caret-position="294">
+          <caret line="108" column="39" lean-forward="false" selection-start-line="108" selection-start-column="39" selection-end-line="108" selection-end-column="39" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#7315#7750#0" expanded="false" />
+            <element signature="e#7768#8577#0" expanded="false" />
+            <element signature="e#8595#8843#0" expanded="false" />
+            <element signature="e#8890#9378#0" expanded="false" />
+            <element signature="e#9396#9794#0" expanded="false" />
           </folding>
         </state>
       </provider>

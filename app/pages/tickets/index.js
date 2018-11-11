@@ -17,7 +17,9 @@ class TicketsComponent extends Component {
 
         finishDate: '',
         daysLeft: '',
-        currentDate: ''
+        currentDate: '',
+        scListWasUpadted: '',
+        openFormNewSc: '',
     };
 
     getAllData() {
@@ -94,7 +96,6 @@ class TicketsComponent extends Component {
         }
     };
 
-
     insertServiceCenter = (saveData) => {
         fetch('/mongooseSCInsert', {
             method: 'post',
@@ -107,8 +108,8 @@ class TicketsComponent extends Component {
             }
         })
             .then(checkStatus)
-            /*.then(() => {this.getAllServiceCenters()})
-            .then(() => {this.setState({openformForCreate: false, newCs: true})}) */
+            .then(() => {this.setState({scListWasUpadted:true, openFormNewSc:false})})
+            /*.then(() => {this.setState({openformForCreate: false, newCs: true})}) */
             .then(() => console.log('new sc inserted'));
 
         function checkStatus(responsee) {
@@ -122,6 +123,12 @@ class TicketsComponent extends Component {
         }
     };
 
+    getAllServiceCenters = () => {
+        console.log('getAllServiceCenters');
+        fetch(`/mongooseGetDataSC`)
+            .then(res => res.json())
+            .then(json => this.setState({sc: json}));
+    };
 
     componentDidMount() {
         console.log('componentDidMount');
@@ -169,9 +176,6 @@ class TicketsComponent extends Component {
 
                             <div className={this.state.openTicketDescId !== ticket._id ? 'content_ticket' : 'content_ticket open'}
                                  style={this.state.openTicketDescId !== ticket._id ? {background: 'white'} : {background: '#550a5f'}}>
-
-
-
 
 
                                 <div className="ticket_flex1">
@@ -255,8 +259,12 @@ class TicketsComponent extends Component {
                                             saveButtonClick={(updatearg) => {
                                                 this.updateDataFunc(updatearg, ticket._id)
                                             }}
-                                            saveButtonClickSC={(newSC)=>{this.insertServiceCenter(newSC)}}
                                             deleteButtonClick={this.promtToDelete}
+
+                                            saveButtonClickSC={(newSC)=>{this.insertServiceCenter(newSC)}}
+                                            updateSpanClickSC={()=>{this.getAllServiceCenters()}}
+                                            scListWasUpdated={this.state.scListWasUpadted}
+                                            openFormNewSc={this.state.openFormNewSc}
 
                                         />
                                     </section>
