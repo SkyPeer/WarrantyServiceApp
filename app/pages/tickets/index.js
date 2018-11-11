@@ -18,8 +18,7 @@ class TicketsComponent extends Component {
         finishDate: '',
         daysLeft: '',
         currentDate: '',
-        scListWasUpadted: '',
-        openFormNewSc: '',
+        scListWasUpadted: false,
     };
 
     getAllData() {
@@ -94,6 +93,10 @@ class TicketsComponent extends Component {
                 throw error
             }
         }
+    };
+
+    scListWasUpadtedHideFunc = () => {
+        this.setState({scListWasUpadted: false})
     };
 
     insertServiceCenter = (saveData) => {
@@ -216,7 +219,7 @@ class TicketsComponent extends Component {
 
                                 <div className="ticket_flex3">
                                     <button className={this.state.openTicketDescId !== ticket._id ? 'ticketOpenCloseButton' : 'ticketOpenCloseButton open'} onClick={() => {
-                                        this.state.openTicketDescId !== ticket._id ? this.setState({openTicketDescId: ticket._id}) : this.setState({openTicketDescId: null})
+                                        this.state.openTicketDescId !== ticket._id ? this.setState({openTicketDescId: ticket._id, scListWasUpadted:false}) : this.setState({openTicketDescId: null, scListWasUpadted:false})
                                     }}>
                                         {this.state.openTicketDescId !== ticket._id ? 'Открыть' : 'Закрыть'}
                                     </button>
@@ -264,7 +267,8 @@ class TicketsComponent extends Component {
                                             saveButtonClickSC={(newSC)=>{this.insertServiceCenter(newSC)}}
                                             updateSpanClickSC={()=>{this.getAllServiceCenters()}}
                                             scListWasUpdated={this.state.scListWasUpadted}
-                                            openFormNewSc={this.state.openFormNewSc}
+                                            scListWasUpadtedHideFunc = {this.scListWasUpadtedHideFunc}
+
 
                                         />
                                     </section>

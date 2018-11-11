@@ -1808,7 +1808,11 @@ function (_Component) {
           key: sc._id,
           value: sc._id
         }, sc.scTitle);
-      })), this.state.serviceCenterDetails !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0421\u0426: "), this.state.serviceCenterDetails.scAdress, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432: "), " ", this.state.serviceCenterDetails.scVendors) : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      })), this.state.serviceCenterDetails !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0421\u0426: "), this.state.serviceCenterDetails.scAdress, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432: "), " ", this.state.serviceCenterDetails.scVendors) : ''), this.props.scListWasUpdated && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          _this2.props.scListWasUpadtedHideFunc();
+        }
+      }, "OK!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           !_this2.state.openFormNewSc ? _this2.setState({
             openFormNewSc: true
@@ -1818,7 +1822,7 @@ function (_Component) {
         }
       }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0441\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "ServiceCenterFormDiv"
-      }, this.props.scListWasUpdated && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D!"), this.state.openFormNewSc ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_servicecenters_form__WEBPACK_IMPORTED_MODULE_4__["ServiceCenterForm"], {
+      }, this.state.openFormNewSc ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_servicecenters_form__WEBPACK_IMPORTED_MODULE_4__["ServiceCenterForm"], {
         clickSaveFunc: function clickSaveFunc(arg) {
           return _this2.clickSaveSCFunc(arg);
         },
@@ -1965,8 +1969,7 @@ function (_Component) {
       finishDate: '',
       daysLeft: '',
       currentDate: '',
-      scListWasUpadted: '',
-      openFormNewSc: ''
+      scListWasUpadted: false
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "deleteData", function (id) {
@@ -2035,6 +2038,12 @@ function (_Component) {
           throw error;
         }
       }
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "scListWasUpadtedHideFunc", function () {
+      _this.setState({
+        scListWasUpadted: false
+      });
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "insertServiceCenter", function (saveData) {
@@ -2193,9 +2202,11 @@ function (_Component) {
           className: _this3.state.openTicketDescId !== ticket._id ? 'ticketOpenCloseButton' : 'ticketOpenCloseButton open',
           onClick: function onClick() {
             _this3.state.openTicketDescId !== ticket._id ? _this3.setState({
-              openTicketDescId: ticket._id
+              openTicketDescId: ticket._id,
+              scListWasUpadted: false
             }) : _this3.setState({
-              openTicketDescId: null
+              openTicketDescId: null,
+              scListWasUpadted: false
             });
           }
         }, _this3.state.openTicketDescId !== ticket._id ? 'Открыть' : 'Закрыть'))), ticket._id === _this3.state.openTicketDescId && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form__WEBPACK_IMPORTED_MODULE_6__["OpenFormComponent"], {
@@ -2238,7 +2249,7 @@ function (_Component) {
             _this3.getAllServiceCenters();
           },
           scListWasUpdated: _this3.state.scListWasUpadted,
-          openFormNewSc: _this3.state.openFormNewSc
+          scListWasUpadtedHideFunc: _this3.scListWasUpadtedHideFunc
         }))));
       })));
     }
