@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {render} from 'react-dom'
 import 'react-dropdown/style.css'
 import {Link} from 'react-router-dom';
+import {ServiceCenterForm} from '../servicecenters/form'
 const isNumber = require('is-number');
 const getDate = require('../getDate');
 
@@ -40,7 +41,7 @@ class OpenFormComponent extends Component {
     vendor=this.props.vendor;
     partNumber = this.props.partNumber;
 
-
+    /*saveButtonClickSC = this.props.saveButtonClickSC;*/
 
     fullSetStateFunc = () => {
         this.setState({
@@ -150,7 +151,9 @@ class OpenFormComponent extends Component {
                         <div><b>Адрес СЦ: </b>{this.state.serviceCenterDetails.scAdress} <b><br />
                             Авторизация вендоров: </b> {this.state.serviceCenterDetails.scVendors}</div> : ''}
                 </div>
-
+                <ServiceCenterForm
+                    clickSaveFunc={this.props.saveButtonClickSC}
+                />
                 <div>
                     <label>Ремонт: </label>
                     <select id="typeOfService" onChange={this.handleUserInput} value={this.state.typeOfService}>

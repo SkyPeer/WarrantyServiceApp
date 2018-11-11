@@ -28,7 +28,7 @@ class Navbar extends Component{
 
         return (
             <div id="navBar">
-            <div className="logo" >/LOGO/</div>
+            <div className="logo" >ServiceApp</div>
                 <div className="topnav" id="myTopnav">
                     <NavLink to="/" className={this.isActive('/')} >Главная</NavLink>
                     <NavLink to="/search" className={this.isActive('/search')}>Поиск</NavLink>

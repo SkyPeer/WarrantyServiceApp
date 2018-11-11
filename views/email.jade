@@ -6,5 +6,6 @@ html
         body
             h1.h1 Добрый день!
             p
-                strong !{subject} <br />
-                | для отслеживание статуса !{vendorProperty} воспользуйтесь ссылкой http://localhost:3000/search/!{otherProperty}
+                strong !{subject} !{vendorProperty} !{modelProperty} !{partnumberProperty} <br />
+                | Дефект: !{problemProperty}
+                | для отслеживание статуса  воспользуйтесь ссылкой https://api.arroway.cloud/search/!{otherProperty}

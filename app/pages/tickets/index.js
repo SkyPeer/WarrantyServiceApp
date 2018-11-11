@@ -94,6 +94,35 @@ class TicketsComponent extends Component {
         }
     };
 
+
+    insertServiceCenter = (saveData) => {
+        fetch('/mongooseSCInsert', {
+            method: 'post',
+            body: JSON.stringify({
+                ...saveData
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(checkStatus)
+            /*.then(() => {this.getAllServiceCenters()})
+            .then(() => {this.setState({openformForCreate: false, newCs: true})}) */
+            .then(() => console.log('new sc inserted'));
+
+        function checkStatus(responsee) {
+            if (responsee.status >= 200 && responsee.status < 300) {
+                return responsee
+            } else {
+                let error = new Error(response.statusText);
+                error.response = response;
+                throw error
+            }
+        }
+    };
+
+
     componentDidMount() {
         console.log('componentDidMount');
         this.getAllData();
@@ -108,7 +137,7 @@ class TicketsComponent extends Component {
     timerGetAllData = setInterval(() => {
         //console.log( "time" );
         this.getAllData()
-    }, 5000);
+    }, 10000);
 
 
     render() {
@@ -128,7 +157,7 @@ class TicketsComponent extends Component {
                         <button className="ticketDeleteMessage_button" onClick={() => {this.setState({ticketWasDeleted: false})}}>OK</button>
                     </div> }
                     </div>
-                    
+
                     {this.state.data.map((ticket) => (
                         <div key={ticket._id}>
 
@@ -226,6 +255,7 @@ class TicketsComponent extends Component {
                                             saveButtonClick={(updatearg) => {
                                                 this.updateDataFunc(updatearg, ticket._id)
                                             }}
+                                            saveButtonClickSC={(newSC)=>{this.insertServiceCenter(newSC)}}
                                             deleteButtonClick={this.promtToDelete}
 
                                         />

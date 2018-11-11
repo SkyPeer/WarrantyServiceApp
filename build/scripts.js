@@ -233,7 +233,7 @@ function (_Component) {
         id: "navBar"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "logo"
-      }, "/LOGO/"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "ServiceApp"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "topnav",
         id: "myTopnav"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
@@ -1248,7 +1248,7 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Form: add"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041D\u0430\u0437\u0430\u0432\u043D\u0438\u0435 \u0421\u0426!!: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Form: add"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041D\u0430\u0437\u0430\u0432\u043D\u0438\u0435 \u0421\u0426: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "scTitle",
         onChange: this.scChangeHandler,
         value: this.state.scTitle
@@ -1559,6 +1559,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dropdown_style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dropdown/style.css */ "./node_modules/react-dropdown/style.css");
 /* harmony import */ var react_dropdown_style_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dropdown_style_css__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _servicecenters_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../servicecenters/form */ "./app/pages/servicecenters/form.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -1580,6 +1581,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1776,7 +1778,9 @@ function (_Component) {
           key: sc._id,
           value: sc._id
         }, sc.scTitle);
-      })), this.state.serviceCenterDetails !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0421\u0426: "), this.state.serviceCenterDetails.scAdress, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432: "), " ", this.state.serviceCenterDetails.scVendors) : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0420\u0435\u043C\u043E\u043D\u0442: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      })), this.state.serviceCenterDetails !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0421\u0426: "), this.state.serviceCenterDetails.scAdress, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432: "), " ", this.state.serviceCenterDetails.scVendors) : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_servicecenters_form__WEBPACK_IMPORTED_MODULE_4__["ServiceCenterForm"], {
+        clickSaveFunc: this.props.saveButtonClickSC
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0420\u0435\u043C\u043E\u043D\u0442: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         id: "typeOfService",
         onChange: this.handleUserInput,
         value: this.state.typeOfService
@@ -1988,10 +1992,36 @@ function (_Component) {
       }
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "insertServiceCenter", function (saveData) {
+      fetch('/mongooseSCInsert', {
+        method: 'post',
+        body: JSON.stringify(_objectSpread({}, saveData)),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).then(checkStatus)
+      /*.then(() => {this.getAllServiceCenters()})
+      .then(() => {this.setState({openformForCreate: false, newCs: true})}) */
+      .then(function () {
+        return console.log('new sc inserted');
+      });
+
+      function checkStatus(responsee) {
+        if (responsee.status >= 200 && responsee.status < 300) {
+          return responsee;
+        } else {
+          var error = new Error(response.statusText);
+          error.response = response;
+          throw error;
+        }
+      }
+    });
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "timerGetAllData", setInterval(function () {
       //console.log( "time" );
       _this.getAllData();
-    }, 5000));
+    }, 10000));
 
     return _this;
   }
@@ -2139,6 +2169,9 @@ function (_Component) {
           typeOfServiceOptions: _props__WEBPACK_IMPORTED_MODULE_5__["typeOfServiceOptions"],
           saveButtonClick: function saveButtonClick(updatearg) {
             _this3.updateDataFunc(updatearg, ticket._id);
+          },
+          saveButtonClickSC: function saveButtonClickSC(newSC) {
+            _this3.insertServiceCenter(newSC);
           },
           deleteButtonClick: _this3.promtToDelete
         }))));

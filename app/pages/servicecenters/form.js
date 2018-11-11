@@ -30,7 +30,7 @@ class ServiceCenterForm extends Component {
             <div>
                 <hr />
                 <h4>Form: add</h4>
-                <label>Назавние СЦ!!: </label>
+                <label>Назавние СЦ: </label>
                 <input id='scTitle'
                        onChange={this.scChangeHandler} value={this.state.scTitle}
                 />
