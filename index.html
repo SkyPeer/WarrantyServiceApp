@@ -133,10 +133,101 @@
             /*z-index: auto; */
         }
 
+        #additionalMenu {
+            position: relative;
+            background-color: #4e5d62;
+            padding: 16px;
+            height: auto;
+            overflow: hidden;
+        }
+
+        #additionalMenu * {
+            left: 100%;
+            float: right;
+            /*display: inline-block; */
+            /*float: right;*/
+        }
 
         h1 {
             background-color: green;
         }
+
+
+
+
+        .serviceCenterS {
+            /*background-color: #550a5f;*/
+        }
+        .serviceCenter {
+            /*padding: 16px;*/
+            /*border: dotted 2px red; */
+            border-bottom: dotted 1px #550a5f;
+            /*margin-bottom: 10px;*/
+            line-height: 1.6;
+            color: #424242;
+        }
+
+
+        .serviceCenter div b {
+            color: #550a5f;
+        }
+
+        .serviceCenter .scMain{
+            padding: 16px 16px 4px 16px
+        }
+
+        .serviceCenter.edit{
+            border: dotted 1px #550a5f;
+            border-radius: 0 0 10px 10px;
+        }
+        .serviceCenter.edit .scMain {
+            background-color: #550a5f;
+            color: white
+        }
+        .serviceCenter.edit .scMain div b {
+            color: white;
+        }
+
+        .ServiceCenterFormOpen{
+            /*padding-left: 16px;
+            padding-right: 16px;*/
+            padding: 8px 16px 8px 16px;
+        }
+
+        .scForm label {
+            color: #550a5f;
+        }
+        .scForm input {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .editScButton{
+            border: 2px dotted;
+            border-color: #550a5f;
+            color: #550a5f;
+            border-radius: 5px;
+            background-color: white;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin: 10px 15px 0 0;
+        }
+
+        .editScButton:hover{
+            background-color: #550a5f;
+            color: white;
+            transition: all 0.2s;
+        }
+
+
+
+
+
+
+
+
 
 
         #createTicketForm{
@@ -274,7 +365,6 @@
             box-sizing: border-box;
         }
 
-
         textarea {
             outline: none;
             display: block;
@@ -326,7 +416,6 @@
             transform: translateY(-50%);
         }
 
-
         .ticketUpdateMessage_button{
             /*display: inline-block; */
             width: 88px;
@@ -348,7 +437,6 @@
             color: white;
         }
 
-
         .ticketDeleteMessage {
             position: relative;
             width: 100%;
@@ -358,7 +446,6 @@
             /*background-color: green;*/
             color: red;
             /*text-align: center; */
-
             /*flex: none; */
         }
 
@@ -369,8 +456,6 @@
             top: 50%;
             transform: translateY(-50%);
         }
-
-
         .ticketDeleteMessage_button{
             /*display: inline-block; */
             width: 88px;
@@ -391,9 +476,6 @@
             border: 2px dotted red;
             color: white;
         }
-
-
-
 
         .ticket_flex1{
             /*margin: 10px;*/

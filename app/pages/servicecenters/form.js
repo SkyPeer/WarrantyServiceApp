@@ -28,9 +28,7 @@ class ServiceCenterForm extends Component {
     render() {
         return (
 
-            <div>
-                <hr />
-                <h4>Сервисный центр</h4>
+            <div className="scForm">
                 <label>Назавние СЦ: </label>
                 <input id='scTitle'
                        onChange={this.scChangeHandler} value={this.state.scTitle}
@@ -42,26 +40,24 @@ class ServiceCenterForm extends Component {
                        value={this.state.scVendors}
                 />
 
-                <label>Адрес и контактная информация</label>
+                <label>Адрес и контактная информация: </label>
                 <input id="scAdress"
                        onChange={this.scChangeHandler}
                        value={this.state.scAdress}
                 />
 
-                <button onClick={ () => {
+                <button className="openDescForm_form_button save" onClick={ () => {
                     this.props.clickSaveFunc(this.state)
                 } }>Сохранить
                 </button>
-                <button style={this.props.deleteResetButtonsEnabled ? {display: ''}: {display:'none'}} onClick={() => {
+                <button className="openDescForm_form_button reset" style={this.props.deleteResetButtonsEnabled ? {display: ''}: {display:'none'}} onClick={() => {
                     this.getState()
                 }}>Сбросить
                 </button>
-                <button style={this.props.deleteResetButtonsEnabled ? {display: ''}: {display:'none'}} onClick={ () => {
+                <button className="openDescForm_form_button delete" style={this.props.deleteResetButtonsEnabled ? {display: ''}: {display:'none'}} onClick={ () => {
                     this.props.clickDelFunc(this.state._id)
                 } }>Удалить СЦ
                 </button>
-
-                <hr />
             </div>
         )
     }

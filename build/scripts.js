@@ -1249,7 +1249,9 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041D\u0430\u0437\u0430\u0432\u043D\u0438\u0435 \u0421\u0426: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "scForm"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041D\u0430\u0437\u0430\u0432\u043D\u0438\u0435 \u0421\u0426: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "scTitle",
         onChange: this.scChangeHandler,
         value: this.state.scTitle
@@ -1257,15 +1259,17 @@ function (_Component) {
         id: "scVendors",
         onChange: this.scChangeHandler,
         value: this.state.scVendors
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0410\u0434\u0440\u0435\u0441 \u0438 \u043A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u0430\u044F \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0410\u0434\u0440\u0435\u0441 \u0438 \u043A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u0430\u044F \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "scAdress",
         onChange: this.scChangeHandler,
         value: this.state.scAdress
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "openDescForm_form_button save",
         onClick: function onClick() {
           _this2.props.clickSaveFunc(_this2.state);
         }
       }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "openDescForm_form_button reset",
         style: this.props.deleteResetButtonsEnabled ? {
           display: ''
         } : {
@@ -1275,6 +1279,7 @@ function (_Component) {
           _this2.getState();
         }
       }, "\u0421\u0431\u0440\u043E\u0441\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "openDescForm_form_button delete",
         style: this.props.deleteResetButtonsEnabled ? {
           display: ''
         } : {
@@ -1283,7 +1288,7 @@ function (_Component) {
         onClick: function onClick() {
           _this2.props.clickDelFunc(_this2.state._id);
         }
-      }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0421\u0426"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
+      }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0421\u0426"));
     }
   }]);
 
@@ -1503,47 +1508,57 @@ function (_Component) {
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "header_title"
-      }, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0435 \u0446\u0435\u043D\u0442\u0440\u044B")), this.state.newCs ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041D\u043E\u0432\u044B\u0439 \u0441\u0435\u0440\u0432\u0438\u0441-\u0446\u0435\u043D\u0442\u0440 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D! ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0435 \u0446\u0435\u043D\u0442\u0440\u044B")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "additionalMenu"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          _this2.state.openformForCreate ? _this2.setState({
+            openformForCreate: false
+          }) : _this2.setState({
+            openformForCreate: true
+          });
+        }
+      }, this.state.openformForCreate ? 'Свернуть' : 'Добавить сервисный центр ')), this.state.newCs ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041D\u043E\u0432\u044B\u0439 \u0441\u0435\u0440\u0432\u0438\u0441-\u0446\u0435\u043D\u0442\u0440 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D! ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         onClick: function onClick() {
           _this2.setState({
             newCs: false
           });
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "- \u0421\u043A\u0440\u044B\u0442\u044C -"))) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          _this2.setState({
-            openformForCreate: true
-          });
-        }
-      }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0441\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          _this2.setState({
-            openformForCreate: false
-          });
-        }
-      }, "\u0417\u0430\u043A\u0440\u044B\u0442\u044C"), this.state.openformForCreate && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form__WEBPACK_IMPORTED_MODULE_2__["ServiceCenterForm"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "- \u0421\u043A\u0440\u044B\u0442\u044C -"))) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, this.state.openformForCreate && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form__WEBPACK_IMPORTED_MODULE_2__["ServiceCenterForm"], {
         clickSaveFunc: this.insertServiceCenter
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.sc.map(function (serviceCenter) {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "serviceCenterS"
+      }, this.state.sc.map(function (serviceCenter) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: _this2.state.openformForEdit !== serviceCenter._id ? 'serviceCenter' : 'serviceCenter edit',
           key: serviceCenter._id
-        }, _this2.state.idOfupdatedSC === serviceCenter._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " \u0414\u0430\u043D\u043D\u044B\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u044B! "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0426\u0435\u043D\u0442\u0440: "), serviceCenter.scTitle, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u041E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u0435\u0442: "), serviceCenter.scVendors), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0438 \u043A\u043E\u043D\u0442\u0430\u043A\u0442\u044B: "), serviceCenter.scAdress), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, _this2.state.idOfupdatedSC === serviceCenter._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " \u0414\u0430\u043D\u043D\u044B\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u044B! "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "scMain"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "scTitle"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0426\u0435\u043D\u0442\u0440: "), serviceCenter.scTitle), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "scVendors"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u041E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u0435\u0442: "), serviceCenter.scVendors), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "scAdress"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0438 \u043A\u043E\u043D\u0442\u0430\u043A\u0442\u044B: "), serviceCenter.scAdress), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "editScButton",
           onClick: function onClick() {
-            _this2.setState({
+            _this2.state.openformForEdit !== serviceCenter._id ? _this2.setState({
               openformForEdit: serviceCenter._id
+            }) : _this2.setState({
+              openformForEdit: null
             });
           }
-        }, "\u0420\u0435\u0434\u0430\u043A\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0421\u0426"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          onClick: function onClick() {
-            _this2.setState({
-              openformForEdit: ''
-            });
-          }
-        }, "\u0417\u0430\u043A\u0440\u044B\u0442\u044C"), _this2.state.openformForEdit === serviceCenter._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form__WEBPACK_IMPORTED_MODULE_2__["ServiceCenterForm"], _extends({
+        }, _this2.state.openformForEdit !== serviceCenter._id ? 'Редактировать СЦ' : 'Закрыть')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "ServiceCenterFormOpen"
+        }, _this2.state.openformForEdit === serviceCenter._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form__WEBPACK_IMPORTED_MODULE_2__["ServiceCenterForm"], _extends({
           clickSaveFunc: _this2.updateSericeCenter,
           clickDelFunc: _this2.deleteHandler,
           deleteResetButtonsEnabled: true
-        }, serviceCenter)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
-      })));
+        }, serviceCenter))));
+      }))));
     }
   }]);
 

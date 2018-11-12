@@ -131,50 +131,50 @@ class ServiceCentres extends Component {
         return (
             <Layout>
                 <header><div className="header_title">Сервисные центры</div></header>
+
+
+                <div id="additionalMenu">
+                        <button onClick={() => {this.state.openformForCreate ? this.setState({openformForCreate: false}) : this.setState({openformForCreate: true})}}>
+                            {this.state.openformForCreate ? 'Свернуть' : 'Добавить сервисный центр '}
+                        </button>
+                </div>
+
                 {this.state.newCs ? <div>Новый сервис-центр добавлен! <p onClick={() => {
                     this.setState({newCs: false})
                 }}><b>- Скрыть -</b></p></div> : ''}
 
-                <button onClick={() => {
-                    this.setState({openformForCreate: true})
-                }}>Добавить сервисный центр
-                </button>
-
-                <button onClick={() => {
-                    this.setState({openformForCreate: false})
-                }}>Закрыть
-                </button>
-
+                <div className="content">
                 {this.state.openformForCreate && <ServiceCenterForm clickSaveFunc={this.insertServiceCenter}/> }
 
-                <div>{this.state.sc.map(serviceCenter => (
-                    <div key={serviceCenter._id}>
-                        {this.state.idOfupdatedSC === serviceCenter._id && <div> Данные обновлены! </div>}<b>Сервисный
-                        Центр: </b>{serviceCenter.scTitle}
-                        <p><b>Обслуживает: </b>{serviceCenter.scVendors}</p>
-                        <p><b>Адрес и контакты: </b>{serviceCenter.scAdress}</p>
+                <div className="serviceCenterS">{this.state.sc.map(serviceCenter => (
+                    <div className={this.state.openformForEdit !== serviceCenter._id ? 'serviceCenter': 'serviceCenter edit'}
+                         key={serviceCenter._id}>
+                        {this.state.idOfupdatedSC === serviceCenter._id && <div> Данные обновлены! </div>}
+                        <div className="scMain">
 
-                        <button onClick={() => {
-                            this.setState({openformForEdit: serviceCenter._id})
-                        }}>Редакктировать СЦ
-                        </button>
+                            <div className="scTitle"><b>Сервисный Центр: </b>{serviceCenter.scTitle}</div>
+                            <div className="scVendors"><b>Обслуживает: </b>{serviceCenter.scVendors}</div>
+                            <div className="scAdress"><b>Адрес и контакты: </b>{serviceCenter.scAdress}</div>
 
-                        <button onClick={() => {
-                            this.setState({openformForEdit: ''})
-                        }}>Закрыть
-                        </button>
+                                <button className="editScButton" onClick={() => {
+                                    this.state.openformForEdit !== serviceCenter._id ? this.setState({openformForEdit: serviceCenter._id}) : this.setState({openformForEdit: null})}}>
+                                    {this.state.openformForEdit !== serviceCenter._id ? 'Редактировать СЦ' : 'Закрыть'}
+                                </button>
+                        </div>
 
+                        <div className="ServiceCenterFormOpen">
+                            {this.state.openformForEdit === serviceCenter._id &&
+                            <ServiceCenterForm
+                                clickSaveFunc={this.updateSericeCenter}
+                                clickDelFunc={this.deleteHandler}
+                                deleteResetButtonsEnabled={true}
+                                {...serviceCenter}
+                            /> }
+                        </div>
 
-                        {this.state.openformForEdit === serviceCenter._id &&
-                        <ServiceCenterForm
-                            clickSaveFunc={this.updateSericeCenter}
-                            clickDelFunc={this.deleteHandler}
-                            deleteResetButtonsEnabled={true}
-                            {...serviceCenter}
-                        /> }
-                        <hr />
                     </div>
                 ))}
+                </div>
                 </div>
             </Layout>
         )
