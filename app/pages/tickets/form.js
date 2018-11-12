@@ -163,8 +163,14 @@ class OpenFormComponent extends Component {
                         <div><b>Адрес СЦ: </b>{this.state.serviceCenterDetails.scAdress} <b><br />
                             Авторизация вендоров: </b> {this.state.serviceCenterDetails.scVendors}</div> : ''}
                 </div>
-                    {this.props.scListWasUpdated && <div><b>Сервисный центр добавлен!</b><button onClick={()=>{this.props.scListWasUpadtedHideFunc()}}>OK!</button></div>}
-                    <button onClick={()=>{!this.state.openFormNewSc ? this.setState({openFormNewSc:true}) : this.setState({openFormNewSc:false})}}>
+                    {this.props.scListWasUpdated && <div className="ticketUpdateMessage">
+                        <div className="ticketUpdateMessage_text" style={{marginLeft: '15px'}}>Новый сервис-центр добавлен!</div>
+                        <button className="ticketUpdateMessage_button" onClick={() => {
+                            this.props.scListWasUpadtedHideFunc()}}>ОК!</button></div>}
+
+
+                    <button className="addScButtononForm"
+                            onClick={()=>{!this.state.openFormNewSc ? this.setState({openFormNewSc:true}) : this.setState({openFormNewSc:false})}}>
                         Добавить сервисный центр
                     </button>
                     <div className="ServiceCenterFormDiv">

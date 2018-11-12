@@ -134,17 +134,24 @@ class ServiceCentres extends Component {
 
 
                 <div id="additionalMenu">
-                        <button onClick={() => {this.state.openformForCreate ? this.setState({openformForCreate: false}) : this.setState({openformForCreate: true})}}>
+                        <button className={this.state.openformForCreate ? 'addScButton selected' : 'addScButton'} onClick={() => {this.state.openformForCreate ? this.setState({openformForCreate: false}) : this.setState({openformForCreate: true})}}>
                             {this.state.openformForCreate ? 'Свернуть' : 'Добавить сервисный центр '}
                         </button>
                 </div>
 
-                {this.state.newCs ? <div>Новый сервис-центр добавлен! <p onClick={() => {
-                    this.setState({newCs: false})
-                }}><b>- Скрыть -</b></p></div> : ''}
+
 
                 <div className="content">
-                {this.state.openformForCreate && <ServiceCenterForm clickSaveFunc={this.insertServiceCenter}/> }
+
+                    {this.state.newCs ?
+                        <div className="ticketUpdateMessage"><div className="ticketUpdateMessage_text">Новый сервис-центр добавлен!</div>
+                            <button className="ticketUpdateMessage_button" onClick={() => {
+                                this.setState({newCs: false})}}>ОК!</button></div> : ''}
+
+                    <div className="addScForm">
+                        {this.state.openformForCreate && <div className="addScFormOpened"><ServiceCenterForm clickSaveFunc={this.insertServiceCenter}/></div> }
+                    </div>
+
 
                 <div className="serviceCenterS">{this.state.sc.map(serviceCenter => (
                     <div className={this.state.openformForEdit !== serviceCenter._id ? 'serviceCenter': 'serviceCenter edit'}
@@ -156,7 +163,7 @@ class ServiceCentres extends Component {
                             <div className="scVendors"><b>Обслуживает: </b>{serviceCenter.scVendors}</div>
                             <div className="scAdress"><b>Адрес и контакты: </b>{serviceCenter.scAdress}</div>
 
-                                <button className="editScButton" onClick={() => {
+                                <button className={this.state.openformForEdit !== serviceCenter._id ? 'editScButton' : 'editScButton selected'} onClick={() => {
                                     this.state.openformForEdit !== serviceCenter._id ? this.setState({openformForEdit: serviceCenter._id}) : this.setState({openformForEdit: null})}}>
                                     {this.state.openformForEdit !== serviceCenter._id ? 'Редактировать СЦ' : 'Закрыть'}
                                 </button>

@@ -136,7 +136,7 @@
         #additionalMenu {
             position: relative;
             background-color: #4e5d62;
-            padding: 16px;
+            padding: 8px 16px;
             height: auto;
             overflow: hidden;
         }
@@ -182,7 +182,8 @@
         }
         .serviceCenter.edit .scMain {
             background-color: #550a5f;
-            color: white
+            color: white;
+            padding-bottom: 16px;
         }
         .serviceCenter.edit .scMain div b {
             color: white;
@@ -220,8 +221,51 @@
             color: white;
             transition: all 0.2s;
         }
+        .editScButton.selected{
+            background-color: #550a5f;
+            color: white;
+            transition: all 0.2s;
+        }
 
 
+        .addScForm {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+
+        .addScButton{
+            border: 2px dotted;
+            border-color: #ffffff;
+            color: #ffffff;
+            border-radius: 5px;
+            background-color: #4e5d62;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            /*margin: 10px 15px 0 0*/;
+        }
+
+        .addScButton:hover{
+            color: #ffffff;
+            background-color: #550a5f;
+            cursor: pointer;
+            transition: all 0.2s;
+            /*margin: 10px 15px 0 0*/;
+        }
+
+        .addScButton.selected{
+            color: #ffffff;
+            background-color: #550a5f;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+
+
+        .addScFormOpened{
+            border-bottom: dotted 1px #550a5f;
+        }
 
 
 
@@ -613,6 +657,24 @@
             width: 100%;
         }
 
+        .addScButtononForm{
+            border: 2px dotted;
+            border-color: #550a5f;
+            color: #550a5f;
+            border-radius: 5px;
+            background-color: white;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin: 0 0 10px 0;
+        }
+        .addScButtononForm:hover{
+            background-color: #550a5f;
+            color: white;
+            transition: all 0.2s;
+        }
+
 
         .status_new{
             color: #d80ae2;
@@ -815,6 +877,9 @@
                 width: 100%;
             }
             .openDescForm_form_button{
+                width: 100%;
+            }
+            .addScButtononForm{
                 width: 100%;
             }
             .openDescForm_form div{

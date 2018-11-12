@@ -1254,15 +1254,18 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041D\u0430\u0437\u0430\u0432\u043D\u0438\u0435 \u0421\u0426: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "scTitle",
         onChange: this.scChangeHandler,
-        value: this.state.scTitle
+        value: this.state.scTitle,
+        placeholder: "\u0412\u0435\u0435\u0434\u0438\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0421\u0426"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u041F\u0435\u0440\u0435\u0447\u0435\u043D\u044C \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u0435\u043C\u044B\u0445 \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "scVendors",
         onChange: this.scChangeHandler,
-        value: this.state.scVendors
+        value: this.state.scVendors,
+        placeholder: "\u041F\u0435\u0440\u0435\u0447\u0438\u0441\u043B\u0438\u0442\u0435 \u0438\u043C\u0435\u044E\u0449\u0443\u044E\u0441\u044F \u0430\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044E \u0443 \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0410\u0434\u0440\u0435\u0441 \u0438 \u043A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u0430\u044F \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "scAdress",
         onChange: this.scChangeHandler,
-        value: this.state.scAdress
+        value: this.state.scAdress,
+        placeholder: "\u0423\u0442\u043E\u0447\u043D\u0438\u0435 \u043A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u0443\u044E \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438, \u0410\u0434\u0440\u0435\u0441, \u0442\u0435\u043B\u0435\u0444\u043E\u043D, \u0441\u0430\u0439\u0442, \u043F\u043E\u0447\u0442\u0443, \u043A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u043E\u0435 \u043B\u0438\u0446\u043E"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "openDescForm_form_button save",
         onClick: function onClick() {
@@ -1511,6 +1514,7 @@ function (_Component) {
       }, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0435 \u0446\u0435\u043D\u0442\u0440\u044B")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "additionalMenu"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: this.state.openformForCreate ? 'addScButton selected' : 'addScButton',
         onClick: function onClick() {
           _this2.state.openformForCreate ? _this2.setState({
             openformForCreate: false
@@ -1518,17 +1522,26 @@ function (_Component) {
             openformForCreate: true
           });
         }
-      }, this.state.openformForCreate ? 'Свернуть' : 'Добавить сервисный центр ')), this.state.newCs ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u041D\u043E\u0432\u044B\u0439 \u0441\u0435\u0440\u0432\u0438\u0441-\u0446\u0435\u043D\u0442\u0440 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D! ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, this.state.openformForCreate ? 'Свернуть' : 'Добавить сервисный центр ')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, this.state.newCs ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "ticketUpdateMessage"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "ticketUpdateMessage_text"
+      }, "\u041D\u043E\u0432\u044B\u0439 \u0441\u0435\u0440\u0432\u0438\u0441-\u0446\u0435\u043D\u0442\u0440 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "ticketUpdateMessage_button",
         onClick: function onClick() {
           _this2.setState({
             newCs: false
           });
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "- \u0421\u043A\u0440\u044B\u0442\u044C -"))) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "content"
-      }, this.state.openformForCreate && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form__WEBPACK_IMPORTED_MODULE_2__["ServiceCenterForm"], {
+      }, "\u041E\u041A!")) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "addScForm"
+      }, this.state.openformForCreate && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "addScFormOpened"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form__WEBPACK_IMPORTED_MODULE_2__["ServiceCenterForm"], {
         clickSaveFunc: this.insertServiceCenter
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "serviceCenterS"
       }, this.state.sc.map(function (serviceCenter) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1543,7 +1556,7 @@ function (_Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u041E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u0435\u0442: "), serviceCenter.scVendors), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "scAdress"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0438 \u043A\u043E\u043D\u0442\u0430\u043A\u0442\u044B: "), serviceCenter.scAdress), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          className: "editScButton",
+          className: _this2.state.openformForEdit !== serviceCenter._id ? 'editScButton' : 'editScButton selected',
           onClick: function onClick() {
             _this2.state.openformForEdit !== serviceCenter._id ? _this2.setState({
               openformForEdit: serviceCenter._id
@@ -1823,11 +1836,20 @@ function (_Component) {
           key: sc._id,
           value: sc._id
         }, sc.scTitle);
-      })), this.state.serviceCenterDetails !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0421\u0426: "), this.state.serviceCenterDetails.scAdress, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432: "), " ", this.state.serviceCenterDetails.scVendors) : ''), this.props.scListWasUpdated && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      })), this.state.serviceCenterDetails !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u0410\u0434\u0440\u0435\u0441 \u0421\u0426: "), this.state.serviceCenterDetails.scAdress, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F \u0432\u0435\u043D\u0434\u043E\u0440\u043E\u0432: "), " ", this.state.serviceCenterDetails.scVendors) : ''), this.props.scListWasUpdated && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "ticketUpdateMessage"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "ticketUpdateMessage_text",
+        style: {
+          marginLeft: '15px'
+        }
+      }, "\u041D\u043E\u0432\u044B\u0439 \u0441\u0435\u0440\u0432\u0438\u0441-\u0446\u0435\u043D\u0442\u0440 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "ticketUpdateMessage_button",
         onClick: function onClick() {
           _this2.props.scListWasUpadtedHideFunc();
         }
-      }, "OK!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "\u041E\u041A!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "addScButtononForm",
         onClick: function onClick() {
           !_this2.state.openFormNewSc ? _this2.setState({
             openFormNewSc: true
@@ -2151,6 +2173,16 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_controls_layout__WEBPACK_IMPORTED_MODULE_4__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "header_title"
       }, "\u0417\u0430\u044F\u0432\u043A\u0438 \u043D\u0430 \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u0435")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "additionalMenu"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "addScButton"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        style: {
+          color: 'white',
+          textDecoration: 'none'
+        },
+        to: "/servicecenters"
+      }, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0435 \u0426\u0435\u043D\u0442\u0440\u044B"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "content"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.ticketWasDeleted && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "ticketDeleteMessage"

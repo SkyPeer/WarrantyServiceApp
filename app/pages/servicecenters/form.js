@@ -31,19 +31,23 @@ class ServiceCenterForm extends Component {
             <div className="scForm">
                 <label>Назавние СЦ: </label>
                 <input id='scTitle'
-                       onChange={this.scChangeHandler} value={this.state.scTitle}
+                       onChange={this.scChangeHandler}
+                       value={this.state.scTitle}
+                       placeholder="Веедие название СЦ"
                 />
 
                 <label>Перечень обслуживаемых вендоров: </label>
                 <input id="scVendors"
                        onChange={this.scChangeHandler}
                        value={this.state.scVendors}
+                       placeholder="Перечислите имеющуюся авторизацию у вендоров"
                 />
 
                 <label>Адрес и контактная информация: </label>
                 <input id="scAdress"
                        onChange={this.scChangeHandler}
                        value={this.state.scAdress}
+                       placeholder="Уточние контактную информаци, Адрес, телефон, сайт, почту, контактное лицо"
                 />
 
                 <button className="openDescForm_form_button save" onClick={ () => {

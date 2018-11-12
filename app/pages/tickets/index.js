@@ -156,10 +156,16 @@ class TicketsComponent extends Component {
                 <header>
                     <div className="header_title">Заявки на обслуживание</div>
                 </header>
-
+                <div id="additionalMenu">
+                    <div className='addScButton'>
+                        <Link style={{color: 'white', textDecoration: 'none'}} to="/servicecenters">Сервисные Центры</Link>
+                    </div>
+                </div>
 
 
                 <div className="content">
+
+
 
                     <div>{this.state.ticketWasDeleted &&
                     <div className="ticketDeleteMessage">
