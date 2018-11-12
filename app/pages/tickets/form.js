@@ -131,8 +131,7 @@ class OpenFormComponent extends Component {
 
                 <div className="openDescForm_problem">
 
-                    <div>Оборудование: <b>{this.vendor +' '+ this.model + '  P/N: ' + this.partNumber}</b><br />
-                        <Link to={'/tickets/' + this.partNumber}>Посмотреть другие заявки с <b>{this.model} {this.partNumber}</b></Link></div>
+                    <div>Оборудование: <b>{this.vendor +' '+ this.model + '  P/N: ' + this.partNumber}</b><br /></div>
                         <div>Причина: {this.props.problem}</div>
                         <div>Код проекта: {this.props.projectCode}</div>
                         <div>Местонахождение оборудования: {this.place !== 5 ? ' ' + this.placeOptions[this.place].label + ' ' : ' ' + this.placeAnother + ' '}</div>

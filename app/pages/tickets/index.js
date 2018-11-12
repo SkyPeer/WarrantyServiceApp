@@ -111,7 +111,9 @@ class TicketsComponent extends Component {
             }
         })
             .then(checkStatus)
-            .then(() => {this.setState({scListWasUpadted:true, openFormNewSc:false})})
+            .then(() => {
+                this.setState({scListWasUpadted: true, openFormNewSc: false})
+            })
             /*.then(() => {this.setState({openformForCreate: false, newCs: true})}) */
             .then(() => console.log('new sc inserted'));
 
@@ -158,19 +160,20 @@ class TicketsComponent extends Component {
                 </header>
                 <div id="additionalMenu">
                     <div className='addScButton'>
-                        <Link style={{color: 'white', textDecoration: 'none'}} to="/servicecenters">Сервисные Центры</Link>
+                        <Link style={{color: 'white', textDecoration: 'none'}} to="/servicecenters">Сервисные
+                            Центры</Link>
                     </div>
                 </div>
 
-
                 <div className="content">
-
-
 
                     <div>{this.state.ticketWasDeleted &&
                     <div className="ticketDeleteMessage">
                         <div className="ticketDeleteMessage_text">Заявка удалена!</div>
-                        <button className="ticketDeleteMessage_button" onClick={() => {this.setState({ticketWasDeleted: false})}}>OK</button>
+                        <button className="ticketDeleteMessage_button" onClick={() => {
+                            this.setState({ticketWasDeleted: false})
+                        }}>OK
+                        </button>
                     </div> }
                     </div>
 
@@ -178,18 +181,24 @@ class TicketsComponent extends Component {
                         <div key={ticket._id}>
 
                             <div>{this.state.idOfupdatedTicket === ticket._id &&
-                            <div className="ticketUpdateMessage"><span className="ticketUpdateMessage_text"> Заявка № {ticket.ticketNumber} <b>обновлена!</b> </span>
-                                <button className="ticketUpdateMessage_button" onClick={() => {this.setState({idOfupdatedTicket: null})} }>OK</button>
+                            <div className="ticketUpdateMessage"><span
+                                className="ticketUpdateMessage_text"> Заявка № {ticket.ticketNumber} <b>обновлена!</b> </span>
+                                <button className="ticketUpdateMessage_button" onClick={() => {
+                                    this.setState({idOfupdatedTicket: null})
+                                } }>OK
+                                </button>
                             </div>}</div>
 
 
-                            <div className={this.state.openTicketDescId !== ticket._id ? 'content_ticket' : 'content_ticket open'}
-                                 style={this.state.openTicketDescId !== ticket._id ? {background: 'white'} : {background: '#550a5f'}}>
+                            <div
+                                className={this.state.openTicketDescId !== ticket._id ? 'content_ticket' : 'content_ticket open'}
+                                style={this.state.openTicketDescId !== ticket._id ? {background: 'white'} : {background: '#550a5f'}}>
 
 
                                 <div className="ticket_flex1">
-                                    <div style={this.state.openTicketDescId !== ticket._id ? {color: '#550a5f'} : {color: 'white'} }
-                                         className={ticket.status !== 4 ? 'ticketNumber' : 'ticketNumber_canceled' }>
+                                    <div
+                                        style={this.state.openTicketDescId !== ticket._id ? {color: '#550a5f'} : {color: 'white'} }
+                                        className={ticket.status !== 4 ? 'ticketNumber' : 'ticketNumber_canceled' }>
                                         Заявка № <b>{' ' + ticket.ticketNumber}</b>
                                     </div>
 
@@ -212,7 +221,9 @@ class TicketsComponent extends Component {
                                             ticket.daysForService && <div className="daysForService">
                                                 <div className="finishDate">
                                                     Завершение: {getDate(this.state.currentDate, ticket.ticketDate, ticket.daysForService).finishDate}
-                                                    <span className="daysForService"> осталось: {getDate(this.state.currentDate, ticket.ticketDate, ticket.daysForService).daysLeftLocal} дн.</span>
+                                                    <span
+                                                        className="daysForService"> осталось: {getDate(this.state.currentDate, ticket.ticketDate, ticket.daysForService).daysLeftLocal}
+                                                        дн.</span>
                                                 </div>
 
                                             </div>
@@ -224,9 +235,14 @@ class TicketsComponent extends Component {
                                 </div>
 
                                 <div className="ticket_flex3">
-                                    <button className={this.state.openTicketDescId !== ticket._id ? 'ticketOpenCloseButton' : 'ticketOpenCloseButton open'} onClick={() => {
-                                        this.state.openTicketDescId !== ticket._id ? this.setState({openTicketDescId: ticket._id, scListWasUpadted:false}) : this.setState({openTicketDescId: null, scListWasUpadted:false})
-                                    }}>
+                                    <button
+                                        className={this.state.openTicketDescId !== ticket._id ? 'ticketOpenCloseButton' : 'ticketOpenCloseButton open'}
+                                        onClick={() => {
+                                            this.state.openTicketDescId !== ticket._id ? this.setState({
+                                                openTicketDescId: ticket._id,
+                                                scListWasUpadted: false
+                                            }) : this.setState({openTicketDescId: null, scListWasUpadted: false})
+                                        }}>
                                         {this.state.openTicketDescId !== ticket._id ? 'Открыть' : 'Закрыть'}
                                     </button>
                                 </div>
@@ -270,10 +286,14 @@ class TicketsComponent extends Component {
                                             }}
                                             deleteButtonClick={this.promtToDelete}
 
-                                            saveButtonClickSC={(newSC)=>{this.insertServiceCenter(newSC)}}
-                                            updateSpanClickSC={()=>{this.getAllServiceCenters()}}
+                                            saveButtonClickSC={(newSC) => {
+                                                this.insertServiceCenter(newSC)
+                                            }}
+                                            updateSpanClickSC={() => {
+                                                this.getAllServiceCenters()
+                                            }}
                                             scListWasUpdated={this.state.scListWasUpadted}
-                                            scListWasUpadtedHideFunc = {this.scListWasUpadtedHideFunc}
+                                            scListWasUpadtedHideFunc={this.scListWasUpadtedHideFunc}
 
 
                                         />
