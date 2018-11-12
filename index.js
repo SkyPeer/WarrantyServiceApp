@@ -176,7 +176,7 @@ app.get('/mongooseGetDataTickets', function(req, res, next){
     TicketModel.find(function (err, ticketsDocs){
         if (err) return next (err);
 
-        res.json({data: ticketsDocs.reverse(), currentDate: getCurrnetDateTime()})
+        res.json({data: ticketsDocs.reverse(), currentDate: getCurrnetDateTime()._now})
     })
 });
 
@@ -194,11 +194,11 @@ app.get('/mongooseGetTicketsSC', function(req, res, next){
 
 app.post('/mongooseFind', bodyParser.json(), function(req, res){
     //console.log('req.body', req.body);
-    TicketModel.findById(req.body, function (err, taskDocs) {
+    TicketModel.findById(req.body, function (err, ticketsDocs) {
         //if (err) return next (err);
         if (err) return (err);
         //console.log(taskDocs);
-        res.json(taskDocs)
+        res.json(ticketsDocs)
     })
 });
 
@@ -210,7 +210,7 @@ app.post('/mongooseSearchbyTicketNumber', bodyParser.json(), function (req, res)
         TicketModel.findOne({ticketNumber: req.body.ticketNumber}, function (err, ticket) {
             if (err) return (err);
             console.log('findOne', ticket);
-            ticket !== null ?  res.json(ticket): res.json({error: 'mongoNotFound'})
+            ticket !== null ?  res.json({data: ticket, currentDate: getCurrnetDateTime()._now}): res.json({error: 'mongoNotFound'})
         })
 });
 
@@ -276,10 +276,10 @@ app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
     );
 
     let randomTicketNumber = getRandomTicketNumber();
-    let currnetDateTime = getCurrnetDateTime()._now;
+    let currentDateTime = getCurrnetDateTime()._now;
     let resJson = {
         ticketNumber: randomTicketNumber,
-        currnetDateTime: currnetDateTime,
+        currentDateTime: currentDateTime,
         status: 200
     };
     TicketModel.create(
@@ -292,7 +292,7 @@ app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
             extnum: req.body.extnum,
 
             ticketNumber: randomTicketNumber,
-            ticketDate: currnetDateTime,
+            ticketDate: currentDateTime,
             ticketPriority: req.body.ticketPriority,
             status: 0,
 
@@ -318,8 +318,8 @@ app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
             //res.setHeader('Content-Type', 'application/json');
             res.json({resJson})
         })
-        .then(mailersend(req.body.email, randomTicketNumber, req.body.vendor))
-        .then(mailersend('oleg.selivantsev@gmail.com', randomTicketNumber, req.body.vendor))
+        .then(mailersend(req.body.email, randomTicketNumber, req.body.vendor, req.body.model, req.body.partNumber, req.body.problem))
+        .then(mailersend('', randomTicketNumber))
         .catch(err => {
             console.error(err)
         })
@@ -330,23 +330,26 @@ app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
 //---------------------------- mailer
 
 mailer.extend(app, {
-    from: 'service@arroway.cloud',
-    host: 'smtp.yandex.ru', // hostname
+    from: '',
+    host: '', // hostname
     secureConnection: true, // use SSL
     port: 465, // port for secure SMTP
     transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
     auth: {
-        user: 'service@arroway.cloud',
-        pass: 'Qwerty0111'
+        user: '',
+        pass: ''
     }
 });
-function mailersend(mailadress, ticketNumber, vendor) {
+function mailersend(mailadress, ticketNumber, vendor, model, partnumber, problem) {
 
     app.mailer.send('email', {
         to: mailadress, // REQUIRED. This can be a comma delimited string just like a normal email to field.
         subject: 'Создана заявка на сервисное обслуживание '+ ticketNumber, // REQUIRED.
         otherProperty: ticketNumber, // All additional properties are also passed to the template as local variables.
-        vendorProperty: vendor
+        vendorProperty: vendor,
+        modelProperty: model,
+        partnumberProperty: partnumber,
+        problemProperty: problem,
     }, function (err) {
         if (err) {
             // handle error
