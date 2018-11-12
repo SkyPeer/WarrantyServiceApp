@@ -156,7 +156,16 @@ class ServiceCentres extends Component {
                 <div className="serviceCenterS">{this.state.sc.map(serviceCenter => (
                     <div className={this.state.openformForEdit !== serviceCenter._id ? 'serviceCenter': 'serviceCenter edit'}
                          key={serviceCenter._id}>
-                        {this.state.idOfupdatedSC === serviceCenter._id && <div> Данные обновлены! </div>}
+
+                        {this.state.idOfupdatedSC === serviceCenter._id &&
+                            <div className="ticketUpdateMessage">
+                                <div className="ticketUpdateMessage_text">Данные обновлены!</div>
+                                <button className="ticketUpdateMessage_button"
+                                    onClick={()=>{this.setState({idOfupdatedSC: null})}}>ОК!
+                                </button>
+                            </div>
+                        }
+
                         <div className="scMain">
 
                             <div className="scTitle"><b>Сервисный Центр: </b>{serviceCenter.scTitle}</div>

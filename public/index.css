@@ -2,7 +2,6 @@
     font-family: AlegreyaSansRegular;
     src: url(/public/fonts/AlegreyaSans-Regular.ttf);
 }
-
 @font-face {
     font-family: AlegreyaSansBold;
     src: url(/public/fonts/AlegreyaSans-Bold.ttf);
@@ -135,7 +134,7 @@ header {
 }
 
 #additionalMenu * {
-    left: 100%;
+    /*left: 100%;*/
     float: right;
     /*display: inline-block; */
     /*float: right;*/
@@ -223,6 +222,25 @@ h1 {
     padding-left: 16px;
     padding-right: 16px;
 }
+
+.servicecentersLink{
+    border: 2px dotted;
+    border-color: #ffffff;
+    color: #ffffff;
+    border-radius: 5px;
+    background-color: #4e5d62;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    /*width: 100%; */
+}
+
+.servicecentersLink:hover {color: #ffffff;
+background-color: #550a5f;
+cursor: pointer;
+transition: all 0.2s;}
+
 
 .addScButton{
     border: 2px dotted;
@@ -640,8 +658,7 @@ select {
 }
 
 .addScButtononForm{
-    border: 2px dotted;
-    border-color: #550a5f;
+    border: 2px dotted #550a5f;
     color: #550a5f;
     border-radius: 5px;
     background-color: white;
@@ -655,6 +672,20 @@ select {
     background-color: #550a5f;
     color: white;
     transition: all 0.2s;
+}
+
+.refreshScListonForm {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: dotted 1px #550a5f;
+    background-color: white;
+    margin: 0 0 5px 5px;
+    cursor: pointer;
+}
+.refreshScListonForm:hover{
+    background-color: #550a5f;
+    color: white;
 }
 
 
@@ -862,6 +893,12 @@ select {
         width: 100%;
     }
     .addScButtononForm{
+        width: 100%;
+    }
+    .addScButton {
+        width: 100%;
+    }
+    .editScButton{
         width: 100%;
     }
     .openDescForm_form div{

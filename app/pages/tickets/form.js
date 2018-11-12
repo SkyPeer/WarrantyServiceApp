@@ -151,7 +151,7 @@ class OpenFormComponent extends Component {
                     </div>
 
                      <div className="openDescForm_form_serviceCenter">
-                         <label>Сервисный центр: </label><span className="updateScList" onClick={this.props.updateSpanClickSC}> Обновить список </span>
+                         <label>Сервисный центр: </label><button className="refreshScListonForm">Обновить список</button>
                         <select id="serviceCenter" onChange={this.changeServiceCenter} value={this.state.serviceCenter}>
                             <option value="" defaultValue>Выбрать сервисный центр</option>
                             {this.props.serviceCenterOptions.map(sc =>

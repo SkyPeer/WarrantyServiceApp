@@ -1547,7 +1547,18 @@ function (_Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: _this2.state.openformForEdit !== serviceCenter._id ? 'serviceCenter' : 'serviceCenter edit',
           key: serviceCenter._id
-        }, _this2.state.idOfupdatedSC === serviceCenter._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " \u0414\u0430\u043D\u043D\u044B\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u044B! "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, _this2.state.idOfupdatedSC === serviceCenter._id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "ticketUpdateMessage"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "ticketUpdateMessage_text"
+        }, "\u0414\u0430\u043D\u043D\u044B\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u044B!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "ticketUpdateMessage_button",
+          onClick: function onClick() {
+            _this2.setState({
+              idOfupdatedSC: null
+            });
+          }
+        }, "\u041E\u041A!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "scMain"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "scTitle"
@@ -1819,10 +1830,9 @@ function (_Component) {
         onChange: this.handleUserInput
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "openDescForm_form_serviceCenter"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "updateScList",
-        onClick: this.props.updateSpanClickSC
-      }, " \u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0441\u043F\u0438\u0441\u043E\u043A "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "refreshScListonForm"
+      }, "\u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0441\u043F\u0438\u0441\u043E\u043A"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         id: "serviceCenter",
         onChange: this.changeServiceCenter,
         value: this.state.serviceCenter
@@ -2172,15 +2182,14 @@ function (_Component) {
         className: "header_title"
       }, "\u0417\u0430\u044F\u0432\u043A\u0438 \u043D\u0430 \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u0435")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "additionalMenu"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "addScButton"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "servicecentersLink",
         style: {
           color: 'white',
           textDecoration: 'none'
         },
         to: "/servicecenters"
-      }, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0435 \u0426\u0435\u043D\u0442\u0440\u044B"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0435 \u0446\u0435\u043D\u0442\u0440\u044B")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "content"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.ticketWasDeleted && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "ticketDeleteMessage"

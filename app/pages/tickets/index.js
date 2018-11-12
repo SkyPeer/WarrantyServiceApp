@@ -159,10 +159,7 @@ class TicketsComponent extends Component {
                     <div className="header_title">Заявки на обслуживание</div>
                 </header>
                 <div id="additionalMenu">
-                    <div className='addScButton'>
-                        <Link style={{color: 'white', textDecoration: 'none'}} to="/servicecenters">Сервисные
-                            Центры</Link>
-                    </div>
+                    <Link className='servicecentersLink' style={{color: 'white', textDecoration: 'none'}} to="/servicecenters">Сервисные центры</Link>
                 </div>
 
                 <div className="content">
