@@ -10,7 +10,6 @@ class ServiceCenterForm extends Component {
 
 
     componentDidMount() {
-        console.log('this.props',this.props);
         this.getState()
     }
 

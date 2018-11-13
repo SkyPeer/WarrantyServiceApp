@@ -31,8 +31,6 @@ class TicketsComponent extends Component {
     }
 
     deleteData = (id) => {
-        console.log('deleteTicket, id', id);
-
         fetch('/mongooseTicketDelete', {
             method: 'post',
             body: JSON.stringify({_id: id}),
@@ -45,8 +43,8 @@ class TicketsComponent extends Component {
             .then(() => {
                 this.setState({idOfupdatedTicket: null, ticketWasDeleted: true})
             })
-            .then(this.getAllData())
-            .then(() => console.log('ticket deleted'));
+            .then(this.getAllData());
+            /*.then(() => console.log('ticket deleted'));*/
 
 
         function checkStatus(responsee) {
@@ -113,9 +111,8 @@ class TicketsComponent extends Component {
             .then(checkStatus)
             .then(() => {
                 this.setState({scListWasUpadted: true, openFormNewSc: false})
-            })
-            /*.then(() => {this.setState({openformForCreate: false, newCs: true})}) */
-            .then(() => console.log('new sc inserted'));
+            });
+            /*.then(() => console.log('new sc inserted'));*/
 
         function checkStatus(responsee) {
             if (responsee.status >= 200 && responsee.status < 300) {
@@ -129,27 +126,24 @@ class TicketsComponent extends Component {
     };
 
     getAllServiceCenters = () => {
-        console.log('getAllServiceCenters');
         fetch(`/mongooseGetDataSC`)
             .then(res => res.json())
             .then(json => this.setState({sc: json}));
     };
 
     componentDidMount() {
-        console.log('componentDidMount');
         this.getAllData();
-        //this.timerGetAllData;
+        /*this.timerGetAllData;*/
     }
 
     componentWillUnmount() {
-        console.log('componentWillUnmount');
-        clearInterval(this.timerGetAllData)
+        /*clearInterval(this.timerGetAllData)*/
     }
 
-    timerGetAllData = setInterval(() => {
+   /* timerGetAllData = setInterval(() => {
         //console.log( "time" );
         this.getAllData()
-    }, 10000);
+    }, 10000);*/
 
 
     render() {

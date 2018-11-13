@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {HashRouter, BrowserRouter, Switch, Route, Link} from 'react-router-dom';
 import {render} from 'react-dom'
-import 'react-dropdown/style.css'
 import {Main} from "./pages/main";
 import {TicketsComponent} from "./pages/tickets"
 import {Search} from "./pages/search";
@@ -9,7 +8,6 @@ import {Form} from "./pages/form";
 import {ServiceCentres} from "./pages/servicecenters";
 import {DescComponent} from "./pages/tickets/othertickets"
 import {Layout} from "./controls/layout";
-import {statusOptions, typeOfServiceOptions, ticketPriorityOptions, placeOptions} from "./pages/props"
 
 
 const Routing = () => (

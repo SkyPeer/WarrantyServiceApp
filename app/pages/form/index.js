@@ -35,8 +35,6 @@ class Form extends Component {
     };
 
     updateDataFunc = (saveData) => {
-        console.log('clickFunc', saveData);
-
         fetch('/mongooseInsert', {
             method: 'post',
             body: JSON.stringify({
@@ -52,8 +50,8 @@ class Form extends Component {
             .then((json) => this.setState({
                 newTicketNumber: json.resJson.ticketNumber,
                 datetimeOfCreate: json.resJson.currentDateTime
-            }))
-            .then(() => console.log('inserted'));
+            }));
+            /*.then(() => console.log('inserted'));*/
 
 
         function checkStatus(responsee) {

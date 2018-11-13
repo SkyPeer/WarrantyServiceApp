@@ -3,14 +3,15 @@ module.exports = (_currentDate, _ticketDate, _daysLeft) => {
         const dateOfCreation = new Date(_ticketDate);
         const finishDate = new Date(_ticketDate);
         const currentDate = new Date(_currentDate);
-        const minutes = dateOfCreation.getMinutes() < 10 ? '0'+dateOfCreation.getMinutes(): dateOfCreation.getMinutes()
+        const minutes = dateOfCreation.getMinutes() < 10 ? '0'+dateOfCreation.getMinutes(): dateOfCreation.getMinutes();
+        let daysLeftClass = '';
 
         finishDate.setDate(dateOfCreation.getDate()+parseInt(_daysLeft));
 
         const daysLeftLocal = Math.round((finishDate - currentDate) / 1000 / 60 / 60/ 24);
 
 
-    let daysLeftClass = 'green';
+
 
         switch (true) {
             case(daysLeftLocal < 5)  :

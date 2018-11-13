@@ -39,7 +39,6 @@ class Search extends Component {
 
 
     checkData = (ticket) => {
-        console.log(ticket);
         JSON.stringify(ticket) !== JSON.stringify({error: 'mongoNotFound'}) ?
             this.setState({
                 ...ticket.data,currentDate:ticket.currentDate, checkData: true, cantFind: false,
@@ -50,11 +49,7 @@ class Search extends Component {
 
 
     componentDidMount() {
-        console.log('this.searcharg: ', this.searcharg);
         this.searcharg !== undefined ? this.trySearch(this.searcharg) : ''
-        //this.setState({search:this.searcharg})
-
-
     };
 
 
