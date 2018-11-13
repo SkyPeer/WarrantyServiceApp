@@ -215,15 +215,18 @@ class TicketsComponent extends Component {
 
                                     <div>
                                         {
-                                            ticket.daysForService && <div className="daysForService">
-                                                <div className={getDate(this.state.currentDate, ticket.ticketDate, ticket.daysForService).daysLeftClass}>
+                                            (ticket.daysForService && ticket.status !== 3) && <div className="daysForService">
+                                                <div
+                                                    className="finishDate">
                                                     Завершение: {getDate(this.state.currentDate, ticket.ticketDate, ticket.daysForService).finishDate}
 
-                                                    <span
-                                                        className="daysForService"> осталось: {getDate(this.state.currentDate, ticket.ticketDate, ticket.daysForService).daysLeftLocal}
-                                                        дн.</span>
+                                                    <span className="daysForService"> осталось:
+                                                        <span className={getDate(this.state.currentDate, ticket.ticketDate, ticket.daysForService).daysLeftClass}>
+                                                        {getDate(this.state.currentDate, ticket.ticketDate, ticket.daysForService).daysLeftLocal}
+                                                        </span>
+                                                         дн.
+                                                    </span>
                                                 </div>
-
                                             </div>
                                         }
                                     </div>

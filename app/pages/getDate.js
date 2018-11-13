@@ -7,15 +7,21 @@ module.exports = (_currentDate, _ticketDate, _daysLeft) => {
 
         finishDate.setDate(dateOfCreation.getDate()+parseInt(_daysLeft));
 
-
-
         const daysLeftLocal = Math.round((finishDate - currentDate) / 1000 / 60 / 60/ 24);
 
 
-        let daysLeftClass = daysLeftLocal < 5 ? 'red' :'yellow';
-        daysLeftClass = daysLeftLocal < 15 ? 'yellow' : 'green';
+    let daysLeftClass = 'green';
 
-
+        switch (true) {
+            case(daysLeftLocal < 5)  :
+                daysLeftClass = 'daysForService_red';
+                break;
+            case(daysLeftLocal < 10)  :
+                daysLeftClass = 'daysForService_yellow';
+                break;
+            default:
+                daysLeftClass = 'daysForService_green';
+        }
 
 
         return {dateOfCreation: (dateOfCreation.getDate() + '/' + (dateOfCreation.getMonth()+parseInt(1)) + '/' +dateOfCreation.getFullYear()+' '+dateOfCreation.getHours()+':'+ minutes ),

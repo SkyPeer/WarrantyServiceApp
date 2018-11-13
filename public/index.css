@@ -657,6 +657,22 @@ select {
     width: 100%;
 }
 
+.daysForService_green{
+    padding: 0 4px;
+    color: green;
+}
+.daysForService_yellow{
+    padding: 0 4px;
+    color: darkgoldenrod;
+    font-weight: bold;
+}
+.daysForService_red{
+    color: white;
+    background-color: red;
+    padding: 0 4px;
+
+}
+
 .addScButtononForm{
     border: 2px dotted #550a5f;
     color: #550a5f;

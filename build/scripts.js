@@ -830,8 +830,21 @@ module.exports = function (_currentDate, _ticketDate, _daysLeft) {
   var minutes = dateOfCreation.getMinutes() < 10 ? '0' + dateOfCreation.getMinutes() : dateOfCreation.getMinutes();
   finishDate.setDate(dateOfCreation.getDate() + parseInt(_daysLeft));
   var daysLeftLocal = Math.round((finishDate - currentDate) / 1000 / 60 / 60 / 24);
-  var daysLeftClass = daysLeftLocal < 5 ? 'red' : 'yellow';
-  daysLeftClass = daysLeftLocal < 15 ? 'yellow' : 'green';
+  var daysLeftClass = 'green';
+
+  switch (true) {
+    case daysLeftLocal < 5:
+      daysLeftClass = 'daysForService_red';
+      break;
+
+    case daysLeftLocal < 10:
+      daysLeftClass = 'daysForService_yellow';
+      break;
+
+    default:
+      daysLeftClass = 'daysForService_green';
+  }
+
   return {
     dateOfCreation: dateOfCreation.getDate() + '/' + (dateOfCreation.getMonth() + parseInt(1)) + '/' + dateOfCreation.getFullYear() + ' ' + dateOfCreation.getHours() + ':' + minutes,
     finishDate: finishDate.getDate() + '/' + (finishDate.getMonth() + parseInt(1)) + '/' + finishDate.getFullYear(),
@@ -2216,13 +2229,15 @@ function (_Component) {
           className: _props__WEBPACK_IMPORTED_MODULE_5__["statusOptions"][ticket.status].className
         }, _props__WEBPACK_IMPORTED_MODULE_5__["statusOptions"][ticket.status].label))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "ticket_flex2"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.lastname + ' ' + ticket.firstname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, ticket.daysForService && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.lastname + ' ' + ticket.firstname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, ticket.daysForService && ticket.status !== 3 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "daysForService"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: getDate(_this3.state.currentDate, ticket.ticketDate, ticket.daysForService).daysLeftClass
+          className: "finishDate"
         }, "\u0417\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u0435: ", getDate(_this3.state.currentDate, ticket.ticketDate, ticket.daysForService).finishDate, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "daysForService"
-        }, " \u043E\u0441\u0442\u0430\u043B\u043E\u0441\u044C: ", getDate(_this3.state.currentDate, ticket.ticketDate, ticket.daysForService).daysLeftLocal, "\u0434\u043D.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, " \u043E\u0441\u0442\u0430\u043B\u043E\u0441\u044C:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: getDate(_this3.state.currentDate, ticket.ticketDate, ticket.daysForService).daysLeftClass
+        }, getDate(_this3.state.currentDate, ticket.ticketDate, ticket.daysForService).daysLeftLocal), "\u0434\u043D.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "ticketPriority"
         }, "\u041F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: _props__WEBPACK_IMPORTED_MODULE_5__["ticketPriorityOptions"][ticket.ticketPriority].className
