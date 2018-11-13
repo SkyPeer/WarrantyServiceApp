@@ -443,15 +443,9 @@ function (_Component) {
       }).then(function () {
         return console.log('inserted');
       });
-      /*.then(
-       () => {
-       alert('Создано обращение №' + this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate)
-       }
-       );*/
 
       function checkStatus(responsee) {
         if (responsee.status >= 200 && responsee.status < 300) {
-          //console.log(response);
           return responsee;
         } else {
           var error = new Error(response.statusText);
@@ -464,14 +458,11 @@ function (_Component) {
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleUserInput", function (e) {
       var name = e.target.id;
       var value = e.target.value;
-      console.log(name, ' ', value);
 
       _this.setState(_defineProperty({}, name, value));
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "telnumChange", function (e) {
-      console.log('telnumnChange:', e);
-
       _this.setState({
         telnum: e
       });
@@ -480,8 +471,7 @@ function (_Component) {
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "placeChange", function (e) {
       _this.setState({
         place: e.target.value
-      }); //console.log('this.state.place', this.state.place); // ПОЧЕМУ ТУТ ОСТАЕТСЯ СТАРОЕ ЗНАЧЕНИЕ, потому что обновление проихсодит внутри метода render() ???
-
+      });
 
       var errorsObj = _this.state.formErrors;
       e.target.value == '5' ? errorsObj['placeAnother'] = 'error' : delete errorsObj['placeAnother'];
@@ -493,15 +483,13 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "checkLetters", function (target) {
       var value = target;
-      var pattern = /^[A-Za-zА-Яа-я]+$/; // console.log('checkLetters value: ', value,' resutl: ', pattern.test(value));
-
+      var pattern = /^[A-Za-zА-Яа-я]+$/;
       return pattern.test(value);
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "checkEmail", function (target) {
       var value = target;
-      var pattern = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i; //console.log('checkEmail', pattern.test(value));
-
+      var pattern = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
       return pattern.test(value);
     });
 
@@ -510,15 +498,12 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onBlur", function (e) {
-      //   console.log('blur');
       var target = e.target;
       var targetId = e.target.id;
       var required = e.target.required;
-      var validator = e.target.dataset.validator;
       var checkValue = _this.state[targetId];
-      console.log('validator: ', validator); //!required ? targetId = "notrequired" : '';
-
       var errorsObj = _this.state.formErrors;
+      var validator = e.target.dataset.validator;
       !required && checkValue.length == 0 ? validator = 'notrequired' : '';
 
       switch (validator) {
@@ -537,9 +522,6 @@ function (_Component) {
             _this.changeClassName(target);
           }
           break;
-
-        /*case 'telnum' : {
-           }break;*/
 
         case 'standart':
           {
@@ -567,7 +549,6 @@ function (_Component) {
 
         case 'notrequired':
           {
-            console.log('notrequired');
             target.className = '';
             delete _this.state.formErrors[targetId];
           }
@@ -582,12 +563,9 @@ function (_Component) {
 
       _this.setState({
         formErrors: errorsObj
-      }); //console.log('this.state.formErrors', this.state.formErrors)
+      });
 
-
-      _this.checkform(); //  console.log('this.state.formErrors', this.state.formErrors);
-      //  console.log('id:',event.target.id, 'required:', event.target.required, 'hasOwnProperty(validator)', this.state.formErrors.hasOwnProperty(validator), 'value.length:',event.target.value.length == 0);
-
+      _this.checkform();
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onFocus", function (e) {
@@ -596,10 +574,7 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onTelNumBlur", function () {
       var errorsObj = _this.state.formErrors;
-      _this.state.telnum.length === 18 ? delete errorsObj['telnum'] : errorsObj['telnum'] = 'error'; //this.state.telnum.length !== 18 ? this.setState({telnumCheck:{borderColor: 'red'}}) : this.setState({telnumCheck:{}});
-
-      console.log(_this.state.formErrors.hasOwnProperty('telnum'));
-      console.log('telNumBlur', _this.state.telnum.length);
+      _this.state.telnum.length === 18 ? delete errorsObj['telnum'] : errorsObj['telnum'] = 'error';
 
       _this.setState({
         formErrors: errorsObj
@@ -621,15 +596,13 @@ function (_Component) {
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "checkform", function () {
       var arrayOfErrors = Object.keys(_this.state.formErrors);
       var requireArrayCheck = true;
-      var requireArray = [_this.state.firstname, _this.state.lastname, _this.state.email, _this.state.telnum, _this.state.vendor, _this.state.model, _this.state.partNumber, _this.state.problem]; //console.log('checkform --- test:', requireArray[0].length)
+      var requireArray = [_this.state.firstname, _this.state.lastname, _this.state.email, _this.state.telnum, _this.state.vendor, _this.state.model, _this.state.partNumber, _this.state.problem];
 
       for (var i = 0; i < requireArray.length; i++) {
         if (requireArray[i].length == 0) {
           requireArrayCheck = false;
         }
       }
-
-      console.log('---- CHECKFORM:   arrayOfErrors', arrayOfErrors.length == 0, ' requireArrayCheck ', requireArrayCheck, 'result:', arrayOfErrors.length == 0 && requireArrayCheck);
 
       _this.setState({
         formValid: arrayOfErrors.length == 0 && requireArrayCheck
@@ -857,10 +830,13 @@ module.exports = function (_currentDate, _ticketDate, _daysLeft) {
   var minutes = dateOfCreation.getMinutes() < 10 ? '0' + dateOfCreation.getMinutes() : dateOfCreation.getMinutes();
   finishDate.setDate(dateOfCreation.getDate() + parseInt(_daysLeft));
   var daysLeftLocal = Math.round((finishDate - currentDate) / 1000 / 60 / 60 / 24);
+  var daysLeftClass = daysLeftLocal < 5 ? 'red' : 'yellow';
+  daysLeftClass = daysLeftLocal < 15 ? 'yellow' : 'green';
   return {
     dateOfCreation: dateOfCreation.getDate() + '/' + (dateOfCreation.getMonth() + parseInt(1)) + '/' + dateOfCreation.getFullYear() + ' ' + dateOfCreation.getHours() + ':' + minutes,
     finishDate: finishDate.getDate() + '/' + (finishDate.getMonth() + parseInt(1)) + '/' + finishDate.getFullYear(),
-    daysLeftLocal: daysLeftLocal
+    daysLeftLocal: daysLeftLocal,
+    daysLeftClass: daysLeftClass
   };
 };
 
@@ -2243,7 +2219,7 @@ function (_Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u043E\u0440 ", ticket.lastname + ' ' + ticket.firstname + ' ' + ticket.familyname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, ticket.daysForService && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "daysForService"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "finishDate"
+          className: getDate(_this3.state.currentDate, ticket.ticketDate, ticket.daysForService).daysLeftClass
         }, "\u0417\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u0435: ", getDate(_this3.state.currentDate, ticket.ticketDate, ticket.daysForService).finishDate, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "daysForService"
         }, " \u043E\u0441\u0442\u0430\u043B\u043E\u0441\u044C: ", getDate(_this3.state.currentDate, ticket.ticketDate, ticket.daysForService).daysLeftLocal, "\u0434\u043D.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

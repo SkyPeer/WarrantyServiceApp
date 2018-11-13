@@ -54,15 +54,10 @@ class Form extends Component {
                 datetimeOfCreate: json.resJson.currentDateTime
             }))
             .then(() => console.log('inserted'));
-        /*.then(
-         () => {
-         alert('Создано обращение №' + this.state.newTicketNumber + '  ' + this.state.datetimeOfCreate)
-         }
-         );*/
+
 
         function checkStatus(responsee) {
             if (responsee.status >= 200 && responsee.status < 300) {
-                //console.log(response);
                 return responsee
             } else {
                 let error = new Error(response.statusText);
@@ -75,36 +70,30 @@ class Form extends Component {
     handleUserInput = (e) => {
         const name = e.target.id;
         const value = e.target.value;
-        console.log(name, ' ', value);
         this.setState({[name]: value})
     };
 
     telnumChange = (e) => {
-        console.log('telnumnChange:', e);
         this.setState({telnum: e})
     };
 
     placeChange = (e) => {
         this.setState({place: e.target.value});
-        //console.log('this.state.place', this.state.place); // ПОЧЕМУ ТУТ ОСТАЕТСЯ СТАРОЕ ЗНАЧЕНИЕ, потому что обновление проихсодит внутри метода render() ???
-
-        let errorsObj = this.state.formErrors;
+        const errorsObj = this.state.formErrors;
         e.target.value == '5' ? errorsObj['placeAnother'] = 'error' : delete errorsObj['placeAnother'];
         this.setState({formErrors: errorsObj})
 
     };
 
     checkLetters = (target) => {
-        let value = target;
-        let pattern = /^[A-Za-zА-Яа-я]+$/;
-        // console.log('checkLetters value: ', value,' resutl: ', pattern.test(value));
+        const value = target;
+        const pattern = /^[A-Za-zА-Яа-я]+$/;
         return pattern.test(value)
     };
 
     checkEmail = (target) => {
-        let value = target;
-        let pattern = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
-        //console.log('checkEmail', pattern.test(value));
+        const value = target;
+        const pattern = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
         return pattern.test(value)
     };
 
@@ -113,17 +102,13 @@ class Form extends Component {
     };
 
     onBlur = (e) => {
-        //   console.log('blur');
-        let target = e.target;
-        let targetId = e.target.id;
-        let required = e.target.required;
+
+        const target = e.target;
+        const targetId = e.target.id;
+        const required = e.target.required;
+        const checkValue = this.state[targetId];
+        const errorsObj = this.state.formErrors;
         let validator = e.target.dataset.validator;
-        let checkValue = this.state[targetId];
-
-        console.log('validator: ', validator);
-
-        //!required ? targetId = "notrequired" : '';
-        let errorsObj = this.state.formErrors;
 
         !required && checkValue.length == 0 ? validator = 'notrequired' : '';
 
@@ -145,10 +130,6 @@ class Form extends Component {
             }
                 break;
 
-            /*case 'telnum' : {
-
-             }break;*/
-
             case 'standart' : {
                 checkValue.length < 2 ? errorsObj[targetId] = 'error' : delete errorsObj[targetId];
                 this.changeClassName(target)
@@ -168,7 +149,6 @@ class Form extends Component {
                 break;
 
             case 'notrequired' : {
-                console.log('notrequired');
                 target.className = '';
                 delete this.state.formErrors[targetId]
             }
@@ -183,10 +163,8 @@ class Form extends Component {
                 break;
         }
         this.setState({formErrors: errorsObj});
-        //console.log('this.state.formErrors', this.state.formErrors)
         this.checkform();
-        //  console.log('this.state.formErrors', this.state.formErrors);
-        //  console.log('id:',event.target.id, 'required:', event.target.required, 'hasOwnProperty(validator)', this.state.formErrors.hasOwnProperty(validator), 'value.length:',event.target.value.length == 0);
+
 
     };
 
@@ -196,13 +174,8 @@ class Form extends Component {
 
     onTelNumBlur = () => {
 
-        let errorsObj = this.state.formErrors;
-
+        const errorsObj = this.state.formErrors;
         this.state.telnum.length === 18 ? delete errorsObj['telnum'] : errorsObj['telnum'] = 'error';
-        //this.state.telnum.length !== 18 ? this.setState({telnumCheck:{borderColor: 'red'}}) : this.setState({telnumCheck:{}});
-        console.log(this.state.formErrors.hasOwnProperty('telnum'));
-
-        console.log('telNumBlur', this.state.telnum.length);
 
         this.setState({formErrors: errorsObj});
 
@@ -214,9 +187,9 @@ class Form extends Component {
     };
 
     checkform = () => {
-        let arrayOfErrors = Object.keys(this.state.formErrors);
+        const arrayOfErrors = Object.keys(this.state.formErrors);
         let requireArrayCheck = true;
-        let requireArray = [
+        const requireArray = [
             this.state.firstname,
             this.state.lastname,
             this.state.email,
@@ -226,14 +199,12 @@ class Form extends Component {
             this.state.partNumber,
             this.state.problem
         ];
-        //console.log('checkform --- test:', requireArray[0].length)
 
         for (let i = 0; i < requireArray.length; i++) {
             if (requireArray[i].length == 0) {
                 requireArrayCheck = false
             }
         }
-        console.log('---- CHECKFORM:   arrayOfErrors', arrayOfErrors.length == 0, ' requireArrayCheck ', requireArrayCheck, 'result:', (arrayOfErrors.length == 0 && requireArrayCheck));
 
         this.setState({formValid: (arrayOfErrors.length == 0 && requireArrayCheck)})
 
