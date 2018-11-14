@@ -133,17 +133,16 @@ class TicketsComponent extends Component {
 
     componentDidMount() {
         this.getAllData();
-        /*this.timerGetAllData;*/
+        this.timerGetAllData;
     }
 
     componentWillUnmount() {
-        /*clearInterval(this.timerGetAllData)*/
+        clearInterval(this.timerGetAllData)
     }
 
-   /* timerGetAllData = setInterval(() => {
-        //console.log( "time" );
+   timerGetAllData = setInterval(() => {
         this.getAllData()
-    }, 10000);*/
+    }, 4000);
 
 
     render() {

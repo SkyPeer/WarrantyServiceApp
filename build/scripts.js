@@ -2127,6 +2127,10 @@ function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "timerGetAllData", setInterval(function () {
+      _this.getAllData();
+    }, 4000));
+
     return _this;
   }
 
@@ -2155,18 +2159,13 @@ function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.getAllData();
-      /*this.timerGetAllData;*/
+      this.timerGetAllData;
     }
   }, {
     key: "componentWillUnmount",
-    value: function componentWillUnmount() {}
-    /*clearInterval(this.timerGetAllData)*/
-
-    /* timerGetAllData = setInterval(() => {
-         //console.log( "time" );
-         this.getAllData()
-     }, 10000);*/
-
+    value: function componentWillUnmount() {
+      clearInterval(this.timerGetAllData);
+    }
   }, {
     key: "render",
     value: function render() {
