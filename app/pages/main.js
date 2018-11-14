@@ -21,21 +21,21 @@ class Main extends Component{
                                        <Link to="/form">Форма создания заявки</Link>
                                        <div className="content_main_desc">Компонент для создания заявки и валидации формы. <br />
                                            После получения запроса backend'ом <br />
-                                           <b>1. B БД записываются</b>:
+                                           <b>1.B БД записываются</b>:
                                            <ul>
                                                <li>данные с формы</li>
                                                <li>время и дата создания заявки</li>
                                                <li>«рандомный» номер заявки</li>
                                            </ul>
                                            --- Объект Date и «рандомный» номер «создаются» на стороне backend'a <br />
-                                           <b>2. Модуль express-mailer:</b> отправляет подтверждение на указанный в форме email, в соответствии с шаблоном.
+                                           <b>2.Модуль express-mailer:</b> отправляет подтверждение на указанный в форме email, в соответствии с шаблоном.
                                            Просьба указывать реальный e-mail ))
                                        </div>
                                    </li>
 
                                    <li>
                                        <Link to="/tickets">Управление заявками</Link>
-                                       <div className="content_main_desc">Компонент для редактирования заявок, назначения сервисного центра, <br /> времени необходимого для ремонта и.т.д....</div>
+                                       <div className="content_main_desc">Компонент для редактирования заявок, назначения сервисного центра, времени необходимого для ремонта и.т.д....</div>
                                    </li>
 
                                    <li>
@@ -56,7 +56,7 @@ class Main extends Component{
                                <h3>Стэк технологий</h3>
                                <b>Backend</b>
                                <ul>
-                                   <li>IIS (в ближайшее время "переедет" на nginx)</li>
+                                   <li>IIS</li>
                                    <li>node.js</li>
                                    <li>expressjs</li>
                                    <li>express-mailer</li>
@@ -67,6 +67,10 @@ class Main extends Component{
                                <b>Frontend:</b> ReactJS + (react-router)
                                <br />
                                <b>Сборка:</b> webpack
+                               <br />
+                               <b>Авторизация:</b> изначально планировалось реализовать с пом. Kerberos (на уровне домена Active Directory)
+                               <br />
+                               <b>Репозиторий:</b> <a href="https://github.com/SkyPeer/WarrantyServiceApp">https://github.com/SkyPeer/WarrantyServiceApp</a>
 
                            </div>
                        </div>
