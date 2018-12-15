@@ -27,5 +27,5 @@ module.exports = (_currentDate, _ticketDate, _daysLeft) => {
 
         return {dateOfCreation: (dateOfCreation.getDate() + '/' + (dateOfCreation.getMonth()+parseInt(1)) + '/' +dateOfCreation.getFullYear()+' '+dateOfCreation.getHours()+':'+ minutes ),
             finishDate: (finishDate.getDate() + '/' +(finishDate.getMonth()+parseInt(1)) + '/' +finishDate.getFullYear()),
-            daysLeftLocal: daysLeftLocal, daysLeftClass: daysLeftClass}
+            daysLeftLocal: daysLeftLocal < 0 ? 'просрочено: ' + daysLeftLocal * -1 + ' ' : daysLeftLocal + '', daysLeftClass: daysLeftClass}
 };
