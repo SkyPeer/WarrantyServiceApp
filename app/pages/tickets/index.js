@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {render} from 'react-dom'
-import 'react-dropdown/style.css'
+/*import 'react-dropdown/style.css'*/
 import {Layout} from "../../controls/layout";
-import {statusOptions, typeOfServiceOptions, ticketPriorityOptions, placeOptions} from "../props"
-import {OpenFormComponent} from "./form"
+import {statusOptions, typeOfServiceOptions, ticketPriorityOptions, placeOptions} from "../props";
+import {OpenFormComponent} from "./form";
 const getDate = require('../getDate');
+import store from "../../redux-store";
 
 class TicketsComponent extends Component {
     state = {
@@ -14,11 +15,11 @@ class TicketsComponent extends Component {
         idOfupdatedTicket: null,
         sc: [],
         ticketWasDeleted: false,
-
         finishDate: '',
         daysLeft: '',
         currentDate: '',
         scListWasUpadted: false,
+        reduxValue:'',
     };
 
     getAllData() {
@@ -134,10 +135,17 @@ class TicketsComponent extends Component {
     componentDidMount() {
         this.getAllData();
         this.timerGetAllData;
+
+        console.log(store)
+
+        this.setState({reduxValue:store.getState()});
+        //store.subscribe(()=>this.setState({reduxValue:store.getState()}));
+        store.subscribe(()=>this.reduxStore = store.getState())
     }
 
     componentWillUnmount() {
-        clearInterval(this.timerGetAllData)
+        clearInterval(this.timerGetAllData);
+        //store.unsubscribe()
     }
 
    timerGetAllData = setInterval(() => {
@@ -145,11 +153,23 @@ class TicketsComponent extends Component {
     }, 4000);
 
 
+    reduxStore = '';
+
     render() {
         return (
             <Layout>
                 <header>
                     <div className="header_title">Заявки на обслуживание</div>
+
+                    <div>
+                        <span>Redux Counter</span><br />
+                        <span>ReduxStore: {this.reduxStore}</span><br />
+                        <span>ReduxStateValue: {this.state.reduxValue}</span><br />
+                        <button onClick={()=>{store.dispatch({ type: 'INCREMENT' })}}>-- + --</button>
+                        <button onClick={()=>console.log('this.state.reduxValue: ', this.state.reduxValue, ' reduxStore: ', this.reduxStore)}>-- 0 --</button>
+
+                    </div>
+
                 </header>
                 <div id="additionalMenu">
                     <Link className='servicecentersLink' style={{color: 'white', textDecoration: 'none'}} to="/servicecenters">Сервисные центры</Link>

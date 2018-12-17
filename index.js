@@ -17,10 +17,8 @@ const express = require('express'),
     datetime = require('node-datetime');
 //mongoose = require('mongoose');
 
-
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
-
 
 mongoose.connect('mongodb://localhost:27017/warranty', {
     useNewUrlParser: true,
@@ -169,7 +167,6 @@ app.post('/mongooseSCDelete', bodyParser.json(), function (req, res) {
 // ----- get/post for ServiceCenters
 
 
-
 // ----- get/post for Tickets
 app.get('/mongooseGetDataTickets', function(req, res, next){
 
@@ -177,7 +174,9 @@ app.get('/mongooseGetDataTickets', function(req, res, next){
         if (err) return next (err);
 
         res.json({data: ticketsDocs.reverse(), currentDate: getCurrnetDateTime()._now})
-    })
+    });
+
+
 });
 
 app.get('/mongooseGetTicketsSC', function(req, res, next){
@@ -319,7 +318,7 @@ app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
             res.json({resJson})
         })
         .then(mailersend(req.body.email, randomTicketNumber, req.body.vendor, req.body.model, req.body.partNumber, req.body.problem))
-        .then(mailersend('', randomTicketNumber))
+        .then(mailersend('oleg.selivantsev@gmail.com', randomTicketNumber))
         .catch(err => {
             console.error(err)
         })
@@ -330,14 +329,14 @@ app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
 //---------------------------- mailer
 
 mailer.extend(app, {
-    from: '',
-    host: '', // hostname
+    from: 'arroway.service@yandex.ru',
+    host: 'smtp.yandex.ru', // hostname
     secureConnection: true, // use SSL
     port: 465, // port for secure SMTP
     transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
     auth: {
-        user: '',
-        pass: ''
+        user: 'arroway.service@yandex.ru',
+        pass: 'b!azQ32v#zY'
     }
 });
 function mailersend(mailadress, ticketNumber, vendor, model, partnumber, problem) {
@@ -363,138 +362,6 @@ function mailersend(mailadress, ticketNumber, vendor, model, partnumber, problem
 }
 
 
-
-
-
-
-
-
-
-
-/*app.get('/email', function (req, res, next) {
-    app.mailer.send('email', {
-        to: 'oleg.selivantsev@gmail.com', // REQUIRED. This can be a comma delimited string just like a normal email to field.
-        subject: 'Test Email', // REQUIRED.
-        otherProperty: 'Other Property' // All additional properties are also passed to the template as local variables.
-    }, function (err) {
-        if (err) {
-            // handle error
-            console.log(err);
-            console.log('There was an error sending the email');
-            return;
-        }
-        console.log('Email Sent');
-    });
-});*/
-
-
-
-// ----- get/post for Tickets
-
-
-
-
-// ----------------------------------------------- OLD MongoClient
-app.post('/delete', bodyParser.json(), function (req, res){
-    console.log('--- delete', req.body);
-
-    MongoClient.connect(mongoUrl)
-        .then( client => {
-            const db = client.db(dbName);
-            const col = db.collection('tasks');
-            /*col.updateOne({id: ObjectId("5bc16e50ddc7c1304065cf56")}, {$set: {complete: true}}) */
-            /*col.updateOne(("_id", "5bc16e44d4b3d823f44d207f"), ("$set", ("zipcode", "10462")) ) */
-
-            col.deleteOne({"_id": ObjectID(req.body._id)}).then(res.sendStatus(200))
-
-        });
-});
-
-app.post('/update', bodyParser.json(), function (req, res) {
-    console.log('--- update', req.body);
-
-    MongoClient.connect(mongoUrl)
-        .then( client => {
-            const db = client.db(dbName);
-            const col = db.collection('tasks');
-            /*col.updateOne({id: ObjectId("5bc16e50ddc7c1304065cf56")}, {$set: {complete: true}}) */
-            /*col.updateOne(("_id", "5bc16e44d4b3d823f44d207f"), ("$set", ("zipcode", "10462")) ) */
-
-            col.updateOne({"_id": ObjectID(req.body._id)}, {$set: {"complete": req.body.complete}})
-
-    });
-
-});
-
-app.post('/add', bodyParser.json(), function(req, res) {
-    console.log('---add', req.body);
-    res.sendStatus(200);
-
-    MongoClient.connect(mongoUrl).then(client => {
-        const db = client.db(dbName);
-        const col = db.collection('tasks');
-
-        col.insert(req.body)
-    });
-});
-
-app.get('/test', (req, res) => {
-
-    // opens connection to mongodb
-    MongoClient.connect(mongoUrl).then(client => {
-        let tasksArray = [];
-        // creates const for our database
-        const db = client.db(dbName);
-
-        // creates const for 'employees' collection in database
-        const col = db.collection('tasks');
-
-        // finds ALL employees in 'employees' collection/converts to array
-        col.find({}).toArray().then(docs => {
-
-            // logs message upon finding collection
-          //  console.log('found tasks for index');
-
-            //console.log(docs);
-            // renders index ejs template and passes employees array as data
-
-            for (let i=0; i<docs.length; i++){
-                tasksArray.push(
-                    {
-                        title: docs[i].title,
-                        complete: docs[i].complete,
-                        id: docs[i]._id
-                    }
-
-                   // docs[i].title
-
-                )
-            }
-
-            res.send(tasksArray);
-
-            // closes connection to mongodb and logs message
-            //client.close(() => console.log('connection closed'));
-            client.close();
-
-            // checks for error in finding 'employees' collection
-        }).catch(err => {
-
-            // logs message upon error in finding 'employees' collection
-            console.log('error finding employees', err);
-
-        });
-
-        // checks for error in connecting to mongodb
-    }).catch(err => {
-
-        // logs message upon error connecting to mongodb
-        console.log('error connecting to mongodb', err);
-
-    });
-
-});
-
 app.use(helmet());
 app.use(compression());
 
@@ -506,15 +373,6 @@ app.use('/', (req, res, next) => {
     res.sendFile('index.html', {root: __dirname})
 });
 
-server.listen(3000, function () {
-    console.log(`WarrantyServiceApp Start http://localhost:3000`);
+server.listen(3100, function () {
+    console.log(`WarrantyServiceApp Start http://localhost:3100`);
 });
-
-
-/* add in DB
-*
-* // note_routes.js
-
-
-*
-* */

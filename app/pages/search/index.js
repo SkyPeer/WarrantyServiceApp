@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Layout} from "../../controls/layout";
 import {statusOptions} from "../props";
+import store from "../../redux-store";
 const getDate = require('../getDate');
 
 class Search extends Component {
@@ -16,6 +17,7 @@ class Search extends Component {
         cantFind: false,
         checkData: false,
 
+        reduxValue: ''
 
     };
     searcharg = this.props.match.params.ticketid;
@@ -49,15 +51,29 @@ class Search extends Component {
 
 
     componentDidMount() {
-        this.searcharg !== undefined ? this.trySearch(this.searcharg) : ''
+        this.searcharg !== undefined ? this.trySearch(this.searcharg) : '';
+
+        console.log(store);
+        this.setState({reduxValue:store.getState()});
+        store.subscribe(()=>this.setState({reduxValue:store.getState()}));
     };
 
 
     render() {
         return (
             <Layout>
+                <div>
+                    <span>Redux Counter</span><br />
+                    <span>Redux Value: {this.state.reduxValue}</span><br />
+
+                    <button onClick={()=>{store.dispatch({ type: 'INCREMENT' })}}>-- + --</button>
+                    <button onClick={()=>console.log(this.state.reduxValue)}>-- 0 --</button>
+
+                </div>
+
                 <header><div className="header_title">Найти заявку</div></header>
-                    <div className="content search">
+
+                <div className="content search">
 
                         <form className="searchForm" onSubmit={(event) => {
                             event.preventDefault()

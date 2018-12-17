@@ -1,0 +1,1 @@
+<Link to={'/tickets/' + this.partNumber}>Посмотреть другие заявки с <b>{this.model} {this.partNumber}</b></Link>
