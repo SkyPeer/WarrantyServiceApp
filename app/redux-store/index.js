@@ -30,6 +30,13 @@ function reduxState(
                 console.log(state.data)
             })();*/
 
+        case 'DISPATCHDATA':
+        {
+            console.log('action.foo', action.foo)
+            //console.log(arguments)
+            //state.data = data;
+        }
+
 
         case 'GETSC':
             /*fetch(`/mongooseGetDataSC`)
@@ -62,7 +69,7 @@ let store = createStore(reduxState);
 
 //store.dispatch({type: 'INCREMENT', arg:1});
 
-store.dispatch({type: 'GETDATA'});
+//store.dispatch({type: 'GETDATA'});
 //store.dispatch({type: 'DECREMENT'});
 
 export default store

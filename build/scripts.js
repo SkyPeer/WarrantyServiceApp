@@ -2166,13 +2166,38 @@ function (_Component) {
       //this.updateStateFromReduxStore();
     }
   }, {
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      _redux_store__WEBPACK_IMPORTED_MODULE_6__["default"].dispatch({
+        type: 'GETDATA'
+      });
+      this.setState({
+        data: _redux_store__WEBPACK_IMPORTED_MODULE_6__["default"].getState().data
+      });
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       //console.log('reduxStore.getState()', reduxStore.getState())
       //this.getAllData();
       this.unsubscribeStore = _redux_store__WEBPACK_IMPORTED_MODULE_6__["default"].subscribe(this.updateStateFromReduxStore);
-      _redux_store__WEBPACK_IMPORTED_MODULE_6__["default"].dispatch({
-        type: 'GETDATA'
+      fetch("/mongooseGetDataTickets").then(function (res) {
+        return res.json();
+      }).then(function (json) {
+        return _redux_store__WEBPACK_IMPORTED_MODULE_6__["default"].dispatch({
+          type: 'DISPATCHDATA',
+          data: json.data,
+          currentDate: json.currentDate,
+          foo: 2
+        });
+      });
+      fetch("/mongooseGetDataSC").then(function (res) {
+        return res.json();
+      }).then(function (json) {
+        return _redux_store__WEBPACK_IMPORTED_MODULE_6__["default"].dispatch({
+          type: 'DISPATCHSC',
+          sc: json.sc
+        });
       }); //this.timerGetAllData;
       // console.log(' --- reduxstore: ', reduxStore);
       //this.setState({reduxValue:store.getState()});
@@ -2513,6 +2538,12 @@ function reduxState() {
         console.log(state.data)
     })();*/
 
+    case 'DISPATCHDATA':
+      {
+        console.log('action.foo', action.foo); //console.log(arguments)
+        //state.data = data;
+      }
+
     case 'GETSC':
     /*fetch(`/mongooseGetDataSC`)
         .then(res => res.json())
@@ -2537,10 +2568,8 @@ function reduxState() {
 var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reduxState); //store.subscribe( () => console.log( 'store.subscribe(() - store.getState()', store.getState() ) );
 //store.dispatch({ type: 'INCREMENT' });
 //store.dispatch({type: 'INCREMENT', arg:1});
-
-store.dispatch({
-  type: 'GETDATA'
-}); //store.dispatch({type: 'DECREMENT'});
+//store.dispatch({type: 'GETDATA'});
+//store.dispatch({type: 'DECREMENT'});
 
 /* harmony default export */ __webpack_exports__["default"] = (store);
 

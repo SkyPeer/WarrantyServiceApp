@@ -141,14 +141,22 @@ class TicketsComponent extends Component {
             .then(json => this.setState({sc: json}));
     };
 
-
+    componentWillMount(){
+        reduxStore.dispatch({ type: 'GETDATA' });
+        this.setState({data: reduxStore.getState().data})
+    }
 
     componentDidMount() {
         //console.log('reduxStore.getState()', reduxStore.getState())
         //this.getAllData();
         this.unsubscribeStore = reduxStore.subscribe(this.updateStateFromReduxStore);
 
-        reduxStore.dispatch({ type: 'GETDATA' });
+        fetch(`/mongooseGetDataTickets`)
+            .then(res => res.json())
+            .then(json => reduxStore.dispatch({type: 'DISPATCHDATA', data: json.data, currentDate: json.currentDate, foo: 2}));
+        fetch(`/mongooseGetDataSC`)
+            .then(res => res.json())
+            .then(json => reduxStore.dispatch({type: 'DISPATCHSC', sc: json.sc}))
 
         //this.timerGetAllData;
 
