@@ -1,11 +1,12 @@
 import {createStore} from 'redux';
+import axios from 'axios';
 
 function reduxState(
     state = {
-        data: [],
+       data: [],
         sc: [],
         currentDate : '',
-        counter: 1,
+
 
     }, action) {
 
@@ -16,22 +17,41 @@ function reduxState(
             return state
         }
 
-        //return state - 1;
         case 'GETDATA':
             fetch(`/mongooseGetDataTickets`)
                 .then(res => res.json())
-                .then(json => this.state({data: json.data, currentDate: json.currentDate}));
+                .then(json => {state.data = json.data; state.currentDate = json.currentDate});
             fetch(`/mongooseGetDataSC`)
                 .then(res => res.json())
-                .then(json => this.state({sc: json}));
+                .then(json => state.sc = json);
+            /*(async function getData() {
+                let data = await axios.get('/mongooseGetDataTickets');
+                state.data = data.data
+                console.log(state.data)
+            })();*/
+
+
+        case 'GETSC':
+            /*fetch(`/mongooseGetDataSC`)
+                .then(res => res.json())
+                .then(json => state.sc = json);*/
+
         default:
             return state
     }
 }
 
-setInterval(() => {
-    store.dispatch({type: 'INCREMENT'});
-}, 4000);
+/*setInterval(() => {
+    store.dispatch({type: 'GETDATA'});
+}, 4000);*/
+
+/*let userProvider = {
+    async fetch() {
+        let response = await axios.post('/mongooseGetDataTickets');
+        return response.data.users;
+    },
+};*/
+
 
 
 let store = createStore(reduxState);
@@ -40,8 +60,9 @@ let store = createStore(reduxState);
 
 //store.dispatch({ type: 'INCREMENT' });
 
-store.dispatch({type: 'INCREMENT'});
+//store.dispatch({type: 'INCREMENT', arg:1});
 
+store.dispatch({type: 'GETDATA'});
 //store.dispatch({type: 'DECREMENT'});
 
 export default store

@@ -10,7 +10,8 @@ import {DescComponent} from "./pages/tickets/othertickets"
 import {Layout} from "./controls/layout";
 
 import { Provider } from 'react-redux';
-import store from './redux-store'
+import store from './redux-store';
+
 
 
 const Routing = () => (

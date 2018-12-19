@@ -11,27 +11,33 @@ import { connect } from 'react-redux';
 
 class TicketsComponent extends Component {
     state = {
-        data: [],
+        data: reduxStore.getState().data,
+        sc: [],
+        currentDate: '',
+
         openTicketDescId: null,
         idOfupdatedTicket: null,
-        sc: [],
         ticketWasDeleted: false,
         finishDate: '',
         daysLeft: '',
-        currentDate: '',
         scListWasUpadted: false,
 
         reduxCounter: ''
 
     };
 
+
+
     getAllData() {
-        fetch(`/mongooseGetDataTickets`)
+        /*fetch(`/mongooseGetDataTickets`)
             .then(res => res.json())
             .then(json => this.setState({data: json.data, currentDate: json.currentDate}));
         fetch(`/mongooseGetDataSC`)
             .then(res => res.json())
-            .then(json => this.setState({sc: json}))
+            .then(json => this.setState({sc: json}))*/
+
+        //this.updateStateFromReduxStore();
+
     }
 
     deleteData = (id) => {
@@ -135,45 +141,45 @@ class TicketsComponent extends Component {
             .then(json => this.setState({sc: json}));
     };
 
+
+
     componentDidMount() {
-        this.getAllData();
-        this.timerGetAllData;
+        //console.log('reduxStore.getState()', reduxStore.getState())
+        //this.getAllData();
+        this.unsubscribeStore = reduxStore.subscribe(this.updateStateFromReduxStore);
+
+        reduxStore.dispatch({ type: 'GETDATA' });
+
+        //this.timerGetAllData;
 
        // console.log(' --- reduxstore: ', reduxStore);
 
         //this.setState({reduxValue:store.getState()});
         //store.subscribe(()=>this.setState({reduxValue:store.getState()}));
         //store.subscribe(()=>this.reduxStore = store.getState())
-        this.unsubscribeStore = reduxStore.subscribe(this.updateStateFromStore);
+
+
+
     }
 
     componentWillUnmount() {
-        clearInterval(this.timerGetAllData);
+     //   clearInterval(this.timerGetAllData);
         //store.unsubscribe()
-        this.unsubscribeStore();
+       // this.unsubscribeStore();
     }
 
-   timerGetAllData = setInterval(() => {
+   /*timerGetAllData = setInterval(() => {
         this.getAllData()
-    }, 4000);
+    }, 4000); */
 
 
-    getCurrentStateFromStore() {
-       // console.log(' --- reduxStore.getState().counter: ', reduxStore.getState().counter);
-        return {
-            reduxCounter: reduxStore.getState().counter,
-        }
-    }
 
-    updateStateFromStore = () => {
-        const currentState = this.getCurrentStateFromStore();
-        //console.log('updateStateFromStore , : currentState : ', currentState.reduxCounter);
-        this.setState({reduxCounter: currentState.reduxCounter});
+    updateStateFromReduxStore = () => {
+        const reduxState = reduxStore.getState();
+        console.log('updateStateFromStore , : currentState : ', reduxState.data);
+        this.setState({data: reduxState.data, sc: reduxState.sc, currentDate: reduxState.currentDate });
 
     };
-
-
-
 
     render() {
         return (
@@ -181,6 +187,15 @@ class TicketsComponent extends Component {
                 <header>
                     <div className="header_title">Заявки на обслуживание</div>
                 </header>
+
+                <div>
+                    <button onClick={()=>{reduxStore.dispatch({ type: 'INCREMENT' })}}>-- + --</button>
+                    <button onClick={()=>{/*reduxStore.dispatch({ type: 'GETDATA' })*/ }}>-- GETDATA --</button>
+                    <button onClick={()=>{reduxStore.dispatch({ type: 'CASEFUNC', foo: 2 })}}>-- CASEFUNC --</button>
+                    <button onClick={()=>console.log(reduxStore.getState())}>-- 0 --</button><br />
+
+                </div>
+
                 <div id="additionalMenu">
                     <Link className='servicecentersLink' style={{color: 'white', textDecoration: 'none'}} to="/servicecenters">Сервисные центры</Link>
                 </div>
