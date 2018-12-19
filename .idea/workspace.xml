@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7c3f11f8-8f34-4f71-90a4-ff7c203623dc" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/pages/search/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/search/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/pages/tickets/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/tickets/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/redux-store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/redux-store/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/scripts.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/scripts.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/build/scripts.js.map" afterDir="false" />
     </list>
@@ -34,29 +31,42 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/pages/tickets/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="141" column="9" selection-start-line="141" selection-start-column="9" selection-end-line="141" selection-end-column="9" />
+            <state relative-caret-position="-457">
+              <caret line="50" column="32" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="32" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
                 <element signature="e#150#195#0" expanded="true" />
-                <element signature="e#376#417#0" expanded="true" />
                 <element signature="n#!!block;n#getAllData#0;n#TicketsComponent#0" />
-                <element signature="e#1087#1967#0" />
-                <element signature="e#2013#2280#0" />
-                <element signature="e#2323#3123#0" />
-                <element signature="e#3163#3219#0" />
-                <element signature="e#3262#4091#0" />
-                <element signature="e#4127#4261#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/redux-store/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="988">
-              <caret line="38" column="2" selection-start-line="38" selection-start-column="2" selection-end-line="38" selection-end-column="2" />
+            <state relative-caret-position="480">
+              <caret line="38" column="32" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="498">
+              <caret line="76" lean-forward="true" selection-start-line="76" selection-end-line="76" />
+              <folding>
+                <element signature="e#1001#1523#0" />
+                <element signature="e#1635#1704#0" />
+                <element signature="n#!!block;n#getRandomTicketNumber#0" />
+                <element signature="n#!!block;n#getCurrnetDateTime#0" />
+                <element signature="e#2488#2622#0" />
+                <element signature="e#2695#3526#0" />
+                <element signature="e#3599#4008#0" />
+                <element signature="e#4081#4427#0" />
+                <element signature="n#!!block;n#mailersend#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -64,8 +74,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/pages/search/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+            <state relative-caret-position="1222">
+              <caret line="50" selection-start-line="50" selection-end-line="50" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -76,8 +86,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="676">
-              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+            <state relative-caret-position="364">
+              <caret line="26" selection-start-line="26" selection-end-line="26" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -135,8 +145,6 @@
       <find>console.</find>
       <find>days</find>
       <find>color</find>
-      <find>consol</find>
-      <find>console</find>
       <find>новый</find>
       <find>cont</find>
       <find>content_ma</find>
@@ -145,6 +153,8 @@
       <find>delete</find>
       <find>store</find>
       <find>console.log</find>
+      <find>consol</find>
+      <find>console</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -194,8 +204,8 @@
         <option value="$PROJECT_DIR$/index.js" />
         <option value="$PROJECT_DIR$/app/index.js" />
         <option value="$PROJECT_DIR$/app/pages/search/index.js" />
-        <option value="$PROJECT_DIR$/app/pages/tickets/index.js" />
         <option value="$PROJECT_DIR$/app/redux-store/index.js" />
+        <option value="$PROJECT_DIR$/app/pages/tickets/index.js" />
       </list>
     </option>
   </component>
@@ -320,7 +330,7 @@
   <component name="RunManager" selected="Node.js.index.js">
     <configuration name="date.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-js-file="date.js" working-dir="$PROJECT_DIR$/../practice/Parctice" />
     <configuration name="filterSearch.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-js-file="filterSearch.js" working-dir="$PROJECT_DIR$/../practice/Parctice" />
-    <configuration name="index.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-js-file="index.js" working-dir="$PROJECT_DIR$" />
+    <configuration name="index.js" type="NodeJSConfigurationType" factoryName="Node.js" path-to-js-file="index.js" working-dir="$PROJECT_DIR$" />
     <configuration name="switch.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-js-file="switch.js" working-dir="$PROJECT_DIR$/../practice/Parctice" />
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-interpreter>project</node-interpreter>
@@ -348,7 +358,6 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Node.js.index.js" />
         <item itemvalue="npm.start" />
         <item itemvalue="Node.js.filterSearch.js" />
         <item itemvalue="Node.js.switch.js" />
@@ -413,11 +422,12 @@
       <workItem from="1544983975982" duration="8681000" />
       <workItem from="1545022853594" duration="1259000" />
       <workItem from="1545168139217" duration="6031000" />
+      <workItem from="1545180388571" duration="130000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="759679000" />
+    <option name="totallyTimeSpent" value="759809000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -432,14 +442,13 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.64961916" visible="true" weight="0.12802951" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.648531" visible="true" weight="0.12802951" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49367756" weight="0.32861805" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50632244" side_tool="true" weight="0.32861805" />
-      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3297062" />
-      <window_info id="npm" order="2" sideWeight="0.35038084" side_tool="true" visible="true" weight="0.12802951" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4910432" weight="0.20457019" />
+      <window_info id="npm" order="2" sideWeight="0.35146898" side_tool="true" visible="true" weight="0.12802951" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24973656" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49789253" weight="0.33949944" />
       <window_info id="Favorites" order="3" sideWeight="0.34698796" side_tool="true" weight="0.12802951" />
@@ -450,6 +459,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -686,24 +696,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1222">
-          <caret line="87" column="53" lean-forward="true" selection-start-line="87" selection-start-column="53" selection-end-line="87" selection-end-column="53" />
-          <folding>
-            <element signature="e#1001#1523#0" />
-            <element signature="e#1635#1704#0" />
-            <element signature="n#!!block;n#getRandomTicketNumber#0" />
-            <element signature="n#!!block;n#getCurrnetDateTime#0" />
-            <element signature="e#2488#2622#0" />
-            <element signature="e#2695#3526#0" />
-            <element signature="e#3599#4008#0" />
-            <element signature="e#4081#4427#0" />
-            <element signature="n#!!block;n#mailersend#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controls/layout.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="104">
@@ -734,8 +726,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="676">
-          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+        <state relative-caret-position="364">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
@@ -744,8 +736,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/pages/search/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+        <state relative-caret-position="1222">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
@@ -754,27 +746,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/pages/tickets/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="141" column="9" selection-start-line="141" selection-start-column="9" selection-end-line="141" selection-end-column="9" />
+        <state relative-caret-position="-457">
+          <caret line="50" column="32" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="32" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
             <element signature="e#150#195#0" expanded="true" />
-            <element signature="e#376#417#0" expanded="true" />
             <element signature="n#!!block;n#getAllData#0;n#TicketsComponent#0" />
-            <element signature="e#1087#1967#0" />
-            <element signature="e#2013#2280#0" />
-            <element signature="e#2323#3123#0" />
-            <element signature="e#3163#3219#0" />
-            <element signature="e#3262#4091#0" />
-            <element signature="e#4127#4261#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/redux-store/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="988">
-          <caret line="38" column="2" selection-start-line="38" selection-start-column="2" selection-end-line="38" selection-end-column="2" />
+        <state relative-caret-position="480">
+          <caret line="38" column="32" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="498">
+          <caret line="76" lean-forward="true" selection-start-line="76" selection-end-line="76" />
+          <folding>
+            <element signature="e#1001#1523#0" />
+            <element signature="e#1635#1704#0" />
+            <element signature="n#!!block;n#getRandomTicketNumber#0" />
+            <element signature="n#!!block;n#getCurrnetDateTime#0" />
+            <element signature="e#2488#2622#0" />
+            <element signature="e#2695#3526#0" />
+            <element signature="e#3599#4008#0" />
+            <element signature="e#4081#4427#0" />
+            <element signature="n#!!block;n#mailersend#0" />
+          </folding>
         </state>
       </provider>
     </entry>

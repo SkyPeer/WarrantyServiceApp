@@ -159,7 +159,7 @@ class TicketsComponent extends Component {
 
 
     getCurrentStateFromStore() {
-        console.log(' --- reduxStore.getState().counter: ', reduxStore.getState().counter);
+       // console.log(' --- reduxStore.getState().counter: ', reduxStore.getState().counter);
         return {
             reduxCounter: reduxStore.getState().counter,
         }

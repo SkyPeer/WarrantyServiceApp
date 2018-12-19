@@ -2198,7 +2198,7 @@ function (_Component) {
   }, {
     key: "getCurrentStateFromStore",
     value: function getCurrentStateFromStore() {
-      console.log(' --- reduxStore.getState().counter: ', _redux_store__WEBPACK_IMPORTED_MODULE_6__["default"].getState().counter);
+      // console.log(' --- reduxStore.getState().counter: ', reduxStore.getState().counter);
       return {
         reduxCounter: _redux_store__WEBPACK_IMPORTED_MODULE_6__["default"].getState().counter
       };
