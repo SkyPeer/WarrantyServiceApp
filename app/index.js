@@ -9,6 +9,9 @@ import {ServiceCentres} from "./pages/servicecenters";
 import {DescComponent} from "./pages/tickets/othertickets"
 import {Layout} from "./controls/layout";
 
+import { Provider } from 'react-redux';
+import store from './redux-store'
+
 
 const Routing = () => (
     <Switch>
@@ -23,7 +26,10 @@ const Routing = () => (
 );
 
 render(
-    <BrowserRouter>
-        <Routing />
-    </BrowserRouter>,
+
+        <BrowserRouter>
+            <Provider store={store}>
+                <Routing />
+            </Provider>
+        </BrowserRouter>,
     document.getElementById('root'));

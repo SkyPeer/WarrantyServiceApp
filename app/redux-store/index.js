@@ -4,12 +4,18 @@ function reduxState(
     state = {
         data: [],
         sc: [],
-        counter: 0,
+        currentDate : '',
+        counter: 1,
+
     }, action) {
 
     switch (action.type) {
         case 'INCREMENT':
-            return state + 1;
+        {
+            state.counter  = state.counter + 1;
+            return state
+        }
+
         //return state - 1;
         case 'GETDATA':
             fetch(`/mongooseGetDataTickets`)
@@ -24,19 +30,18 @@ function reduxState(
 }
 
 setInterval(() => {
-    console.log('redux interval');
     store.dispatch({type: 'INCREMENT'});
 }, 4000);
 
 
-let store = createStore(reduxState)
+let store = createStore(reduxState);
 
-//store.subscribe(() => console.log('store.subscribe(() - store.getState()', store.getState()))
+//store.subscribe( () => console.log( 'store.subscribe(() - store.getState()', store.getState() ) );
 
 //store.dispatch({ type: 'INCREMENT' });
 
 store.dispatch({type: 'INCREMENT'});
 
-store.dispatch({type: 'DECREMENT'});
+//store.dispatch({type: 'DECREMENT'});
 
 export default store
