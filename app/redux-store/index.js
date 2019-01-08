@@ -1,9 +1,36 @@
-import {createStore} from 'redux';
-import axios from 'axios';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
 
-function reduxState(
-    state = {
-       data: [],
+const initialState = {
+    data: [],
+    sc: [],
+    currentDate: '',
+};
+
+
+function reducer(state = initialState, action) {
+    switch(action.type) {
+        case 'CHANGESTORE':
+
+            console.log('CHANGESTORE REDUCE');
+            console.log('action.items', action.providerData)
+            state.data = action.providerData.data;
+            state.currentDate = action.providerData.currentDate;
+
+            return {
+                data: state.data,
+                currentDate: state.currentDate
+                //total: state.total
+            };
+        default:
+            return state;
+    }
+}
+
+
+
+function reduxState(state = {
+        data: [],
         sc: [],
         currentDate : '',
 
@@ -20,10 +47,14 @@ function reduxState(
         case 'GETDATA':
             fetch(`/mongooseGetDataTickets`)
                 .then(res => res.json())
-                .then(json => {state.data = json.data; state.currentDate = json.currentDate});
+                .then(json => {state.data = json.data; state.currentDate = json.currentDate})
+                .then(console.log('GETDATA mongooseGetDataTickets'));
+
             fetch(`/mongooseGetDataSC`)
                 .then(res => res.json())
-                .then(json => state.sc = json);
+                .then(json => state.sc = json)
+                .then(console.log('GETDATA mongooseGetDataSC'));
+
             /*(async function getData() {
                 let data = await axios.get('/mongooseGetDataTickets');
                 state.data = data.data
@@ -61,7 +92,7 @@ function reduxState(
 
 
 
-let store = createStore(reduxState);
+let store = createStore(reducer, applyMiddleware(thunk));
 
 //store.subscribe( () => console.log( 'store.subscribe(() - store.getState()', store.getState() ) );
 
@@ -71,5 +102,7 @@ let store = createStore(reduxState);
 
 //store.dispatch({type: 'GETDATA'});
 //store.dispatch({type: 'DECREMENT'});
+
+store.subscribe(() => console.log('STORE updated'/*, store.getState()*/));
 
 export default store

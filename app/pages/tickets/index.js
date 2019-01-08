@@ -1,17 +1,33 @@
-import React, {Component} from 'react';
+import React, {Component } from 'react';
 import {Link} from 'react-router-dom';
-import {render} from 'react-dom'
+import { connect } from 'react-redux';
+//import {render} from 'react-dom'
 /*import 'react-dropdown/style.css'*/
 import {Layout} from "../../controls/layout";
 import {statusOptions, typeOfServiceOptions, ticketPriorityOptions, placeOptions} from "../props";
 import {OpenFormComponent} from "./form";
 const getDate = require('../getDate');
-import reduxStore from "../../redux-store";
-import { connect } from 'react-redux';
+//import reduxStore from "../../redux-store";
+import {getDataAction} from "../../redux-store/actions";
+
+function mapStateToProps(state) {
+    return {
+        /*reduxData: state.items.data,
+        total: state.total*/
+        ...state
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchData: (arg) => dispatch(getDataAction(arg))
+    };
+};
+
 
 class TicketsComponent extends Component {
     state = {
-        data: reduxStore.getState().data,
+        data: [],
         sc: [],
         currentDate: '',
 
@@ -25,8 +41,6 @@ class TicketsComponent extends Component {
         reduxCounter: ''
 
     };
-
-
 
     getAllData() {
         /*fetch(`/mongooseGetDataTickets`)
@@ -142,21 +156,28 @@ class TicketsComponent extends Component {
     };
 
     componentWillMount(){
-        reduxStore.dispatch({ type: 'GETDATA' });
-        this.setState({data: reduxStore.getState().data})
+        //this.unsubscribeStore = reduxStore.subscribe(this.updateStateFromReduxStore);
+        //reduxStore.dispatch({ type: 'GETDATA' });
+        //this.setState({data: reduxStore.getState().data})
     }
 
     componentDidMount() {
+
+        this.props.fetchData();
+        console.log(this.props)
         //console.log('reduxStore.getState()', reduxStore.getState())
         //this.getAllData();
-        this.unsubscribeStore = reduxStore.subscribe(this.updateStateFromReduxStore);
+        //reduxStore.dispatch({ type: 'GETDATA' });
 
-        fetch(`/mongooseGetDataTickets`)
+
+        //reduxStore.dispatch({type: 'GETDATA'});
+
+        /*fetch(`/mongooseGetDataTickets`)
             .then(res => res.json())
             .then(json => reduxStore.dispatch({type: 'DISPATCHDATA', data: json.data, currentDate: json.currentDate, foo: 2}));
         fetch(`/mongooseGetDataSC`)
             .then(res => res.json())
-            .then(json => reduxStore.dispatch({type: 'DISPATCHSC', sc: json.sc}))
+            .then(json => reduxStore.dispatch({type: 'DISPATCHSC', sc: json.sc}))*/
 
         //this.timerGetAllData;
 
@@ -173,13 +194,13 @@ class TicketsComponent extends Component {
     componentWillUnmount() {
      //   clearInterval(this.timerGetAllData);
         //store.unsubscribe()
-       // this.unsubscribeStore();
+       //this.unsubscribeStore();
+       //console.log(TicketsComponent.PropTypes)
     }
 
    /*timerGetAllData = setInterval(() => {
         this.getAllData()
     }, 4000); */
-
 
 
     updateStateFromReduxStore = () => {
@@ -202,6 +223,11 @@ class TicketsComponent extends Component {
                     <button onClick={()=>{reduxStore.dispatch({ type: 'CASEFUNC', foo: 2 })}}>-- CASEFUNC --</button>
                     <button onClick={()=>console.log(reduxStore.getState())}>-- 0 --</button><br />
 
+                    <button onClick={()=>
+                        /*this.props.reduxData.map((item)=>console.log(item._id))*/
+                        console.log(this.props)
+                    }>
+                        TEST REDUX</button>
                 </div>
 
                 <div id="additionalMenu">
@@ -220,7 +246,7 @@ class TicketsComponent extends Component {
                     </div> }
                     </div>
 
-                    {this.state.data.map((ticket) => (
+                    {this.props.data.map((ticket) => (
                         <div key={ticket._id}>
 
                             <div>{this.state.idOfupdatedTicket === ticket._id &&
@@ -264,11 +290,11 @@ class TicketsComponent extends Component {
                                             (ticket.daysForService && ticket.status !== 3) && <div className="daysForService">
                                                 <div
                                                     className="finishDate">
-                                                    Завершение: {getDate(this.state.currentDate, ticket.ticketDate, ticket.daysForService).finishDate}
+                                                    Завершение: {getDate(this.props.currentDate, ticket.ticketDate, ticket.daysForService).finishDate}
 
                                                     <span className="daysForService"> осталось:
-                                                        <span className={getDate(this.state.currentDate, ticket.ticketDate, ticket.daysForService).daysLeftClass}>
-                                                        {getDate(this.state.currentDate, ticket.ticketDate, ticket.daysForService).daysLeftLocal}
+                                                        <span className={getDate(this.props.currentDate, ticket.ticketDate, ticket.daysForService).daysLeftClass}>
+                                                        {getDate(this.props.currentDate, ticket.ticketDate, ticket.daysForService).daysLeftLocal}
                                                         </span>
                                                          дн.
                                                     </span>
@@ -358,4 +384,6 @@ class TicketsComponent extends Component {
     }
 }// end of RouterComponent
 
-export {TicketsComponent}
+//export {TicketsComponent}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TicketsComponent);
