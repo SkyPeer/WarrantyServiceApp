@@ -336,7 +336,7 @@ mailer.extend(app, {
     transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
     auth: {
         user: 'arroway.service@yandex.ru',
-        pass: 'b!azQ32v#zY'
+        pass: ''
     }
 });
 function mailersend(mailadress, ticketNumber, vendor, model, partnumber, problem) {
