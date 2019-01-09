@@ -324,8 +324,6 @@ app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
         })
 });
 
-///
-
 //---------------------------- mailer
 
 mailer.extend(app, {
@@ -360,7 +358,6 @@ function mailersend(mailadress, ticketNumber, vendor, model, partnumber, problem
     });
 
 }
-
 
 app.use(helmet());
 app.use(compression());
