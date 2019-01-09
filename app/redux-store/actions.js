@@ -1,7 +1,7 @@
 import {getDataProvider} from "./providers";
 
-export function changeDataInStoreAction(providerData) {
-    console.log(' --- changeDataInStoreAction');
+export function changeDataInStoreAction(providerData, dataType) {
+    console.log(' --- changeDataInStoreAction' + ' dataType:', dataType);
     return {
         type: 'CHANGESTORE', providerData: providerData
     };

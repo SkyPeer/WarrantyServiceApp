@@ -2511,8 +2511,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDataAction", function() { return getDataAction; });
 /* harmony import */ var _providers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./providers */ "./app/redux-store/providers.js");
 
-function changeDataInStoreAction(providerData) {
-  console.log(' --- changeDataInStoreAction');
+function changeDataInStoreAction(providerData, dataType) {
+  console.log(' --- changeDataInStoreAction' + ' dataType:', dataType);
   return {
     type: 'CHANGESTORE',
     providerData: providerData
@@ -2674,8 +2674,12 @@ function getDataProvider() {
     }).then(function (response) {
       return response.json();
     }).then(function (providerData) {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_0__["changeDataInStoreAction"])(providerData));
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_0__["changeDataInStoreAction"])(providerData, 'tickets'));
     });
+    /*fetch(`/mongooseGetDataSC`)
+        .then((response) => {return response})
+        .then((response) => response.json())
+        .then((serviceCenters) => this.setState({sc: json}))*/
   };
 }
 
