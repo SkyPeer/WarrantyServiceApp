@@ -7,7 +7,7 @@
 
 import {changeDataInStoreAction} from "./actions";
 
-export function getDataProvider() {
+export function getDataProvider() { //FIXME rename to getTicketsProvied
     console.log('mongooseGetDataTickets provider');
     return (dispatch) => {
         fetch('/mongooseGetDataTickets')
@@ -20,3 +20,5 @@ export function getDataProvider() {
             .then((serviceCenters) => this.setState({sc: json}))*/
     };
 }
+
+// need GetSC providers!

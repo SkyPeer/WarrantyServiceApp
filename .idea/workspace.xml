@@ -4,14 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/.babelrc" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c3f11f8-8f34-4f71-90a4-ff7c203623dc" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/redux-store/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/redux-store/actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/redux-store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/redux-store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/redux-store/providers.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/redux-store/providers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/scripts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/scripts.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/build/scripts.js.map" afterDir="false" />
-    </list>
+    <list default="true" id="7c3f11f8-8f34-4f71-90a4-ff7c203623dc" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -382,12 +375,12 @@
       <workItem from="1546869782205" duration="1913000" />
       <workItem from="1546942926511" duration="9381000" />
       <workItem from="1547012491579" duration="2095000" />
-      <workItem from="1547065261192" duration="609000" />
+      <workItem from="1547065261192" duration="658000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="814220000" />
+    <option name="totallyTimeSpent" value="814269000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -402,13 +395,13 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.63418293" visible="true" weight="0.11064278" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6343852" visible="true" weight="0.11064278" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49315068" weight="0.32861805" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5089568" side_tool="true" weight="0.35582155" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.3297062" />
-      <window_info id="npm" order="2" sideWeight="0.3658171" side_tool="true" visible="true" weight="0.11064278" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4910432" visible="true" weight="0.2742111" />
+      <window_info id="npm" order="2" sideWeight="0.3656148" side_tool="true" visible="true" weight="0.11064278" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4910432" weight="0.2742111" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24973656" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49789253" weight="0.33949944" />
       <window_info id="Favorites" order="3" sideWeight="0.34698796" side_tool="true" weight="0.12802951" />
