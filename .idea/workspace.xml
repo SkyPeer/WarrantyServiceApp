@@ -2,9 +2,13 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/.babelrc" />
+    <bookmark url="file://$PROJECT_DIR$/app/redux-store/index.js" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c3f11f8-8f34-4f71-90a4-ff7c203623dc" name="Default" comment="" />
+    <list default="true" id="7c3f11f8-8f34-4f71-90a4-ff7c203623dc" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/redux-store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/redux-store/index.js" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -26,10 +30,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/pages/tickets/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
+            <state relative-caret-position="-1170">
               <caret line="50" column="52" selection-start-line="48" selection-start-column="8" selection-end-line="50" selection-end-column="52" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
@@ -41,11 +45,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="116">
+              <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -53,8 +54,11 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/redux-store/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="15" column="61" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
+            <state relative-caret-position="26">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -63,12 +67,12 @@
         <entry file="file://$PROJECT_DIR$/app/redux-store/providers.js">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="12" lean-forward="true" selection-start-column="12" selection-end-column="12" />
+              <caret column="12" selection-start-column="12" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="actions.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="actions.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/redux-store/actions.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="78">
@@ -172,8 +176,8 @@
         <option value="$PROJECT_DIR$/index.js" />
         <option value="$PROJECT_DIR$/../practice/Parctice/NodeJS/test-start.js" />
         <option value="$PROJECT_DIR$/app/redux-store/providers.js" />
-        <option value="$PROJECT_DIR$/app/redux-store/index.js" />
         <option value="$PROJECT_DIR$/app/redux-store/actions.js" />
+        <option value="$PROJECT_DIR$/app/redux-store/index.js" />
       </list>
     </option>
   </component>
@@ -222,11 +226,6 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="redux-store" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="WarrantyServiceApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WarrantyServiceApp" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -238,7 +237,7 @@
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="SearchEverywhereHistoryKey" value="lasname&#9;null&#9;null&#10;las&#9;null&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../redux2/dummys/dummys-guide-to-redux-and-thunk-react-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../reduxApp" />
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
@@ -376,11 +375,13 @@
       <workItem from="1546942926511" duration="9381000" />
       <workItem from="1547012491579" duration="2095000" />
       <workItem from="1547065261192" duration="658000" />
+      <workItem from="1547984097487" duration="2040000" />
+      <workItem from="1552256546740" duration="655000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="814269000" />
+    <option name="totallyTimeSpent" value="816964000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -395,17 +396,17 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6343852" visible="true" weight="0.11064278" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.63220894" visible="true" weight="0.11064278" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49315068" weight="0.32861805" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5089568" side_tool="true" weight="0.35582155" />
-      <window_info anchor="bottom" id="Version Control" order="10" weight="0.3297062" />
-      <window_info id="npm" order="2" sideWeight="0.3656148" side_tool="true" visible="true" weight="0.11064278" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4910432" weight="0.2742111" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.3297062" />
+      <window_info id="npm" order="2" sideWeight="0.3677911" side_tool="true" visible="true" weight="0.11064278" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24973656" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49789253" weight="0.33949944" />
-      <window_info id="Favorites" order="3" sideWeight="0.34698796" side_tool="true" weight="0.12802951" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39935064" />
+      <window_info id="Favorites" order="3" sideWeight="0.34698796" side_tool="true" weight="0.12802951" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -686,7 +687,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4212">
+        <state relative-caret-position="-718">
           <caret line="270" lean-forward="true" selection-start-line="270" selection-end-line="270" />
           <folding>
             <element signature="e#1001#1523#0" />
@@ -702,37 +703,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/pages/tickets/index.js">
+    <entry file="file://$PROJECT_DIR$/app/redux-store/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="50" column="52" selection-start-line="48" selection-start-column="8" selection-end-line="50" selection-end-column="52" />
+        <state relative-caret-position="26">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
           <folding>
-            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#0#51#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/redux-store/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="15" column="61" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
+        <state relative-caret-position="116">
+          <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/redux-store/providers.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="12" lean-forward="true" selection-start-column="12" selection-end-column="12" />
+          <caret column="12" selection-start-column="12" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -740,6 +731,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="78">
           <caret line="3" column="51" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/pages/tickets/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1170">
+          <caret line="50" column="52" selection-start-line="48" selection-start-column="8" selection-end-line="50" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -12,7 +12,7 @@ function reducer(state = initialState, action) {
     switch(action.type) {
         case 'CHANGESTORE':
 
-            console.log('CHANGESTORE REDUCE');
+            console.log('CHANGESTORE REDUCER');
             console.log('action.items', action.providerData);
             state.data = action.providerData.data;
             state.currentDate = action.providerData.currentDate;
