@@ -844,7 +844,7 @@ module.exports = function (_currentDate, _ticketDate, _daysLeft) {
   return {
     dateOfCreation: dateOfCreation.getDate() + '/' + (dateOfCreation.getMonth() + parseInt(1)) + '/' + dateOfCreation.getFullYear() + ' ' + dateOfCreation.getHours() + ':' + minutes,
     finishDate: finishDate.getDate() + '/' + (finishDate.getMonth() + parseInt(1)) + '/' + finishDate.getFullYear(),
-    daysLeftLocal: daysLeftLocal < 0 ? 'просрочено: ' + daysLeftLocal * -1 + ' ' : daysLeftLocal + '',
+    daysLeftLocal: daysLeftLocal,
     daysLeftClass: daysLeftClass
   };
 };
@@ -2557,7 +2557,7 @@ function reducer() {
 
   switch (action.type) {
     case 'CHANGESTORE':
-      console.log('CHANGESTORE REDUCE');
+      console.log('CHANGESTORE REDUCER');
       console.log('action.items', action.providerData);
       state.data = action.providerData.data;
       state.currentDate = action.providerData.currentDate;
@@ -2667,6 +2667,7 @@ __webpack_require__.r(__webpack_exports__);
         .then(json => this.setState({sc: json}))*/
 
 function getDataProvider() {
+  //FIXME rename to getTicketsProvied
   console.log('mongooseGetDataTickets provider');
   return function (dispatch) {
     fetch('/mongooseGetDataTickets').then(function (response) {
@@ -2681,7 +2682,7 @@ function getDataProvider() {
         .then((response) => response.json())
         .then((serviceCenters) => this.setState({sc: json}))*/
   };
-}
+} // need GetSC providers!
 
 /***/ }),
 
