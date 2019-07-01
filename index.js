@@ -16,6 +16,7 @@ const express = require('express'),
     jade = require('jade'),
     datetime = require('node-datetime');
 //mongoose = require('mongoose');
+const mailconfig = require('./mail-config')
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
@@ -333,8 +334,8 @@ mailer.extend(app, {
     port: 465, // port for secure SMTP
     transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
     auth: {
-        user: 'arroway.service@yandex.ru',
-        pass: ''
+        user: mailconfig.user,
+        pass: mailconfig.pass
     }
 });
 function mailersend(mailadress, ticketNumber, vendor, model, partnumber, problem) {
