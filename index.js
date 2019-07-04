@@ -15,8 +15,9 @@ const express = require('express'),
     mailer = require('express-mailer'),
     jade = require('jade'),
     datetime = require('node-datetime');
-//mongoose = require('mongoose');
-const mailconfig = require('./mail-config')
+    mailconfig = require('./mail-config')
+
+console.log('mailConfig', mailconfig)
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
@@ -319,7 +320,7 @@ app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
             res.json({resJson})
         })
         .then(mailersend(req.body.email, randomTicketNumber, req.body.vendor, req.body.model, req.body.partNumber, req.body.problem))
-        .then(mailersend('oleg.selivantsev@gmail.com', randomTicketNumber))
+        .then(mailersend(mailconfig.confirmationEmail, randomTicketNumber))
         .catch(err => {
             console.error(err)
         })
