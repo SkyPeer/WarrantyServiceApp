@@ -329,11 +329,11 @@ app.post('/mongooseInsert', bodyParser.json(), function (req, res) {
 //---------------------------- mailer
 
 mailer.extend(app, {
-    from: 'arroway.service@yandex.ru',
-    host: 'smtp.yandex.ru', // hostname
-    secureConnection: true, // use SSL
-    port: 465, // port for secure SMTP
-    transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+    from: mailconfig.from,
+    host: mailconfig.host, // hostname
+    secureConnection: mailconfig.secureConnection, // use SSL
+    port: mailconfig.port, // port for secure SMTP
+    transportMethod: mailconfig.transportMethod, // default is SMTP. Accepts anything that nodemailer accepts
     auth: {
         user: mailconfig.user,
         pass: mailconfig.pass
