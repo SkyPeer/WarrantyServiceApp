@@ -383,10 +383,10 @@ function mailersend(
       if (err) {
         // handle error
         //console.log(err);
-        //console.log('There was an error sending the email to', mailadress);
+        console.log('There was an error sending the email to', mailadress);
         return;
       }
-      //console.log('Email Sent to:', mailadress);
+      console.log('Email Sent to:', mailadress);
     }
   );
 }
