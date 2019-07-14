@@ -5,19 +5,20 @@ const express = require("express"),
   app = express(),
   http = require("http"),
   server = http.createServer(app),
-  MongoClient = require("mongodb").MongoClient,
-  mongoUrl = "mongodb://localhost:27017",
-  dbName = "warranty",
+  //MongoClient = require("mongodb").MongoClient,
+  //mongoUrl = "mongodb://localhost:27017",
+  //dbName = "warranty",
   bodyParser = require("body-parser"),
-  multer = require("multer"),
-  ObjectID = require("mongodb").ObjectID,
+  //multer = require("multer"),
+  //ObjectID = require("mongodb").ObjectID,
   mongoose = require("mongoose"),
   mailer = require("express-mailer"),
-  jade = require("jade"),
+  //jade = require("jade"),
   datetime = require("node-datetime");
-mailconfig = require("./mail-config");
+const mailconfig = require("./mail-config");
 
 console.log("mailConfig", mailconfig);
+
 
 app.set("views", __dirname + "/views");
 app.set("view engine", "jade");
