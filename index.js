@@ -16,7 +16,7 @@ const express = require("express"),
   //jade = require("jade"),
   datetime = require("node-datetime");
 const mailconfig = require("./mail-config");
-
+const masterconfig = require("./serverconfig")
 console.log("mailConfig", mailconfig);
 
 
