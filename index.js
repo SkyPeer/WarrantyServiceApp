@@ -17,8 +17,9 @@ const express = require("express"),
   datetime = require("node-datetime");
 const mailconfig = require("./mail-config");
 const masterconfig = require("./serverconfig")
-console.log("mailConfig", mailconfig);
 
+console.log("mailConfig:", mailconfig);
+console.log('masterConfig:', masterconfig)
 
 app.set("views", __dirname + "/views");
 app.set("view engine", "jade");
@@ -403,6 +404,6 @@ app.use("/", (req, res, next) => {
   res.sendFile("index.html", { root: __dirname });
 });
 
-server.listen(3100, function() {
-  console.log(`WarrantyServiceApp Start http://localhost:3100`);
+server.listen(masterconfig.server.port, function() {
+  console.log(`WarrantyServiceApp Start http://${masterconfig.server.host}:${masterconfig.server.port}`);
 });
