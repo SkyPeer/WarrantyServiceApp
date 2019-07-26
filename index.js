@@ -15,11 +15,14 @@ const express = require("express"),
   mailer = require("express-mailer"),
   //jade = require("jade"),
   datetime = require("node-datetime");
+
 const mailconfig = require("./mail-config");
-const masterconfig = require("./serverconfig")
+const masterconfig = require("./serverconfig");
+const dbconfig = require('./dbconfig')
 
 console.log("mailConfig:", mailconfig);
 console.log('masterConfig:', masterconfig)
+console.log('dbconfig', dbconfig)
 
 app.set("views", __dirname + "/views");
 app.set("view engine", "jade");
