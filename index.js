@@ -105,16 +105,16 @@ app.get("/mongooseGetDataSC", function(req, res, next) {
 });
 
 app.post("/mongooseSCUpdate", bodyParser.json(), function(req, res) {
-  console.log(
-    "------- mongooseUpdate " + "req.body:   id",
-    req.body._id,
-    "body.scTitle:",
-    req.body.scTitle,
-    "body.scVendors:",
-    req.body.scVendors,
-    "body.scAdress:",
-    req.body.scAdress
-  );
+  // console.log(
+  //   "------- mongooseUpdate " + "req.body:   id",
+  //   req.body._id,
+  //   "body.scTitle:",
+  //   req.body.scTitle,
+  //   "body.scVendors:",
+  //   req.body.scVendors,
+  //   "body.scAdress:",
+  //   req.body.scAdress
+  // );
 
   ServiceCenterModel.findOneAndUpdate(
     {
