@@ -1,3 +1,5 @@
+
+
 module.exports = {
 
 	db:{
@@ -9,6 +11,6 @@ module.exports = {
 	
 	server: {
 		host: 'localhost',
-		port: 3100
+		port: args.port
 	}	
 }

@@ -15,6 +15,13 @@ const express = require("express"),
   mailer = require("express-mailer"),
   //jade = require("jade"),
   datetime = require("node-datetime");
+  const minimist = require('minimist');
+
+let args = minimist(process.argv.slice(2));
+
+console.log('tryGetPort:', args.port);
+
+
 
 const mailconfig = require("./mail-config");
 const masterconfig = require("./serverconfig");
