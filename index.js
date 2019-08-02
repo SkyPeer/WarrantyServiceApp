@@ -1,3 +1,13 @@
+/*
+
+    Start server:
+    node index.js --port {portNumber}
+    example:
+    node index.js --port 3100
+    
+
+*/
+
 const express = require("express"),
   helmet = require("helmet"),
   path = require("path"),
@@ -15,11 +25,21 @@ const express = require("express"),
   mailer = require("express-mailer"),
   //jade = require("jade"),
   datetime = require("node-datetime");
+  minimist = require('minimist');
+  masterconfig = require("./serverconfig");
+
+  let args = minimist(process.argv.slice(2));
+
 
 
 const mailconfig = require("./mail-config");
-const masterconfig = require("./serverconfig");
 const dbconfig = require('./dbconfig')
+
+if(args.port){
+  console.log('port was bind by args:', args.port);
+  masterconfig.port = args.port
+}
+
 
 console.log("mailConfig:", mailconfig);
 console.log('masterConfig:', masterconfig)
