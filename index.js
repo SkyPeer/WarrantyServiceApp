@@ -5,6 +5,7 @@
     example:
     node index.js --port 3100
     
+    default port 3100
 
 */
 
@@ -37,13 +38,15 @@ const dbconfig = require('./dbconfig')
 
 if(args.port){
   console.log('port was bind by args:', args.port);
-  masterconfig.port = args.port
+  masterconfig.server.port = args.port
 }
 
-
+console.log('-----------------------------------------------------')
+console.log('TRY START ServiceApp Server:')
 console.log("mailConfig:", mailconfig);
 console.log('masterConfig:', masterconfig)
 console.log('dbconfig', dbconfig)
+console.log('-----------------------------------------------------')
 
 app.set("views", __dirname + "/views");
 app.set("view engine", "jade");
