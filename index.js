@@ -26,15 +26,14 @@ const express = require("express"),
   mailer = require("express-mailer"),
   //jade = require("jade"),
   datetime = require("node-datetime");
+
+  //ServerConfiguration Block
   minimist = require('minimist');
   masterconfig = require("./serverconfig");
-
-  let args = minimist(process.argv.slice(2));
-
-
-
-const mailconfig = require("./mail-config");
-const dbconfig = require('./dbconfig')
+  mailconfig = require("./mail-config");
+  db = require('./dbconfig')
+  
+let args = minimist(process.argv.slice(2));
 
 if(args.port){
   console.log('port was bind by args:', args.port);
@@ -45,14 +44,14 @@ console.log('-----------------------------------------------------')
 console.log('TRY START ServiceApp Server:')
 console.log("mailConfig:", mailconfig);
 console.log('masterConfig:', masterconfig)
-console.log('dbconfig', dbconfig)
+console.log('DataBase Configuration', db)
 console.log('-----------------------------------------------------')
 
 app.set("views", __dirname + "/views");
 app.set("view engine", "jade");
 
 mongoose
-  .connect("mongodb://localhost:27017/warranty", {
+  .connect(`mongodb://${db.host}:${db.port}/${db.dbname}`, {
     useNewUrlParser: true,
     useFindAndModify: true
   })
