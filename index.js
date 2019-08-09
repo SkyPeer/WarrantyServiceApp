@@ -272,18 +272,18 @@ app.post("/mongooseTicketDelete", bodyParser.json(), function(req, res) {
 });
 
 app.post("/mongooseUpdate", bodyParser.json(), function(req, res) {
-  console.log(
-    "------- mongooseUpdate " + "req.body:   id",
-    req.body._id,
-    "body.comment:",
-    req.body.comment,
-    "body.status:",
-    req.body.status,
-    "body.serviceCenterTicket:",
-    req.body.serviceCenterTicket,
-    "body.daysForService:",
-    req.body.daysForService
-  );
+  // console.log(
+  //   "------- mongooseUpdate " + "req.body:   id",
+  //   req.body._id,
+  //   "body.comment:",
+  //   req.body.comment,
+  //   "body.status:",
+  //   req.body.status,
+  //   "body.serviceCenterTicket:",
+  //   req.body.serviceCenterTicket,
+  //   "body.daysForService:",
+  //   req.body.daysForService
+  // );
 
   TicketModel.findOneAndUpdate(
     {
