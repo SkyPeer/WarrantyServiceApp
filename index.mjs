@@ -9,35 +9,32 @@
 
 */
 
-const express = require("express"),
-  helmet = require("helmet"),
-  path = require("path"),
-  compression = require("compression"),
-  app = express(),
-  http = require("http"),
-  server = http.createServer(app),
-  //MongoClient = require("mongodb").MongoClient,
-  //mongoUrl = "mongodb://localhost:27017",
-  //dbName = "warranty",
-  bodyParser = require("body-parser"),
-  //multer = require("multer"),
-  //ObjectID = require("mongodb").ObjectID,
-  mongoose = require("mongoose"),
-  mailer = require("express-mailer"),
-  //jade = require("jade"),
-  datetime = require("node-datetime");
+import express from "express";
+import helmet from"helmet"
+import path from "path"
+import compression from "compression"
+import app from 'express'
+import http from "http"
+import server from http.createServer(app),
+  
+import bodyParser = require("body-parser")),
+  
+import mongoose = require("mongoose")),
+import mailer = require("express-mailer")),
+  
+import datetime = require("node-datetime"));
 
 //ServerConfiguration Block
-minimist = require("minimist");
-masterconfig = require("./serverconfig");
-mailconfig = require("./mail-config");
-db = require("./dbconfig");
+import minimist = require("minimist");
+import masterconfig = require("./serverconfig");
+import ailconfig = require("./mail-config");
+import db = require("./dbconfig");
 
 let args = minimist(process.argv.slice(2));
 
-//import config from "./config2.mjs";
+import config from "./config2.mjs";
 
-//console.log("newConfig", config);
+console.log("newConfig", config2);
 
 if (args.port) {
   console.log("port was bind by args:", args.port);
