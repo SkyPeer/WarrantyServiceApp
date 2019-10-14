@@ -9,8 +9,8 @@
 
 */
 
-import express from "express";
-import helmet from"helmet"
+import express = require("express");
+import helmet  = require ("helmet")
 import path from "path"
 import compression from "compression"
 import app from 'express'
@@ -34,7 +34,7 @@ let args = minimist(process.argv.slice(2));
 
 import config from "./config2.mjs";
 
-console.log("newConfig", config2);
+console.log("newConfig", config);
 
 if (args.port) {
   console.log("port was bind by args:", args.port);
