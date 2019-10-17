@@ -31,7 +31,7 @@ const express = require("express"),
 minimist = require("minimist");
 masterconfig = require("./serverconfig");
 mailconfig = require("./mail-config");
-db = require("./dbconfig");
+const db = require("./dbconfig");
 
 let args = minimist(process.argv.slice(2));
 
